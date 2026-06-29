@@ -83,9 +83,12 @@ export default function SolutionSection() {
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.15 * i }}
               whileHover={{ scale: 1.05, y: -8 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              transition={{ 
+                opacity: { duration: 0.6, delay: 0.15 * i },
+                y: { type: "spring", stiffness: 400, damping: 17, delay: 0.15 * i },
+                scale: { type: "spring", stiffness: 400, damping: 17 }
+              }}
               className="relative rounded-2xl p-8 sm:p-10 overflow-hidden transition-all duration-150 hover:shadow-2xl cursor-default border-2 border-transparent"
               style={{
                 background: card.bg,

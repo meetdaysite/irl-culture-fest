@@ -86,9 +86,12 @@ export default function ExperienceSection() {
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.12 * i }}
               whileHover={{ y: -12, scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 450, damping: 18 }}
+              transition={{ 
+                opacity: { duration: 0.6, delay: 0.12 * i },
+                y: { type: "spring", stiffness: 450, damping: 18, delay: 0.12 * i },
+                scale: { type: "spring", stiffness: 450, damping: 18 }
+              }}
               className="group rounded-2xl p-8 sm:p-10 transition-all duration-150 cursor-default"
               style={{ background: card.bg, color: card.text }}
               onMouseEnter={(e) => {

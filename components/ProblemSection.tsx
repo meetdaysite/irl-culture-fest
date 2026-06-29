@@ -71,9 +71,12 @@ export default function ProblemSection() {
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.15 * i }}
               whileHover={{ y: -12, scale: 1.03 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              transition={{ 
+                opacity: { duration: 0.6, delay: 0.15 * i },
+                y: { type: "spring", stiffness: 400, damping: 17, delay: 0.15 * i },
+                scale: { type: "spring", stiffness: 400, damping: 17 }
+              }}
               className="bg-white rounded-xl shadow-md p-6 sm:p-8 transition-shadow duration-150 hover:shadow-2xl cursor-default"
               style={{ borderLeft: `4px solid ${card.borderColor}` }}
             >
