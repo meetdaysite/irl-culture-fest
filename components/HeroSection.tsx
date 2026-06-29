@@ -1,0 +1,185 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+
+function ConfettiBurst() {
+  const [particles, setParticles] = useState<
+    { id: number; x: number; color: string; delay: number; size: number }[]
+  >([]);
+
+  useEffect(() => {
+    const colors = ["#FF2D2D", "#BF5FFF", "#FF6B35", "#8FFB2B", "#FFD600", "#00C2FF"];
+    const items = Array.from({ length: 40 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      delay: Math.random() * 1.5,
+      size: 4 + Math.random() * 8,
+    }));
+    setParticles(items);
+  }, []);
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none z-10">
+      {particles.map((p) => (
+        <motion.div
+          key={p.id}
+          initial={{ y: -20, opacity: 1, scale: 1 }}
+          animate={{ y: "100vh", opacity: 0, rotate: 720 }}
+          transition={{ duration: 2.5 + Math.random(), delay: p.delay, ease: "easeIn" }}
+          className="absolute rounded-full"
+          style={{
+            left: `${p.x}%`,
+            width: p.size,
+            height: p.size,
+            background: p.color,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+export default function HeroSection() {
+  const words1 = ["INDIA'S", "FIRST"];
+  const words2 = ["IRL", "FESTIVAL"];
+
+  const scrollToSection = (href: string) => {
+    const el = document.querySelector(href);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
+
+  return (
+    <section
+      id="hero"
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
+      style={{ background: "#0D0D0D" }}
+    >
+      {/* Floating Orbs */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="orb orb-red" />
+        <div className="orb orb-purple" />
+        <div className="orb orb-orange" />
+        <div className="orb orb-green" />
+      </div>
+
+      {/* Noise Overlay */}
+      <div className="noise-overlay" />
+
+      {/* Confetti Burst */}
+      <ConfettiBurst />
+
+      {/* Main Content */}
+      <div className="relative z-20 text-center px-6 max-w-5xl mx-auto pt-24 pb-12 sm:pt-32">
+        {/* Eyebrow */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.6 }}
+          className="font-[family-name:var(--font-space-grotesk)] text-[#F5F0E8] text-xs sm:text-sm uppercase tracking-[0.25em] mb-8"
+        >
+          NOVEMBER 2026 &nbsp;·&nbsp; DELHI &nbsp;·&nbsp; MUMBAI &nbsp;·&nbsp;
+          BANGALORE &nbsp;·&nbsp; PUNE
+        </motion.p>
+
+        {/* H1 Line 1 — INDIA'S FIRST */}
+        <h1 className="flex flex-wrap justify-center gap-x-4 sm:gap-x-6">
+          {words1.map((word, i) => (
+            <motion.span
+              key={word}
+              initial={{ opacity: 0, y: 60 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 + i * 0.12, duration: 0.7, ease: "easeOut" }}
+              className="font-[family-name:var(--font-abril-fatface)] text-5xl sm:text-7xl md:text-8xl lg:text-[96px] text-white leading-tight"
+            >
+              {word}
+            </motion.span>
+          ))}
+        </h1>
+
+        {/* H1 Line 2 — IRL FESTIVAL */}
+        <div className="flex flex-wrap justify-center gap-x-4 sm:gap-x-6 mt-2">
+          {words2.map((word, i) => (
+            <motion.span
+              key={word}
+              initial={{ opacity: 0, y: 60 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.74 + i * 0.12, duration: 0.7, ease: "easeOut" }}
+              className="font-[family-name:var(--font-abril-fatface)] text-5xl sm:text-7xl md:text-8xl lg:text-[96px] text-[#FF2D2D] leading-tight"
+            >
+              {word}
+            </motion.span>
+          ))}
+        </div>
+
+        {/* Subheading */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8, duration: 0.8 }}
+          className="font-[family-name:var(--font-space-grotesk)] text-[#F5F0E8] text-base sm:text-lg md:text-xl max-w-xl mx-auto mt-8 leading-relaxed"
+        >
+          Celebrating the IRL Culture Builders &amp; the ecosystem making it
+          happen.
+        </motion.p>
+
+        {/* CTA Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.2, duration: 0.6 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10"
+        >
+          <button
+            onClick={() => scrollToSection("#partner")}
+            className="bg-[#FF2D2D] text-white font-[family-name:var(--font-space-grotesk)] font-semibold text-base px-8 py-3.5 rounded-full transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(255,45,45,0.5)] cursor-pointer"
+          >
+            Become a Partner
+          </button>
+          <button
+            onClick={() => scrollToSection("#partner")}
+            className="border-2 border-white text-white font-[family-name:var(--font-space-grotesk)] font-semibold text-base px-8 py-3.5 rounded-full transition-all hover:bg-white hover:text-[#0D0D0D] cursor-pointer"
+          >
+            Apply as Host
+          </button>
+        </motion.div>
+      </div>
+
+      {/* Scroll Indicator */}
+      <motion.button
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.8 }}
+        onClick={() => scrollToSection("#problem")}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 cursor-pointer"
+        aria-label="Scroll down"
+      >
+        <div className="bounce-chevron">
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="white"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </div>
+      </motion.button>
+
+      {/* Powered by */}
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.4 }}
+        transition={{ delay: 2 }}
+        className="absolute bottom-6 left-6 font-[family-name:var(--font-space-grotesk)] text-xs text-[#F5F0E8] z-20"
+      >
+        Powered by meetday.ai
+      </motion.p>
+    </section>
+  );
+}

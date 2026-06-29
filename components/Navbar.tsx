@@ -1,0 +1,172 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+const navLinks = [
+  { label: "About", href: "#about" },
+  { label: "Experience", href: "#experience" },
+  { label: "Cities", href: "#cities" },
+  { label: "Team", href: "#team" },
+];
+
+export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 80);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToSection = (href: string) => {
+    setMobileOpen(false);
+    if (href === "#top") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    const el = document.querySelector(href);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
+
+  return (
+    <>
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? "bg-white/70 backdrop-blur-xl shadow-lg"
+            : "bg-transparent"
+        }`}
+      >
+        <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
+          {/* Logo */}
+          <button
+            onClick={() => scrollToSection("#top")}
+            className="flex items-baseline gap-0.5 cursor-pointer"
+          >
+            <span
+              className={`font-[family-name:var(--font-abril-fatface)] text-2xl font-normal ${
+                scrolled ? "text-[#FF2D2D]" : "text-[#FF2D2D]"
+              }`}
+            >
+              IRL
+            </span>
+            <span
+              className={`font-[family-name:var(--font-space-grotesk)] text-lg font-medium ml-1 ${
+                scrolled ? "text-[#0D0D0D]" : "text-white"
+              }`}
+            >
+              Culture Fest
+            </span>
+            <sup
+              className={`font-[family-name:var(--font-space-grotesk)] text-xs font-bold ml-0.5 ${
+                scrolled ? "text-[#FF2D2D]" : "text-[#FF2D2D]"
+              }`}
+            >
+              2026
+            </sup>
+          </button>
+
+          {/* Desktop Links */}
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <button
+                key={link.label}
+                onClick={() => scrollToSection(link.href)}
+                className={`nav-link font-[family-name:var(--font-space-grotesk)] text-sm font-medium transition-colors cursor-pointer ${
+                  scrolled
+                    ? "text-[#0D0D0D] hover:text-[#FF2D2D]"
+                    : "text-white/90 hover:text-white"
+                }`}
+              >
+                {link.label}
+              </button>
+            ))}
+            <button
+              onClick={() => scrollToSection("#partner")}
+              className="bg-[#FF2D2D] text-white font-[family-name:var(--font-space-grotesk)] text-sm font-semibold px-6 py-2.5 rounded-full transition-all hover:scale-105 hover:bg-[#e02525] hover:shadow-lg cursor-pointer"
+            >
+              Partner With Us
+            </button>
+          </div>
+
+          {/* Mobile Hamburger */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="md:hidden relative w-8 h-8 flex flex-col items-center justify-center gap-1.5 cursor-pointer z-[60]"
+            aria-label="Toggle menu"
+          >
+            <motion.span
+              animate={
+                mobileOpen
+                  ? { rotate: 45, y: 6, background: "#fff" }
+                  : { rotate: 0, y: 0, background: scrolled ? "#0D0D0D" : "#fff" }
+              }
+              className="block w-6 h-0.5 rounded-full"
+              style={{ background: scrolled ? "#0D0D0D" : "#fff" }}
+            />
+            <motion.span
+              animate={
+                mobileOpen
+                  ? { opacity: 0 }
+                  : { opacity: 1, background: scrolled ? "#0D0D0D" : "#fff" }
+              }
+              className="block w-6 h-0.5 rounded-full"
+              style={{ background: scrolled ? "#0D0D0D" : "#fff" }}
+            />
+            <motion.span
+              animate={
+                mobileOpen
+                  ? { rotate: -45, y: -6, background: "#fff" }
+                  : { rotate: 0, y: 0, background: scrolled ? "#0D0D0D" : "#fff" }
+              }
+              className="block w-6 h-0.5 rounded-full"
+              style={{ background: scrolled ? "#0D0D0D" : "#fff" }}
+            />
+          </button>
+        </div>
+      </motion.nav>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-[55] bg-[#0D0D0D] flex flex-col items-center justify-center gap-8"
+          >
+            {navLinks.map((link, i) => (
+              <motion.button
+                key={link.label}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 + i * 0.1 }}
+                onClick={() => scrollToSection(link.href)}
+                className="font-[family-name:var(--font-abril-fatface)] text-4xl text-white hover:text-[#FF2D2D] transition-colors cursor-pointer"
+              >
+                {link.label}
+              </motion.button>
+            ))}
+            <motion.button
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              onClick={() => scrollToSection("#partner")}
+              className="mt-4 bg-[#FF2D2D] text-white font-[family-name:var(--font-space-grotesk)] text-lg font-semibold px-10 py-4 rounded-full hover:scale-105 transition-transform cursor-pointer"
+            >
+              Partner With Us
+            </motion.button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}

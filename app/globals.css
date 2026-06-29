@@ -1,0 +1,303 @@
+@import "tailwindcss";
+
+/* ─── Brand Colour Tokens ─── */
+:root {
+  --red: #FF2D2D;
+  --black: #0D0D0D;
+  --cream: #F5F0E8;
+  --orange: #FF6B35;
+  --yellow: #FFD600;
+  --green: #8FFB2B;
+  --purple: #BF5FFF;
+  --blue: #00C2FF;
+  --midnight: #2A1A2E;
+  --white: #FFFFFF;
+}
+
+/* ─── Tailwind v4 Theme Tokens ─── */
+@theme inline {
+  --color-red: var(--red);
+  --color-black: var(--black);
+  --color-cream: var(--cream);
+  --color-orange: var(--orange);
+  --color-yellow: var(--yellow);
+  --color-green: var(--green);
+  --color-purple: var(--purple);
+  --color-blue: var(--blue);
+  --color-midnight: var(--midnight);
+  --color-white: var(--white);
+  --font-abril: var(--font-abril-fatface);
+  --font-space: var(--font-space-grotesk);
+}
+
+/* ─── Base ─── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-space-grotesk), sans-serif;
+  overflow-x: hidden;
+}
+
+/* ─── Custom Cursor ─── */
+.custom-cursor {
+  width: 20px;
+  height: 20px;
+  background: var(--red);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition: transform 0.15s ease;
+}
+
+.custom-cursor.hovering {
+  transform: scale(2);
+}
+
+/* ─── Scroll Progress Bar ─── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: var(--red);
+  z-index: 100;
+  transform-origin: left;
+}
+
+/* ─── Noise / Grain Overlay ─── */
+.noise-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* ─── Floating Orbs ─── */
+@keyframes float-orb {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(80px, -60px) scale(1.1); }
+  50% { transform: translate(-40px, -120px) scale(0.95); }
+  75% { transform: translate(-80px, 40px) scale(1.05); }
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.35;
+  animation: float-orb 20s ease-in-out infinite;
+}
+
+.orb-red {
+  width: 400px;
+  height: 400px;
+  background: var(--red);
+  top: 10%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.orb-purple {
+  width: 350px;
+  height: 350px;
+  background: var(--purple);
+  top: 40%;
+  right: 10%;
+  animation-delay: -5s;
+}
+
+.orb-orange {
+  width: 300px;
+  height: 300px;
+  background: var(--orange);
+  bottom: 20%;
+  left: 30%;
+  animation-delay: -10s;
+}
+
+.orb-green {
+  width: 250px;
+  height: 250px;
+  background: var(--green);
+  bottom: 10%;
+  right: 25%;
+  animation-delay: -15s;
+}
+
+/* ─── Gradient Text ─── */
+.gradient-text-red-orange {
+  background: linear-gradient(90deg, var(--red), var(--orange));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-purple-blue {
+  background: linear-gradient(90deg, var(--purple), var(--blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Decorative Rotating Circle ─── */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.rotating-circle {
+  animation: spin-slow 30s linear infinite;
+}
+
+/* ─── Bounce Chevron ─── */
+@keyframes bounce-chevron {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(12px); }
+}
+
+.bounce-chevron {
+  animation: bounce-chevron 2s ease-in-out infinite;
+}
+
+/* ─── Pulsing Dot ─── */
+@keyframes pulse-dot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.7; }
+}
+
+.pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* ─── City Card 3D Flip ─── */
+.flip-card {
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+  position: absolute;
+  inset: 0;
+}
+
+/* ─── Diagonal Stripes ─── */
+@keyframes diagonal-stripes {
+  0% { background-position: 0 0; }
+  100% { background-position: 60px 60px; }
+}
+
+.diagonal-stripes {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.05) 0px,
+    rgba(255, 255, 255, 0.05) 2px,
+    transparent 2px,
+    transparent 30px
+  );
+  animation: diagonal-stripes 3s linear infinite;
+}
+
+/* ─── Nav Link Underline ─── */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.15s ease-out;
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* ─── Confetti Particles ─── */
+@keyframes confetti-fall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+.confetti-particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  animation: confetti-fall 3s ease-in forwards;
+}
+
+/* ─── Decorative Star Burst (Cities Section) ─── */
+.star-burst {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.08;
+}
+
+/* ─── Section Label Dash ─── */
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* ─── Selection Color ─── */
+::selection {
+  background: var(--red);
+  color: var(--white);
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--red);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--orange);
+}
