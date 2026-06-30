@@ -33,8 +33,8 @@ export default function CitiesSection() {
   return (
     <section
       id="cities"
-      className="relative py-24 sm:py-32 px-6 overflow-hidden"
-      style={{ background: "#BF5FFF" }}
+      className="relative py-12 sm:py-16 px-8 overflow-hidden"
+      style={{ background: "#6700a2" }}
     >
       {/* Decorative Star Burst */}
       <div className="star-burst pointer-events-none">
@@ -46,14 +46,14 @@ export default function CitiesSection() {
         >
           <path
             d="M100 0L120 80L200 100L120 120L100 200L80 120L0 100L80 80L100 0Z"
-            stroke="white"
+            stroke="#DCDCDC"
             strokeWidth="1"
             fill="none"
             opacity="0.3"
           />
           <path
             d="M100 20L115 85L180 100L115 115L100 180L85 115L20 100L85 85L100 20Z"
-            stroke="white"
+            stroke="#DCDCDC"
             strokeWidth="0.5"
             fill="none"
             opacity="0.2"
@@ -68,7 +68,7 @@ export default function CitiesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="font-[family-name:var(--font-abril-fatface)] text-4xl sm:text-5xl md:text-6xl text-white leading-tight text-center mb-3"
+          className="font-[family-name:var(--font-archivo-black)] text-4xl sm:text-5xl md:text-6xl text-white leading-tight text-center mb-3"
         >
           4 CITIES. ONE MOVEMENT.
         </motion.h2>
@@ -97,19 +97,19 @@ export default function CitiesSection() {
               <div className="flip-card-inner w-full h-full">
                 {/* Front */}
                 <div className="flip-card-front bg-white rounded-2xl p-6 sm:p-8 flex flex-col items-center justify-center w-full h-full">
-                  <h3 className="font-[family-name:var(--font-abril-fatface)] text-3xl sm:text-4xl text-[#0D0D0D] mb-1">
+                  <h3 className="font-[family-name:var(--font-archivo-black)] text-3xl sm:text-4xl text-[#0D0D0D] mb-1">
                     {city.name}
                   </h3>
                   <p className="font-[family-name:var(--font-space-grotesk)] text-gray-400 text-sm mb-4">
                     {city.state}
                   </p>
-                  <span className="inline-block font-[family-name:var(--font-space-grotesk)] text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-[#FF2D2D] text-white">
+                  <span className="inline-block font-[family-name:var(--font-space-grotesk)] text-[12px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-[#FF2D2D] text-white">
                     Coming Nov 2026
                   </span>
                 </div>
                 {/* Back */}
                 <div className="flip-card-back bg-[#0D0D0D] rounded-2xl p-6 sm:p-8 flex flex-col items-center justify-center w-full h-full">
-                  <h4 className="font-[family-name:var(--font-abril-fatface)] text-xl text-[#FF2D2D] mb-3">
+                  <h4 className="font-[family-name:var(--font-archivo-black)] text-xl text-[#FF2D2D] mb-3">
                     {city.name}
                   </h4>
                   <p className="font-[family-name:var(--font-space-grotesk)] text-white/80 text-sm text-center leading-relaxed">

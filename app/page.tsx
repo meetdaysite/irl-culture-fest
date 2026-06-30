@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { motion, useSpring, useMotionValue } from "framer-motion";
+import { motion } from "framer-motion";
 import { useScrollProgress } from "@/hooks/useScrollProgress";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";

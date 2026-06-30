@@ -29,7 +29,7 @@ export default function PartnerCTA() {
   return (
     <section
       id="partner"
-      className="relative min-h-screen flex flex-col items-center justify-center py-24 sm:py-32 px-6 overflow-hidden"
+      className="relative min-h-screen flex flex-col items-center justify-center py-12 sm:py-16 px-8 overflow-hidden"
       style={{ background: "#FF2D2D" }}
     >
       {/* Diagonal Stripes Overlay */}
@@ -42,7 +42,7 @@ export default function PartnerCTA() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="font-[family-name:var(--font-abril-fatface)] text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-6"
+          className="font-[family-name:var(--font-archivo-black)] text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-6"
         >
           LET&apos;S MAKE THE OFFLINE ECONOMY SUSTAINABLE
         </motion.h2>
@@ -81,7 +81,7 @@ export default function PartnerCTA() {
           {submitted ? (
             <div className="py-10 text-center">
               <div className="text-5xl mb-4">🎉</div>
-              <h3 className="font-[family-name:var(--font-abril-fatface)] text-2xl text-[#0D0D0D] mb-2">
+              <h3 className="font-[family-name:var(--font-archivo-black)] text-2xl text-[#0D0D0D] mb-2">
                 Thank You!
               </h3>
               <p className="font-[family-name:var(--font-space-grotesk)] text-[#555]">
@@ -146,7 +146,7 @@ export default function PartnerCTA() {
               </div>
               <button
                 type="submit"
-                className="w-full font-[family-name:var(--font-space-grotesk)] font-semibold text-sm bg-[#0D0D0D] text-white py-3.5 rounded-full transition-all hover:bg-[#FF2D2D] hover:scale-[1.02] cursor-pointer"
+                className="w-full font-[family-name:var(--font-space-grotesk)] font-semibold text-base bg-[#0D0D0D] text-white py-3.5 rounded-full transition-all hover:bg-[#FF2D2D] hover:scale-[1.02] cursor-pointer"
               >
                 Submit
               </button>

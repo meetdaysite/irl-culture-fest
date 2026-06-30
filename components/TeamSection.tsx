@@ -13,7 +13,7 @@ const team = [
     name: "Tumul",
     org: "IRL Culture Fest",
     initials: "T",
-    accentColor: "#FF6B35",
+    accentColor: "#FF2B2B",
   },
   {
     name: "Madhur",
@@ -31,7 +31,7 @@ const team = [
     name: "Aaquib",
     org: "IRL Culture Fest",
     initials: "A",
-    accentColor: "#BF5FFF",
+    accentColor: "#6700a2",
   },
 ];
 
@@ -39,7 +39,7 @@ export default function TeamSection() {
   return (
     <section
       id="team"
-      className="py-24 sm:py-32 px-6"
+      className="py-12 sm:py-16 px-8"
       style={{ background: "#F5F0E8" }}
     >
       <div className="max-w-7xl mx-auto">
@@ -60,7 +60,7 @@ export default function TeamSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="font-[family-name:var(--font-abril-fatface)] text-3xl sm:text-4xl md:text-5xl text-[#0D0D0D] leading-tight mb-3"
+          className="font-[family-name:var(--font-archivo-black)] text-3xl sm:text-4xl md:text-5xl text-[#0D0D0D] leading-tight mb-3"
         >
           TEAM BUILDING THE IRL CULTURE FEST.
         </motion.h2>
@@ -102,13 +102,13 @@ export default function TeamSection() {
                   (e.currentTarget as HTMLDivElement).style.boxShadow = "none";
                 }}
               >
-                <span className="font-[family-name:var(--font-abril-fatface)] text-2xl sm:text-3xl text-[#555]">
+                <span className="font-[family-name:var(--font-archivo-black)] text-2xl sm:text-3xl text-[#555]">
                   {member.initials}
                 </span>
               </div>
 
               {/* Name & Org */}
-              <h3 className="font-[family-name:var(--font-abril-fatface)] text-lg text-[#0D0D0D]">
+              <h3 className="font-[family-name:var(--font-archivo-black)] text-lg text-[#0D0D0D]">
                 {member.name}
               </h3>
               <p className="font-[family-name:var(--font-space-grotesk)] text-[#FF2D2D] text-sm">

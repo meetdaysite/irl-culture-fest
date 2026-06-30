@@ -6,7 +6,7 @@ export default function AudienceSection() {
   return (
     <section
       id="audience"
-      className="relative py-24 sm:py-32 px-6 overflow-hidden"
+      className="relative py-12 sm:py-16 px-8 overflow-hidden"
       style={{ background: "#2A1A2E" }}
     >
       {/* Decorative Dots */}
@@ -15,13 +15,13 @@ export default function AudienceSection() {
           { top: "10%", left: "5%", color: "#FF2D2D", size: 6 },
           { top: "20%", right: "8%", color: "#8FFB2B", size: 4 },
           { top: "45%", left: "3%", color: "#FFD600", size: 5 },
-          { top: "60%", right: "12%", color: "#BF5FFF", size: 8 },
+          { top: "60%", right: "12%", color: "#6700a2", size: 8 },
           { top: "80%", left: "15%", color: "#00C2FF", size: 4 },
-          { top: "75%", right: "5%", color: "#FF6B35", size: 6 },
+          { top: "75%", right: "5%", color: "#FF2B2B", size: 6 },
           { top: "30%", left: "50%", color: "#FF2D2D", size: 3 },
           { top: "55%", left: "85%", color: "#8FFB2B", size: 5 },
           { top: "15%", left: "70%", color: "#FFD600", size: 4 },
-          { top: "90%", left: "40%", color: "#BF5FFF", size: 3 },
+          { top: "90%", left: "40%", color: "#6700a2", size: 3 },
         ].map((dot, i) => (
           <div
             key={i}
@@ -46,7 +46,7 @@ export default function AudienceSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="section-label text-[#BF5FFF]/60 font-[family-name:var(--font-space-grotesk)] mb-6"
+          className="section-label text-[#6700a2]/60 font-[family-name:var(--font-space-grotesk)] mb-6"
         >
           Target Audience ————
         </motion.p>
@@ -57,7 +57,7 @@ export default function AudienceSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="font-[family-name:var(--font-abril-fatface)] text-3xl sm:text-4xl md:text-5xl text-white leading-tight mb-4"
+          className="font-[family-name:var(--font-archivo-black)] text-3xl sm:text-4xl md:text-5xl text-white leading-tight mb-4"
         >
           WHO IS IN THE ROOM?
         </motion.h2>
@@ -86,7 +86,7 @@ export default function AudienceSection() {
             style={{ background: "#F5F0E8" }}
           >
             {/* Ghost Number */}
-            <span className="absolute top-2 right-4 font-[family-name:var(--font-abril-fatface)] text-[100px] sm:text-[140px] leading-none text-[#0D0D0D] opacity-[0.06] pointer-events-none select-none">
+            <span className="absolute top-2 right-4 font-[family-name:var(--font-archivo-black)] text-[100px] sm:text-[140px] leading-none text-[#0D0D0D] opacity-[0.06] pointer-events-none select-none">
               01
             </span>
             <div className="relative z-10">
@@ -110,7 +110,7 @@ export default function AudienceSection() {
             style={{ background: "#FF2D2D" }}
           >
             {/* Ghost Number */}
-            <span className="absolute top-2 right-4 font-[family-name:var(--font-abril-fatface)] text-[100px] sm:text-[140px] leading-none text-white opacity-[0.15] pointer-events-none select-none">
+            <span className="absolute top-2 right-4 font-[family-name:var(--font-archivo-black)] text-[100px] sm:text-[140px] leading-none text-white opacity-[0.15] pointer-events-none select-none">
               02
             </span>
             <div className="relative z-10">

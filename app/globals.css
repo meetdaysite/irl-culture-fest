@@ -5,13 +5,13 @@
   --red: #FF2D2D;
   --black: #0D0D0D;
   --cream: #F5F0E8;
-  --orange: #FF6B35;
+  --orange: #FF2B2B;
   --yellow: #FFD600;
   --green: #8FFB2B;
-  --purple: #BF5FFF;
+  --purple: #6700a2;
   --blue: #00C2FF;
   --midnight: #2A1A2E;
-  --white: #FFFFFF;
+  --white: #DCDCDC;
 }
 
 /* ─── Tailwind v4 Theme Tokens ─── */
@@ -26,8 +26,11 @@
   --color-blue: var(--blue);
   --color-midnight: var(--midnight);
   --color-white: var(--white);
-  --font-abril: var(--font-abril-fatface);
+  --font-archivo: var(--font-archivo-black);
   --font-space: var(--font-space-grotesk);
+  --font-size-sm: 0.75rem;
+  --font-size-lg: 1.25rem;
+  --font-size-3xl: 2rem;
 }
 
 /* ─── Base ─── */
@@ -88,6 +91,21 @@ body {
   25% { transform: translate(80px, -60px) scale(1.1); }
   50% { transform: translate(-40px, -120px) scale(0.95); }
   75% { transform: translate(-80px, 40px) scale(1.05); }
+}
+
+@keyframes float-slow-0 {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(40px, -60px); }
+}
+
+@keyframes float-slow-1 {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-60px, 40px); }
+}
+
+@keyframes float-slow-2 {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(30px, 30px); }
 }
 
 .orb {
@@ -209,7 +227,7 @@ body {
 /* ─── Diagonal Stripes ─── */
 @keyframes diagonal-stripes {
   0% { background-position: 0 0; }
-  100% { background-position: 60px 60px; }
+  100% { background-position: 42.43px 0; }
 }
 
 .diagonal-stripes {
@@ -220,6 +238,7 @@ body {
     transparent 2px,
     transparent 30px
   );
+  background-size: 42.43px 42.43px;
   animation: diagonal-stripes 3s linear infinite;
 }
 

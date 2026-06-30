@@ -5,19 +5,22 @@ import { motion } from "framer-motion";
 
 function ConfettiBurst() {
   const [particles, setParticles] = useState<
-    { id: number; x: number; color: string; delay: number; size: number }[]
+    { id: number; x: number; color: string; delay: number; size: number; duration: number }[]
   >([]);
 
   useEffect(() => {
-    const colors = ["#FF2D2D", "#BF5FFF", "#FF6B35", "#8FFB2B", "#FFD600", "#00C2FF"];
+    const colors = ["#FF2D2D", "#6700a2", "#FF2B2B", "#8FFB2B", "#FFD600", "#00C2FF"];
     const items = Array.from({ length: 40 }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       color: colors[Math.floor(Math.random() * colors.length)],
       delay: Math.random() * 1.5,
       size: 4 + Math.random() * 8,
+      duration: 2.5 + Math.random(),
     }));
-    setParticles(items);
+    setTimeout(() => {
+      setParticles(items);
+    }, 0);
   }, []);
 
   return (
@@ -27,7 +30,7 @@ function ConfettiBurst() {
           key={p.id}
           initial={{ y: -20, opacity: 1, scale: 1 }}
           animate={{ y: "100vh", opacity: 0, rotate: 720 }}
-          transition={{ duration: 2.5 + Math.random(), delay: p.delay, ease: "easeIn" }}
+          transition={{ duration: p.duration, delay: p.delay, ease: "easeIn" }}
           className="absolute rounded-full"
           style={{
             left: `${p.x}%`,
@@ -45,6 +48,37 @@ export default function HeroSection() {
   const words1 = ["INDIA'S", "FIRST"];
   const words2 = ["IRL", "FESTIVAL"];
 
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [floatingDots, setFloatingDots] = useState<
+    { id: number; x: number; y: number; size: number; color: string; parallax: number; duration: number }[]
+  >([]);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 60;
+      const y = (e.clientY / window.innerHeight - 0.5) * 60;
+      setMousePos({ x, y });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
+  useEffect(() => {
+    const colors = ["#FF2D2D", "#6700a2", "#FF2B2B", "#8FFB2B", "#FFD600", "#00C2FF"];
+    const items = Array.from({ length: 25 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: 4 + Math.random() * 8,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      parallax: 0.3 + Math.random() * 1.2,
+      duration: 10 + Math.random() * 20,
+    }));
+    setTimeout(() => {
+      setFloatingDots(items);
+    }, 0);
+  }, []);
+
   const scrollToSection = (href: string) => {
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -56,12 +90,67 @@ export default function HeroSection() {
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
       style={{ background: "#0D0D0D" }}
     >
-      {/* Floating Orbs */}
+      {/* Floating Orbs (Parallax smoke background) */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="orb orb-red" />
-        <div className="orb orb-purple" />
-        <div className="orb orb-orange" />
-        <div className="orb orb-green" />
+        <motion.div
+          animate={{ x: mousePos.x * 0.8, y: mousePos.y * 0.8 }}
+          transition={{ type: "spring", stiffness: 40, damping: 20 }}
+          className="absolute inset-0"
+        >
+          <div className="orb orb-red" />
+        </motion.div>
+        <motion.div
+          animate={{ x: mousePos.x * -1.2, y: mousePos.y * -1.2 }}
+          transition={{ type: "spring", stiffness: 45, damping: 22 }}
+          className="absolute inset-0"
+        >
+          <div className="orb orb-purple" />
+        </motion.div>
+        <motion.div
+          animate={{ x: mousePos.x * 1.5, y: mousePos.y * 1.5 }}
+          transition={{ type: "spring", stiffness: 35, damping: 18 }}
+          className="absolute inset-0"
+        >
+          <div className="orb orb-orange" />
+        </motion.div>
+        <motion.div
+          animate={{ x: mousePos.x * -0.9, y: mousePos.y * -0.9 }}
+          transition={{ type: "spring", stiffness: 50, damping: 25 }}
+          className="absolute inset-0"
+        >
+          <div className="orb orb-green" />
+        </motion.div>
+      </div>
+
+      {/* Floating Interactive Parallax Dots */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-10">
+        {floatingDots.map((dot) => (
+          <motion.div
+            key={dot.id}
+            animate={{
+              x: mousePos.x * dot.parallax,
+              y: mousePos.y * dot.parallax,
+            }}
+            transition={{ type: "spring", stiffness: 60, damping: 25 }}
+            className="absolute"
+            style={{
+              left: `${dot.x}%`,
+              top: `${dot.y}%`,
+            }}
+          >
+            <div
+              className="rounded-full"
+              style={{
+                width: dot.size,
+                height: dot.size,
+                background: dot.color,
+                opacity: 0.6,
+                boxShadow: `0 0 10px ${dot.color}80`,
+                animation: `float-slow-${dot.id % 3} ${dot.duration}s ease-in-out infinite alternate`,
+              }}
+            />
+          </motion.div>
+        ))}
       </div>
 
       {/* Noise Overlay */}
@@ -71,7 +160,7 @@ export default function HeroSection() {
       <ConfettiBurst />
 
       {/* Main Content */}
-      <div className="relative z-20 text-center px-6 max-w-5xl mx-auto pt-24 pb-12 sm:pt-32">
+      <div className="relative z-20 text-center px-8 max-w-5xl mx-auto pt-24 pb-12 sm:pt-32">
         {/* Eyebrow */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -91,7 +180,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 60 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 + i * 0.12, duration: 0.7, ease: "easeOut" }}
-              className="font-[family-name:var(--font-abril-fatface)] text-5xl sm:text-7xl md:text-8xl lg:text-[96px] text-white leading-tight"
+              className="font-[family-name:var(--font-archivo-black)] text-5xl sm:text-7xl md:text-8xl lg:text-[96px] text-white leading-tight"
             >
               {word}
             </motion.span>
@@ -106,7 +195,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 60 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.74 + i * 0.12, duration: 0.7, ease: "easeOut" }}
-              className="font-[family-name:var(--font-abril-fatface)] text-5xl sm:text-7xl md:text-8xl lg:text-[96px] text-[#FF2D2D] leading-tight"
+              className="font-[family-name:var(--font-archivo-black)] text-5xl sm:text-7xl md:text-8xl lg:text-[96px] text-[#FF2D2D] leading-tight"
             >
               {word}
             </motion.span>
@@ -133,43 +222,20 @@ export default function HeroSection() {
         >
           <button
             onClick={() => scrollToSection("#partner")}
-            className="bg-[#FF2D2D] text-white font-[family-name:var(--font-space-grotesk)] font-semibold text-base px-8 py-3.5 rounded-full transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(255,45,45,0.5)] cursor-pointer"
+            className="bg-[#FF2D2D] text-white font-[family-name:var(--font-space-grotesk)] font-semibold text-xl px-8 py-3.5 rounded-full transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(255,45,45,0.5)] cursor-pointer"
           >
             Become a Partner
           </button>
           <button
             onClick={() => scrollToSection("#partner")}
-            className="border-2 border-white text-white font-[family-name:var(--font-space-grotesk)] font-semibold text-base px-8 py-3.5 rounded-full transition-all hover:bg-white hover:text-[#0D0D0D] cursor-pointer"
+            className="border-2 border-white text-white font-[family-name:var(--font-space-grotesk)] font-semibold text-xl px-8 py-3.5 rounded-full transition-all hover:bg-white hover:text-[#0D0D0D] cursor-pointer"
           >
             Apply as Host
           </button>
         </motion.div>
       </div>
 
-      {/* Scroll Indicator */}
-      <motion.button
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.8 }}
-        onClick={() => scrollToSection("#problem")}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 cursor-pointer"
-        aria-label="Scroll down"
-      >
-        <div className="bounce-chevron">
-          <svg
-            width="32"
-            height="32"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="white"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <polyline points="6 9 12 15 18 9" />
-          </svg>
-        </div>
-      </motion.button>
+
 
       {/* Powered by */}
       <motion.p

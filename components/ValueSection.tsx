@@ -21,7 +21,7 @@ export default function ValueSection() {
   return (
     <section
       id="value"
-      className="py-24 sm:py-32 px-6"
+      className="py-12 sm:py-16 px-8"
       style={{ background: "#FF2D2D" }}
     >
       <div className="max-w-7xl mx-auto">
@@ -42,7 +42,7 @@ export default function ValueSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="font-[family-name:var(--font-abril-fatface)] text-3xl sm:text-4xl md:text-5xl text-white leading-tight mb-16"
+          className="font-[family-name:var(--font-archivo-black)] text-3xl sm:text-4xl md:text-5xl text-white leading-tight mb-16"
         >
           THE HIGH-VALUE EXCHANGE FOR IRL BUILDERS.
         </motion.h2>

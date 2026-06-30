@@ -17,16 +17,16 @@ const cards = [
     title: "ENGAGE",
     body: "An immersive, brand-integrated festival where high-intent audiences, creators, and partners come together for unforgettable live experiences and collaborations.",
     bg: "#FF2D2D",
-    textColor: "#FFFFFF",
+    textColor: "#DCDCDC",
     numberColor: "rgba(255,255,255,0.3)",
-    hoverBorder: "#FF6B35",
+    hoverBorder: "#FF2B2B",
   },
   {
     number: "03",
     title: "THRIVE",
     body: "A launchpad for sustainable growth — giving IRL builders the tools, networks, and institutional validation to monetize, scale, and build lasting impact.",
     bg: "#0D0D0D",
-    textColor: "#FFFFFF",
+    textColor: "#DCDCDC",
     numberColor: "#8FFB2B",
     hoverBorder: "#8FFB2B",
   },
@@ -36,8 +36,8 @@ export default function SolutionSection() {
   return (
     <section
       id="about"
-      className="py-24 sm:py-32 px-6"
-      style={{ background: "#FFFFFF" }}
+      className="py-12 sm:py-16 px-8"
+      style={{ background: "#DCDCDC" }}
     >
       <div className="max-w-7xl mx-auto">
         {/* Section Label */}
@@ -58,7 +58,7 @@ export default function SolutionSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-[family-name:var(--font-abril-fatface)] text-3xl sm:text-4xl md:text-5xl text-[#0D0D0D] leading-tight"
+            className="font-[family-name:var(--font-archivo-black)] text-3xl sm:text-4xl md:text-5xl text-[#0D0D0D] leading-tight"
           >
             INTRODUCING THE IRL CULTURE FESTIVAL.
           </motion.h2>
@@ -103,14 +103,14 @@ export default function SolutionSection() {
             >
               {/* Ghost Number */}
               <span
-                className="absolute top-2 right-4 font-[family-name:var(--font-abril-fatface)] text-[80px] sm:text-[100px] leading-none opacity-10 pointer-events-none select-none"
+                className="absolute top-2 right-4 font-[family-name:var(--font-archivo-black)] text-[80px] sm:text-[100px] leading-none opacity-10 pointer-events-none select-none"
                 style={{ color: card.numberColor }}
               >
                 {card.number}
               </span>
               <div className="relative z-10">
                 <span
-                  className="font-[family-name:var(--font-abril-fatface)] text-4xl block mb-1"
+                  className="font-[family-name:var(--font-archivo-black)] text-4xl block mb-1"
                   style={{ color: card.numberColor }}
                 >
                   {card.number}

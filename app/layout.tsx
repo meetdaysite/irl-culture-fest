@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Abril_Fatface, Space_Grotesk } from "next/font/google";
+import { Archivo_Black, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
-const abril = Abril_Fatface({
+const archivo = Archivo_Black({
   weight: "400",
   subsets: ["latin"],
-  variable: "--font-abril-fatface",
+  variable: "--font-archivo-black",
   display: "swap",
 });
 
@@ -39,7 +39,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${abril.variable} ${spaceGrotesk.variable} antialiased`}
+      className={`${archivo.variable} ${spaceGrotesk.variable} antialiased`}
     >
       <body>{children}</body>
     </html>

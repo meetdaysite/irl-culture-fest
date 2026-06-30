@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -40,37 +41,24 @@ export default function Navbar() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "bg-white/70 backdrop-blur-xl shadow-lg"
+            ? "bg-[#121212]/90 backdrop-blur-xl border-b border-white/10 shadow-lg"
             : "bg-transparent"
         }`}
       >
-        <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
+        <div className="mx-auto max-w-7xl px-8 py-4 flex items-center justify-between">
           {/* Logo */}
           <button
             onClick={() => scrollToSection("#top")}
-            className="flex items-baseline gap-0.5 cursor-pointer"
+            className="flex items-center cursor-pointer"
           >
-            <span
-              className={`font-[family-name:var(--font-abril-fatface)] text-2xl font-normal ${
-                scrolled ? "text-[#FF2D2D]" : "text-[#FF2D2D]"
-              }`}
-            >
-              IRL
-            </span>
-            <span
-              className={`font-[family-name:var(--font-space-grotesk)] text-lg font-medium ml-1 ${
-                scrolled ? "text-[#0D0D0D]" : "text-white"
-              }`}
-            >
-              Culture Fest
-            </span>
-            <sup
-              className={`font-[family-name:var(--font-space-grotesk)] text-xs font-bold ml-0.5 ${
-                scrolled ? "text-[#FF2D2D]" : "text-[#FF2D2D]"
-              }`}
-            >
-              2026
-            </sup>
+            <Image
+              src="/navbar-logo.png"
+              alt="IRL Culture Fest Logo"
+              width={154}
+              height={44}
+              style={{ width: "auto", height: "auto" }}
+              className="h-11 object-contain"
+            />
           </button>
 
           {/* Desktop Links */}
@@ -79,18 +67,14 @@ export default function Navbar() {
               <button
                 key={link.label}
                 onClick={() => scrollToSection(link.href)}
-                className={`nav-link font-[family-name:var(--font-space-grotesk)] text-sm font-medium transition-colors cursor-pointer ${
-                  scrolled
-                    ? "text-[#0D0D0D] hover:text-[#FF2D2D]"
-                    : "text-white/90 hover:text-white"
-                }`}
+                className="nav-link font-[family-name:var(--font-space-grotesk)] text-sm font-medium transition-colors cursor-pointer text-white/90 hover:text-white"
               >
                 {link.label}
               </button>
             ))}
             <button
               onClick={() => scrollToSection("#partner")}
-              className="bg-[#FF2D2D] text-white font-[family-name:var(--font-space-grotesk)] text-sm font-semibold px-6 py-2.5 rounded-full transition-all hover:scale-105 hover:bg-[#e02525] hover:shadow-lg cursor-pointer"
+              className="bg-[#FF2D2D] text-white font-[family-name:var(--font-space-grotesk)] text-base font-semibold px-6 py-2.5 rounded-full transition-all hover:scale-105 hover:bg-[#e02525] hover:shadow-lg cursor-pointer"
             >
               Partner With Us
             </button>
@@ -105,29 +89,29 @@ export default function Navbar() {
             <motion.span
               animate={
                 mobileOpen
-                  ? { rotate: 45, y: 6, background: "#fff" }
-                  : { rotate: 0, y: 0, background: scrolled ? "#0D0D0D" : "#fff" }
+                  ? { rotate: 45, y: 6, background: "#DCDCDC" }
+                  : { rotate: 0, y: 0, background: "#DCDCDC" }
               }
               className="block w-6 h-0.5 rounded-full"
-              style={{ background: scrolled ? "#0D0D0D" : "#fff" }}
+              style={{ background: "#DCDCDC" }}
             />
             <motion.span
               animate={
                 mobileOpen
                   ? { opacity: 0 }
-                  : { opacity: 1, background: scrolled ? "#0D0D0D" : "#fff" }
+                  : { opacity: 1, background: "#DCDCDC" }
               }
               className="block w-6 h-0.5 rounded-full"
-              style={{ background: scrolled ? "#0D0D0D" : "#fff" }}
+              style={{ background: "#DCDCDC" }}
             />
             <motion.span
               animate={
                 mobileOpen
-                  ? { rotate: -45, y: -6, background: "#fff" }
-                  : { rotate: 0, y: 0, background: scrolled ? "#0D0D0D" : "#fff" }
+                  ? { rotate: -45, y: -6, background: "#DCDCDC" }
+                  : { rotate: 0, y: 0, background: "#DCDCDC" }
               }
               className="block w-6 h-0.5 rounded-full"
-              style={{ background: scrolled ? "#0D0D0D" : "#fff" }}
+              style={{ background: "#DCDCDC" }}
             />
           </button>
         </div>
@@ -150,7 +134,7 @@ export default function Navbar() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 + i * 0.1 }}
                 onClick={() => scrollToSection(link.href)}
-                className="font-[family-name:var(--font-abril-fatface)] text-4xl text-white hover:text-[#FF2D2D] transition-colors cursor-pointer"
+                className="font-[family-name:var(--font-archivo-black)] text-4xl text-white hover:text-[#FF2D2D] transition-colors cursor-pointer"
               >
                 {link.label}
               </motion.button>
@@ -160,7 +144,7 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
               onClick={() => scrollToSection("#partner")}
-              className="mt-4 bg-[#FF2D2D] text-white font-[family-name:var(--font-space-grotesk)] text-lg font-semibold px-10 py-4 rounded-full hover:scale-105 transition-transform cursor-pointer"
+              className="mt-4 bg-[#FF2D2D] text-white font-[family-name:var(--font-space-grotesk)] text-xl font-semibold px-10 py-4 rounded-full hover:scale-105 transition-transform cursor-pointer"
             >
               Partner With Us
             </motion.button>

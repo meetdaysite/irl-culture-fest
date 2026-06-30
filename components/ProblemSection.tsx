@@ -11,7 +11,7 @@ const cards = [
   {
     title: "THE SURVIVAL TRAP",
     body: "Without structural monetization tools or scale resources, offline communities struggle to survive.",
-    borderColor: "#FF6B35",
+    borderColor: "#FF2B2B",
   },
   {
     title: "THE AUDIENCE ACQUISITION CRISIS",
@@ -24,7 +24,7 @@ export default function ProblemSection() {
   return (
     <section
       id="problem"
-      className="py-24 sm:py-32 px-6"
+      className="py-12 sm:py-16 px-8"
       style={{ background: "#F5F0E8" }}
     >
       <div className="max-w-7xl mx-auto">
@@ -46,7 +46,7 @@ export default function ProblemSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-[family-name:var(--font-abril-fatface)] text-3xl sm:text-4xl md:text-5xl text-[#0D0D0D] leading-tight"
+            className="font-[family-name:var(--font-archivo-black)] text-3xl sm:text-4xl md:text-5xl text-[#0D0D0D] leading-tight"
           >
             THE INVISIBLE BACKBONE &amp; THE BRAND DISCONNECT
           </motion.h2>
