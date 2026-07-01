@@ -9,7 +9,7 @@ const cards = [
     body: "Dedicated zones for each subculture — music, art, food, wellness, gaming, fitness, and more. Each hub is curated by real community leaders who know their scene inside out.",
     bg: "#0D0D0D",
     text: "#DCDCDC",
-    dotColor: "#8FFB2B",
+    dotColor: "#FFD600",
   },
   {
     title: "HOST SANDBOX",
@@ -324,13 +324,19 @@ export default function ExperienceCarousel() {
                     className="inline-block w-3 h-3 rounded-full flex-shrink-0 animate-pulse"
                     style={{ background: card.dotColor }}
                   />
-                  <h3 className="font-[family-name:var(--font-space-grotesk)] font-bold text-base sm:text-lg uppercase tracking-wider">
+                  <h3
+                    className="font-body font-bold uppercase"
+                    style={{
+                      fontSize: "clamp(18px, 2.2vw, 26px)",
+                      letterSpacing: "0.03em",
+                    }}
+                  >
                     {card.title}
                   </h3>
                 </div>
 
                 {/* Card Body */}
-                <p className="font-[family-name:var(--font-space-grotesk)] text-[14px] sm:text-[15px] leading-relaxed opacity-90">
+                <p className="font-body text-[14px] sm:text-[15px] leading-relaxed opacity-90">
                   {card.body}
                 </p>
               </motion.div>

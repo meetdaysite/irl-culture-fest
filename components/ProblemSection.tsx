@@ -16,7 +16,7 @@ const cards = [
   {
     title: "THE AUDIENCE ACQUISITION CRISIS",
     body: "Brands spend millions on digital ads but desperately need an alternative, authentic connection.",
-    borderColor: "#8FFB2B",
+    borderColor: "#FFD600",
   },
 ];
 

@@ -6,9 +6,18 @@ export default function AudienceSection() {
   return (
     <section
       id="audience"
-      className="relative py-12 sm:py-16 px-8 overflow-hidden"
+      className="relative py-12 sm:py-16 px-8 overflow-visible"
       style={{ background: "#2A1A2E" }}
     >
+      {/* Diagonal Section Divider */}
+      <div
+        className="absolute -top-[40px] left-0 right-0 h-[60px] pointer-events-none z-[1]"
+        style={{
+          backgroundColor: "#2A1A2E",
+          clipPath: "polygon(0 40px, 100% 0, 100% 60px, 0 60px)",
+        }}
+      />
+
       {/* Decorative Dots */}
       <div className="absolute inset-0 pointer-events-none">
         {[
@@ -46,7 +55,11 @@ export default function AudienceSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="section-label text-[#6700a2]/60 font-[family-name:var(--font-space-grotesk)] mb-6"
+          className="font-body text-[#6700a2]/60 mb-6"
+          style={{
+            fontSize: "clamp(10px, 1vw, 12px)",
+            letterSpacing: "0.18em",
+          }}
         >
           Target Audience ————
         </motion.p>
@@ -57,7 +70,12 @@ export default function AudienceSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="font-[family-name:var(--font-archivo-black)] text-3xl sm:text-4xl md:text-5xl text-white leading-tight mb-4"
+          className="font-display text-white mb-4"
+          style={{
+            fontSize: "clamp(40px, 6vw, 88px)",
+            lineHeight: 0.95,
+            letterSpacing: "0.01em",
+          }}
         >
           WHO IS IN THE ROOM?
         </motion.h2>
@@ -68,7 +86,7 @@ export default function AudienceSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="font-[family-name:var(--font-space-grotesk)] text-[#F5F0E8]/80 text-base sm:text-lg max-w-2xl mb-16 leading-relaxed"
+          className="font-body text-[#F5F0E8]/80 text-base sm:text-lg max-w-2xl mb-16 leading-relaxed"
         >
           We bypass mass vanity metrics to focus exclusively on high-fidelity,
           high-leverage target layers.
@@ -86,14 +104,14 @@ export default function AudienceSection() {
             style={{ background: "#F5F0E8" }}
           >
             {/* Ghost Number */}
-            <span className="absolute top-2 right-4 font-[family-name:var(--font-archivo-black)] text-[100px] sm:text-[140px] leading-none text-[#0D0D0D] opacity-[0.06] pointer-events-none select-none">
+            <span className="absolute top-2 right-4 font-display text-[100px] sm:text-[140px] leading-none text-[#0D0D0D] opacity-[0.06] pointer-events-none select-none">
               01
             </span>
             <div className="relative z-10">
-              <span className="inline-block font-[family-name:var(--font-space-grotesk)] text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full mb-6 bg-[#8FFB2B] text-[#0D0D0D]">
+              <span className="inline-block font-body text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full mb-6 bg-[#8FFB2B] text-[#0D0D0D]">
                 150+ SUPER-HOSTS
               </span>
-              <p className="font-[family-name:var(--font-space-grotesk)] text-[#333] text-base leading-relaxed">
+              <p className="font-body text-[#333] text-base leading-relaxed">
                 Subculture leaders and community founders representing thousands
                 of hyper-active, loyal members.
               </p>
@@ -110,14 +128,14 @@ export default function AudienceSection() {
             style={{ background: "#FF2D2D" }}
           >
             {/* Ghost Number */}
-            <span className="absolute top-2 right-4 font-[family-name:var(--font-archivo-black)] text-[100px] sm:text-[140px] leading-none text-white opacity-[0.15] pointer-events-none select-none">
+            <span className="absolute top-2 right-4 font-display text-[100px] sm:text-[140px] leading-none text-white opacity-[0.15] pointer-events-none select-none">
               02
             </span>
             <div className="relative z-10">
-              <span className="inline-block font-[family-name:var(--font-space-grotesk)] text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full mb-6 bg-[#FFD600] text-[#0D0D0D]">
+              <span className="inline-block font-body text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full mb-6 bg-[#FFD600] text-[#0D0D0D]">
                 ECOSYSTEM ENABLERS
               </span>
-              <p className="font-[family-name:var(--font-space-grotesk)] text-white text-base leading-relaxed">
+              <p className="font-body text-white text-base leading-relaxed">
                 Platform builders, venue partners, booking agencies, and
                 corporate sponsors shaping the experience economy.
               </p>

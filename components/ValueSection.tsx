@@ -21,17 +21,29 @@ export default function ValueSection() {
   return (
     <section
       id="value"
-      className="py-12 sm:py-16 px-8"
+      className="relative py-12 sm:py-16 px-8 overflow-visible"
       style={{ background: "#FF2D2D" }}
     >
-      <div className="max-w-7xl mx-auto">
+      {/* Diagonal Section Divider */}
+      <div
+        className="absolute -top-[40px] left-0 right-0 h-[60px] pointer-events-none z-[1]"
+        style={{
+          backgroundColor: "#FF2D2D",
+          clipPath: "polygon(0 40px, 100% 0, 100% 60px, 0 60px)",
+        }}
+      />
+      <div className="max-w-7xl mx-auto relative z-[2]">
         {/* Section Label */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="section-label text-white/60 font-[family-name:var(--font-space-grotesk)] mb-6"
+          className="font-body text-white/60 mb-6"
+          style={{
+            fontSize: "clamp(10px, 1vw, 12px)",
+            letterSpacing: "0.18em",
+          }}
         >
           Value Proposition ————
         </motion.p>
@@ -42,7 +54,12 @@ export default function ValueSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="font-[family-name:var(--font-archivo-black)] text-3xl sm:text-4xl md:text-5xl text-white leading-tight mb-16"
+          className="font-display text-white mb-16"
+          style={{
+            fontSize: "clamp(40px, 6vw, 88px)",
+            lineHeight: 0.95,
+            letterSpacing: "0.01em",
+          }}
         >
           THE HIGH-VALUE EXCHANGE FOR IRL BUILDERS.
         </motion.h2>
@@ -60,10 +77,16 @@ export default function ValueSection() {
                 i < columns.length - 1 ? "md:border-r md:border-white/20" : ""
               }`}
             >
-              <h3 className="font-[family-name:var(--font-space-grotesk)] font-bold text-sm uppercase tracking-wider text-white mb-4">
+              <h3
+                className="font-body font-bold uppercase tracking-wider text-white mb-4"
+                style={{
+                  fontSize: "clamp(18px, 2.2vw, 26px)",
+                  letterSpacing: "0.03em",
+                }}
+              >
                 {col.title}
               </h3>
-              <p className="font-[family-name:var(--font-space-grotesk)] text-white/80 text-sm leading-relaxed">
+              <p className="font-body text-white/80 text-sm leading-relaxed">
                 {col.body}
               </p>
             </motion.div>

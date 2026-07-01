@@ -4,11 +4,10 @@ import { motion } from "framer-motion";
 import { useScrollProgress } from "@/hooks/useScrollProgress";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import ProblemSection from "@/components/ProblemSection";
+import GallerySection from "@/components/GallerySection";
 import OpportunitySection from "@/components/OpportunitySection";
 import SolutionSection from "@/components/SolutionSection";
 import ExperienceSection from "@/components/ExperienceSection";
-import AudienceSection from "@/components/AudienceSection";
 import CitiesSection from "@/components/CitiesSection";
 import ValueSection from "@/components/ValueSection";
 import TeamSection from "@/components/TeamSection";
@@ -33,11 +32,10 @@ export default function Home() {
       <Navbar />
       <main>
         <HeroSection />
-        <ProblemSection />
+        <GallerySection />
         <OpportunitySection />
         <SolutionSection />
         <ExperienceSection />
-        <AudienceSection />
         <CitiesSection />
         <ValueSection />
         <TeamSection />

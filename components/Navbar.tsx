@@ -50,15 +50,15 @@ export default function Navbar() {
           {/* Logo */}
           <button
             onClick={() => scrollToSection("#top")}
-            className="flex items-center cursor-pointer"
+            className="flex items-center justify-center cursor-pointer bg-[#0D0D0D] px-6 py-2.5 rounded-full transition-all duration-300 hover:scale-108 hover:shadow-[0_4px_25px_rgba(0,0,0,0.5)] active:scale-95 shadow-sm"
           >
             <Image
               src="/navbar-logo.png"
               alt="IRL Culture Fest Logo"
-              width={154}
-              height={44}
+              width={360}
+              height={102}
               style={{ width: "auto", height: "auto" }}
-              className="h-11 object-contain"
+              className="h-[90px] sm:h-[108px] object-contain"
             />
           </button>
 
@@ -68,14 +68,14 @@ export default function Navbar() {
               <button
                 key={link.label}
                 onClick={() => scrollToSection(link.href)}
-                className="nav-link font-[family-name:var(--font-space-grotesk)] text-sm font-medium transition-colors cursor-pointer text-white/90 hover:text-white"
+                className="nav-link font-body text-sm font-medium transition-colors cursor-pointer text-white/90 hover:text-white"
               >
                 {link.label}
               </button>
             ))}
             <button
               onClick={() => scrollToSection("#partner")}
-              className="bg-[#FF2D2D] text-white font-[family-name:var(--font-space-grotesk)] text-base font-semibold px-6 py-2.5 rounded-full transition-all hover:scale-105 hover:bg-[#e02525] hover:shadow-lg cursor-pointer"
+              className="bg-[#FF2D2D] text-white font-body text-base font-semibold px-6 py-2.5 rounded-full transition-all hover:scale-105 hover:bg-[#e02525] hover:shadow-lg cursor-pointer"
             >
               Partner With Us
             </button>
@@ -135,7 +135,7 @@ export default function Navbar() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 + i * 0.1 }}
                 onClick={() => scrollToSection(link.href)}
-                className="font-[family-name:var(--font-archivo-black)] text-4xl text-white hover:text-[#FF2D2D] transition-colors cursor-pointer"
+                className="font-display text-4xl text-white hover:text-[#FF2D2D] transition-colors cursor-pointer"
               >
                 {link.label}
               </motion.button>
@@ -145,7 +145,7 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
               onClick={() => scrollToSection("#partner")}
-              className="mt-4 bg-[#FF2D2D] text-white font-[family-name:var(--font-space-grotesk)] text-xl font-semibold px-10 py-4 rounded-full hover:scale-105 transition-transform cursor-pointer"
+              className="mt-4 bg-[#FF2D2D] text-white font-body text-xl font-semibold px-10 py-4 rounded-full hover:scale-105 transition-transform cursor-pointer"
             >
               Partner With Us
             </motion.button>

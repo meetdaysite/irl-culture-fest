@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
-import { Archivo_Black, Space_Grotesk } from "next/font/google";
+import { Black_Han_Sans, Space_Grotesk } from "next/font/google";
+import ClientOverlays from "@/components/ClientOverlays";
 import "./globals.css";
 
-const archivo = Archivo_Black({
+const blackHanSans = Black_Han_Sans({
   weight: "400",
   subsets: ["latin"],
-  variable: "--font-archivo-black",
+  variable: "--font-display",
   display: "swap",
 });
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-space-grotesk",
+  variable: "--font-body",
   display: "swap",
 });
 
@@ -39,9 +40,16 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${archivo.variable} ${spaceGrotesk.variable} antialiased`}
+      className={`${blackHanSans.variable} ${spaceGrotesk.variable} antialiased`}
     >
-      <body>{children}</body>
+      <body>
+        <ClientOverlays />
+        {children}
+      </body>
     </html>
   );
 }
+
+
+
+

@@ -166,7 +166,11 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.6 }}
-          className="font-[family-name:var(--font-space-grotesk)] text-[#F5F0E8] text-xs sm:text-sm uppercase tracking-[0.25em] mb-8"
+          className="font-body text-[#F5F0E8] uppercase mb-8"
+          style={{
+            fontSize: "clamp(11px, 1.2vw, 14px)",
+            letterSpacing: "0.2em",
+          }}
         >
           NOVEMBER 2026 &nbsp;·&nbsp; DELHI &nbsp;·&nbsp; MUMBAI &nbsp;·&nbsp;
           BANGALORE &nbsp;·&nbsp; PUNE
@@ -180,7 +184,12 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 60 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 + i * 0.12, duration: 0.7, ease: "easeOut" }}
-              className="font-[family-name:var(--font-archivo-black)] text-5xl sm:text-7xl md:text-8xl lg:text-[96px] text-white leading-tight"
+              className="font-display text-white"
+              style={{
+                fontSize: "clamp(72px, 12vw, 148px)",
+                lineHeight: 0.92,
+                letterSpacing: "0.02em",
+              }}
             >
               {word}
             </motion.span>
@@ -195,7 +204,12 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 60 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.74 + i * 0.12, duration: 0.7, ease: "easeOut" }}
-              className="font-[family-name:var(--font-archivo-black)] text-5xl sm:text-7xl md:text-8xl lg:text-[96px] text-[#FF2D2D] leading-tight"
+              className="font-display text-[#FF2D2D]"
+              style={{
+                fontSize: "clamp(72px, 12vw, 148px)",
+                lineHeight: 0.92,
+                letterSpacing: "0.02em",
+              }}
             >
               {word}
             </motion.span>
@@ -207,7 +221,10 @@ export default function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8, duration: 0.8 }}
-          className="font-[family-name:var(--font-space-grotesk)] text-[#F5F0E8] text-base sm:text-lg md:text-xl max-w-xl mx-auto mt-8 leading-relaxed"
+          className="font-body text-[#F5F0E8] max-w-xl mx-auto mt-8 leading-relaxed"
+          style={{
+            fontSize: "clamp(16px, 1.8vw, 22px)",
+          }}
         >
           Celebrating the IRL Culture Builders &amp; the ecosystem making it
           happen.
@@ -222,15 +239,15 @@ export default function HeroSection() {
         >
           <button
             onClick={() => scrollToSection("#partner")}
-            className="bg-[#FF2D2D] text-white font-[family-name:var(--font-space-grotesk)] font-semibold text-xl px-8 py-3.5 rounded-full transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(255,45,45,0.5)] cursor-pointer"
+            className="bg-[#FF2D2D] text-white font-body font-semibold text-xl px-8 py-3.5 rounded-full transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(255,45,45,0.5)] cursor-pointer"
           >
             Become a Partner
           </button>
           <button
             onClick={() => scrollToSection("#partner")}
-            className="border-2 border-white text-white font-[family-name:var(--font-space-grotesk)] font-semibold text-xl px-8 py-3.5 rounded-full transition-all hover:bg-white hover:text-[#0D0D0D] cursor-pointer"
+            className="border-2 border-white text-white font-body font-semibold text-xl px-8 py-3.5 rounded-full transition-all hover:bg-white hover:text-[#0D0D0D] cursor-pointer"
           >
-            Apply as Host
+            Attend the Fest
           </button>
         </motion.div>
       </div>
