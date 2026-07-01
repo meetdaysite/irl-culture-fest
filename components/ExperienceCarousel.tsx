@@ -9,21 +9,21 @@ const cards = [
     body: "Dedicated zones for each subculture — music, art, food, wellness, gaming, fitness, and more. Each hub is curated by real community leaders who know their scene inside out.",
     bg: "#1A1A1A",
     text: "#FFFFFF",
-    dotColor: "#FFD600",
+    dotColor: "#f2af29",
   },
   {
     title: "HOST SANDBOX",
     body: "An interactive playground where emerging and established hosts can demo their event formats, test new concepts, and receive live feedback from an audience of peers and brands.",
     bg: "#FF2D2D",
     text: "#FFFFFF",
-    dotColor: "#FFD600",
+    dotColor: "#f2af29",
   },
   {
     title: "CURATED MATCHMAKING",
     body: "AI-powered and human-curated matchmaking sessions that connect brands with the right hosts, venues, and communities for authentic, high-impact collaborations.",
-    bg: "#6700a2",
+    bg: "#f2af29",
     text: "#FFFFFF",
-    dotColor: "#00C2FF",
+    dotColor: "#FF2D2D",
   },
   {
     title: "SOCIAL MODULE",
@@ -67,8 +67,8 @@ export default function ExperienceCarousel() {
   }, [interactionCount]);
 
   // Auto-rotate logic:
-  // - Auto-advance every 4 seconds unless hovered
-  // - Pause for 6 seconds after manual interaction
+  // - Auto-advance every 1.5 seconds unless hovered
+  // - Pause for 3 seconds after manual interaction
   useEffect(() => {
     if (isHovered) return;
 
@@ -77,7 +77,7 @@ export default function ExperienceCarousel() {
     };
 
     const timeSinceInteraction = Date.now() - lastInteractionRef.current;
-    const delay = timeSinceInteraction < 6000 ? (6000 - timeSinceInteraction) : 4000;
+    const delay = timeSinceInteraction < 3000 ? (3000 - timeSinceInteraction) : 1500;
 
     const timer = setTimeout(() => {
       handleAutoPlay();
@@ -223,7 +223,7 @@ export default function ExperienceCarousel() {
     >
       {/* 3D Coverflow Wrapper */}
       <div
-        className="relative w-full h-[480px] sm:h-[500px] flex items-center justify-center overflow-visible"
+        className="relative w-full h-[380px] sm:h-[420px] flex items-center justify-center overflow-visible"
         style={{ perspective: "1200px" }}
       >
         {/* Navigation Arrows */}
@@ -315,7 +315,7 @@ export default function ExperienceCarousel() {
                   }
                 }}
                 onClick={() => handleCardClick(i)}
-                className={`absolute w-[290px] sm:w-[340px] h-[380px] sm:h-[440px] rounded-2xl p-8 flex flex-col justify-start select-none cursor-pointer`}
+                className={`absolute w-[270px] sm:w-[300px] h-[320px] sm:h-[380px] rounded-2xl p-6 sm:p-8 flex flex-col justify-start select-none cursor-pointer`}
               >
                 {/* Card Title & Icon */}
                 <div className="flex items-center gap-3 mb-6">

@@ -13,6 +13,7 @@ import ValueSection from "@/components/ValueSection";
 import TeamSection from "@/components/TeamSection";
 import PartnerCTA from "@/components/PartnerCTA";
 import Footer from "@/components/Footer";
+import ConfettiPop from "@/components/ConfettiPop";
 
 function ScrollProgressBar() {
   const progress = useScrollProgress();
@@ -28,6 +29,7 @@ function ScrollProgressBar() {
 export default function Home() {
   return (
     <>
+      <ConfettiPop />
       <ScrollProgressBar />
       <Navbar />
       <main>

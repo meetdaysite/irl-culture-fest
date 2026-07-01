@@ -94,7 +94,7 @@ export default function CustomCursor() {
   if (!isMounted) return null;
   if (typeof window !== "undefined" && window.innerWidth < 768) return null;
 
-  const cursorColor = onRedBg ? "#FFD600" : "#FF2D2D";
+  const cursorColor = onRedBg ? "#f2af29" : "#FF2D2D";
 
   return (
     <>
@@ -130,7 +130,7 @@ export default function CustomCursor() {
           scale: isHovered ? 1.6 : 1,
           backgroundColor: isHovered
             ? onRedBg
-              ? "rgba(255, 214, 0, 0.15)"
+              ? "rgba(242, 175, 41, 0.15)"
               : "rgba(255, 45, 45, 0.15)"
             : "rgba(255, 45, 45, 0)",
         }}

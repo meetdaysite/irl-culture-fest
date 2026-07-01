@@ -3,55 +3,11 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-function ConfettiBurst() {
-  const [particles, setParticles] = useState<
-    { id: number; x: number; color: string; delay: number; size: number; duration: number }[]
-  >([]);
-
-  useEffect(() => {
-    const colors = ["#FF2D2D", "#6700a2", "#FF2B2B", "#8FFB2B", "#FFD600", "#00C2FF"];
-    const items = Array.from({ length: 40 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      delay: Math.random() * 1.5,
-      size: 4 + Math.random() * 8,
-      duration: 2.5 + Math.random(),
-    }));
-    setTimeout(() => {
-      setParticles(items);
-    }, 0);
-  }, []);
-
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none z-10">
-      {particles.map((p) => (
-        <motion.div
-          key={p.id}
-          initial={{ y: -20, opacity: 1, scale: 1 }}
-          animate={{ y: "100vh", opacity: 0, rotate: 720 }}
-          transition={{ duration: p.duration, delay: p.delay, ease: "easeIn" }}
-          className="absolute rounded-full"
-          style={{
-            left: `${p.x}%`,
-            width: p.size,
-            height: p.size,
-            background: p.color,
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
 export default function HeroSection() {
   const words1 = ["INDIA'S", "FIRST"];
   const words2 = ["IRL", "FESTIVAL"];
 
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [floatingDots, setFloatingDots] = useState<
-    { id: number; x: number; y: number; size: number; color: string; parallax: number; duration: number }[]
-  >([]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -63,22 +19,6 @@ export default function HeroSection() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  useEffect(() => {
-    const colors = ["#FF2D2D", "#6700a2", "#FF2B2B", "#8FFB2B", "#FFD600", "#00C2FF"];
-    const items = Array.from({ length: 25 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: 4 + Math.random() * 8,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      parallax: 0.3 + Math.random() * 1.2,
-      duration: 10 + Math.random() * 20,
-    }));
-    setTimeout(() => {
-      setFloatingDots(items);
-    }, 0);
-  }, []);
-
   const scrollToSection = (href: string) => {
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -88,9 +28,9 @@ export default function HeroSection() {
     <section
       id="hero"
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
-      style={{ background: "#F8F5F0" }}
+      style={{ background: "#F8F5F0", paddingTop: 60, paddingBottom: 80 }}
     >
-      {/* Floating Orbs (Parallax smoke background) */}
+      {/* Floating Orbs */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           animate={{ x: mousePos.x * 0.8, y: mousePos.y * 0.8 }}
@@ -122,58 +62,61 @@ export default function HeroSection() {
         </motion.div>
       </div>
 
-      {/* Floating Interactive Parallax Dots */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-10">
-        {floatingDots.map((dot) => (
-          <motion.div
-            key={dot.id}
-            animate={{
-              x: mousePos.x * dot.parallax,
-              y: mousePos.y * dot.parallax,
-            }}
-            transition={{ type: "spring", stiffness: 60, damping: 25 }}
-            className="absolute"
-            style={{
-              left: `${dot.x}%`,
-              top: `${dot.y}%`,
-            }}
-          >
-            <div
-              className="rounded-full"
-              style={{
-                width: dot.size,
-                height: dot.size,
-                background: dot.color,
-                opacity: 0.5,
-                boxShadow: `0 0 10px ${dot.color}60`,
-                animation: `float-slow-${dot.id % 3} ${dot.duration}s ease-in-out infinite alternate`,
-              }}
-            />
-          </motion.div>
-        ))}
-      </div>
-
       {/* Noise Overlay */}
       <div className="noise-overlay" />
 
-      {/* Confetti Burst */}
-      <ConfettiBurst />
+      {/* Floating Date Badge (Top Left Corner) */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8, rotate: -15 }}
+        animate={{
+          opacity: 1,
+          scale: 1,
+          rotate: -8,
+          y: [0, -10, 0]
+        }}
+        transition={{
+          delay: 0.8,
+          duration: 5,
+          y: {
+            repeat: Infinity,
+            duration: 4,
+            ease: "easeInOut"
+          }
+        }}
+        className="absolute left-28 sm:left-40 top-[130px] sm:top-[150px] z-30 hidden md:flex flex-col items-center justify-center bg-[#f2af29] border-[2px] border-[#0D0D0D] rounded-xl w-[75px] h-[75px] p-1.5 select-none"
+        style={{
+          boxShadow: "2px 2px 0px #0D0D0D",
+        }}
+      >
+        <span className="font-body text-[5.5px] font-bold text-[#0D0D0D]/60 uppercase tracking-widest leading-none mb-1">
+          HAPPENING
+        </span>
+        <span className="font-display text-[17px] font-black text-[#0D0D0D] leading-none mb-0.5">
+          NOV
+        </span>
+        <span className="font-display text-[12px] font-black text-[#0D0D0D] leading-none">
+          2026
+        </span>
+      </motion.div>
 
       {/* Main Content */}
-      <div className="relative z-20 text-center px-8 max-w-5xl mx-auto pt-24 pb-12 sm:pt-32">
+      <div
+        className="relative z-20 text-center mx-auto w-full"
+        style={{ maxWidth: 1200, paddingLeft: 48, paddingRight: 48 }}
+      >
         {/* Eyebrow */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.6 }}
-          className="font-body text-[#888] uppercase mb-8"
+          className="font-body text-[#888] uppercase"
           style={{
-            fontSize: "clamp(11px, 1.2vw, 14px)",
+            fontSize: 11,
             letterSpacing: "0.2em",
+            marginBottom: 12,
           }}
         >
-          NOVEMBER 2026 &nbsp;·&nbsp; DELHI &nbsp;·&nbsp; MUMBAI &nbsp;·&nbsp;
-          BANGALORE &nbsp;·&nbsp; PUNE
+          DELHI &nbsp;·&nbsp; MUMBAI &nbsp;·&nbsp; BANGALORE &nbsp;·&nbsp; PUNE
         </motion.p>
 
         {/* H1 Line 1 — INDIA'S FIRST */}
@@ -186,8 +129,8 @@ export default function HeroSection() {
               transition={{ delay: 0.5 + i * 0.12, duration: 0.7, ease: "easeOut" }}
               className="font-display text-[#1A1A1A]"
               style={{
-                fontSize: "clamp(72px, 12vw, 148px)",
-                lineHeight: 0.92,
+                fontSize: "clamp(52px, 7vw, 96px)",
+                lineHeight: 0.95,
                 letterSpacing: "0.02em",
               }}
             >
@@ -206,8 +149,8 @@ export default function HeroSection() {
               transition={{ delay: 0.74 + i * 0.12, duration: 0.7, ease: "easeOut" }}
               className="font-display text-[#FF2D2D]"
               style={{
-                fontSize: "clamp(72px, 12vw, 148px)",
-                lineHeight: 0.92,
+                fontSize: "clamp(52px, 7vw, 96px)",
+                lineHeight: 0.95,
                 letterSpacing: "0.02em",
               }}
             >
@@ -221,9 +164,10 @@ export default function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8, duration: 0.8 }}
-          className="font-body text-[#555] max-w-xl mx-auto mt-8 leading-relaxed"
+          className="font-body text-[#555] max-w-xl mx-auto leading-relaxed"
           style={{
             fontSize: "clamp(16px, 1.8vw, 22px)",
+            marginTop: 20,
           }}
         >
           Celebrating the IRL Culture Builders &amp; the ecosystem making it
@@ -235,17 +179,18 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2, duration: 0.6 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          style={{ marginTop: 48 }}
         >
           <button
             onClick={() => scrollToSection("#partner")}
-            className="bg-[#FF2D2D] text-white font-body font-semibold text-xl px-8 py-3.5 rounded-full transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(255,45,45,0.4)] cursor-pointer"
+            className="bg-[#FF2D2D] text-white font-body font-semibold text-base px-6 py-2.5 rounded-full transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(255,45,45,0.4)] cursor-pointer"
           >
             Become a Partner
           </button>
           <button
             onClick={() => scrollToSection("#partner")}
-            className="border-2 border-[#1A1A1A] text-[#1A1A1A] font-body font-semibold text-xl px-8 py-3.5 rounded-full transition-all hover:bg-[#1A1A1A] hover:text-white cursor-pointer"
+            className="border-2 border-[#1A1A1A] text-[#1A1A1A] font-body font-semibold text-base px-6 py-2.5 rounded-full transition-all hover:bg-[#1A1A1A] hover:text-white cursor-pointer"
           >
             Attend the Fest
           </button>
@@ -257,10 +202,39 @@ export default function HeroSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.4 }}
         transition={{ delay: 2 }}
-        className="absolute bottom-6 left-6 font-[family-name:var(--font-space-grotesk)] text-xs text-[#999] z-20"
+        className="absolute bottom-20 left-6 font-[family-name:var(--font-space-grotesk)] text-xs text-[#999] z-20"
       >
         Powered by meetday.ai
       </motion.p>
+
+      {/* Torn Paper Divider → next section: Gallery #FFFFFF */}
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1440 60"
+        preserveAspectRatio="none"
+        style={{
+          display: "block",
+          width: "100%",
+          height: "60px",
+          position: "absolute",
+          bottom: "-2px",
+          left: 0,
+          pointerEvents: "none",
+          zIndex: 2,
+        }}
+      >
+        {/* Layer 1: Underlay white/cream border shadow */}
+        <path
+          d="M0,25 L15,18 L30,28 L45,16 L60,26 L75,14 L90,24 L105,12 L120,22 L135,14 L150,25 L165,16 L180,28 L195,18 L210,30 L225,20 L240,32 L255,22 L270,34 L285,24 L300,36 L315,26 L330,38 L345,28 L360,40 L375,30 L390,42 L405,32 L420,44 L435,34 L450,45 L465,35 L480,46 L495,36 L510,48 L525,38 L540,49 L555,39 L570,50 L585,40 L600,52 L615,42 L630,53 L645,43 L660,54 L675,44 L690,55 L705,45 L720,55 L735,46 L750,54 L765,44 L780,52 L795,42 L810,50 L825,40 L840,48 L855,38 L870,46 L885,36 L900,44 L915,34 L930,42 L945,32 L960,40 L975,30 L990,38 L1005,28 L1020,36 L1035,26 L1050,34 L1065,24 L1080,32 L1095,22 L1110,30 L1125,20 L1140,28 L1155,18 L1170,26 L1185,16 L1200,24 L1215,14 L1230,22 L1245,12 L1260,20 L1275,10 L1290,18 L1305,8 L1320,16 L1335,6 L1350,14 L1365,4 L1380,12 L1395,2 L1410,10 L1425,2 L1440,8 L1440,60 L0,60 Z"
+          fill="#DCD6CD"
+          transform="translate(0, -3)"
+        />
+        {/* Layer 2: Main foreground color (Gallery BG #FFFFFF) */}
+        <path
+          d="M0,25 L15,18 L30,28 L45,16 L60,26 L75,14 L90,24 L105,12 L120,22 L135,14 L150,25 L165,16 L180,28 L195,18 L210,30 L225,20 L240,32 L255,22 L270,34 L285,24 L300,36 L315,26 L330,38 L345,28 L360,40 L375,30 L390,42 L405,32 L420,44 L435,34 L450,45 L465,35 L480,46 L495,36 L510,48 L525,38 L540,49 L555,39 L570,50 L585,40 L600,52 L615,42 L630,53 L645,43 L660,54 L675,44 L690,55 L705,45 L720,55 L735,46 L750,54 L765,44 L780,52 L795,42 L810,50 L825,40 L840,48 L855,38 L870,46 L885,36 L900,44 L915,34 L930,42 L945,32 L960,40 L975,30 L990,38 L1005,28 L1020,36 L1035,26 L1050,34 L1065,24 L1080,32 L1095,22 L1110,30 L1125,20 L1140,28 L1155,18 L1170,26 L1185,16 L1200,24 L1215,14 L1230,22 L1245,12 L1260,20 L1275,10 L1290,18 L1305,8 L1320,16 L1335,6 L1350,14 L1365,4 L1380,12 L1395,2 L1410,10 L1425,2 L1440,8 L1440,60 L0,60 Z"
+          fill="#FFFFFF"
+        />
+      </svg>
     </section>
   );
 }

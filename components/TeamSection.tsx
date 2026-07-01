@@ -1,94 +1,127 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 const team = [
   {
     name: "Gagaan Singh Nagi",
     org: "meetday.ai",
     initials: "GN",
-    gradient: "linear-gradient(135deg, #FF2D2D, #FF6B35)",
+    gradient: "linear-gradient(135deg, #FF2D2D, #f2af29)",
     glowColor: "#FF2D2D",
-    image: "https://picsum.photos/seed/gagaan/280/380"
+    image: "https://picsum.photos/seed/gagaan/280/380",
+    borderColor: "#FF2D2D",
+    shadowColor: "#0D0D0D",
+    accentDot: "#f2af29",
   },
   {
     name: "Tumul Rishabh",
     org: "meetday.ai",
     initials: "TR",
-    gradient: "linear-gradient(135deg, #FF6B35, #FFD600)",
-    glowColor: "#FF6B35",
-    image: "https://picsum.photos/seed/tumul/280/380"
+    gradient: "linear-gradient(135deg, #f2af29, #FF2D2D)",
+    glowColor: "#f2af29",
+    image: "https://picsum.photos/seed/tumul/280/380",
+    borderColor: "#f2af29",
+    shadowColor: "#0D0D0D",
+    accentDot: "#FF2D2D",
   },
   {
     name: "Madhur Mohan",
     org: "StartupNews.fyi",
     initials: "MM",
-    gradient: "linear-gradient(135deg, #FFD600, #8FFB2B)",
-    glowColor: "#FFD600",
-    image: "https://picsum.photos/seed/madhur/280/380"
+    gradient: "linear-gradient(135deg, #f2af29, #FF2D2D)",
+    glowColor: "#f2af29",
+    image: "https://picsum.photos/seed/madhur/280/380",
+    borderColor: "#f2af29",
+    shadowColor: "#0D0D0D",
+    accentDot: "#FF2D2D",
   },
   {
     name: "Vanshikaa Oberoi",
     org: "The Fingerprint Lab",
     initials: "VO",
-    gradient: "linear-gradient(135deg, #BF5FFF, #00C2FF)",
-    glowColor: "#BF5FFF",
-    image: "https://picsum.photos/seed/vanshikaa/280/380"
+    gradient: "linear-gradient(135deg, #FF2D2D, #f2af29)",
+    glowColor: "#FF2D2D",
+    image: "https://picsum.photos/seed/vanshikaa/280/380",
+    borderColor: "#FF2D2D",
+    shadowColor: "#0D0D0D",
+    accentDot: "#f2af29",
   },
   {
     name: "Aaquib Hussain",
     org: "Freeflow Ventures",
     initials: "AH",
-    gradient: "linear-gradient(135deg, #00C2FF, #8FFB2B)",
-    glowColor: "#00C2FF",
-    image: "https://picsum.photos/seed/aaquib/280/380"
-  }
+    gradient: "linear-gradient(135deg, #FF2D2D, #f2af29)",
+    glowColor: "#FF2D2D",
+    image: "https://picsum.photos/seed/aaquib/280/380",
+    borderColor: "#FF2D2D",
+    shadowColor: "#0D0D0D",
+    accentDot: "#f2af29",
+  },
 ];
 
 export default function TeamSection() {
-  const [activeIndex, setActiveIndex] = useState(0);
   const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
-  const [isPaused, setIsPaused] = useState(false);
-  
-  const autoRotateInterval = useRef<NodeJS.Timeout | null>(null);
-  const manualPauseTimeout = useRef<NodeJS.Timeout | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const [interactionCount, setInteractionCount] = useState(0);
+  const lastInteractionRef = useRef(0);
+  const [width, setWidth] = useState(1200);
 
-  const startAutoRotation = () => {
-    if (autoRotateInterval.current) clearInterval(autoRotateInterval.current);
-    autoRotateInterval.current = setInterval(() => {
-      if (!isPaused) {
-        setActiveIndex((prev) => (prev + 1) % 5);
-      }
-    }, 3000);
+  // Monitor window resize to handle responsiveness
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const isMobile = width < 640;
+  const isTablet = width >= 640 && width < 1024;
+  const maxIndex = isMobile ? 4 : isTablet ? 3 : 2;
+
+  // Track manual interaction
+  useEffect(() => {
+    if (interactionCount > 0) {
+      lastInteractionRef.current = Date.now();
+    }
+  }, [interactionCount]);
+
+  // Autoplay loop every 1.5 seconds
+  useEffect(() => {
+    if (isHovered) return;
+
+    const handleAutoPlay = () => {
+      setActiveIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+    };
+
+    const timeSinceInteraction = Date.now() - lastInteractionRef.current;
+    const delay = timeSinceInteraction < 5000 ? (5000 - timeSinceInteraction) : 3000;
+
+    const timer = setTimeout(() => {
+      handleAutoPlay();
+    }, delay);
+
+    return () => clearTimeout(timer);
+  }, [activeIndex, isHovered, interactionCount, maxIndex]);
+
+  const handleNext = () => {
+    setActiveIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+    setInteractionCount((c) => c + 1);
   };
 
-  useEffect(() => {
-    startAutoRotation();
-    return () => {
-      if (autoRotateInterval.current) clearInterval(autoRotateInterval.current);
-      if (manualPauseTimeout.current) clearTimeout(manualPauseTimeout.current);
-    };
-  }, [isPaused]);
-
-  const handleManualSelect = (index: number) => {
-    setActiveIndex(index);
-    setIsPaused(true);
-    
-    if (manualPauseTimeout.current) clearTimeout(manualPauseTimeout.current);
-    
-    manualPauseTimeout.current = setTimeout(() => {
-      setIsPaused(false);
-    }, 5000);
+  const handlePrev = () => {
+    setActiveIndex((prev) => (prev === 0 ? maxIndex : prev - 1));
+    setInteractionCount((c) => c + 1);
   };
 
   const handleImageError = (name: string) => {
     setImageErrors((prev) => ({ ...prev, [name]: true }));
   };
 
-  // Helper to render card media with correct size properties
-  const renderCardMedia = (person: typeof team[0], isLarge: boolean) => {
+  const renderCardMedia = (person: typeof team[0]) => {
     const hasError = imageErrors[person.name];
     if (hasError) {
       return (
@@ -97,22 +130,20 @@ export default function TeamSection() {
           style={{ background: person.gradient }}
         >
           <span
-            className="font-display text-white select-none"
-            style={{ fontSize: isLarge ? "64px" : "32px" }}
+            className="font-display text-white select-none text-4xl"
           >
             {person.initials}
           </span>
         </div>
       );
     }
-
     return (
       <div className="relative w-full h-full">
         <Image
           src={person.image}
           alt={person.name}
           fill
-          sizes={isLarge ? "320px" : "220px"}
+          sizes="280px"
           className="object-cover"
           onError={() => handleImageError(person.name)}
         />
@@ -120,109 +151,31 @@ export default function TeamSection() {
     );
   };
 
-  // Dynamic layout values for haphazard placing
-  const getCardStyle = (offset: number) => {
-    switch (offset) {
-      case 0: // Center spotlight
-        return {
-          x: 0,
-          y: 0,
-          scale: 1.15,
-          rotate: 0,
-          zIndex: 30,
-          opacity: 1.0,
-          width: 320,
-          height: 440,
-        };
-      case -1: // Immediate Left
-        return {
-          x: -280,
-          y: 35,
-          scale: 0.9,
-          rotate: -7,
-          zIndex: 20,
-          opacity: 0.85,
-          width: 220,
-          height: 290,
-        };
-      case -2: // Far Left
-        return {
-          x: -500,
-          y: -15,
-          scale: 0.75,
-          rotate: -14,
-          zIndex: 10,
-          opacity: 0.65,
-          width: 180,
-          height: 240,
-        };
-      case 1: // Immediate Right
-        return {
-          x: 280,
-          y: 45,
-          scale: 0.95,
-          rotate: 9,
-          zIndex: 20,
-          opacity: 0.85,
-          width: 230,
-          height: 310,
-        };
-      case 2: // Far Right
-        return {
-          x: 500,
-          y: -25,
-          scale: 0.78,
-          rotate: 16,
-          zIndex: 10,
-          opacity: 0.65,
-          width: 190,
-          height: 250,
-        };
-      default:
-        return {
-          x: 0,
-          y: 0,
-          scale: 0,
-          rotate: 0,
-          zIndex: 0,
-          opacity: 0,
-          width: 200,
-          height: 300,
-        };
-    }
-  };
-
   return (
     <section
       id="team"
-      className="relative py-24 px-8 overflow-hidden bg-[#F5F0E8]"
+      className="relative overflow-hidden bg-[#F5F0E8]"
+      style={{ paddingTop: 60, paddingBottom: 80 }}
     >
       {/* Decorative Star Elements */}
       <span className="absolute top-8 right-8 font-display text-[#FF2D2D] opacity-[0.06] text-[160px] pointer-events-none select-none leading-none">
         ✦
       </span>
-      <span className="absolute bottom-8 left-8 font-display text-[#BF5FFF] opacity-[0.06] text-[120px] pointer-events-none select-none leading-none">
+      <span className="absolute bottom-8 left-8 font-display text-[#f2af29] opacity-[0.06] text-[120px] pointer-events-none select-none leading-none">
         ✦
       </span>
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        {/* Section Header */}
-        <p
-          className="font-body text-[#FF2D2D] mb-6"
-          style={{
-            fontSize: "clamp(10px, 1vw, 12px)",
-            letterSpacing: "0.18em",
-          }}
-        >
-          The Team ————
-        </p>
-
+      <div
+        className="mx-auto relative z-10"
+        style={{ maxWidth: 1200, paddingLeft: 48, paddingRight: 48 }}
+      >
         <h2
-          className="font-display text-[#0D0D0D] mb-3"
+          className="font-display text-[#0D0D0D]"
           style={{
-            fontSize: "clamp(40px, 6vw, 88px)",
-            lineHeight: 0.95,
+            fontSize: "clamp(32px, 4.5vw, 64px)",
+            lineHeight: 1.0,
             letterSpacing: "0.01em",
+            marginBottom: 20,
           }}
         >
           TEAM BUILDING THE IRL CULTURE FEST.
@@ -233,115 +186,200 @@ export default function TeamSection() {
         </p>
 
         {/* Thin Red Horizontal Divider */}
-        <div className="w-[120px] h-[1px] bg-[#FF2D2D] opacity-20 mb-16" />
+        <div className="w-[120px] h-[1px] bg-[#FF2D2D] opacity-20 mb-6" />
 
-        {/* Carousel Zone Wrapper */}
+        {/* Carousel Container */}
         <div
-          className="relative flex items-center justify-center min-h-[520px] pb-10 overflow-visible w-full max-w-5xl mx-auto"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => {
-            if (!manualPauseTimeout.current) {
-              setIsPaused(false);
-            }
-          }}
+          role="region"
+          aria-label="Team members carousel"
+          className="relative w-full max-w-[980px] mx-auto flex items-center justify-center overflow-visible"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
         >
-          {team.map((person, idx) => {
-            // Calculate wrapping index difference (-2, -1, 0, 1, 2)
-            let offset = (idx - activeIndex + 5) % 5;
-            if (offset > 2) offset -= 5;
+          {/* Left Navigation Arrow */}
+          <button
+            onClick={handlePrev}
+            className="absolute -left-12 lg:-left-16 z-40 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#1A1A1A] text-white flex items-center justify-center transition-all duration-200 hover:scale-110 hover:bg-[#FF2D2D] focus:outline-none focus:ring-2 focus:ring-[#FF2D2D] cursor-pointer"
+            aria-label="Previous team member"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="w-5 h-5 sm:w-6 sm:h-6"
+            >
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
 
-            const cardStyle = getCardStyle(offset);
-            const isCenter = offset === 0;
+          {/* Viewport Window for exactly 3 cards on desktop (912px width including margins/shadows) */}
+          <div className="overflow-hidden w-[304px] sm:w-[608px] md:w-[912px] py-6 px-3">
+            <motion.div
+              className="flex gap-[24px]"
+              animate={{ x: -activeIndex * (280 + 24) }}
+              transition={{ type: "spring", stiffness: 200, damping: 25 }}
+            >
+              {team.map((person, i) => {
+                const cardBg = i % 2 === 0 ? "#FF2D2D" : "#f2af29";
 
-            return (
-              <motion.div
-                key={person.name}
-                onClick={() => handleManualSelect(idx)}
-                style={{
-                  width: cardStyle.width,
-                  height: cardStyle.height,
-                  boxShadow: isCenter ? `0 0 60px 10px ${person.glowColor}40` : "none",
-                  zIndex: cardStyle.zIndex,
-                }}
-                animate={{
-                  x: cardStyle.x,
-                  y: cardStyle.y,
-                  scale: cardStyle.scale,
-                  rotate: cardStyle.rotate,
-                  opacity: cardStyle.opacity,
-                }}
-                transition={{ type: "spring", stiffness: 280, damping: 28 }}
-                className="absolute flex flex-col justify-between rounded-[20px] overflow-hidden bg-[#0D0D0D] cursor-pointer group select-none shadow-none origin-center"
-              >
-                {/* Photo Area */}
-                <div className="relative w-full h-full overflow-hidden bg-zinc-800 flex-grow">
-                  {renderCardMedia(person, isCenter)}
-                </div>
-
-                {/* Info strip */}
-                <div
-                  style={{ height: isCenter ? 80 : 60 }}
-                  className="px-4 flex flex-col justify-center bg-[#0D0D0D] w-full shrink-0 border-t border-white/5"
-                >
-                  <span
-                    style={{ fontSize: isCenter ? "18px" : "13px" }}
-                    className="font-display text-white tracking-wide block truncate"
+                return (
+                  <motion.div
+                    key={person.name}
+                    whileHover={{
+                      scale: 1.04,
+                      boxShadow: `6px 6px 0px 0px #0D0D0D`,
+                      transition: { duration: 0.2, ease: "easeOut" },
+                    }}
+                    style={{
+                      width: 280,
+                      height: 280,
+                      background: cardBg,
+                      border: `7px solid ${cardBg}`,
+                      borderRadius: 14,
+                      padding: 0,
+                      boxShadow: `4px 4px 0px 0px ${person.shadowColor}`,
+                      position: "relative",
+                      overflow: "visible",
+                      flexShrink: 0,
+                      cursor: "pointer",
+                    }}
                   >
-                    {person.name}
-                  </span>
-                  <div className="flex items-center gap-2 mt-1">
-                    <span
-                      className="w-1.5 h-1.5 rounded-full animate-ping"
-                      style={{ backgroundColor: person.glowColor }}
-                    />
-                    <span
+                    {/* Accent dot (yellow for red cards, red for yellow cards) */}
+                    <div
                       style={{
-                        color: isCenter ? person.glowColor : "#999",
-                        fontSize: isCenter ? "12px" : "10px",
+                        position: "absolute",
+                        top: -5,
+                        right: -5,
+                        width: 14,
+                        height: 14,
+                        borderRadius: "50%",
+                        background: cardBg === "#FF2D2D" ? "#f2af29" : "#FF2D2D",
+                        border: "2.5px solid #FFFFFF",
+                        zIndex: 10,
                       }}
-                      className="font-body uppercase tracking-wider font-semibold truncate block"
+                    />
+
+                    {/* Inner white square (visible from bottom & right card background) */}
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        width: 220,
+                        height: 220,
+                        background: "#FFFFFF",
+                        padding: 8,
+                        borderRadius: "7px 0 8px 0",
+                        overflow: "hidden",
+                      }}
                     >
-                      {person.org}
-                    </span>
-                  </div>
-                </div>
+                      <div className="relative w-full h-full rounded-md overflow-hidden">
+                        {renderCardMedia(person)}
+                      </div>
+                    </div>
 
-                {/* Arrow hint on hover for non-active cards */}
-                {!isCenter && (
-                  <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-hover:bottom-2 transition-all duration-200 pointer-events-none text-white text-[10px] font-body bg-black/60 px-2 py-0.5 rounded">
-                    ↑ click to spotlight
-                  </div>
-                )}
-              </motion.div>
-            );
-          })}
-        </div>
+                    {/* Name tag overlaid at bottom */}
+                    <div
+                      style={{
+                        position: "absolute",
+                        bottom: 12,
+                        left: 12,
+                        background: "#FFFFFF",
+                        border: `2.5px solid ${cardBg}`,
+                        borderRadius: 6,
+                        paddingTop: 4,
+                        paddingBottom: 4,
+                        paddingLeft: 10,
+                        paddingRight: 10,
+                        zIndex: 15,
+                      }}
+                    >
+                      <div
+                        style={{
+                          fontFamily: "var(--font-display)",
+                          fontSize: 12,
+                          color: "#0D0D0D",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.04em",
+                          fontWeight: 900,
+                          lineHeight: 1.2,
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {person.name}
+                      </div>
+                      <div
+                        style={{
+                          fontFamily: "var(--font-body)",
+                          fontSize: 10,
+                          color: cardBg,
+                          lineHeight: 1.2,
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {person.org}
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+          </div>
 
-        {/* Progress Dot Indicators */}
-        <div className="flex items-center justify-center gap-3 mt-12">
-          {team.map((person, idx) => {
-            const isActive = idx === activeIndex;
-            return (
-              <button
-                key={`dot-${person.name}`}
-                onClick={() => handleManualSelect(idx)}
-                className="relative h-2 cursor-pointer focus:outline-none"
-              >
-                <motion.div
-                  className="rounded-full h-full"
-                  initial={false}
-                  animate={{
-                    width: isActive ? 28 : 8,
-                    backgroundColor: isActive ? person.glowColor : "#0D0D0D",
-                    opacity: isActive ? 1.0 : 0.25,
-                  }}
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                />
-              </button>
-            );
-          })}
+          {/* Right Navigation Arrow */}
+          <button
+            onClick={handleNext}
+            className="absolute -right-12 lg:-right-16 z-40 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#1A1A1A] text-white flex items-center justify-center transition-all duration-200 hover:scale-110 hover:bg-[#FF2D2D] focus:outline-none focus:ring-2 focus:ring-[#FF2D2D] cursor-pointer"
+            aria-label="Next team member"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="w-5 h-5 sm:w-6 sm:h-6"
+            >
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
         </div>
       </div>
+
+      {/* Torn Paper Divider → next section: PartnerCTA #FF2D2D */}
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1440 60"
+        preserveAspectRatio="none"
+        style={{
+          display: "block",
+          width: "100%",
+          height: "60px",
+          position: "absolute",
+          bottom: "-2px",
+          left: 0,
+          pointerEvents: "none",
+          zIndex: 2,
+        }}
+      >
+        <path
+          d="M0,25 L15,18 L30,28 L45,16 L60,26 L75,14 L90,24 L105,12 L120,22 L135,14 L150,25 L165,16 L180,28 L195,18 L210,30 L225,20 L240,32 L255,22 L270,34 L285,24 L300,36 L315,26 L330,38 L345,28 L360,40 L375,30 L390,42 L405,32 L420,44 L435,34 L450,45 L465,35 L480,46 L495,36 L510,48 L525,38 L540,49 L555,39 L570,50 L585,40 L600,52 L615,42 L630,53 L645,43 L660,54 L675,44 L690,55 L705,45 L720,55 L735,46 L750,54 L765,44 L780,52 L795,42 L810,50 L825,40 L840,48 L855,38 L870,46 L885,36 L900,44 L915,34 L930,42 L945,32 L960,40 L975,30 L990,38 L1005,28 L1020,36 L1035,26 L1050,34 L1065,24 L1080,32 L1095,22 L1110,30 L1125,20 L1140,28 L1155,18 L1170,26 L1185,16 L1200,24 L1215,14 L1230,22 L1245,12 L1260,20 L1275,10 L1290,18 L1305,8 L1320,16 L1335,6 L1350,14 L1365,4 L1380,12 L1395,2 L1410,10 L1425,2 L1440,8 L1440,60 L0,60 Z"
+          fill="#FFFFFF"
+          transform="translate(0, -3)"
+        />
+        <path
+          d="M0,25 L15,18 L30,28 L45,16 L60,26 L75,14 L90,24 L105,12 L120,22 L135,14 L150,25 L165,16 L180,28 L195,18 L210,30 L225,20 L240,32 L255,22 L270,34 L285,24 L300,36 L315,26 L330,38 L345,28 L360,40 L375,30 L390,42 L405,32 L420,44 L435,34 L450,45 L465,35 L480,46 L495,36 L510,48 L525,38 L540,49 L555,39 L570,50 L585,40 L600,52 L615,42 L630,53 L645,43 L660,54 L675,44 L690,55 L705,45 L720,55 L735,46 L750,54 L765,44 L780,52 L795,42 L810,50 L825,40 L840,48 L855,38 L870,46 L885,36 L900,44 L915,34 L930,42 L945,32 L960,40 L975,30 L990,38 L1005,28 L1020,36 L1035,26 L1050,34 L1065,24 L1080,32 L1095,22 L1110,30 L1125,20 L1140,28 L1155,18 L1170,26 L1185,16 L1200,24 L1215,14 L1230,22 L1245,12 L1260,20 L1275,10 L1290,18 L1305,8 L1320,16 L1335,6 L1350,14 L1365,4 L1380,12 L1395,2 L1410,10 L1425,2 L1440,8 L1440,60 L0,60 Z"
+          fill="#FF2D2D"
+        />
+      </svg>
     </section>
   );
 }

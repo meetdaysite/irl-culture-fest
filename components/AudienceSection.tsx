@@ -6,14 +6,14 @@ export default function AudienceSection() {
   return (
     <section
       id="audience"
-      className="relative py-12 sm:py-16 px-8 overflow-visible"
-      style={{ background: "#2A1A2E" }}
+      className="relative py-8 sm:py-10 px-8 overflow-visible"
+      style={{ background: "#1A1A1A" }}
     >
       {/* Diagonal Section Divider */}
       <div
         className="absolute -top-[40px] left-0 right-0 h-[60px] pointer-events-none z-[1]"
         style={{
-          backgroundColor: "#2A1A2E",
+          backgroundColor: "#1A1A1A",
           clipPath: "polygon(0 40px, 100% 0, 100% 60px, 0 60px)",
         }}
       />
@@ -22,15 +22,15 @@ export default function AudienceSection() {
       <div className="absolute inset-0 pointer-events-none">
         {[
           { top: "10%", left: "5%", color: "#FF2D2D", size: 6 },
-          { top: "20%", right: "8%", color: "#8FFB2B", size: 4 },
-          { top: "45%", left: "3%", color: "#FFD600", size: 5 },
-          { top: "60%", right: "12%", color: "#6700a2", size: 8 },
-          { top: "80%", left: "15%", color: "#00C2FF", size: 4 },
-          { top: "75%", right: "5%", color: "#FF2B2B", size: 6 },
+          { top: "20%", right: "8%", color: "#FF2D2D", size: 4 },
+          { top: "45%", left: "3%", color: "#f2af29", size: 5 },
+          { top: "60%", right: "12%", color: "#f2af29", size: 8 },
+          { top: "80%", left: "15%", color: "#f2af29", size: 4 },
+          { top: "75%", right: "5%", color: "#FF2D2D", size: 6 },
           { top: "30%", left: "50%", color: "#FF2D2D", size: 3 },
-          { top: "55%", left: "85%", color: "#8FFB2B", size: 5 },
-          { top: "15%", left: "70%", color: "#FFD600", size: 4 },
-          { top: "90%", left: "40%", color: "#6700a2", size: 3 },
+          { top: "55%", left: "85%", color: "#FF2D2D", size: 5 },
+          { top: "15%", left: "70%", color: "#f2af29", size: 4 },
+          { top: "90%", left: "40%", color: "#f2af29", size: 3 },
         ].map((dot, i) => (
           <div
             key={i}
@@ -49,20 +49,7 @@ export default function AudienceSection() {
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Section Label */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="font-body text-[#6700a2]/60 mb-6"
-          style={{
-            fontSize: "clamp(10px, 1vw, 12px)",
-            letterSpacing: "0.18em",
-          }}
-        >
-          Target Audience ————
-        </motion.p>
+
 
         {/* Heading */}
         <motion.h2
@@ -108,7 +95,7 @@ export default function AudienceSection() {
               01
             </span>
             <div className="relative z-10">
-              <span className="inline-block font-body text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full mb-6 bg-[#8FFB2B] text-[#0D0D0D]">
+              <span className="inline-block font-body text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full mb-6 bg-[#f2af29] text-[#0D0D0D]">
                 150+ SUPER-HOSTS
               </span>
               <p className="font-body text-[#333] text-base leading-relaxed">
@@ -132,7 +119,7 @@ export default function AudienceSection() {
               02
             </span>
             <div className="relative z-10">
-              <span className="inline-block font-body text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full mb-6 bg-[#FFD600] text-[#0D0D0D]">
+              <span className="inline-block font-body text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full mb-6 bg-[#f2af29] text-[#0D0D0D]">
                 ECOSYSTEM ENABLERS
               </span>
               <p className="font-body text-white text-base leading-relaxed">

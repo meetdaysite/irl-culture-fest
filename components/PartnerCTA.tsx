@@ -29,68 +29,67 @@ export default function PartnerCTA() {
   return (
     <section
       id="partner"
-      className="relative min-h-screen flex flex-col items-center justify-center py-12 sm:py-16 px-8 overflow-visible"
-      style={{ background: "#FF2D2D" }}
+      className="relative flex flex-col items-center justify-center overflow-hidden"
+      style={{ background: "#FF2D2D", paddingTop: 60, paddingBottom: 80, minHeight: "100vh" }}
     >
-      {/* Diagonal Section Divider */}
-      <div
-        className="absolute -top-[40px] left-0 right-0 h-[60px] pointer-events-none z-[1]"
-        style={{
-          backgroundColor: "#FF2D2D",
-          clipPath: "polygon(0 40px, 100% 0, 100% 60px, 0 60px)",
-        }}
-      />
 
       {/* Diagonal Stripes Overlay */}
       <div className="absolute inset-0 diagonal-stripes pointer-events-none" />
 
-      <div className="relative z-10 text-center max-w-4xl mx-auto">
-        {/* Heading */}
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="font-display text-white mb-6"
-          style={{
-            fontSize: "clamp(40px, 6vw, 88px)",
-            lineHeight: 0.95,
-            letterSpacing: "0.01em",
-          }}
-        >
-          LET&apos;S MAKE THE OFFLINE ECONOMY SUSTAINABLE
-        </motion.h2>
+      <div
+        className="relative z-10 mx-auto w-full text-left grid md:grid-cols-2 gap-12 items-start"
+        style={{ maxWidth: 1200, paddingLeft: 48, paddingRight: 48 }}
+      >
+        {/* Left Column: Written Content */}
+        <div>
+          {/* Heading */}
+          <motion.h2
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="font-display text-white"
+            style={{
+              fontSize: "clamp(32px, 4.5vw, 64px)",
+              lineHeight: 1.0,
+              letterSpacing: "0.01em",
+              marginBottom: 20,
+            }}
+          >
+            LET&apos;S MAKE THE OFFLINE ECONOMY SUSTAINABLE
+          </motion.h2>
 
-        {/* Subheading */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="font-body text-white/90 text-base sm:text-lg max-w-2xl mx-auto mb-4 leading-relaxed"
-        >
-          Every thriving cultural movement needs a home, a stage, and an engine.
-          We are building all three.
-        </motion.p>
+          {/* Subheading */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="font-body text-white/90 text-base sm:text-lg mb-4 leading-relaxed"
+          >
+            Every thriving cultural movement needs a home, a stage, and an engine.
+            We are building all three.
+          </motion.p>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.15 }}
-          className="font-body text-white/70 text-sm sm:text-base mb-12"
-        >
-          Join us as a founding partner, co-curator, or brand ecosystem
-          champion.
-        </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="font-body text-white/70 text-sm sm:text-base"
+          >
+            Join us as a founding partner, co-curator, or brand ecosystem
+            champion.
+          </motion.p>
+        </div>
 
-        {/* Contact Form Card */}
+        {/* Right Column: Contact Form Card */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="bg-white rounded-2xl shadow-2xl p-8 sm:p-10 max-w-lg mx-auto"
+          className="bg-white rounded-2xl shadow-2xl p-8 sm:p-10 w-full"
         >
           {submitted ? (
             <div className="py-10 text-center">
@@ -174,6 +173,20 @@ export default function PartnerCTA() {
           )}
         </motion.div>
       </div>
+
+      {/* Torn Paper Divider → next section: Footer #1A1A1A */}
+      {/* Straight Divider → Footer #1A1A1A */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: "2px",
+          background: "#1A1A1A",
+          zIndex: 2,
+        }}
+      />
     </section>
   );
 }

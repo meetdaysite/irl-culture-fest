@@ -16,7 +16,7 @@ const cards = [
   {
     title: "THE AUDIENCE ACQUISITION CRISIS",
     body: "Brands spend millions on digital ads but desperately need an alternative, authentic connection.",
-    borderColor: "#FFD600",
+    borderColor: "#f2af29",
   },
 ];
 
@@ -24,20 +24,11 @@ export default function ProblemSection() {
   return (
     <section
       id="problem"
-      className="py-12 sm:py-16 px-8"
+      className="py-8 sm:py-10 px-8"
       style={{ background: "#F5F0E8" }}
     >
       <div className="max-w-7xl mx-auto">
-        {/* Section Label */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="section-label text-[#FF2D2D] font-[family-name:var(--font-space-grotesk)] mb-10"
-        >
-          The Core Problem ————
-        </motion.p>
+
 
         {/* Two Column Layout */}
         <div className="grid md:grid-cols-2 gap-8 mb-16">

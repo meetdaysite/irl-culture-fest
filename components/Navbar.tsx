@@ -12,13 +12,11 @@ const navLinks = [
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 80);
-    };
+    const handleScroll = () => setScrollY(window.scrollY);
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -34,23 +32,43 @@ export default function Navbar() {
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
+  // Progressive interpolation between 20–80px scroll
+  const progress = Math.min(Math.max((scrollY - 20) / 60, 0), 1); // 0 at top, 1 at 80px+
+
+  const navBg = `rgba(255,255,255,${(0.05 + progress * 0.35).toFixed(2)})`;
+  const blurPx = `${(3 + progress * 11).toFixed(1)}px`;
+  const borderOpacity = progress * 0.06;
+  const shadowOpacity = progress * 0.06;
+
+  // Text color: black at start (with 0.45 opacity) transitioning to fully opaque black (#1A1A1A) when scrolled
+  const textOpacity = (0.45 + (progress * 0.55)).toFixed(2);
+  const linkColor = `rgba(26, 26, 26, ${textOpacity})`;
+  const linkHoverColor = "#FF2D2D";
+
   return (
     <>
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? "bg-white/80 backdrop-blur-xl border-b border-black/8 shadow-sm"
-            : "bg-transparent"
-        }`}
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 50,
+          background: navBg,
+          backdropFilter: `blur(${blurPx})`,
+          WebkitBackdropFilter: `blur(${blurPx})`,
+          boxShadow: `0 1px 24px rgba(0,0,0,${shadowOpacity.toFixed(3)})`,
+          transition: "background 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease",
+        }}
       >
         <div className="mx-auto max-w-7xl px-8 py-4 flex items-center justify-between">
           {/* Logo */}
           <button
             onClick={() => scrollToSection("#top")}
-            className="flex items-center justify-center cursor-pointer bg-white px-6 py-2.5 rounded-full transition-all duration-300 hover:scale-108 hover:shadow-[0_4px_25px_rgba(0,0,0,0.1)] active:scale-95 shadow-sm"
+            className="flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-105 active:scale-95"
           >
             <Image
               src="/navbar-logo.png"
@@ -68,7 +86,17 @@ export default function Navbar() {
               <button
                 key={link.label}
                 onClick={() => scrollToSection(link.href)}
-                className="nav-link font-body text-sm font-medium transition-colors cursor-pointer text-[#1A1A1A]/80 hover:text-[#1A1A1A]"
+                className="nav-link font-body text-sm font-medium cursor-pointer"
+                style={{
+                  color: linkColor,
+                  transition: "color 0.3s ease",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.color = linkHoverColor;
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.color = linkColor;
+                }}
               >
                 {link.label}
               </button>
@@ -87,33 +115,18 @@ export default function Navbar() {
             className="md:hidden relative w-8 h-8 flex flex-col items-center justify-center gap-1.5 cursor-pointer z-[60]"
             aria-label="Toggle menu"
           >
-            <motion.span
-              animate={
-                mobileOpen
-                  ? { rotate: 45, y: 6, background: "#1A1A1A" }
-                  : { rotate: 0, y: 0, background: "#1A1A1A" }
-              }
-              className="block w-6 h-0.5 rounded-full"
-              style={{ background: "#1A1A1A" }}
-            />
-            <motion.span
-              animate={
-                mobileOpen
-                  ? { opacity: 0 }
-                  : { opacity: 1, background: "#1A1A1A" }
-              }
-              className="block w-6 h-0.5 rounded-full"
-              style={{ background: "#1A1A1A" }}
-            />
-            <motion.span
-              animate={
-                mobileOpen
-                  ? { rotate: -45, y: -6, background: "#1A1A1A" }
-                  : { rotate: 0, y: 0, background: "#1A1A1A" }
-              }
-              className="block w-6 h-0.5 rounded-full"
-              style={{ background: "#1A1A1A" }}
-            />
+            {[
+              mobileOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 },
+              mobileOpen ? { opacity: 0 } : { opacity: 1 },
+              mobileOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 },
+            ].map((anim, idx) => (
+              <motion.span
+                key={idx}
+                animate={{ ...anim, background: linkColor }}
+                className="block w-6 h-0.5 rounded-full"
+                style={{ background: linkColor }}
+              />
+            ))}
           </button>
         </div>
       </motion.nav>
