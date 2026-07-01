@@ -65,45 +65,45 @@ export default function HeroSection() {
       {/* Noise Overlay */}
       <div className="noise-overlay" />
 
-      {/* Floating Date Badge (Top Left Corner) */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8, rotate: -15 }}
-        animate={{
-          opacity: 1,
-          scale: 1,
-          rotate: -8,
-          y: [0, -10, 0]
-        }}
-        transition={{
-          delay: 0.8,
-          duration: 5,
-          y: {
-            repeat: Infinity,
-            duration: 4,
-            ease: "easeInOut"
-          }
-        }}
-        className="absolute left-28 sm:left-40 top-[130px] sm:top-[150px] z-30 hidden md:flex flex-col items-center justify-center bg-[#f2af29] border-[2px] border-[#0D0D0D] rounded-xl w-[75px] h-[75px] p-1.5 select-none"
-        style={{
-          boxShadow: "2px 2px 0px #0D0D0D",
-        }}
-      >
-        <span className="font-body text-[5.5px] font-bold text-[#0D0D0D]/60 uppercase tracking-widest leading-none mb-1">
-          HAPPENING
-        </span>
-        <span className="font-display text-[17px] font-black text-[#0D0D0D] leading-none mb-0.5">
-          NOV
-        </span>
-        <span className="font-display text-[12px] font-black text-[#0D0D0D] leading-none">
-          2026
-        </span>
-      </motion.div>
-
       {/* Main Content */}
       <div
-        className="relative z-20 text-center mx-auto w-full"
+        className="relative z-20 text-center mx-auto w-full mt-4 sm:mt-6"
         style={{ maxWidth: 1200, paddingLeft: 48, paddingRight: 48 }}
       >
+        {/* Centered Floating Date Badge */}
+        <div className="flex justify-center mb-6">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, x: 0, y: 0, rotate: 0 }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+              x: [0, 4, -4, 0],
+              y: [0, -3, 3, 0]
+            }}
+            transition={{
+              delay: 0.5,
+              x: {
+                repeat: Infinity,
+                duration: 6,
+                ease: "easeInOut"
+              },
+              y: {
+                repeat: Infinity,
+                duration: 5,
+                ease: "easeInOut"
+              }
+            }}
+            className="flex items-center justify-center bg-[#f2af29] border-[2px] border-[#0D0D0D] rounded-xl px-4 py-2 select-none"
+            style={{
+              boxShadow: "2px 2px 0px #0D0D0D",
+            }}
+          >
+            <span className="font-display text-[10px] font-black text-[#0D0D0D] uppercase tracking-wider">
+              HAPPENING NOVEMBER 2026
+            </span>
+          </motion.div>
+        </div>
+
         {/* Eyebrow */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -113,7 +113,7 @@ export default function HeroSection() {
           style={{
             fontSize: 11,
             letterSpacing: "0.2em",
-            marginBottom: 12,
+            marginBottom: 28,
           }}
         >
           DELHI &nbsp;·&nbsp; MUMBAI &nbsp;·&nbsp; BANGALORE &nbsp;·&nbsp; PUNE
