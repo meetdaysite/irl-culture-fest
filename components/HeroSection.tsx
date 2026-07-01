@@ -88,7 +88,7 @@ export default function HeroSection() {
     <section
       id="hero"
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
-      style={{ background: "#0D0D0D" }}
+      style={{ background: "#F8F5F0" }}
     >
       {/* Floating Orbs (Parallax smoke background) */}
       <div className="absolute inset-0 overflow-hidden">
@@ -144,8 +144,8 @@ export default function HeroSection() {
                 width: dot.size,
                 height: dot.size,
                 background: dot.color,
-                opacity: 0.6,
-                boxShadow: `0 0 10px ${dot.color}80`,
+                opacity: 0.5,
+                boxShadow: `0 0 10px ${dot.color}60`,
                 animation: `float-slow-${dot.id % 3} ${dot.duration}s ease-in-out infinite alternate`,
               }}
             />
@@ -166,7 +166,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.6 }}
-          className="font-body text-[#F5F0E8] uppercase mb-8"
+          className="font-body text-[#888] uppercase mb-8"
           style={{
             fontSize: "clamp(11px, 1.2vw, 14px)",
             letterSpacing: "0.2em",
@@ -184,7 +184,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 60 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 + i * 0.12, duration: 0.7, ease: "easeOut" }}
-              className="font-display text-white"
+              className="font-display text-[#1A1A1A]"
               style={{
                 fontSize: "clamp(72px, 12vw, 148px)",
                 lineHeight: 0.92,
@@ -221,7 +221,7 @@ export default function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8, duration: 0.8 }}
-          className="font-body text-[#F5F0E8] max-w-xl mx-auto mt-8 leading-relaxed"
+          className="font-body text-[#555] max-w-xl mx-auto mt-8 leading-relaxed"
           style={{
             fontSize: "clamp(16px, 1.8vw, 22px)",
           }}
@@ -239,27 +239,25 @@ export default function HeroSection() {
         >
           <button
             onClick={() => scrollToSection("#partner")}
-            className="bg-[#FF2D2D] text-white font-body font-semibold text-xl px-8 py-3.5 rounded-full transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(255,45,45,0.5)] cursor-pointer"
+            className="bg-[#FF2D2D] text-white font-body font-semibold text-xl px-8 py-3.5 rounded-full transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(255,45,45,0.4)] cursor-pointer"
           >
             Become a Partner
           </button>
           <button
             onClick={() => scrollToSection("#partner")}
-            className="border-2 border-white text-white font-body font-semibold text-xl px-8 py-3.5 rounded-full transition-all hover:bg-white hover:text-[#0D0D0D] cursor-pointer"
+            className="border-2 border-[#1A1A1A] text-[#1A1A1A] font-body font-semibold text-xl px-8 py-3.5 rounded-full transition-all hover:bg-[#1A1A1A] hover:text-white cursor-pointer"
           >
             Attend the Fest
           </button>
         </motion.div>
       </div>
 
-
-
       {/* Powered by */}
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.4 }}
         transition={{ delay: 2 }}
-        className="absolute bottom-6 left-6 font-[family-name:var(--font-space-grotesk)] text-xs text-[#F5F0E8] z-20"
+        className="absolute bottom-6 left-6 font-[family-name:var(--font-space-grotesk)] text-xs text-[#999] z-20"
       >
         Powered by meetday.ai
       </motion.p>

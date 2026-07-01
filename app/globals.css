@@ -3,7 +3,7 @@
 /* ─── Brand Colour Tokens ─── */
 :root {
   --red: #FF2D2D;
-  --black: #0D0D0D;
+  --black: #1A1A1A;
   --cream: #F5F0E8;
   --orange: #FF2B2B;
   --yellow: #FFD600;
@@ -11,7 +11,12 @@
   --purple: #6700a2;
   --blue: #00C2FF;
   --midnight: #2A1A2E;
-  --white: #DCDCDC;
+  --white: #FFFFFF;
+  --bg-primary: #F8F5F0;
+  --bg-card: #FFFFFF;
+  --text-primary: #1A1A1A;
+  --text-secondary: #555555;
+  --text-muted: #999999;
 }
 
 /* ─── Tailwind v4 Theme Tokens ─── */
@@ -57,8 +62,8 @@ html {
 }
 
 body {
-  background: var(--black);
-  color: var(--white);
+  background: var(--bg-primary);
+  color: var(--text-primary);
   font-family: var(--font-body), sans-serif;
   overflow-x: hidden;
 }
@@ -95,7 +100,7 @@ body {
 .noise-overlay {
   position: absolute;
   inset: 0;
-  opacity: 0.04;
+  opacity: 0.025;
   pointer-events: none;
   z-index: 1;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
@@ -129,8 +134,8 @@ body {
 .orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.35;
+  filter: blur(100px);
+  opacity: 0.12;
   animation: float-orb 20s ease-in-out infinite;
 }
 
@@ -251,8 +256,8 @@ body {
 .diagonal-stripes {
   background-image: repeating-linear-gradient(
     45deg,
-    rgba(255, 255, 255, 0.05) 0px,
-    rgba(255, 255, 255, 0.05) 2px,
+    rgba(26, 26, 26, 0.03) 0px,
+    rgba(26, 26, 26, 0.03) 2px,
     transparent 2px,
     transparent 30px
   );
@@ -318,7 +323,7 @@ body {
 /* ─── Selection Color ─── */
 ::selection {
   background: var(--red);
-  color: var(--white);
+  color: #FFFFFF;
 }
 
 /* ─── Scrollbar ─── */
@@ -327,7 +332,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--black);
+  background: #F0EDE8;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -364,7 +369,7 @@ body::after {
   height: 100%;
   pointer-events: none;
   z-index: 9997;
-  opacity: 0.035;
+  opacity: 0.02;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 180px 180px;
@@ -380,6 +385,3 @@ body::after {
     cursor: auto !important;
   }
 }
-
-
-

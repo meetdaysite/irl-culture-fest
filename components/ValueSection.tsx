@@ -22,13 +22,13 @@ export default function ValueSection() {
     <section
       id="value"
       className="relative py-12 sm:py-16 px-8 overflow-visible"
-      style={{ background: "#FF2D2D" }}
+      style={{ background: "#1A1A1A" }}
     >
       {/* Diagonal Section Divider */}
       <div
         className="absolute -top-[40px] left-0 right-0 h-[60px] pointer-events-none z-[1]"
         style={{
-          backgroundColor: "#FF2D2D",
+          backgroundColor: "#1A1A1A",
           clipPath: "polygon(0 40px, 100% 0, 100% 60px, 0 60px)",
         }}
       />
@@ -39,7 +39,7 @@ export default function ValueSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="font-body text-white/60 mb-6"
+          className="font-body text-white/50 mb-6"
           style={{
             fontSize: "clamp(10px, 1vw, 12px)",
             letterSpacing: "0.18em",
@@ -73,8 +73,8 @@ export default function ValueSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.15 * i }}
-              className={`p-8 transition-colors hover:bg-white/10 cursor-default ${
-                i < columns.length - 1 ? "md:border-r md:border-white/20" : ""
+              className={`p-8 transition-colors hover:bg-white/5 cursor-default ${
+                i < columns.length - 1 ? "md:border-r md:border-white/15" : ""
               }`}
             >
               <h3
@@ -86,7 +86,7 @@ export default function ValueSection() {
               >
                 {col.title}
               </h3>
-              <p className="font-body text-white/80 text-sm leading-relaxed">
+              <p className="font-body text-white/70 text-sm leading-relaxed">
                 {col.body}
               </p>
             </motion.div>

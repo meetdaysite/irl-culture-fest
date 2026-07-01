@@ -42,7 +42,7 @@ export default function Navbar() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "bg-[#121212]/70 backdrop-blur-xl border-b border-white/10 shadow-lg"
+            ? "bg-white/80 backdrop-blur-xl border-b border-black/8 shadow-sm"
             : "bg-transparent"
         }`}
       >
@@ -50,7 +50,7 @@ export default function Navbar() {
           {/* Logo */}
           <button
             onClick={() => scrollToSection("#top")}
-            className="flex items-center justify-center cursor-pointer bg-[#0D0D0D] px-6 py-2.5 rounded-full transition-all duration-300 hover:scale-108 hover:shadow-[0_4px_25px_rgba(0,0,0,0.5)] active:scale-95 shadow-sm"
+            className="flex items-center justify-center cursor-pointer bg-white px-6 py-2.5 rounded-full transition-all duration-300 hover:scale-108 hover:shadow-[0_4px_25px_rgba(0,0,0,0.1)] active:scale-95 shadow-sm"
           >
             <Image
               src="/navbar-logo.png"
@@ -68,7 +68,7 @@ export default function Navbar() {
               <button
                 key={link.label}
                 onClick={() => scrollToSection(link.href)}
-                className="nav-link font-body text-sm font-medium transition-colors cursor-pointer text-white/90 hover:text-white"
+                className="nav-link font-body text-sm font-medium transition-colors cursor-pointer text-[#1A1A1A]/80 hover:text-[#1A1A1A]"
               >
                 {link.label}
               </button>
@@ -90,29 +90,29 @@ export default function Navbar() {
             <motion.span
               animate={
                 mobileOpen
-                  ? { rotate: 45, y: 6, background: "#DCDCDC" }
-                  : { rotate: 0, y: 0, background: "#DCDCDC" }
+                  ? { rotate: 45, y: 6, background: "#1A1A1A" }
+                  : { rotate: 0, y: 0, background: "#1A1A1A" }
               }
               className="block w-6 h-0.5 rounded-full"
-              style={{ background: "#DCDCDC" }}
+              style={{ background: "#1A1A1A" }}
             />
             <motion.span
               animate={
                 mobileOpen
                   ? { opacity: 0 }
-                  : { opacity: 1, background: "#DCDCDC" }
+                  : { opacity: 1, background: "#1A1A1A" }
               }
               className="block w-6 h-0.5 rounded-full"
-              style={{ background: "#DCDCDC" }}
+              style={{ background: "#1A1A1A" }}
             />
             <motion.span
               animate={
                 mobileOpen
-                  ? { rotate: -45, y: -6, background: "#DCDCDC" }
-                  : { rotate: 0, y: 0, background: "#DCDCDC" }
+                  ? { rotate: -45, y: -6, background: "#1A1A1A" }
+                  : { rotate: 0, y: 0, background: "#1A1A1A" }
               }
               className="block w-6 h-0.5 rounded-full"
-              style={{ background: "#DCDCDC" }}
+              style={{ background: "#1A1A1A" }}
             />
           </button>
         </div>
@@ -126,7 +126,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[55] bg-[#0D0D0D] flex flex-col items-center justify-center gap-8"
+            className="fixed inset-0 z-[55] bg-white flex flex-col items-center justify-center gap-8"
           >
             {navLinks.map((link, i) => (
               <motion.button
@@ -135,7 +135,7 @@ export default function Navbar() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 + i * 0.1 }}
                 onClick={() => scrollToSection(link.href)}
-                className="font-display text-4xl text-white hover:text-[#FF2D2D] transition-colors cursor-pointer"
+                className="font-display text-4xl text-[#1A1A1A] hover:text-[#FF2D2D] transition-colors cursor-pointer"
               >
                 {link.label}
               </motion.button>

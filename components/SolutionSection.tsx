@@ -8,7 +8,7 @@ const cards = [
     title: "CELEBRATE",
     body: "A curated stage for IRL culture builders — the first-ever national platform to spotlight subculture hosts, community leaders, and offline experience creators.",
     bg: "#F5F0E8",
-    textColor: "#0D0D0D",
+    textColor: "#1A1A1A",
     numberColor: "#FF2D2D",
     hoverBorder: "#FF2D2D",
   },
@@ -17,7 +17,7 @@ const cards = [
     title: "ENGAGE",
     body: "An immersive, brand-integrated festival where high-intent audiences, creators, and partners come together for unforgettable live experiences and collaborations.",
     bg: "#FF2D2D",
-    textColor: "#DCDCDC",
+    textColor: "#FFFFFF",
     numberColor: "rgba(255,255,255,0.3)",
     hoverBorder: "#FF2B2B",
   },
@@ -25,8 +25,8 @@ const cards = [
     number: "03",
     title: "THRIVE",
     body: "A launchpad for sustainable growth — giving IRL builders the tools, networks, and institutional validation to monetize, scale, and build lasting impact.",
-    bg: "#0D0D0D",
-    textColor: "#DCDCDC",
+    bg: "#1A1A1A",
+    textColor: "#FFFFFF",
     numberColor: "#FFD600",
     hoverBorder: "#FFD600",
   },
@@ -37,13 +37,13 @@ export default function SolutionSection() {
     <section
       id="about"
       className="relative py-12 sm:py-16 px-8 overflow-visible"
-      style={{ background: "#DCDCDC" }}
+      style={{ background: "#FFFFFF" }}
     >
       {/* Diagonal Section Divider */}
       <div
         className="absolute -top-[40px] left-0 right-0 h-[60px] pointer-events-none z-[1]"
         style={{
-          backgroundColor: "#DCDCDC",
+          backgroundColor: "#FFFFFF",
           clipPath: "polygon(0 40px, 100% 0, 100% 60px, 0 60px)",
         }}
       />
@@ -70,7 +70,7 @@ export default function SolutionSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-display text-[#0D0D0D]"
+            className="font-display text-[#1A1A1A]"
             style={{
               fontSize: "clamp(40px, 6vw, 88px)",
               lineHeight: 0.95,

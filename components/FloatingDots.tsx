@@ -57,7 +57,7 @@ export default function FloatingDots() {
         vy: (Math.random() * 0.8 - 0.4),
         radius: Math.random() * 2 + 1.2, // 1.2 to 3.2
         colour: COLOURS[Math.floor(Math.random() * COLOURS.length)],
-        opacity: Math.random() * 0.3 + 0.25, // 0.25 to 0.55
+        opacity: Math.random() * 0.2 + 0.15, // 0.15 to 0.35 (reduced for light bg)
         origX: rx,
         origY: ry,
       });

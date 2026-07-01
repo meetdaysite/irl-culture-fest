@@ -7,29 +7,29 @@ const cards = [
   {
     title: "SUBCULTURE HUBS",
     body: "Dedicated zones for each subculture — music, art, food, wellness, gaming, fitness, and more. Each hub is curated by real community leaders who know their scene inside out.",
-    bg: "#0D0D0D",
-    text: "#DCDCDC",
+    bg: "#1A1A1A",
+    text: "#FFFFFF",
     dotColor: "#FFD600",
   },
   {
     title: "HOST SANDBOX",
     body: "An interactive playground where emerging and established hosts can demo their event formats, test new concepts, and receive live feedback from an audience of peers and brands.",
     bg: "#FF2D2D",
-    text: "#DCDCDC",
+    text: "#FFFFFF",
     dotColor: "#FFD600",
   },
   {
     title: "CURATED MATCHMAKING",
     body: "AI-powered and human-curated matchmaking sessions that connect brands with the right hosts, venues, and communities for authentic, high-impact collaborations.",
     bg: "#6700a2",
-    text: "#DCDCDC",
+    text: "#FFFFFF",
     dotColor: "#00C2FF",
   },
   {
     title: "SOCIAL MODULE",
     body: "A high-energy, content-rich social layer featuring live performances, panel discussions, networking lounges, and surprise pop-up activations across the venue.",
-    bg: "#DCDCDC",
-    text: "#0D0D0D",
+    bg: "#FFFFFF",
+    text: "#1A1A1A",
     dotColor: "#FF2B2B",
   },
 ];
@@ -229,7 +229,7 @@ export default function ExperienceCarousel() {
         {/* Navigation Arrows */}
         <button
           onClick={handlePrev}
-          className="absolute left-2 sm:left-4 z-40 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black text-white flex items-center justify-center transition-all duration-200 hover:scale-110 hover:bg-[#FF2D2D] focus:outline-none focus:ring-2 focus:ring-[#FF2D2D] cursor-pointer"
+          className="absolute left-2 sm:left-4 z-40 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#1A1A1A] text-white flex items-center justify-center transition-all duration-200 hover:scale-110 hover:bg-[#FF2D2D] focus:outline-none focus:ring-2 focus:ring-[#FF2D2D] cursor-pointer"
           aria-label="Previous experience"
         >
           <svg
@@ -249,7 +249,7 @@ export default function ExperienceCarousel() {
 
         <button
           onClick={handleNext}
-          className="absolute right-2 sm:right-4 z-40 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black text-white flex items-center justify-center transition-all duration-200 hover:scale-110 hover:bg-[#FF2D2D] focus:outline-none focus:ring-2 focus:ring-[#FF2D2D] cursor-pointer"
+          className="absolute right-2 sm:right-4 z-40 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#1A1A1A] text-white flex items-center justify-center transition-all duration-200 hover:scale-110 hover:bg-[#FF2D2D] focus:outline-none focus:ring-2 focus:ring-[#FF2D2D] cursor-pointer"
           aria-label="Next experience"
         >
           <svg
@@ -287,8 +287,8 @@ export default function ExperienceCarousel() {
                   background: card.bg,
                   color: card.text,
                   boxShadow: isCenter
-                    ? "0 25px 50px -12px rgba(0, 0, 0, 0.5)"
-                    : "0 10px 20px -5px rgba(0, 0, 0, 0.3)",
+                    ? "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
+                    : "0 10px 20px -5px rgba(0, 0, 0, 0.15)",
                 }}
                 animate={{
                   x: style.x,
@@ -354,7 +354,7 @@ export default function ExperienceCarousel() {
             className={`h-3 rounded-full transition-all duration-300 cursor-pointer ${
               activeIndex === i
                 ? "w-8 bg-[#FF2D2D]"
-                : "w-3 bg-black/30 hover:bg-black/50"
+                : "w-3 bg-[#1A1A1A]/20 hover:bg-[#1A1A1A]/40"
             }`}
             aria-label={`Go to slide ${i + 1}`}
           />

@@ -34,13 +34,13 @@ export default function CitiesSection() {
     <section
       id="cities"
       className="relative py-12 sm:py-16 px-8 overflow-visible"
-      style={{ background: "#6700a2" }}
+      style={{ background: "#FF2D2D" }}
     >
       {/* Diagonal Section Divider */}
       <div
         className="absolute -top-[40px] left-0 right-0 h-[60px] pointer-events-none z-[1]"
         style={{
-          backgroundColor: "#6700a2",
+          backgroundColor: "#FF2D2D",
           clipPath: "polygon(0 0, 100% 40px, 100% 60px, 0 60px)",
         }}
       />
@@ -55,14 +55,14 @@ export default function CitiesSection() {
         >
           <path
             d="M100 0L120 80L200 100L120 120L100 200L80 120L0 100L80 80L100 0Z"
-            stroke="#DCDCDC"
+            stroke="#FFFFFF"
             strokeWidth="1"
             fill="none"
             opacity="0.3"
           />
           <path
             d="M100 20L115 85L180 100L115 115L100 180L85 115L20 100L85 85L100 20Z"
-            stroke="#DCDCDC"
+            stroke="#FFFFFF"
             strokeWidth="0.5"
             fill="none"
             opacity="0.2"
@@ -112,7 +112,7 @@ export default function CitiesSection() {
                 {/* Front */}
                 <div className="flip-card-front bg-white rounded-2xl p-6 sm:p-8 flex flex-col items-center justify-center w-full h-full">
                   <h3
-                    className="font-display text-[#0D0D0D] mb-1"
+                    className="font-display text-[#1A1A1A] mb-1"
                     style={{
                       fontSize: "clamp(18px, 2.2vw, 26px)",
                       letterSpacing: "0.03em",
@@ -123,12 +123,12 @@ export default function CitiesSection() {
                   <p className="font-body text-gray-400 text-sm mb-4">
                     {city.state}
                   </p>
-                  <span className="inline-block font-body text-[12px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-[#FF2D2D] text-white">
+                  <span className="inline-block font-body text-[12px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-[#1A1A1A] text-white">
                     Coming Nov 2026
                   </span>
                 </div>
                 {/* Back */}
-                <div className="flip-card-back bg-[#0D0D0D] rounded-2xl p-6 sm:p-8 flex flex-col items-center justify-center w-full h-full">
+                <div className="flip-card-back bg-[#1A1A1A] rounded-2xl p-6 sm:p-8 flex flex-col items-center justify-center w-full h-full">
                   <h4
                     className="font-display text-[#FF2D2D] mb-3"
                     style={{

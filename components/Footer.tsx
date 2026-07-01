@@ -20,7 +20,7 @@ export default function Footer() {
   return (
     <footer
       className="pt-16 pb-8 px-8"
-      style={{ background: "#0D0D0D", borderTop: "2px solid #000000" }}
+      style={{ background: "#1A1A1A", borderTop: "2px solid #333" }}
     >
       <div className="max-w-7xl mx-auto">
         {/* Main Columns Grid - Using a 4-column span for wider distribution */}

@@ -24,7 +24,7 @@ export default function CustomCursor() {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
 
-      // Detect if cursor is over a red background
+      // Detect if cursor is over a red or dark background
       const target = document.elementFromPoint(e.clientX, e.clientY) as HTMLElement | null;
       if (target) {
         let isRed = false;

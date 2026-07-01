@@ -11,13 +11,13 @@ export default function OpportunitySection() {
     <section
       id="opportunity"
       className="relative py-12 sm:py-16 px-8 overflow-visible"
-      style={{ background: "#0D0D0D" }}
+      style={{ background: "#FF2D2D" }}
     >
       {/* Diagonal Section Divider */}
       <div
         className="absolute -top-[40px] left-0 right-0 h-[60px] pointer-events-none z-[1]"
         style={{
-          backgroundColor: "#0D0D0D",
+          backgroundColor: "#FF2D2D",
           clipPath: "polygon(0 0, 100% 40px, 100% 60px, 0 60px)",
         }}
       />
@@ -25,7 +25,7 @@ export default function OpportunitySection() {
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Label */}
         <p
-          className="font-body text-[#F5F0E8]/60 mb-16"
+          className="font-body text-white mb-16"
           style={{
             fontSize: "clamp(10px, 1vw, 12px)",
             letterSpacing: "0.18em",
@@ -55,13 +55,13 @@ export default function OpportunitySection() {
         <div className="grid md:grid-cols-2 gap-8">
           {/* Box 1 */}
           <div
-            className="relative rounded-2xl p-8 backdrop-blur-md border border-white/10 shadow-2xl overflow-hidden"
-            style={{ background: "rgba(20, 20, 20, 0.6)" }}
+            className="relative rounded-2xl p-8 backdrop-blur-md border border-[#1A1A1A]/8 shadow-lg overflow-hidden"
+            style={{ background: "rgba(255, 255, 255, 0.8)" }}
           >
             {/* Soft Ambient Red Glow behind text */}
-            <div className="absolute -top-10 -left-10 w-32 h-32 bg-[#FF2D2D]/10 rounded-full blur-2xl pointer-events-none" />
+            <div className="absolute -top-10 -left-10 w-32 h-32 bg-[#FF2D2D]/8 rounded-full blur-2xl pointer-events-none" />
             
-            <p className="font-body text-[#F5F0E8] text-base sm:text-lg leading-relaxed relative z-10">
+            <p className="font-body text-[#333] text-base sm:text-lg leading-relaxed relative z-10">
               India is witnessing an unprecedented explosion of offline culture —
               from underground gig nights and rooftop raves to niche community
               meetups and wellness circles. Yet the builders behind these movements
@@ -71,13 +71,13 @@ export default function OpportunitySection() {
 
           {/* Box 2 */}
           <div
-            className="relative rounded-2xl p-8 backdrop-blur-md border border-white/10 shadow-2xl overflow-hidden"
-            style={{ background: "rgba(20, 20, 20, 0.6)" }}
+            className="relative rounded-2xl p-8 backdrop-blur-md border border-[#1A1A1A]/8 shadow-lg overflow-hidden"
+            style={{ background: "rgba(255, 255, 255, 0.8)" }}
           >
             {/* Soft Ambient Purple Glow behind text */}
-            <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-[#6700a2]/15 rounded-full blur-2xl pointer-events-none" />
+            <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-[#6700a2]/10 rounded-full blur-2xl pointer-events-none" />
 
-            <p className="font-body text-[#F5F0E8] text-base sm:text-lg leading-relaxed relative z-10">
+            <p className="font-body text-[#333] text-base sm:text-lg leading-relaxed relative z-10">
               The market needs a bridge between high-intent offline audiences and
               brands craving authentic connection. That bridge is the IRL Culture
               Fest — India&apos;s first platform to celebrate, monetize, and scale the
