@@ -37,7 +37,7 @@ export default function SolutionSection() {
     <section
       id="about"
       className="relative overflow-hidden"
-      style={{ background: "#FFFFFF", paddingTop: 60, paddingBottom: 80 }}
+      style={{ background: "#FFFFFF", paddingTop: 60, paddingBottom: 140 }}
     >
       <div
         className="mx-auto relative z-[2]"

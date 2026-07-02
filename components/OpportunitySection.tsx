@@ -11,7 +11,7 @@ export default function OpportunitySection() {
     <section
       id="opportunity"
       className="relative overflow-hidden"
-      style={{ background: "#FF2D2D", paddingTop: 60, paddingBottom: 80 }}
+      style={{ background: "#FF2D2D", paddingTop: 60, paddingBottom: 140 }}
     >
       <div
         className="mx-auto relative z-10"

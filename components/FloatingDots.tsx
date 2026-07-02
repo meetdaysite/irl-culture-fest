@@ -14,7 +14,7 @@ interface Dot {
   origY: number;
 }
 
-const COLOURS = ["#FF2D2D", "#FF6B35", "#FFD600", "#8FFB2B", "#BF5FFF", "#00C2FF"];
+const COLOURS = ["#FF2B2B", "#FF6B35", "#f2af29", "#8FFB2B", "#BF5FFF", "#00C2FF"];
 
 export default function FloatingDots() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);

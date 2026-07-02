@@ -30,7 +30,7 @@ export default function PartnerCTA() {
     <section
       id="partner"
       className="relative flex flex-col items-center justify-center overflow-hidden"
-      style={{ background: "#FF2D2D", paddingTop: 60, paddingBottom: 80, minHeight: "100vh" }}
+      style={{ background: "#FF2D2D", paddingTop: 60, paddingBottom: 140, minHeight: "100vh" }}
     >
 
       {/* Diagonal Stripes Overlay */}

@@ -21,7 +21,7 @@ export default function ConfettiPop() {
     };
     window.addEventListener("resize", handleResize);
 
-    const colors = ["#FF2D2D", "#f2af29", "#1A1A1A", "#FFFFFF"];
+    const colors = ["#FF2B2B", "#f2af29", "#1A1A1A", "#FFFFFF"];
     const particles: Array<{
       x: number;
       y: number;

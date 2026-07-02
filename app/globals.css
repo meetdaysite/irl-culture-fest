@@ -2,12 +2,12 @@
 
 /* ─── Brand Colour Tokens ─── */
 :root {
-  --red: #FF2D2D;
+  --red: #FF2B2B;
   --black: #1A1A1A;
   --cream: #F5F0E8;
   --orange: #FF2B2B;
   --yellow: #f2af29;
-  --green: #FF2D2D;
+  --green: #FF2B2B;
   --purple: #f2af29;
   --blue: #f2af29;
   --midnight: #1A1A1A;
@@ -56,9 +56,12 @@
   --font-space-grotesk: var(--font-body);
 }
 
-/* ─── Base ─── */
 html {
   scroll-behavior: smooth;
+}
+
+section {
+  scroll-margin-top: 140px;
 }
 
 body {

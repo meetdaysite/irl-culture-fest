@@ -4,17 +4,24 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Experience", href: "#experience" },
-  { label: "Cities", href: "#cities" },
+  { label: "Home", href: "#top" },
   { label: "Team", href: "#team" },
-  { label: "Partner", href: "#partner" },
+  { label: "Partner", href: "/partner" },
+  { label: "Attend", href: "/attend" },
 ];
 
 export default function Footer() {
   const scrollToSection = (href: string) => {
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    if (href.startsWith("#")) {
+      if (href === "#top") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
+      const el = document.querySelector(href);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    } else {
+      window.location.href = href;
+    }
   };
 
   return (
@@ -55,7 +62,7 @@ export default function Footer() {
                 <button
                   key={link.label}
                   onClick={() => scrollToSection(link.href)}
-                  className="w-fit text-left font-[family-name:var(--font-space-grotesk)] text-base text-white/80 hover:text-[#FF2D2D] transition-colors cursor-pointer"
+                  className="w-fit text-left font-[family-name:var(--font-space-grotesk)] text-base text-white/80 hover:text-[#FF2B2B] transition-colors cursor-pointer"
                 >
                   {link.label}
                 </button>
@@ -77,7 +84,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1 }}
-                  className="text-white/80 hover:text-[#FF2D2D] transition-colors"
+                  className="text-white/80 hover:text-[#FF2B2B] transition-colors"
                   aria-label="Instagram"
                 >
                   <svg
@@ -102,7 +109,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1 }}
-                  className="text-white/80 hover:text-[#FF2D2D] transition-colors"
+                  className="text-white/80 hover:text-[#FF2B2B] transition-colors"
                   aria-label="LinkedIn"
                 >
                   <svg
@@ -127,7 +134,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1 }}
-                  className="text-white/80 hover:text-[#FF2D2D] transition-colors"
+                  className="text-white/80 hover:text-[#FF2B2B] transition-colors"
                   aria-label="Twitter"
                 >
                   <svg
@@ -160,14 +167,14 @@ export default function Footer() {
               href="https://www.irlculturefest.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-[family-name:var(--font-space-grotesk)] text-sm text-white/80 hover:text-[#FF2D2D] transition-colors"
+              className="font-[family-name:var(--font-space-grotesk)] text-sm text-white/80 hover:text-[#FF2B2B] transition-colors"
             >
               www.irlculturefest.com
             </a>
             <span className="hidden sm:inline text-white/20">|</span>
             <a
               href="mailto:info@meetday.ai"
-              className="font-[family-name:var(--font-space-grotesk)] text-sm text-white/80 hover:text-[#FF2D2D] transition-colors"
+              className="font-[family-name:var(--font-space-grotesk)] text-sm text-white/80 hover:text-[#FF2B2B] transition-colors"
             >
               info@meetday.ai
             </a>
@@ -185,7 +192,7 @@ export default function Footer() {
                 href="https://meetday.ai"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-white transition-colors underline"
+                className="hover:text-[#FF2B2B] transition-colors underline"
               >
                 meetday.ai
               </a>

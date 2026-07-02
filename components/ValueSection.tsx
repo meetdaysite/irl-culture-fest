@@ -22,7 +22,7 @@ export default function ValueSection() {
     <section
       id="value"
       className="relative overflow-hidden"
-      style={{ background: "#1A1A1A", paddingTop: 60, paddingBottom: 80 }}
+      style={{ background: "#1A1A1A", paddingTop: 60, paddingBottom: 140 }}
     >
       <div
         className="mx-auto relative z-[2]"
