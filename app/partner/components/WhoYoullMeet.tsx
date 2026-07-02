@@ -17,7 +17,7 @@ export default function WhoYoullMeet() {
         <h2
           className="font-display text-white leading-none mb-4"
           style={{
-            fontSize: "clamp(32px, 4.5vw, 64px)",
+            fontSize: "clamp(24px, 3.5vw, 40px)",
           }}
         >
           WHO IS IN THE ROOM?

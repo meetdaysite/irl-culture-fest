@@ -47,7 +47,7 @@ export default function PartnershipTiers() {
         <h2
           className="font-display text-[#0D0D0D] leading-none mb-8 uppercase"
           style={{
-            fontSize: "clamp(32px, 4.5vw, 64px)",
+            fontSize: "clamp(24px, 3.5vw, 40px)",
           }}
         >
           JOIN US AS A:

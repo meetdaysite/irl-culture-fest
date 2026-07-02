@@ -97,7 +97,7 @@ export default function PartnerForm() {
         <h2
           className="font-display text-white leading-tight text-center max-w-4xl"
           style={{
-            fontSize: "clamp(32px, 4.5vw, 64px)",
+            fontSize: "clamp(24px, 3.5vw, 40px)",
           }}
         >
           READY TO BUILD THE OFFLINE ECONOMY TOGETHER?

@@ -123,7 +123,7 @@ export default function HeroSection() {
               transition={{ delay: 0.5 + i * 0.12, duration: 0.7, ease: "easeOut" }}
               className="font-display text-[#1A1A1A]"
               style={{
-                fontSize: "clamp(52px, 7vw, 96px)",
+                fontSize: "clamp(36px, 5.5vw, 68px)",
                 lineHeight: 0.95,
                 letterSpacing: "0.02em",
               }}
@@ -143,7 +143,7 @@ export default function HeroSection() {
               transition={{ delay: 0.74 + i * 0.12, duration: 0.7, ease: "easeOut" }}
               className="font-display text-[#FF2B2B]"
               style={{
-                fontSize: "clamp(52px, 7vw, 96px)",
+                fontSize: "clamp(36px, 5.5vw, 68px)",
                 lineHeight: 0.95,
                 letterSpacing: "0.02em",
               }}

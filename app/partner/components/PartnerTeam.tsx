@@ -173,7 +173,7 @@ export default function PartnerTeam() {
         <h2
           className="font-display text-[#0D0D0D]"
           style={{
-            fontSize: "clamp(32px, 4.5vw, 64px)",
+            fontSize: "clamp(24px, 3.5vw, 40px)",
             lineHeight: 1.0,
             letterSpacing: "0.01em",
             marginBottom: 20,

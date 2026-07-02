@@ -18,7 +18,7 @@ export default function SplitCTA() {
         <h2
           className="font-display text-white leading-tight"
           style={{
-            fontSize: "clamp(32px, 4vw, 56px)",
+            fontSize: "clamp(24px, 3.5vw, 40px)",
             marginBottom: 48,
           }}
         >

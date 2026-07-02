@@ -5,19 +5,35 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
-const navLinks = [
-  { label: "Home", href: "#top" },
-  { label: "Team", href: "#team" },
-];
-
 export default function Navbar() {
   const [scrollY, setScrollY] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
   const isPartnerPage = pathname === "/partner";
 
+  const [isNavbarWhite, setIsNavbarWhite] = useState(false);
+
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+
+      // Check if overlapping a section with a red background
+      const redElements = ["partner-hero", "partner-form"];
+      let isOverRed = false;
+      for (const id of redElements) {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          // Navbar height is around 100px. Overlap occurs if top of section <= 90px and bottom >= 10px.
+          if (rect.top <= 90 && rect.bottom >= 10) {
+            isOverRed = true;
+            break;
+          }
+        }
+      }
+      setIsNavbarWhite(isOverRed);
+    };
+
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -43,16 +59,19 @@ export default function Navbar() {
   // Progressive interpolation between 20–80px scroll
   const progress = Math.min(Math.max((scrollY - 20) / 60, 0), 1); // 0 at top, 1 at 80px+
 
-  const navBg = `rgba(255,255,255,${(0.05 + progress * 0.35).toFixed(2)})`;
+  const navBg = isNavbarWhite
+    ? "rgba(255, 255, 255, 0.75)"
+    : `rgba(255,255,255,${(0.05 + progress * 0.35).toFixed(2)})`;
   const blurPx = `${(3 + progress * 11).toFixed(1)}px`;
-  const shadowOpacity = progress * 0.06;
+  const shadowOpacity = isNavbarWhite ? 0.12 : progress * 0.06;
 
   // Text color: black at start (with 0.45 opacity) transitioning to fully opaque black (#1A1A1A) when scrolled
   const textOpacity = (0.45 + (progress * 0.55)).toFixed(2);
-  const linkColor = isPartnerPage
-    ? (progress < 0.2 ? "rgba(255, 255, 255, 0.95)" : "#1A1A1A")
-    : `rgba(26, 26, 26, ${textOpacity})`;
-  const linkHoverColor = isPartnerPage && progress < 0.2 ? "#f2af29" : "#FF2B2B";
+  const linkColor = isNavbarWhite
+    ? "#1A1A1A"
+    : isPartnerPage
+      ? (progress < 0.2 ? "rgba(255, 255, 255, 0.95)" : "#1A1A1A")
+      : `rgba(26, 26, 26, ${textOpacity})`;
 
   return (
     <>
@@ -89,57 +108,59 @@ export default function Navbar() {
             />
           </button>
 
-          {/* Desktop Links & Action Buttons */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => {
-              const isActive = pathname === link.href;
-              return (
-                <button
-                  key={link.label}
-                  onClick={() => scrollToSection(link.href)}
-                  className="nav-link font-body text-sm font-medium cursor-pointer"
-                  style={{
-                    color: isActive ? linkHoverColor : linkColor,
-                    transition: "color 0.3s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLButtonElement).style.color = linkHoverColor;
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLButtonElement).style.color = isActive ? linkHoverColor : linkColor;
-                  }}
-                >
-                  {link.label}
-                </button>
-              );
-            })}
-
-            {/* Segregated Action Buttons */}
-            <div className="flex items-center gap-4 ml-2">
-              <button
-                onClick={() => scrollToSection("/partner")}
-                className="font-body text-xs font-black uppercase tracking-wider py-2 px-5 rounded-full border border-black transition-transform cursor-pointer hover:scale-105 active:scale-95"
-                style={{
-                  backgroundColor: "#f2af29",
-                  color: "#0D0D0D",
-                  boxShadow: "2px 2px 0px 0px #0D0D0D",
-                }}
-              >
-                Partner
-              </button>
-              <button
-                onClick={() => scrollToSection("/attend")}
-                className="font-body text-xs font-black uppercase tracking-wider py-2 px-5 rounded-full border border-black transition-transform cursor-pointer hover:scale-105 active:scale-95"
-                style={{
-                  backgroundColor: isPartnerPage && progress < 0.2 ? "#FFFFFF" : "#FF2B2B",
-                  color: isPartnerPage && progress < 0.2 ? "#FF2B2B" : "#FFFFFF",
-                  boxShadow: isPartnerPage && progress < 0.2 ? "2px 2px 0px 0px #FFFFFF" : "2px 2px 0px 0px #0D0D0D",
-                  borderColor: isPartnerPage && progress < 0.2 ? "#FFFFFF" : "#0D0D0D",
-                }}
-              >
-                Attend
-              </button>
-            </div>
+          {/* Desktop Action Buttons */}
+          <div className="hidden md:flex items-center gap-4">
+            <button
+              onClick={() => scrollToSection("#top")}
+              className="font-body text-xs font-black uppercase tracking-wider py-2 px-5 rounded-full border border-black transition-transform cursor-pointer hover:scale-105 active:scale-95"
+              style={{
+                backgroundColor: isNavbarWhite
+                  ? "#FFFFFF"
+                  : isPartnerPage && progress < 0.2 ? "transparent" : "#FFFFFF",
+                color: isNavbarWhite
+                  ? "#0D0D0D"
+                  : isPartnerPage && progress < 0.2 ? "#FFFFFF" : "#0D0D0D",
+                boxShadow: isNavbarWhite
+                  ? "2px 2px 0px 0px #0D0D0D"
+                  : isPartnerPage && progress < 0.2 ? "none" : "2px 2px 0px 0px #0D0D0D",
+                borderColor: isNavbarWhite
+                  ? "#0D0D0D"
+                  : isPartnerPage && progress < 0.2 ? "#FFFFFF" : "#0D0D0D",
+              }}
+            >
+              Home
+            </button>
+            <button
+              onClick={() => scrollToSection("/partner")}
+              className="font-body text-xs font-black uppercase tracking-wider py-2 px-5 rounded-full border border-black transition-transform cursor-pointer hover:scale-105 active:scale-95"
+              style={{
+                backgroundColor: "#f2af29",
+                color: "#0D0D0D",
+                boxShadow: "2px 2px 0px 0px #0D0D0D",
+              }}
+            >
+              Partner
+            </button>
+            <button
+              onClick={() => scrollToSection("/attend")}
+              className="font-body text-xs font-black uppercase tracking-wider py-2 px-5 rounded-full border border-black transition-transform cursor-pointer hover:scale-105 active:scale-95"
+              style={{
+                backgroundColor: isNavbarWhite
+                  ? "#FF2B2B"
+                  : isPartnerPage && progress < 0.2 ? "#FFFFFF" : "#FF2B2B",
+                color: isNavbarWhite
+                  ? "#FFFFFF"
+                  : isPartnerPage && progress < 0.2 ? "#FF2B2B" : "#FFFFFF",
+                boxShadow: isNavbarWhite
+                  ? "2px 2px 0px 0px #0D0D0D"
+                  : isPartnerPage && progress < 0.2 ? "2px 2px 0px 0px #FFFFFF" : "2px 2px 0px 0px #0D0D0D",
+                borderColor: isNavbarWhite
+                  ? "#0D0D0D"
+                  : isPartnerPage && progress < 0.2 ? "#FFFFFF" : "#0D0D0D",
+              }}
+            >
+              Attend
+            </button>
           </div>
 
           {/* Mobile Hamburger */}
@@ -174,31 +195,24 @@ export default function Navbar() {
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-[55] bg-white flex flex-col items-center justify-center gap-8"
           >
-            {navLinks.map((link, i) => {
-              const isActive = pathname === link.href;
-              return (
-                <motion.button
-                  key={link.label}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 + i * 0.1 }}
-                  onClick={() => scrollToSection(link.href)}
-                  className={`font-display text-4xl hover:text-[#FF2B2B] transition-colors cursor-pointer ${
-                    isActive ? "text-[#FF2B2B]" : "text-[#1A1A1A]"
-                  }`}
-                >
-                  {link.label}
-                </motion.button>
-              );
-            })}
-
             {/* Mobile Action Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="flex flex-col gap-4 w-[80%] max-w-[260px] mt-6"
+              transition={{ delay: 0.2 }}
+              className="flex flex-col gap-4 w-[80%] max-w-[260px]"
             >
+              <button
+                onClick={() => scrollToSection("#top")}
+                className="w-full text-center font-body text-sm font-black uppercase tracking-wider py-3.5 rounded-full border border-black transition-transform cursor-pointer hover:scale-103 active:scale-98"
+                style={{
+                  backgroundColor: "#FFFFFF",
+                  color: "#0D0D0D",
+                  boxShadow: "3px 3px 0px 0px #0D0D0D",
+                }}
+              >
+                Home
+              </button>
               <button
                 onClick={() => scrollToSection("/partner")}
                 className="w-full text-center font-body text-sm font-black uppercase tracking-wider py-3.5 rounded-full border border-black transition-transform cursor-pointer hover:scale-103 active:scale-98"

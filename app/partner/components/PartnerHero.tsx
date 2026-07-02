@@ -126,7 +126,7 @@ export default function PartnerHero() {
         <h1
           className="font-display leading-[0.95] text-white uppercase text-center select-none"
           style={{
-            fontSize: "clamp(52px, 7vw, 96px)",
+            fontSize: "clamp(36px, 5.5vw, 68px)",
             letterSpacing: "0.02em",
           }}
         >

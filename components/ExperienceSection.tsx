@@ -24,7 +24,7 @@ export default function ExperienceSection() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="font-display text-[#1A1A1A]"
           style={{
-            fontSize: "clamp(32px, 4.5vw, 64px)",
+            fontSize: "clamp(24px, 3.5vw, 40px)",
             lineHeight: 1.0,
             letterSpacing: "0.01em",
             marginBottom: 20,
