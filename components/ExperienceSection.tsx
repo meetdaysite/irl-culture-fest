@@ -16,34 +16,51 @@ export default function ExperienceSection() {
       >
 
 
-        {/* Heading */}
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="font-display text-[#1A1A1A]"
-          style={{
-            fontSize: "clamp(24px, 3.5vw, 40px)",
-            lineHeight: 1.0,
-            letterSpacing: "0.01em",
-            marginBottom: 20,
-          }}
-        >
-          WHAT HAPPENS INSIDE THE FEST?
-        </motion.h2>
-
-        {/* Subheading */}
+        {/* Eyebrow */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="font-body font-bold text-sm sm:text-base uppercase tracking-wider text-[#FF2B2B]"
-          style={{ marginBottom: 48 }}
+          transition={{ duration: 0.6 }}
+          className="font-body font-bold text-xs sm:text-sm uppercase tracking-wider text-[#FF2B2B] mb-4"
         >
-          A DAY DESIGNED FOR THOSE WHO BUILD THE CULTURE.
+          ✦ INSIDE THE FEST
         </motion.p>
+
+        {/* Heading & Floating Description Row */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-12">
+          {/* Heading */}
+          <div className="lg:col-span-7">
+            <motion.h2
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="font-display text-[#1A1A1A] leading-tight mb-2"
+              style={{
+                fontSize: "clamp(32px, 4.5vw, 56px)",
+                letterSpacing: "0.01em",
+              }}
+            >
+              We Don&apos;t Chase Footfall. <span className="text-[#FF2B2B]">We Curate</span> the Room.
+            </motion.h2>
+          </div>
+
+          {/* Floating Description Box */}
+          <div className="lg:col-span-5 flex justify-center lg:justify-end">
+            <motion.div
+              initial={{ opacity: 0, y: 30, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="bg-[#F5F0E8] border-2 border-[#1A1A1A] rounded-2xl p-6 shadow-[4px_4px_0px_#FF2B2B] max-w-md w-full relative z-10 animate-float"
+            >
+              <p className="font-body text-[#1A1A1A] text-sm sm:text-base leading-relaxed">
+                Every attendee is an active community builder, a forward-thinking consumer brand, or an infrastructure provider engaging millions of urban Indians.
+              </p>
+            </motion.div>
+          </div>
+        </div>
 
         {/* Animated 3D Coverflow Carousel */}
         <ExperienceCarousel />

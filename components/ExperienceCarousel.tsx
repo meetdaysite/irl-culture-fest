@@ -5,36 +5,46 @@ import { motion } from "framer-motion";
 
 const cards = [
   {
-    title: "SUBCULTURE HUBS",
-    body: "Dedicated zones for each subculture — music, art, food, wellness, gaming, fitness, and more. Each hub is curated by real community leaders who know their scene inside out.",
+    title: "KNOWLEDGE SHARING",
+    body: "Masterclasses and shop-talk zones where subculture leaders share scaling playbooks.",
+    image: "/images/inside-the-fest/knowledge-sharing.png",
     bg: "#1A1A1A",
     text: "#FFFFFF",
     dotColor: "#f2af29",
   },
   {
-    title: "HOST SANDBOX",
-    body: "An interactive playground where emerging and established hosts can demo their event formats, test new concepts, and receive live feedback from an audience of peers and brands.",
+    title: "INTERACTIVE BRAND EXPO",
+    body: "Immersive, highly tactile brand environments optimized for sensory product testing—not passive logo placement.",
+    image: "/images/inside-the-fest/interactive-brand.jpg",
     bg: "#FF2B2B",
     text: "#FFFFFF",
     dotColor: "#f2af29",
   },
   {
-    title: "CURATED MATCHMAKING",
-    body: "AI-powered and human-curated matchmaking sessions that connect brands with the right hosts, venues, and communities for authentic, high-impact collaborations.",
+    title: "LIVE PITCHING",
+    body: "High-stakes, rapid-fire pitch sessions inside the Host Sandbox where brand marketers deploy capital straight to community leaders.",
+    image: "/images/inside-the-fest/live-pitching.jpg",
     bg: "#f2af29",
     text: "#FFFFFF",
     dotColor: "#FF2B2B",
   },
   {
-    title: "SOCIAL MODULE",
-    body: "A high-energy, content-rich social layer featuring live performances, panel discussions, networking lounges, and surprise pop-up activations across the venue.",
+    title: "SUBCULTURE HUBS",
+    body: "Dedicated, host-led takeovers spanning independent music, culinary arts, pet culture, and mindful movement.",
+    image: "/images/inside-the-fest/subculture-hubs.png",
     bg: "#FFFFFF",
     text: "#1A1A1A",
     dotColor: "#FF2B2B",
   },
+  {
+    title: "CURATED DINNERS & LOUNGES",
+    body: "VIP networking spaces engineered to turn casual introductions into permanent strategic partnerships.",
+    image: "/images/inside-the-fest/curated-dinners.png",
+    bg: "#1A1A1A",
+    text: "#FFFFFF",
+    dotColor: "#f2af29",
+  },
 ];
-
-const rotationDegrees = [-3, 2, -1.5, 3];
 
 export default function ExperienceCarousel() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -45,10 +55,9 @@ export default function ExperienceCarousel() {
       aria-label="Festival experiences list"
       className="w-full max-w-6xl mx-auto mt-8"
     >
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="flex flex-wrap justify-center gap-6">
         {cards.map((card, i) => {
           const isHovered = hoveredIndex === i;
-          const initialRotate = rotationDegrees[i % rotationDegrees.length];
 
           return (
             <motion.div
@@ -61,40 +70,58 @@ export default function ExperienceCarousel() {
                 boxShadow: isHovered
                   ? "0 20px 40px -10px rgba(0, 0, 0, 0.3)"
                   : "0 10px 20px -5px rgba(0, 0, 0, 0.15)",
+                border: card.bg === "#FFFFFF" ? "2px solid #1A1A1A" : "none",
               }}
               animate={{
-                scale: isHovered ? 1.05 : 1,
-                rotate: isHovered ? 0 : initialRotate,
+                scale: isHovered ? 1.03 : 1,
+                rotate: 0,
               }}
               transition={{
                 type: "spring",
                 stiffness: 300,
                 damping: 20,
               }}
-              className="w-full min-h-[340px] rounded-2xl p-6 sm:p-8 flex flex-col justify-start select-none cursor-pointer shadow-lg"
+              className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)] min-h-[380px] rounded-2xl p-6 flex flex-col justify-between select-none cursor-pointer shadow-lg"
             >
-              {/* Card Title & Icon */}
-              <div className="flex items-center gap-3 mb-6">
-                {/* Pulsing Icon Dot */}
-                <span
-                  className="inline-block w-3 h-3 rounded-full flex-shrink-0 animate-pulse"
-                  style={{ background: card.dotColor }}
-                />
-                <h3
-                  className="font-body font-bold uppercase"
-                  style={{
-                    fontSize: "20px",
-                    letterSpacing: "0.03em",
-                  }}
-                >
-                  {card.title}
-                </h3>
+              <div>
+                {/* Card Title & Icon */}
+                <div className="flex items-center gap-3 mb-4">
+                  {/* Pulsing Icon Dot */}
+                  <span
+                    className="inline-block w-2.5 h-2.5 rounded-full flex-shrink-0 animate-pulse"
+                    style={{ background: card.dotColor }}
+                  />
+                  <h3
+                    className="font-body font-bold uppercase"
+                    style={{
+                      fontSize: "16px",
+                      letterSpacing: "0.03em",
+                    }}
+                  >
+                    {card.title}
+                  </h3>
+                </div>
+
+                {/* Card Body */}
+                <p className="font-body text-[13px] sm:text-[14px] leading-relaxed opacity-90">
+                  {card.body}
+                </p>
               </div>
 
-              {/* Card Body */}
-              <p className="font-body text-[14px] sm:text-[15px] leading-relaxed opacity-90">
-                {card.body}
-              </p>
+              <motion.div
+                animate={{
+                  rotate: isHovered ? 0 : (i % 2 === 0 ? -4 : 4),
+                  scale: isHovered ? 1.02 : 1
+                }}
+                transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                className="w-full aspect-[16/10] mt-5 p-1.5 bg-white rounded-xl overflow-hidden shadow-md flex items-center justify-center"
+              >
+                <img
+                  src={card.image}
+                  alt={card.title}
+                  className="w-full h-full object-cover rounded-lg transition-all duration-300"
+                />
+              </motion.div>
             </motion.div>
           );
         })}

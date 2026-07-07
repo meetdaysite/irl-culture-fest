@@ -173,6 +173,13 @@ export default function Footer() {
             </a>
             <span className="hidden sm:inline text-white/20">|</span>
             <a
+              href="tel:+918130339180"
+              className="font-[family-name:var(--font-space-grotesk)] text-sm text-white/80 hover:text-[#FF2B2B] transition-colors"
+            >
+              +91 81303 39180
+            </a>
+            <span className="hidden sm:inline text-white/20">|</span>
+            <a
               href="mailto:info@meetday.ai"
               className="font-[family-name:var(--font-space-grotesk)] text-sm text-white/80 hover:text-[#FF2B2B] transition-colors"
             >

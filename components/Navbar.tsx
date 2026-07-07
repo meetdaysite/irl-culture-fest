@@ -12,6 +12,36 @@ export default function Navbar() {
   const isPartnerPage = pathname === "/partner";
 
   const [isNavbarWhite, setIsNavbarWhite] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
+
+  useEffect(() => {
+    if (pathname !== "/") return;
+
+    const sections = ["manifesto", "solution", "subcultures", "passes", "team"];
+    const observers = sections.map((id) => {
+      const el = document.getElementById(id);
+      if (!el) return null;
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setActiveSection(id);
+          }
+        },
+        {
+          rootMargin: "-25% 0px -55% 0px",
+        }
+      );
+      observer.observe(el);
+      return { observer, el };
+    });
+
+    return () => {
+      observers.forEach((obs) => {
+        if (obs) obs.observer.unobserve(obs.el);
+      });
+    };
+  }, [pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -108,41 +138,49 @@ export default function Navbar() {
             />
           </button>
 
+          {/* Desktop Navigation Links */}
+          <div className="hidden md:flex items-center gap-8 mr-6">
+            <button
+              onClick={() => scrollToSection("#manifesto")}
+              className="font-body text-xs font-bold uppercase tracking-wider transition-colors hover:text-[#FF2B2B]"
+              style={{ color: activeSection === "manifesto" ? "#FF2B2B" : linkColor }}
+            >
+              The Manifesto
+            </button>
+            <button
+              onClick={() => scrollToSection("#solution")}
+              className="font-body text-xs font-bold uppercase tracking-wider transition-colors hover:text-[#FF2B2B]"
+              style={{ color: activeSection === "solution" ? "#FF2B2B" : linkColor }}
+            >
+              The Festival
+            </button>
+            <button
+              onClick={() => scrollToSection("#subcultures")}
+              className="font-body text-xs font-bold uppercase tracking-wider transition-colors hover:text-[#FF2B2B]"
+              style={{ color: activeSection === "subcultures" ? "#FF2B2B" : linkColor }}
+            >
+              Subcultures
+            </button>
+            <button
+              onClick={() => scrollToSection("#passes")}
+              className="font-body text-xs font-bold uppercase tracking-wider transition-colors hover:text-[#FF2B2B]"
+              style={{ color: activeSection === "passes" ? "#FF2B2B" : linkColor }}
+            >
+              Passes
+            </button>
+            <button
+              onClick={() => scrollToSection("#team")}
+              className="font-body text-xs font-bold uppercase tracking-wider transition-colors hover:text-[#FF2B2B]"
+              style={{ color: activeSection === "team" ? "#FF2B2B" : linkColor }}
+            >
+              Team &amp; Partners
+            </button>
+          </div>
+
           {/* Desktop Action Buttons */}
           <div className="hidden md:flex items-center gap-4">
             <button
-              onClick={() => scrollToSection("#top")}
-              className="font-body text-xs font-black uppercase tracking-wider py-2 px-5 rounded-full border border-black transition-transform cursor-pointer hover:scale-105 active:scale-95"
-              style={{
-                backgroundColor: isNavbarWhite
-                  ? "#FFFFFF"
-                  : isPartnerPage && progress < 0.2 ? "transparent" : "#FFFFFF",
-                color: isNavbarWhite
-                  ? "#0D0D0D"
-                  : isPartnerPage && progress < 0.2 ? "#FFFFFF" : "#0D0D0D",
-                boxShadow: isNavbarWhite
-                  ? "2px 2px 0px 0px #0D0D0D"
-                  : isPartnerPage && progress < 0.2 ? "none" : "2px 2px 0px 0px #0D0D0D",
-                borderColor: isNavbarWhite
-                  ? "#0D0D0D"
-                  : isPartnerPage && progress < 0.2 ? "#FFFFFF" : "#0D0D0D",
-              }}
-            >
-              Home
-            </button>
-            <button
-              onClick={() => scrollToSection("/partner")}
-              className="font-body text-xs font-black uppercase tracking-wider py-2 px-5 rounded-full border border-black transition-transform cursor-pointer hover:scale-105 active:scale-95"
-              style={{
-                backgroundColor: "#f2af29",
-                color: "#0D0D0D",
-                boxShadow: "2px 2px 0px 0px #0D0D0D",
-              }}
-            >
-              Partner
-            </button>
-            <button
-              onClick={() => scrollToSection("/attend")}
+              onClick={() => scrollToSection("#passes")}
               className="font-body text-xs font-black uppercase tracking-wider py-2 px-5 rounded-full border border-black transition-transform cursor-pointer hover:scale-105 active:scale-95"
               style={{
                 backgroundColor: isNavbarWhite
@@ -159,7 +197,7 @@ export default function Navbar() {
                   : isPartnerPage && progress < 0.2 ? "#FFFFFF" : "#0D0D0D",
               }}
             >
-              Attend
+              Secure Your Pass
             </button>
           </div>
 
@@ -195,6 +233,45 @@ export default function Navbar() {
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-[55] bg-white flex flex-col items-center justify-center gap-8"
           >
+            {/* Mobile Navigation Links */}
+            <div className="flex flex-col items-center gap-6 mt-16">
+              <button
+                onClick={() => scrollToSection("#manifesto")}
+                className="font-body text-base font-bold uppercase tracking-wider transition-colors hover:text-[#FF2B2B]"
+                style={{ color: activeSection === "manifesto" ? "#FF2B2B" : "#1A1A1A" }}
+              >
+                The Manifesto
+              </button>
+              <button
+                onClick={() => scrollToSection("#solution")}
+                className="font-body text-base font-bold uppercase tracking-wider transition-colors hover:text-[#FF2B2B]"
+                style={{ color: activeSection === "solution" ? "#FF2B2B" : "#1A1A1A" }}
+              >
+                The Festival
+              </button>
+              <button
+                onClick={() => scrollToSection("#subcultures")}
+                className="font-body text-base font-bold uppercase tracking-wider transition-colors hover:text-[#FF2B2B]"
+                style={{ color: activeSection === "subcultures" ? "#FF2B2B" : "#1A1A1A" }}
+              >
+                Subcultures
+              </button>
+              <button
+                onClick={() => scrollToSection("#passes")}
+                className="font-body text-base font-bold uppercase tracking-wider transition-colors hover:text-[#FF2B2B]"
+                style={{ color: activeSection === "passes" ? "#FF2B2B" : "#1A1A1A" }}
+              >
+                Passes
+              </button>
+              <button
+                onClick={() => scrollToSection("#team")}
+                className="font-body text-base font-bold uppercase tracking-wider transition-colors hover:text-[#FF2B2B]"
+                style={{ color: activeSection === "team" ? "#FF2B2B" : "#1A1A1A" }}
+              >
+                Team &amp; Partners
+              </button>
+            </div>
+
             {/* Mobile Action Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -203,29 +280,7 @@ export default function Navbar() {
               className="flex flex-col gap-4 w-[80%] max-w-[260px]"
             >
               <button
-                onClick={() => scrollToSection("#top")}
-                className="w-full text-center font-body text-sm font-black uppercase tracking-wider py-3.5 rounded-full border border-black transition-transform cursor-pointer hover:scale-103 active:scale-98"
-                style={{
-                  backgroundColor: "#FFFFFF",
-                  color: "#0D0D0D",
-                  boxShadow: "3px 3px 0px 0px #0D0D0D",
-                }}
-              >
-                Home
-              </button>
-              <button
-                onClick={() => scrollToSection("/partner")}
-                className="w-full text-center font-body text-sm font-black uppercase tracking-wider py-3.5 rounded-full border border-black transition-transform cursor-pointer hover:scale-103 active:scale-98"
-                style={{
-                  backgroundColor: "#f2af29",
-                  color: "#0D0D0D",
-                  boxShadow: "3px 3px 0px 0px #0D0D0D",
-                }}
-              >
-                Partner
-              </button>
-              <button
-                onClick={() => scrollToSection("/attend")}
+                onClick={() => scrollToSection("#passes")}
                 className="w-full text-center font-body text-sm font-black uppercase tracking-wider py-3.5 rounded-full border border-[#0D0D0D] transition-transform cursor-pointer hover:scale-103 active:scale-98"
                 style={{
                   backgroundColor: "#FF2B2B",
@@ -233,7 +288,7 @@ export default function Navbar() {
                   boxShadow: "3px 3px 0px 0px #0D0D0D",
                 }}
               >
-                Attend
+                Secure Your Pass
               </button>
             </motion.div>
           </motion.div>

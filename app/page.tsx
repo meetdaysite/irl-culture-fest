@@ -4,13 +4,17 @@ import { motion } from "framer-motion";
 import { useScrollProgress } from "@/hooks/useScrollProgress";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import WhatIsIRL from "@/components/WhatIsIRL";
 import StatsBar from "@/components/StatsBar";
 import GallerySection from "@/components/GallerySection";
+import ManifestoSection from "@/components/ManifestoSection";
+import SolutionSection from "@/components/SolutionSection";
 import ExperienceSection from "@/components/ExperienceSection";
-import CitiesSection from "@/components/CitiesSection";
+import SubculturesMatrix from "@/components/SubculturesMatrix";
+import SponsorImpact from "@/components/SponsorImpact";
 import TeamSection from "@/components/TeamSection";
-import SplitCTA from "@/components/SplitCTA";
+import PartnersCollaborators from "@/components/PartnersCollaborators";
+import PassesSection from "@/components/PassesSection";
+import ContactFormSection from "@/components/ContactFormSection";
 import Footer from "@/components/Footer";
 // import ConfettiPop from "@/components/ConfettiPop";
 
@@ -33,13 +37,18 @@ export default function Home() {
       <Navbar />
       <main>
         <HeroSection />
-        <WhatIsIRL />
         <StatsBar />
-        <GallerySection />
+        {/* <GallerySection /> */}
+        <ManifestoSection />
+        <SolutionSection />
         <ExperienceSection />
-        <CitiesSection />
+        {/* <CitiesSection /> */}
+        <SubculturesMatrix />
+        <SponsorImpact />
         <TeamSection />
-        <SplitCTA />
+        <PartnersCollaborators />
+        <PassesSection />
+        <ContactFormSection />
       </main>
       <Footer />
     </>
