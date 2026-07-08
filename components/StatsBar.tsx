@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import DecorativeStar from "@/components/DecorativeStar";
 
 const statsData: Array<{
   target?: number;
@@ -73,32 +74,23 @@ export default function StatsBar() {
       className="relative overflow-hidden w-full"
       style={{ background: "#FF2B2B", paddingTop: 32, paddingBottom: 92 }}
     >
+      {/* Decorative rotating stars */}
+      <DecorativeStar size={130} color="#f2af29" opacity={0.12} top="20px" left="5%" spin spinDuration={45} />
+      <DecorativeStar size={90} color="#FFFFFF" opacity={0.15} bottom="45px" right="6%" spin spinDuration={35} />
+
       <div className="w-full px-6 md:px-12 relative z-10">
-        {/* Intro block: paragraph + logo */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12 pb-10 border-b border-white/[0.18]">
+        {/* Intro block: centered paragraph */}
+        <div className="flex flex-col items-center justify-center text-center mb-12 pb-10 border-b border-white/[0.18]">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="md:col-span-8 font-body text-white/90 text-base sm:text-lg leading-relaxed"
+            className="max-w-4xl font-body text-white/90 text-base sm:text-lg leading-relaxed text-center"
           >
             The internet spent a decade optimizing for digital creators, leaving physical community hosts completely invisible. Meanwhile, a premium audience of Gen Z and urban professionals is actively demanding highly curated, offline experiences.{" "}
             <span className="font-bold text-white"><br></br><br></br>We are bridging that gap to make the offline economy sustainable.</span>
           </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="md:col-span-4 flex items-center md:justify-end"
-          >
-            <img
-              src="/IRL Culture Fest_ logo_ reverse.png"
-              alt="IRL Culture Fest"
-              className="h-[100px] object-contain"
-            />
-          </motion.div>
         </div>
 
         {/* Stats row */}
