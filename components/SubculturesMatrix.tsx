@@ -241,7 +241,7 @@ export default function SubculturesMatrix() {
               className="overflow-x-auto w-full border-2 border-black rounded-2xl bg-white shadow-[6px_6px_0px_#1A1A1A]"
             >
               <table className="min-w-full divide-y-2 divide-black text-left font-body">
-                <thead className="bg-[#f2af29] text-black font-black uppercase text-xs tracking-wider">
+                <thead className="bg-[#f2af29] text-black font-display font-black uppercase text-sm sm:text-[16px] tracking-wider">
                   <tr>
                     <th scope="col" className="px-6 py-4 border-r-2 border-black">Subculture Vertical</th>
                     <th scope="col" className="px-6 py-4 border-r-2 border-black">The Curators</th>

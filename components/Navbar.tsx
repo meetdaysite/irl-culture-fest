@@ -125,16 +125,13 @@ export default function Navbar() {
         <div className="mx-auto max-w-7xl px-8 py-4 flex items-center justify-between">
           {/* Logo */}
           <button
-            onClick={() => scrollToSection("#top")}
+            onClick={() => scrollToSection("#hero")}
             className="flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-105 active:scale-95"
           >
-            <Image
-              src="/navbar-logo.png"
+            <img
+              src="/navbar-logo.png?v=2"
               alt="IRL Culture Fest Logo"
-              width={360}
-              height={102}
-              style={{ width: "auto", height: "auto" }}
-              className="h-[90px] sm:h-[108px] object-contain"
+              className="h-[38px] sm:h-[46px] object-contain"
             />
           </button>
 
@@ -162,18 +159,18 @@ export default function Navbar() {
               Subcultures
             </button>
             <button
-              onClick={() => scrollToSection("#passes")}
-              className="font-body text-xs font-bold uppercase tracking-wider transition-colors hover:text-[#FF2B2B]"
-              style={{ color: activeSection === "passes" ? "#FF2B2B" : linkColor }}
-            >
-              Passes
-            </button>
-            <button
               onClick={() => scrollToSection("#team")}
               className="font-body text-xs font-bold uppercase tracking-wider transition-colors hover:text-[#FF2B2B]"
               style={{ color: activeSection === "team" ? "#FF2B2B" : linkColor }}
             >
               Team &amp; Partners
+            </button>
+            <button
+              onClick={() => scrollToSection("#passes")}
+              className="font-body text-xs font-bold uppercase tracking-wider transition-colors hover:text-[#FF2B2B]"
+              style={{ color: activeSection === "passes" ? "#FF2B2B" : linkColor }}
+            >
+              Passes
             </button>
           </div>
 
@@ -257,18 +254,18 @@ export default function Navbar() {
                 Subcultures
               </button>
               <button
-                onClick={() => scrollToSection("#passes")}
-                className="font-body text-base font-bold uppercase tracking-wider transition-colors hover:text-[#FF2B2B]"
-                style={{ color: activeSection === "passes" ? "#FF2B2B" : "#1A1A1A" }}
-              >
-                Passes
-              </button>
-              <button
                 onClick={() => scrollToSection("#team")}
                 className="font-body text-base font-bold uppercase tracking-wider transition-colors hover:text-[#FF2B2B]"
                 style={{ color: activeSection === "team" ? "#FF2B2B" : "#1A1A1A" }}
               >
                 Team &amp; Partners
+              </button>
+              <button
+                onClick={() => scrollToSection("#passes")}
+                className="font-body text-base font-bold uppercase tracking-wider transition-colors hover:text-[#FF2B2B]"
+                style={{ color: activeSection === "passes" ? "#FF2B2B" : "#1A1A1A" }}
+              >
+                Passes
               </button>
             </div>
 

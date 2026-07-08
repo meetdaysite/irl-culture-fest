@@ -30,7 +30,7 @@ export default function TeamSection() {
     >
       {/* Decorative stars */}
       <DecorativeStar size={150} color="#FF2B2B" opacity={0.06} top="-20px" left="6%" spin spinDuration={45} />
-      <DecorativeStar size={90}  color="#f2af29" opacity={0.07} top="30%" right="4%" rotate={28} />
+      <DecorativeStar size={90} color="#f2af29" opacity={0.07} top="30%" right="4%" rotate={28} />
       <DecorativeStar size={120} color="#1A1A1A" opacity={0.05} bottom="10%" left="3%" spin spinDuration={32} />
       <div
         className="mx-auto relative z-10"
@@ -44,10 +44,8 @@ export default function TeamSection() {
           transition={{ duration: 0.6 }}
           className="inline-block font-body text-[10px] sm:text-xs font-black uppercase tracking-wider px-3 py-1 rounded-full border-2 border-[#FF2B2B] text-[#FF2B2B] mb-3"
         >
-          ✦ LEADERSHIP &amp; ADVISORY
-        </motion.span>
-
-        {/* Heading */}
+          ✦ OUR TEAM
+        </motion.span>        {/* Heading */}
         <motion.h2
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -56,103 +54,106 @@ export default function TeamSection() {
           className="font-display text-[#1A1A1A] tracking-tight leading-none mb-16"
           style={{ fontSize: "clamp(32px, 4.5vw, 56px)", letterSpacing: "0.01em" }}
         >
-          Organized by the{" "}
-          <span className="text-[#FF2B2B]">Offline Pioneers.</span>
+          The Team Building <span className="text-[#FF2B2B]">The Fest.</span>
         </motion.h2>
 
-        {/* Director card — full width spotlight */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.15 }}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-0 rounded-2xl overflow-hidden border-2 border-[#1A1A1A] mb-16"
-          style={{ boxShadow: "6px 6px 0px #1A1A1A" }}
-        >
-          {/* Yellow name block */}
-          <div className="lg:col-span-4 bg-[#f2af29] p-8 flex flex-col justify-between">
-            <div>
-              <span className="block font-body text-[10px] uppercase font-bold tracking-widest text-[#1A1A1A] opacity-60 mb-3">
-                Festival Director &amp; Founder
-              </span>
-              <h3 className="font-display text-[26px] sm:text-[30px] font-black text-[#1A1A1A] leading-tight mb-1">
-                Gagaan Singh Nagi
-              </h3>
-              <span className="font-body text-[12px] font-semibold text-[#1A1A1A] opacity-70 uppercase tracking-wider">
-                Meetday
-              </span>
+        {/* Row 1: Gagaan's Spotlight Card (Full length horizontal layout with synced hover effects) */}
+        <div className="flex justify-center mb-12 w-full">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ type: "spring", stiffness: 260, damping: 25, delay: 0.15 }}
+            className="w-full max-w-5xl flex flex-col sm:flex-row rounded-2xl overflow-hidden border-2 border-[#1A1A1A] bg-[#f2af29] transition-all duration-300 ease-out hover:scale-[1.02] hover:bg-[#1A1A1A] hover:text-white group cursor-pointer"
+            style={{ boxShadow: "6px 6px 0px #1A1A1A" }}
+          >
+            {/* Image Container (Left side - portrait footprint) */}
+            <div className="w-full sm:w-1/3 aspect-square sm:aspect-auto sm:min-h-[260px] overflow-hidden border-b-2 sm:border-b-0 sm:border-r-2 border-[#1A1A1A] bg-white flex-shrink-0">
+              <img
+                src="/images/team/Gagaan.png"
+                alt="Gagaan Singh Nagi"
+                className="w-full h-full object-cover"
+              />
             </div>
-            {/* Decorative dot grid */}
-            <div className="mt-8 flex gap-2 flex-wrap">
-              {Array.from({ length: 12 }).map((_, i) => (
-                <span
-                  key={i}
-                  className="w-2 h-2 rounded-full bg-[#1A1A1A] opacity-20"
-                />
-              ))}
-            </div>
-          </div>
 
-          {/* Bio block */}
-          <div className="lg:col-span-8 bg-[#1A1A1A] p-8 flex flex-col justify-center">
-            <p className="font-body text-white text-base sm:text-lg leading-relaxed opacity-90 mb-6">
-              20+ years navigating marketing, experiential strategy, and massive event ecosystems.
-              Driving the host-centric, micro-entrepreneur operational framework across India.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              {["Experiential Strategy", "Host-Centric Ops", "Event Ecosystems", "Marketing"].map((tag) => (
-                <span
-                  key={tag}
-                  className="font-body text-[11px] uppercase font-bold tracking-wider px-3 py-1.5 rounded-full border border-white/20 text-white/60"
-                >
-                  {tag}
+            {/* Content Details */}
+            <div className="p-6 flex flex-col justify-between flex-1">
+              <div>
+                <span className="block font-body text-[10px] uppercase font-bold tracking-widest text-[#1A1A1A] opacity-60 mb-2 group-hover:text-white group-hover:opacity-85 transition-colors duration-300">
+                  Festival Director &amp; Founder
                 </span>
-              ))}
+                <h3 className="font-display text-[22px] sm:text-[26px] font-black text-[#1A1A1A] group-hover:text-white transition-colors duration-300 leading-tight mb-1">
+                  Gagaan Singh Nagi
+                </h3>
+                <span className="font-body text-[11px] font-semibold text-[#1A1A1A] opacity-70 group-hover:text-white/80 transition-colors duration-300 uppercase tracking-wider block mb-4">
+                  Meetday
+                </span>
+                <p className="font-body text-[#1A1A1A]/80 group-hover:text-white/95 transition-colors duration-300 text-[13px] sm:text-[14px] leading-relaxed mb-6">
+                  20+ years navigating marketing, experiential strategy, and massive event ecosystems. Driving the host-centric micro-entrepreneur operational framework across India.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {["Experiential Ops", "Marketing Strategy"].map((tag) => (
+                  <span
+                    key={tag}
+                    className="font-body text-[9px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full border border-[#1A1A1A]/20 group-hover:border-white/30 text-[#1A1A1A]/80 group-hover:text-white/90 transition-all duration-300"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
 
-        {/* Advisory section heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-8"
-        >
-          <h3 className="font-display text-[#1A1A1A] text-[22px] sm:text-[26px] font-black leading-tight mb-2">
-            Strategic Growth &amp; Infrastructure Advisory
-          </h3>
-          <p className="font-body text-[#555] text-sm sm:text-base leading-relaxed max-w-2xl">
-            Supported by industry leaders at the absolute intersection of tech, media, and real-world property layer integration.
-          </p>
-        </motion.div>
-
-        {/* Advisor cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {advisors.map((advisor, i) => (
+        {/* Row 2: Partnership Cards (Side-by-side, smaller container) */}
+        <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {[
+            {
+              name: "Anshika Jain",
+              role: "Partnerships Lead",
+              image: "/images/team/Anshika.png",
+            },
+            {
+              name: "Vanshika Sharma",
+              role: "Partnerships Associate",
+              image: "/images/team/Vanshika.png",
+            },
+            {
+              name: "Shagun Ravish",
+              role: "Partnerships Associate",
+              image: "/images/team/Shagun.png",
+            },
+          ].map((member, i) => (
             <motion.div
-              key={advisor.name}
+              key={member.name}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 + i * 0.1 }}
-              whileHover={{ scale: 1.03, rotate: 0 }}
-              className="rounded-2xl p-6 border-2 border-[#1A1A1A] bg-white flex flex-col gap-3"
+              transition={{ type: "spring", stiffness: 260, damping: 25, delay: 0.2 + i * 0.1 }}
+              className="flex flex-col rounded-2xl overflow-hidden border-2 border-[#1A1A1A] bg-white transition-all duration-300 ease-out hover:scale-[1.04] hover:bg-[#FF2B2B] hover:text-white group cursor-pointer"
               style={{
                 boxShadow: "4px 4px 0px #1A1A1A",
-                rotate: `${[-1.5, 1.5, -1][i % 3]}deg`,
               }}
             >
-              <span className="block font-body text-[9px] uppercase font-bold tracking-widest text-[#FF2B2B] opacity-80">
-                {advisor.role}
-              </span>
-              <h4 className="font-display text-[20px] sm:text-[22px] font-black text-[#1A1A1A] leading-tight">
-                {advisor.name}
-              </h4>
-              <p className="font-body text-[13px] sm:text-[14px] text-[#555] leading-relaxed">
-                {advisor.description}
-              </p>
+              {/* Image Container (Aspect Square) */}
+              <div className="relative w-full aspect-square overflow-hidden border-b-2 border-[#1A1A1A] bg-gray-50">
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              {/* Name & Role */}
+              <div className="p-4 flex flex-col justify-center flex-1">
+                <h4 className="font-display text-[16px] sm:text-[18px] font-black text-[#1A1A1A] group-hover:text-white transition-colors duration-300 leading-tight mb-1">
+                  {member.name}
+                </h4>
+                <span className="block font-body text-[9px] uppercase font-bold tracking-widest text-[#FF2B2B] group-hover:text-[#f2af29] transition-colors duration-300">
+                  {member.role}
+                </span>
+              </div>
             </motion.div>
           ))}
         </div>

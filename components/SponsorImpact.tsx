@@ -161,34 +161,45 @@ export default function SponsorImpact() {
         >
           {/* Green emoji + label */}
           <div className="flex items-center gap-3 mb-6">
-            <span className="text-2xl">💚</span>
-            <span className="font-body text-[11px] uppercase font-bold tracking-widest text-[#4ade80]">
+            <span className="text-2xl sm:text-3xl">💰</span>
+            <h3
+              className="font-display text-[26px] sm:text-[28px] font-black leading-tight text-[#4ade80]"
+              style={{ letterSpacing: "0.01em" }}
+            >
               Fueling the Ecosystem
-            </span>
+            </h3>
           </div>
 
           <p className="font-body text-white text-base sm:text-lg leading-relaxed mb-10 max-w-3xl opacity-90">
             We practice what we preach. Alongside our community grant pool, Meetday is actively backing highly curated experiences with technology, capital, and infrastructure to guarantee a sustainable, 12-month physical supply line.
           </p>
 
-          {/* Two stats */}
+          {/* Two stats with hover effects */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div className="border border-white/10 rounded-xl p-6 bg-white/5">
+            <motion.div
+              whileHover={{ scale: 1.03, borderColor: "rgba(255, 255, 255, 0.25)", backgroundColor: "rgba(255, 255, 255, 0.08)" }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="border border-white/10 rounded-xl p-6 bg-white/5 cursor-pointer transition-colors duration-300"
+            >
               <span className="font-display text-[42px] sm:text-[52px] text-[#FF2B2B] leading-none block mb-2 font-black">
                 25%
               </span>
               <p className="font-body text-white/80 text-sm leading-relaxed">
                 of all festival revenue is converted directly into community grants.
               </p>
-            </div>
-            <div className="border border-white/10 rounded-xl p-6 bg-white/5">
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.03, borderColor: "rgba(255, 255, 255, 0.25)", backgroundColor: "rgba(255, 255, 255, 0.08)" }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="border border-white/10 rounded-xl p-6 bg-white/5 cursor-pointer transition-colors duration-300"
+            >
               <span className="font-display text-[42px] sm:text-[52px] text-[#f2af29] leading-none block mb-2 font-black">
                 20+
               </span>
               <p className="font-body text-white/80 text-sm leading-relaxed">
                 highly curated experiences backed with technology, capital &amp; infrastructure over 12 months.
               </p>
-            </div>
+            </motion.div>
           </div>
         </motion.div>
       </div>

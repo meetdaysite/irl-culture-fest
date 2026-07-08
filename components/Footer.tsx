@@ -8,8 +8,8 @@ const navLinks = [
   { label: "The Manifesto", href: "#manifesto" },
   { label: "The Festival", href: "#solution" },
   { label: "Subcultures", href: "#subcultures" },
-  { label: "Passes", href: "#passes" },
   { label: "Team & Partners", href: "#team" },
+  { label: "Passes", href: "#passes" },
 ];
 
 export default function Footer() {

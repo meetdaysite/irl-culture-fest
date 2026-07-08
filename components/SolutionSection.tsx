@@ -115,8 +115,11 @@ export default function SolutionSection() {
               }}
             >
               <span
-                className="absolute top-2 right-4 font-display text-[80px] sm:text-[100px] leading-none opacity-10 pointer-events-none select-none"
-                style={{ color: card.numberColor }}
+                className="absolute top-2 right-4 font-display text-[80px] sm:text-[100px] leading-none pointer-events-none select-none"
+                style={{
+                  color: card.number === "02" ? "#FF5253" : card.numberColor,
+                  opacity: card.number === "02" ? 1 : 0.1
+                }}
               >
                 {card.number}
               </span>

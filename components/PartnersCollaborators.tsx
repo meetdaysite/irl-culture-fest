@@ -3,16 +3,16 @@
 import { motion } from "framer-motion";
 
 const brands = [
-  "Google",
-  "Microsoft",
-  "Meta",
-  "Intel",
-  "Samsung",
-  "Nestlé",
-  "HUL",
-  "P&G",
-  "Volkswagen",
-  "Suzuki",
+  { name: "Google", logo: "/images/partner-logos/Google.svg", url: "https://www.google.com" },
+  { name: "Microsoft", logo: "/images/partner-logos/Microsoft.svg", url: "https://www.microsoft.com" },
+  { name: "Meta", logo: "/images/partner-logos/Meta.svg", url: "https://www.meta.com" },
+  { name: "Intel", logo: "/images/partner-logos/Intel.png", url: "https://www.intel.com" },
+  { name: "Samsung", logo: "/images/partner-logos/Samsung.svg", url: "https://www.samsung.com" },
+  { name: "Nestlé", logo: "/images/partner-logos/Nestle.svg", url: "https://www.nestle.com" },
+  { name: "HUL", logo: "/images/partner-logos/HUL.svg", url: "https://www.hul.co.in" },
+  { name: "P&G", logo: "/images/partner-logos/PandG.svg", url: "https://www.pg.com" },
+  { name: "Volkswagen", logo: "/images/partner-logos/Volkswagen.svg", url: "https://www.volkswagen.com" },
+  { name: "Suzuki", logo: "/images/partner-logos/Suzuki.webp", url: "https://www.globalsuzuki.com" },
 ];
 
 export default function PartnersCollaborators() {
@@ -51,7 +51,7 @@ export default function PartnersCollaborators() {
         </motion.h2>
 
         {/* Presented By */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -80,13 +80,13 @@ export default function PartnersCollaborators() {
               </div>
             </motion.div>
           </div>
-        </motion.div>
+        </motion.div> */}
 
         {/* Divider */}
-        <div className="w-full h-px bg-white/10 my-14" />
+        {/* <div className="w-full h-px bg-white/10 my-14" /> */}
 
         {/* Ecosystem Alliances */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -104,7 +104,7 @@ export default function PartnersCollaborators() {
               Logo will be added later
             </p>
           </div>
-        </motion.div>
+        </motion.div> */}
 
         {/* Past Global Brand Collaborators */}
         <motion.div
@@ -122,19 +122,24 @@ export default function PartnersCollaborators() {
 
           <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
             {brands.map((brand, i) => (
-              <motion.div
-                key={brand}
+              <motion.a
+                key={brand.name}
+                href={brand.url}
+                target="_blank"
+                rel="noopener noreferrer"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ scale: 1.06, borderColor: "rgba(255,255,255,0.3)" }}
+                whileHover={{ scale: 1.06, borderColor: "rgba(255,255,255,0.3)", backgroundColor: "rgba(255,255,255,0.8)" }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.05 }}
-                className="flex items-center justify-center border border-white/10 rounded-xl py-5 bg-white/5 cursor-pointer transition-colors"
+                className="flex items-center justify-center border border-white/10 rounded-xl py-2.5 px-3 bg-white/[0.65] cursor-pointer transition-colors h-[76px]"
               >
-                <span className="font-display text-white text-sm sm:text-base font-black tracking-widest uppercase opacity-60 hover:opacity-100 transition-opacity">
-                  {brand}
-                </span>
-              </motion.div>
+                <img
+                  src={brand.logo}
+                  alt={brand.name}
+                  className="max-h-[44px] max-w-[90%] object-contain opacity-100 transition-opacity duration-300"
+                />
+              </motion.a>
             ))}
           </div>
         </motion.div>

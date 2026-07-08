@@ -31,7 +31,7 @@ const otherPasses = [
       "Grant Pool Consideration",
     ],
     headerBg: "linear-gradient(135deg, #1A1A1A 0%, #2d2d2d 100%)",
-    headerText: "#f2af29",
+    headerText: "#FFFFFF",
   },
   {
     title: "Live Pitching & Fest Pass",
@@ -60,16 +60,39 @@ const otherPasses = [
     headerText: "#1A1A1A",
   },
   {
-    title: "Expo Booth Space",
-    price: "₹29,999",
-    taxes: "Flat",
-    bestFor: "D2C Brands & Tactile Retail Curators",
+    title: "Ecosystem Pass",
+    price: "₹4,499",
+    taxes: "Plus Taxes",
+    bestFor: "Ecosystem Builders, Enablers, & Community Partners",
     inclusions: [
-      "Dedicated 10×10 sq.ft. raw footprint",
-      "Core infrastructure support",
+      "Main Conference",
+      "Expo Access",
+      "Ecosystem Lounge Access",
+    ],
+    headerBg: "linear-gradient(135deg, #FF2B2B 0%, #cc1f1f 100%)",
+    headerText: "#FFFFFF",
+  },
+  {
+    title: "Networking Dinner",
+    price: "₹5,999",
+    taxes: "Plus Taxes",
+    bestFor: "Micro-curators, Subculture Heads & Hosts",
+    inclusions: [
+      "An exclusive invite to a highly curated networking dinner.",
+    ],
+    headerBg: "linear-gradient(135deg, #f2af29 0%, #e09a10 100%)",
+    headerText: "#1A1A1A",
+  },
+  {
+    title: "Expo Booth",
+    price: "₹29,999",
+    taxes: "Space Cost",
+    bestFor: "D2C Brands & Tactile Lifestyle Curators",
+    inclusions: [
+      "10x10 sq.ft. dedicated space with the required infrastructure.",
     ],
     headerBg: "linear-gradient(135deg, #1A1A1A 0%, #2d2d2d 100%)",
-    headerText: "#FF2B2B",
+    headerText: "#FFFFFF",
   },
 ];
 
@@ -102,12 +125,15 @@ function TicketCard({
     >
       <div
         className="relative w-full h-full rounded-2xl overflow-visible flex flex-col"
-        style={{ border: "2.5px solid #1A1A1A" }}
+        style={{
+          border: "2.5px solid #1A1A1A",
+          background: pass.headerBg,
+          color: pass.headerText,
+        }}
       >
         {/* TOP: coloured header */}
         <div
           className={`relative px-4 rounded-t-[14px] flex-shrink-0 ${large ? "pt-6 pb-6" : "pt-3 pb-3"}`}
-          style={{ background: pass.headerBg }}
         >
           <h3
             className="font-display font-black uppercase leading-tight"
@@ -122,7 +148,7 @@ function TicketCard({
         </div>
 
         {/* TEAR LINE */}
-        <div className="relative flex items-center" style={{ background: "#fff" }}>
+        <div className="relative flex items-center" style={{ background: "transparent" }}>
           <div
             className="absolute -left-4 w-8 h-8 rounded-full z-10"
             style={{ background: "#F5F0E8" }}
@@ -131,51 +157,75 @@ function TicketCard({
             className="absolute -right-4 w-8 h-8 rounded-full z-10"
             style={{ background: "#F5F0E8" }}
           />
-          <div className="w-full border-t-[3px] border-dashed border-[#1A1A1A]/50 mx-4" />
+          <div
+            className="w-full border-t-[3px] border-dashed mx-4"
+            style={{ borderColor: pass.headerText, opacity: 0.5 }}
+          />
         </div>
 
-        {/* BOTTOM: white body */}
-        <div className={`bg-white rounded-b-[14px] flex-1 flex flex-col ${large ? "px-5 pt-4 pb-5" : "px-4 pt-3 pb-3"}`}>
+        {/* BOTTOM: body */}
+        <div className={`rounded-b-[14px] flex-1 flex flex-col ${large ? "px-5 pt-4 pb-5" : "px-4 pt-3 pb-3"}`}>
           {/* Price */}
           <div className="flex items-baseline gap-2 mb-2">
             <span
-              className="font-display font-black text-[#1A1A1A] leading-none"
-              style={{ fontSize: large ? "clamp(32px, 3.5vw, 44px)" : "18px" }}
+              className="font-display font-black leading-none"
+              style={{
+                fontSize: large ? "clamp(32px, 3.5vw, 44px)" : "18px",
+                color: pass.headerText,
+              }}
             >
               {pass.price}
             </span>
-            <span className="font-body text-[8px] uppercase font-bold tracking-widest text-[#FF2B2B]">
+            <span
+              className="font-body text-[8px] uppercase font-bold tracking-widest"
+              style={{ color: pass.headerText === "#1A1A1A" ? "#FF2B2B" : "#f2af29" }}
+            >
               {pass.taxes}
             </span>
           </div>
 
           {/* Best for */}
           <div className="mb-2">
-            <span className="font-body text-[8px] uppercase font-black tracking-wider text-[#1A1A1A]">
+            <span
+              className="font-body text-[8px] uppercase font-black tracking-wider"
+              style={{ color: pass.headerText, opacity: 0.7 }}
+            >
               For:{" "}
             </span>
             <span
-              className="font-body uppercase font-bold tracking-wide text-[#1A1A1A] leading-snug"
-              style={{ fontSize: large ? "11px" : "9px" }}
+              className="font-body uppercase font-bold tracking-wide leading-snug"
+              style={{
+                fontSize: large ? "11px" : "9px",
+                color: pass.headerText,
+              }}
             >
               {pass.bestFor}
             </span>
           </div>
 
           {/* Divider */}
-          <div className="border-t border-[#1A1A1A]/10 mb-3" />
+          <div
+            className="border-t mb-3"
+            style={{ borderColor: pass.headerText, opacity: 0.15 }}
+          />
 
           {/* Inclusions */}
           <div>
-            <span className="block font-body text-[9px] uppercase font-black tracking-wider text-[#FF2B2B] mb-2">
+            <span
+              className="block font-body text-[9px] uppercase font-black tracking-wider mb-2"
+              style={{ color: pass.headerText === "#1A1A1A" ? "#FF2B2B" : "#f2af29" }}
+            >
               Included:
             </span>
             <ul className={large ? "space-y-1.5" : "space-y-1"}>
               {pass.inclusions.map((inc) => (
                 <li
                   key={inc}
-                  className="flex items-start gap-2 font-body text-[#1A1A1A] leading-tight"
-                  style={{ fontSize: large ? "13px" : "11px" }}
+                  className="flex items-start gap-2 font-body leading-tight"
+                  style={{
+                    fontSize: large ? "13px" : "11px",
+                    color: pass.headerText,
+                  }}
                 >
                   <span className="flex-shrink-0 w-4 h-4 rounded bg-[#22c55e] flex items-center justify-center mt-px">
                     <svg width="9" height="7" viewBox="0 0 9 7" fill="none">
@@ -251,7 +301,7 @@ export default function PassesSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="lg:col-span-5 h-full"
+            className="lg:col-span-4 h-full"
           >
             <TicketCard
               pass={allAccessPass}
@@ -262,8 +312,8 @@ export default function PassesSection() {
             />
           </motion.div>
 
-          {/* RIGHT: 2×2 grid of other passes */}
-          <div className="lg:col-span-7 grid grid-cols-2 gap-3 h-full" style={{ gridTemplateRows: "1fr 1fr" }}>
+          {/* RIGHT: 3×2 grid of other passes (6 smaller cards, narrower format) */}
+          <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 h-full">
             {otherPasses.map((pass, i) => (
               <motion.div
                 key={pass.title}
@@ -284,21 +334,6 @@ export default function PassesSection() {
           </div>
         </div>
 
-        {/* Add-ons note */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-12 text-center border-2 border-[#1A1A1A]/20 rounded-2xl py-5 px-8 max-w-2xl mx-auto bg-white/60"
-        >
-          <p className="font-body text-[#555] text-sm leading-relaxed">
-            Additional localized single tickets available:&nbsp;
-            <span className="text-[#1A1A1A] font-semibold">Ecosystem Pass: ₹4,499</span>
-            &nbsp;|&nbsp;
-            <span className="text-[#1A1A1A] font-semibold">Standalone Networking Dinner Invite: ₹5,999</span>
-          </p>
-        </motion.div>
       </div>
 
       {/* Torn Paper Divider → Footer */}

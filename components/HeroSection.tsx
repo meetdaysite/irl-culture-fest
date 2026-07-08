@@ -145,7 +145,7 @@ export default function HeroSection() {
       <DecorativeStar size={130} color="#FF2B2B" opacity={0.08} bottom="25%" right="6%" spin spinDuration={35} />
 
       {/* Main Restructured Grid */}
-      <div className="relative z-10 max-w-7xl px-8 mx-auto w-full mt-6 mb-12 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <div className="relative z-10 max-w-7xl px-8 mx-auto w-full mt-6 mb-12 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
 
         {/* Left Column: Copy Area (7 cols on desktop) */}
         <div className="lg:col-span-7 flex flex-col justify-center items-start text-left">
@@ -156,7 +156,7 @@ export default function HeroSection() {
             transition={{ duration: 0.5 }}
             className="inline-block font-body text-[10px] sm:text-xs font-black uppercase tracking-wider px-3 py-1 rounded-full border-2 border-[#FF2B2B] text-[#FF2B2B] mb-6"
           >
-            India's first IRL Culture Festival
+            India's first IRL Festival
           </motion.div>
 
           {/* Compact Headline (Celebrating the IRL...) */}
@@ -299,7 +299,7 @@ export default function HeroSection() {
                           transformOrigin: "bottom center",
                           background: "#FFFFFF",
                         }}
-                        className="w-[160px] sm:w-[190px] aspect-[1/1.22] rounded-t-[18px] overflow-hidden border-2 border-[#1A1A1A] border-b-0 flex flex-col justify-between shadow-xl"
+                        className="w-[160px] sm:w-[190px] aspect-[1/1.22] rounded-[18px] overflow-hidden border-2 border-[#1A1A1A] flex flex-col justify-between shadow-xl"
                       >
                         <div className="relative flex-1 overflow-hidden bg-white p-1.5">
                           <div className="w-full h-full rounded-t-[10px] overflow-hidden border border-[#1A1A1A]/10">
@@ -323,102 +323,102 @@ export default function HeroSection() {
               </div>
             </div>
           )}
+
+          {/* Desktop Circular Fan Carousel (Absolute positioned relative to centered content grid) */}
+          {!isMobile && (
+            <div
+              className="absolute right-[6px] lg:right-[0px] xl:right-[-12px] top-1/2 -translate-y-[45%] w-[480px] h-[500px] pointer-events-none overflow-visible z-10 origin-right scale-[0.8] xl:scale-100 transition-all duration-300"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              <div className="relative w-full h-full overflow-visible">
+                <AnimatePresence initial={false}>
+                  {activeCards.map((card, i) => {
+                    const slotConfig = getSlotConfig(i);
+
+                    // Entrance and exit configurations centered along the 45deg/ -45deg radial trajectories
+                    const R = 440;
+                    const W = 220;
+                    const H = 270;
+                    const Y_c = 250;
+
+                    const enterRight = R * Math.cos((45 * Math.PI) / 180) - W / 2;
+                    const enterTop = Y_c + R * Math.sin((45 * Math.PI) / 180) - H / 2;
+
+                    const exitRight = R * Math.cos((-45 * Math.PI) / 180) - W / 2;
+                    const exitTop = Y_c + R * Math.sin((-45 * Math.PI) / 180) - H / 2;
+
+                    return (
+                      <motion.div
+                        key={card.id}
+                        initial={{
+                          right: `${enterRight}px`,
+                          top: `${enterTop}px`,
+                          scale: 0.8,
+                          rotate: 45,
+                          opacity: 0,
+                          zIndex: 0,
+                        }}
+                        animate={{
+                          right: slotConfig.right,
+                          top: slotConfig.top,
+                          scale: slotConfig.scale,
+                          rotate: slotConfig.rotate,
+                          opacity: slotConfig.opacity,
+                          zIndex: slotConfig.zIndex,
+                        }}
+                        exit={{
+                          right: `${exitRight}px`,
+                          top: `${exitTop}px`,
+                          scale: 0.8,
+                          rotate: -45,
+                          opacity: 0,
+                          zIndex: 0,
+                        }}
+                        transition={{
+                          duration: 0.6,
+                          ease: "easeInOut",
+                        }}
+                        style={{
+                          position: "absolute",
+                          transformOrigin: "bottom center",
+                          background: "#FFFFFF",
+                          pointerEvents: "auto", // enable interaction (hover pause) on individual cards
+                        }}
+                        className="w-[220px] h-[270px] rounded-[22px] overflow-hidden border-2 border-[#1A1A1A] flex flex-col justify-between shadow-2xl transition-shadow hover:shadow-[0_20px_35px_-10px_rgba(0,0,0,0.3)] cursor-pointer"
+                      >
+                        {/* Image */}
+                        <div className="relative flex-1 overflow-hidden bg-white p-2">
+                          <div className="w-full h-full rounded-t-[14px] overflow-hidden border border-[#1A1A1A]/10">
+                            <img
+                              src={card.image}
+                              alt={card.label}
+                              className="w-full h-full object-cover"
+                              loading="lazy"
+                            />
+                          </div>
+                        </div>
+
+                        {/* Card Label */}
+                        <div className="px-3.5 py-2 border-t-2 border-[#1A1A1A] min-h-[56px] bg-white text-[#1A1A1A] flex items-center text-left">
+                          <span className="leading-snug">
+                            <span className="font-display font-black text-[13px] uppercase tracking-tight mr-2 inline">
+                              {card.label}
+                            </span>
+                            <span className="font-body text-[8px] uppercase tracking-widest font-bold text-[#FF2B2B] inline whitespace-nowrap">
+                              {card.badge}
+                            </span>
+                          </span>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </AnimatePresence>
+              </div>
+            </div>
+          )}
         </div>
       </div>
-
-      {/* Desktop Circular Fan Carousel (Absolute positioned, visible only on desktop/large screens) */}
-      {!isMobile && (
-        <div
-          className="absolute right-0 top-1/2 -translate-y-[45%] w-[480px] h-[500px] pointer-events-none overflow-visible z-10"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          <div className="relative w-full h-full overflow-visible">
-            <AnimatePresence initial={false}>
-              {activeCards.map((card, i) => {
-                const slotConfig = getSlotConfig(i);
-
-                // Entrance and exit configurations centered along the 45deg/ -45deg radial trajectories
-                const R = 440;
-                const W = 220;
-                const H = 270;
-                const Y_c = 250;
-
-                const enterRight = R * Math.cos((45 * Math.PI) / 180) - W / 2;
-                const enterTop = Y_c + R * Math.sin((45 * Math.PI) / 180) - H / 2;
-
-                const exitRight = R * Math.cos((-45 * Math.PI) / 180) - W / 2;
-                const exitTop = Y_c + R * Math.sin((-45 * Math.PI) / 180) - H / 2;
-
-                return (
-                  <motion.div
-                    key={card.id}
-                    initial={{
-                      right: `${enterRight}px`,
-                      top: `${enterTop}px`,
-                      scale: 0.8,
-                      rotate: 45,
-                      opacity: 0,
-                      zIndex: 0,
-                    }}
-                    animate={{
-                      right: slotConfig.right,
-                      top: slotConfig.top,
-                      scale: slotConfig.scale,
-                      rotate: slotConfig.rotate,
-                      opacity: slotConfig.opacity,
-                      zIndex: slotConfig.zIndex,
-                    }}
-                    exit={{
-                      right: `${exitRight}px`,
-                      top: `${exitTop}px`,
-                      scale: 0.8,
-                      rotate: -45,
-                      opacity: 0,
-                      zIndex: 0,
-                    }}
-                    transition={{
-                      duration: 0.6,
-                      ease: "easeInOut",
-                    }}
-                    style={{
-                      position: "absolute",
-                      transformOrigin: "bottom center",
-                      background: "#FFFFFF",
-                      pointerEvents: "auto", // enable interaction (hover pause) on individual cards
-                    }}
-                    className="w-[220px] h-[270px] rounded-t-[22px] overflow-hidden border-2 border-[#1A1A1A] border-b-0 flex flex-col justify-between shadow-2xl transition-shadow hover:shadow-[0_20px_35px_-10px_rgba(0,0,0,0.3)] cursor-pointer"
-                  >
-                    {/* Image */}
-                    <div className="relative flex-1 overflow-hidden bg-white p-2">
-                      <div className="w-full h-full rounded-t-[14px] overflow-hidden border border-[#1A1A1A]/10">
-                        <img
-                          src={card.image}
-                          alt={card.label}
-                          className="w-full h-full object-cover"
-                          loading="lazy"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Card Label */}
-                    <div className="px-3.5 py-2 border-t-2 border-[#1A1A1A] min-h-[56px] bg-white text-[#1A1A1A] flex items-center text-left">
-                      <span className="leading-snug">
-                        <span className="font-display font-black text-[13px] uppercase tracking-tight mr-2 inline">
-                          {card.label}
-                        </span>
-                        <span className="font-body text-[8px] uppercase tracking-widest font-bold text-[#FF2B2B] inline whitespace-nowrap">
-                          {card.badge}
-                        </span>
-                      </span>
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </AnimatePresence>
-          </div>
-        </div>
-      )}
 
       {/* Torn Paper Divider -> StatsBar #FF2B2B */}
       <svg
