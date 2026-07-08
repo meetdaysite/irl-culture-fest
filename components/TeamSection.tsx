@@ -55,65 +55,92 @@ export default function TeamSection() {
           style={{ fontSize: "clamp(32px, 4.5vw, 56px)", letterSpacing: "0.01em" }}
         >
           The Team Building <span className="text-[#FF2B2B]">The Fest.</span>
-        </motion.h2>
-
-        {/* Row 1: Gagaan's Spotlight Card (Full length horizontal layout with synced hover effects) */}
-        <div className="flex justify-center mb-12 w-full">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", stiffness: 260, damping: 25, delay: 0.15 }}
-            className="w-full max-w-5xl flex flex-col sm:flex-row rounded-2xl overflow-hidden border-2 border-[#1A1A1A] bg-[#f2af29] transition-all duration-300 ease-out hover:scale-[1.02] hover:bg-[#1A1A1A] hover:text-white group cursor-pointer"
-            style={{ boxShadow: "6px 6px 0px #1A1A1A" }}
-          >
-            {/* Image Container (Left side - portrait footprint) */}
-            <div className="w-full sm:w-1/3 aspect-square sm:aspect-auto sm:min-h-[260px] overflow-hidden border-b-2 sm:border-b-0 sm:border-r-2 border-[#1A1A1A] bg-white flex-shrink-0">
-              <img
-                src="/images/team/Gagaan.png"
-                alt="Gagaan Singh Nagi"
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            {/* Content Details */}
-            <div className="p-6 flex flex-col justify-between flex-1">
-              <div>
-                <span className="block font-body text-[10px] uppercase font-bold tracking-widest text-[#1A1A1A] opacity-60 mb-2 group-hover:text-white group-hover:opacity-85 transition-colors duration-300">
-                  Festival Director &amp; Founder
-                </span>
-                <h3 className="font-display text-[22px] sm:text-[26px] font-black text-[#1A1A1A] group-hover:text-white transition-colors duration-300 leading-tight mb-1">
-                  Gagaan Singh Nagi
-                </h3>
-                <span className="font-body text-[11px] font-semibold text-[#1A1A1A] opacity-70 group-hover:text-white/80 transition-colors duration-300 uppercase tracking-wider block mb-4">
-                  Meetday
-                </span>
-                <p className="font-body text-[#1A1A1A]/80 group-hover:text-white/95 transition-colors duration-300 text-[13px] sm:text-[14px] leading-relaxed mb-6">
-                  20+ years navigating marketing, experiential strategy, and massive event ecosystems. Driving the host-centric micro-entrepreneur operational framework across India.
-                </p>
+        </motion.h2>        {/* Row 1: Gagaan's Spotlight Card (8 cols) + Anshika's Card (4 cols) */}
+        <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8 items-stretch">
+          {/* Gagaan's Spotlight Card (Left side, horizontal layout) */}
+          <div className="lg:col-span-8 flex">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ type: "spring", stiffness: 260, damping: 25, delay: 0.15 }}
+              className="w-full flex flex-col sm:flex-row rounded-2xl overflow-hidden border-2 border-[#1A1A1A] bg-[#f2af29] transition-all duration-300 ease-out hover:scale-[1.02] hover:bg-[#1A1A1A] hover:text-white group cursor-pointer"
+              style={{ boxShadow: "6px 6px 0px #1A1A1A" }}
+            >
+              {/* Image Container (Left side - portrait footprint) */}
+              <div className="w-full sm:w-1/2 aspect-square overflow-hidden border-b-2 sm:border-b-0 sm:border-r-2 border-[#1A1A1A] bg-white flex-shrink-0">
+                <img
+                  src="/images/team/Gagaan.png"
+                  alt="Gagaan Singh Nagi"
+                  className="w-full h-full object-cover"
+                />
               </div>
-              <div className="flex flex-wrap gap-1.5">
-                {["Experiential Ops", "Marketing Strategy"].map((tag) => (
-                  <span
-                    key={tag}
-                    className="font-body text-[9px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full border border-[#1A1A1A]/20 group-hover:border-white/30 text-[#1A1A1A]/80 group-hover:text-white/90 transition-all duration-300"
-                  >
-                    {tag}
+
+              {/* Content Details */}
+              <div className="p-6 flex flex-col justify-between flex-1 text-left">
+                <div>
+                  <span className="block font-body text-[10px] font-bold tracking-widest text-[#1A1A1A] opacity-60 mb-2 group-hover:text-white group-hover:opacity-85 transition-colors duration-300">
+                    <span className="uppercase">Festival Director &amp; Founder,</span>{" "}
+                    <span className="normal-case">meetday.ai</span>
                   </span>
-                ))}
+                  <h3 className="font-display text-[22px] sm:text-[26px] font-black text-[#1A1A1A] group-hover:text-white transition-colors duration-300 leading-tight mb-1">
+                    Gagaan Singh Nagi
+                  </h3>
+                  <p className="font-body text-[#1A1A1A]/80 group-hover:text-white/95 transition-colors duration-300 text-[13px] sm:text-[14px] leading-relaxed mb-6">
+                    20+ years navigating marketing, experiential strategy, and massive event ecosystems. Driving the host-centric micro-entrepreneur operational framework across India.
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {["Experiential Ops", "Marketing Strategy"].map((tag) => (
+                    <span
+                      key={tag}
+                      className="font-body text-[9px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full border border-[#1A1A1A]/20 group-hover:border-white/30 text-[#1A1A1A]/80 group-hover:text-white/90 transition-all duration-300"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
+
+          {/* Anshika's Card (Right side, vertical layout) */}
+          <div className="lg:col-span-4 flex">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ type: "spring", stiffness: 260, damping: 25, delay: 0.2 }}
+              className="w-full flex flex-col rounded-2xl overflow-hidden border-2 border-[#1A1A1A] bg-white transition-all duration-300 ease-out hover:scale-[1.04] hover:bg-[#FF2B2B] hover:text-white group cursor-pointer"
+              style={{
+                boxShadow: "4px 4px 0px #1A1A1A",
+              }}
+            >
+              {/* Image Container */}
+              <div className="relative w-full aspect-square overflow-hidden border-b-2 border-[#1A1A1A] bg-gray-50">
+                <img
+                  src="/images/team/Anshika.png"
+                  alt="Anshika Jain"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              {/* Name & Role */}
+              <div className="p-4 flex flex-col justify-center flex-1 text-left">
+                <h4 className="font-display text-[16px] sm:text-[18px] font-black text-[#1A1A1A] group-hover:text-white transition-colors duration-300 leading-tight mb-1">
+                  Anshika Jain
+                </h4>
+                <span className="block font-body text-[9px] uppercase font-bold tracking-widest text-[#FF2B2B] group-hover:text-[#f2af29] transition-colors duration-300">
+                  Partnerships Lead
+                </span>
+              </div>
+            </motion.div>
+          </div>
         </div>
 
-        {/* Row 2: Partnership Cards (Side-by-side, smaller container) */}
-        <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6">
+        {/* Row 2: Vanshika & Shagun Cards (Side-by-side, centered below Row 1) */}
+        <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6">
           {[
-            {
-              name: "Anshika Jain",
-              role: "Partnerships Lead",
-              image: "/images/team/Anshika.png",
-            },
             {
               name: "Vanshika Sharma",
               role: "Partnerships Associate",
@@ -130,7 +157,7 @@ export default function TeamSection() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ type: "spring", stiffness: 260, damping: 25, delay: 0.2 + i * 0.1 }}
+              transition={{ type: "spring", stiffness: 260, damping: 25, delay: 0.25 + i * 0.1 }}
               className="flex flex-col rounded-2xl overflow-hidden border-2 border-[#1A1A1A] bg-white transition-all duration-300 ease-out hover:scale-[1.04] hover:bg-[#FF2B2B] hover:text-white group cursor-pointer"
               style={{
                 boxShadow: "4px 4px 0px #1A1A1A",
@@ -146,7 +173,7 @@ export default function TeamSection() {
               </div>
 
               {/* Name & Role */}
-              <div className="p-4 flex flex-col justify-center flex-1">
+              <div className="p-4 flex flex-col justify-center flex-1 text-left">
                 <h4 className="font-display text-[16px] sm:text-[18px] font-black text-[#1A1A1A] group-hover:text-white transition-colors duration-300 leading-tight mb-1">
                   {member.name}
                 </h4>

@@ -55,8 +55,8 @@ export default function SolutionSection() {
         </motion.span>
 
         {/* Header Row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          <div>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
+          <div className="md:col-span-7">
             <motion.h2
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -80,15 +80,22 @@ export default function SolutionSection() {
               The Physical Home of India’s Offline Movement.
             </motion.p>
           </div>
-          <motion.p
+          <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="font-body text-[#555] text-base sm:text-lg leading-relaxed self-end"
+            className="md:col-span-5 flex flex-col justify-end gap-5"
           >
-            This isn’t a trade show, and it’s definitely not a corporate conference. For one weekend across three cities, we are building a dedicated ecosystem where real-world curation meets commercial viability.
-          </motion.p>
+            <img
+              src="/footer-logo.png"
+              alt="IRL Culture Fest"
+              className="h-[90px] object-contain object-left"
+            />
+            <p className="font-body text-[#555] text-sm sm:text-base leading-relaxed">
+              This isn't a trade show, and it's definitely not a corporate conference. For one weekend across three cities, we are building a dedicated ecosystem where real-world curation meets commercial viability.
+            </p>
+          </motion.div>
         </div>
 
         {/* 3 Numbered Cards */}

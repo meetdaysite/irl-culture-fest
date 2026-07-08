@@ -149,14 +149,18 @@ function TicketCard({
 
         {/* TEAR LINE */}
         <div className="relative flex items-center" style={{ background: "transparent" }}>
-          <div
-            className="absolute -left-4 w-8 h-8 rounded-full z-10"
-            style={{ background: "#F5F0E8" }}
-          />
-          <div
-            className="absolute -right-4 w-8 h-8 rounded-full z-10"
-            style={{ background: "#F5F0E8" }}
-          />
+          {large && (
+            <>
+              <div
+                className="absolute -left-6 w-12 h-12 rounded-full z-10"
+                style={{ background: "#F5F0E8" }}
+              />
+              <div
+                className="absolute -right-6 w-12 h-12 rounded-full z-10"
+                style={{ background: "#F5F0E8" }}
+              />
+            </>
+          )}
           <div
             className="w-full border-t-[3px] border-dashed mx-4"
             style={{ borderColor: pass.headerText, opacity: 0.5 }}

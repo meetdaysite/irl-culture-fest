@@ -156,48 +156,58 @@ export default function SponsorImpact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="rounded-2xl p-8 sm:p-10 border-2 border-[#1A1A1A] bg-[#0D0D0D] relative overflow-hidden"
-          style={{ boxShadow: "6px 6px 0px #FF2B2B" }}
+          animate={{ y: [0, -10, 0] }}
+          className="rounded-2xl p-8 sm:p-10 border-2 border-[#1A1A1A] bg-[#F5F0E8] relative overflow-hidden"
+          style={{
+            boxShadow: "6px 6px 0px #1A1A1A, 0 20px 60px rgba(242,175,41,0.35)",
+            animation: "float 5s ease-in-out infinite",
+          }}
         >
-          {/* Green emoji + label */}
+          <style>{`
+            @keyframes float {
+              0%, 100% { transform: translateY(0px); }
+              50% { transform: translateY(-12px); }
+            }
+          `}</style>
+          {/* Emoji + label */}
           <div className="flex items-center gap-3 mb-6">
             <span className="text-2xl sm:text-3xl">💰</span>
             <h3
-              className="font-display text-[26px] sm:text-[28px] font-black leading-tight text-[#4ade80]"
+              className="font-display text-[26px] sm:text-[28px] font-black leading-tight text-[#1A1A1A]"
               style={{ letterSpacing: "0.01em" }}
             >
               Fueling the Ecosystem
             </h3>
           </div>
 
-          <p className="font-body text-white text-base sm:text-lg leading-relaxed mb-10 max-w-3xl opacity-90">
-            We practice what we preach. Alongside our community grant pool, Meetday is actively backing highly curated experiences with technology, capital, and infrastructure to guarantee a sustainable, 12-month physical supply line.
+          <p className="font-body text-[#1A1A1A]/80 text-base sm:text-lg leading-relaxed mb-10 max-w-3xl">
+            <span className="text-[#FF2B2B] font-bold">We practice what we preach.</span> Alongside our community grant pool, Meetday is actively backing highly curated experiences with technology, capital, and infrastructure to guarantee a sustainable, 12-month physical supply line.
           </p>
 
           {/* Two stats with hover effects */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <motion.div
-              whileHover={{ scale: 1.03, borderColor: "rgba(255, 255, 255, 0.25)", backgroundColor: "rgba(255, 255, 255, 0.08)" }}
+              whileHover={{ scale: 1.03, borderColor: "rgba(255,255,255,0.2)", backgroundColor: "#333" }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="border border-white/10 rounded-xl p-6 bg-white/5 cursor-pointer transition-colors duration-300"
+              className="border border-white/10 rounded-xl p-6 bg-[#1A1A1A] cursor-pointer transition-colors duration-300"
             >
               <span className="font-display text-[42px] sm:text-[52px] text-[#FF2B2B] leading-none block mb-2 font-black">
                 25%
               </span>
-              <p className="font-body text-white/80 text-sm leading-relaxed">
-                of all festival revenue is converted directly into community grants.
+              <p className="font-body text-white/70 text-sm leading-relaxed">
+                of all <span className="text-[#f2af29] font-bold">festival revenue</span> is converted directly into <span className="text-[#f2af29] font-bold">community grants</span>.
               </p>
             </motion.div>
             <motion.div
-              whileHover={{ scale: 1.03, borderColor: "rgba(255, 255, 255, 0.25)", backgroundColor: "rgba(255, 255, 255, 0.08)" }}
+              whileHover={{ scale: 1.03, borderColor: "rgba(255,255,255,0.2)", backgroundColor: "#333" }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="border border-white/10 rounded-xl p-6 bg-white/5 cursor-pointer transition-colors duration-300"
+              className="border border-white/10 rounded-xl p-6 bg-[#1A1A1A] cursor-pointer transition-colors duration-300"
             >
               <span className="font-display text-[42px] sm:text-[52px] text-[#f2af29] leading-none block mb-2 font-black">
                 20+
               </span>
-              <p className="font-body text-white/80 text-sm leading-relaxed">
-                highly curated experiences backed with technology, capital &amp; infrastructure over 12 months.
+              <p className="font-body text-white/70 text-sm leading-relaxed">
+                highly curated <span className="text-[#FF2B2B] font-bold">experiences</span> backed with technology, capital &amp; infrastructure over <span className="text-[#FF2B2B] font-bold">12 months</span>.
               </p>
             </motion.div>
           </div>

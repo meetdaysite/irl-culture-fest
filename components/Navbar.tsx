@@ -131,7 +131,7 @@ export default function Navbar() {
             <img
               src="/footer-logo.png?v=2"
               alt="IRL Culture Fest Logo"
-              className="h-[38px] sm:h-[46px] object-contain"
+              className="h-[50px] sm:h-[60px] object-contain"
             />
           </button>
 

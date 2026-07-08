@@ -6,13 +6,35 @@ const brands = [
   { name: "Google", logo: "/images/partner-logos/Google.svg", url: "https://www.google.com" },
   { name: "Microsoft", logo: "/images/partner-logos/Microsoft.svg", url: "https://www.microsoft.com" },
   { name: "Meta", logo: "/images/partner-logos/Meta.svg", url: "https://www.meta.com" },
-  { name: "Intel", logo: "/images/partner-logos/Intel.png", url: "https://www.intel.com" },
   { name: "Samsung", logo: "/images/partner-logos/Samsung.svg", url: "https://www.samsung.com" },
   { name: "Nestlé", logo: "/images/partner-logos/Nestle.svg", url: "https://www.nestle.com" },
-  { name: "HUL", logo: "/images/partner-logos/HUL.svg", url: "https://www.hul.co.in" },
+  { name: "Unilever", logo: "/images/partner-logos/Unilever.svg", url: "https://www.unilever.com" },
   { name: "P&G", logo: "/images/partner-logos/PandG.svg", url: "https://www.pg.com" },
   { name: "Volkswagen", logo: "/images/partner-logos/Volkswagen.svg", url: "https://www.volkswagen.com" },
-  { name: "Suzuki", logo: "/images/partner-logos/Suzuki.webp", url: "https://www.globalsuzuki.com" },
+  { name: "Yamaha", logo: "/images/partner-logos/Yamaha.svg", url: "https://www.yamaha-motor-india.com" },
+  { name: "Mercedes-Benz", logo: "/images/partner-logos/Mercedes-Benz.svg", url: "https://www.mercedes-benz.co.in" },
+  { name: "Deloitte", logo: "/images/partner-logos/Deloitte.svg", url: "https://www.deloitte.com" },
+  { name: "Flipkart", logo: "/images/partner-logos/Flipkart.svg", url: "https://www.flipkart.com" },
+  { name: "DLF", logo: "/images/partner-logos/DLF.svg", url: "https://www.dlf.in" },
+  { name: "IBM", logo: "/images/partner-logos/IBM.svg", url: "https://www.ibm.com" },
+  { name: "WPP", logo: "/images/partner-logos/WPP.svg", url: "https://www.wpp.com" },
+  { name: "IPG", logo: "/images/partner-logos/IPG.svg", url: "https://www.interpublic.com" },
+  { name: "OMG", logo: "/images/partner-logos/OMG.svg", url: "https://www.omnicommediagroup.com" },
+  { name: "HT", logo: "/images/partner-logos/HT.svg", url: "https://www.hindustantimes.com" },
+  { name: "Mirchi", logo: "/images/partner-logos/Mirchi.svg", url: "https://www.radioamirchi.com" },
+  { name: "Glance TV", logo: "/images/partner-logos/GlanceTV.svg", url: "https://www.glance.com" },
+  { name: "JioHotstar", logo: "/images/partner-logos/JioHotstar.svg", url: "https://www.hotstar.com" },
+  { name: "SonyLIV", logo: "/images/partner-logos/SonyLIV.svg", url: "https://www.sonyliv.com" },
+  { name: "Zee TV", logo: "/images/partner-logos/ZeeTV.svg", url: "https://www.zee5.com" },
+  { name: "Colors TV", logo: "/images/partner-logos/ColorsTV.svg", url: "https://www.colorstv.com" },
+  { name: "Star Plus", logo: "/images/partner-logos/StarPlus.svg", url: "https://www.hotstar.com/channels/star-plus" },
+  { name: "SET", logo: "/images/partner-logos/SET.svg", url: "https://www.setindia.com" },
+  { name: "MX Player", logo: "/images/partner-logos/MXPlayer.svg", url: "https://www.mxplayer.in" },
+  { name: "Mini TV", logo: "/images/partner-logos/MiniTV.svg", url: "https://www.amazon.in/minitv" },
+  { name: "Shark Tank India", logo: "/images/partner-logos/SharkTankIndia.svg", url: "https://www.sonyliv.com/shows/shark-tank-india-1700000741" },
+  { name: "KBC", logo: "/images/partner-logos/KBC.svg", url: "https://www.sonyliv.com/shows/kaun-banega-crorepati-1700000780" },
+  { name: "Indian Idol", logo: "/images/partner-logos/IndianIdol.svg", url: "https://www.sonyliv.com/shows/indian-idol-1700000762" },
+  { name: "Bigg Boss", logo: "/images/partner-logos/BiggBoss.svg", url: "https://www.voot.com/shows/bigg-boss" },
 ];
 
 export default function PartnersCollaborators() {
@@ -120,7 +142,7 @@ export default function PartnersCollaborators() {
             Our leadership team has consistently built and delivered high-impact programs for global giants:
           </p>
 
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3">
             {brands.map((brand, i) => (
               <motion.a
                 key={brand.name}
@@ -132,12 +154,12 @@ export default function PartnersCollaborators() {
                 whileHover={{ scale: 1.06, borderColor: "rgba(255,255,255,0.3)", backgroundColor: "rgba(255,255,255,0.8)" }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.05 }}
-                className="flex items-center justify-center border border-white/10 rounded-xl py-2.5 px-3 bg-white/[0.65] cursor-pointer transition-colors h-[76px]"
+                className="flex items-center justify-center border border-white/10 rounded-xl py-1.5 px-2 bg-white/[0.65] cursor-pointer transition-colors h-[64px]"
               >
                 <img
                   src={brand.logo}
                   alt={brand.name}
-                  className="max-h-[44px] max-w-[90%] object-contain opacity-100 transition-opacity duration-300"
+                  className="max-h-[38px] max-w-[92%] object-contain opacity-100 transition-opacity duration-300"
                 />
               </motion.a>
             ))}

@@ -10,10 +10,10 @@ const statsData: Array<{
   isNumeric: boolean;
   text?: string;
 }> = [
-  { target: 600, suffix: "+", label: "Verified IRL Communities", isNumeric: true },
-  { target: 400, suffix: "+", label: "Consumer Brands & Enablers", isNumeric: true },
-  { target: 10, suffix: "M+", label: "Combined Hyper-Local Reach", isNumeric: true },
-];
+    { target: 600, suffix: "+", label: "Verified IRL Communities", isNumeric: true },
+    { target: 400, suffix: "+", label: "Consumer Brands & Enablers", isNumeric: true },
+    { target: 10, suffix: "M+", label: "Combined Hyper-Local Reach", isNumeric: true },
+  ];
 
 function CountUp({ target, suffix = "", inView }: { target: number; suffix?: string; inView: boolean }) {
   const [count, setCount] = useState(0);
@@ -27,10 +27,10 @@ function CountUp({ target, suffix = "", inView }: { target: number; suffix?: str
     const animate = (currentTime: number) => {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      
+
       // Easing: ease-out cubic
       const easeProgress = 1 - Math.pow(1 - progress, 3);
-      
+
       const currentCount = Math.floor(easeProgress * target);
       setCount(currentCount);
 
@@ -74,6 +74,34 @@ export default function StatsBar() {
       style={{ background: "#FF2B2B", paddingTop: 32, paddingBottom: 92 }}
     >
       <div className="w-full px-6 md:px-12 relative z-10">
+        {/* Intro block: paragraph + logo */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12 pb-10 border-b border-white/[0.18]">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="md:col-span-8 font-body text-white/90 text-base sm:text-lg leading-relaxed"
+          >
+            The internet spent a decade optimizing for digital creators, leaving physical community hosts completely invisible. Meanwhile, a premium audience of Gen Z and urban professionals is actively demanding highly curated, offline experiences.{" "}
+            <span className="font-bold text-white"><br></br><br></br>We are bridging that gap to make the offline economy sustainable.</span>
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="md:col-span-4 flex items-center md:justify-end"
+          >
+            <img
+              src="/IRL Culture Fest_ logo_ reverse.png"
+              alt="IRL Culture Fest"
+              className="h-[100px] object-contain"
+            />
+          </motion.div>
+        </div>
+
+        {/* Stats row */}
         <div className="grid grid-cols-2 gap-y-6 gap-x-4 md:flex md:flex-row md:items-center md:justify-evenly text-center">
           {statsData.map((stat, index) => (
             <div key={index} className="relative flex flex-col items-center justify-center md:flex-1">
