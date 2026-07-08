@@ -129,7 +129,7 @@ export default function Navbar() {
             className="flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-105 active:scale-95"
           >
             <img
-              src="/navbar-logo.png?v=2"
+              src="/footer-logo.png?v=2"
               alt="IRL Culture Fest Logo"
               className="h-[38px] sm:h-[46px] object-contain"
             />
