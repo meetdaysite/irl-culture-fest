@@ -16,8 +16,14 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 });
 
+const getSiteUrl = () => {
+  const url = process.env.NEXT_PUBLIC_SITE_URL || process.env.VERCEL_URL;
+  if (!url) return "http://localhost:3000";
+  return url.startsWith("http") ? url : `https://${url}`;
+};
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
+  metadataBase: new URL(getSiteUrl()),
   title: "IRL Culture Fest 2026 — India's First IRL Festival",
   description:
     "Celebrating India's offline community builders across Delhi, Mumbai, Bangalore & Pune. November 2026.",
