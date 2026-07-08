@@ -1,18 +1,26 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
 const navLinks = [
-  { label: "Home", href: "#top" },
-  { label: "Team", href: "#team" },
-  { label: "Partner", href: "/partner" },
-  { label: "Attend", href: "/attend" },
+  { label: "The Manifesto", href: "#manifesto" },
+  { label: "The Festival", href: "#solution" },
+  { label: "Subcultures", href: "#subcultures" },
+  { label: "Passes", href: "#passes" },
+  { label: "Team & Partners", href: "#team" },
 ];
 
 export default function Footer() {
+  const pathname = usePathname();
+
   const scrollToSection = (href: string) => {
     if (href.startsWith("#")) {
+      if (pathname !== "/") {
+        window.location.href = `/${href}`;
+        return;
+      }
       if (href === "#top") {
         window.scrollTo({ top: 0, behavior: "smooth" });
         return;

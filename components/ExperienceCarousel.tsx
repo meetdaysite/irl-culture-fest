@@ -32,16 +32,25 @@ const cards = [
     title: "SUBCULTURE HUBS",
     body: "Dedicated, host-led takeovers spanning independent music, culinary arts, pet culture, and mindful movement.",
     image: "/images/inside-the-fest/subculture-hubs.png",
-    bg: "#FFFFFF",
+    bg: "#f2af29",
     text: "#1A1A1A",
     dotColor: "#FF2B2B",
   },
   {
-    title: "CURATED DINNERS & LOUNGES",
+    title: "CURATED DINNERS",
     body: "VIP networking spaces engineered to turn casual introductions into permanent strategic partnerships.",
     image: "/images/inside-the-fest/curated-dinners.png",
     bg: "#1A1A1A",
     text: "#FFFFFF",
+    dotColor: "#f2af29",
+  },
+  {
+    title: "NETWORKING LOUNGE",
+    body: "A limited access lounge for communities, brands, speakers to network, pitch and engage.",
+    image: "/images/inside-the-fest/networking-lounges.png",
+    bg: "#FF2B2B",
+    text: "#FFFFFF",
+    titleColor: "#FFFFFF",
     dotColor: "#f2af29",
   },
 ];
@@ -96,6 +105,7 @@ export default function ExperienceCarousel() {
                     style={{
                       fontSize: "16px",
                       letterSpacing: "0.03em",
+                      color: (card as any).titleColor || card.text,
                     }}
                   >
                     {card.title}

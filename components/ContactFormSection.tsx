@@ -59,10 +59,11 @@ export default function ContactFormSection() {
     >
       {/* Decorative stars */}
       <DecorativeStar size={160} color="#f2af29" opacity={0.12} top="30px" right="4%" spin spinDuration={40} />
-      <DecorativeStar size={90}  color="#FFFFFF"  opacity={0.15} top="35%" left="2%" rotate={33} />
+      <DecorativeStar size={90} color="#FFFFFF" opacity={0.15} top="35%" left="2%" rotate={33} />
       <DecorativeStar size={120} color="#1A1A1A" opacity={0.15} bottom="15%" right="2%" spin spinDuration={32} />
-      <DecorativeStar size={70}  color="#FFFFFF"  opacity={0.1} bottom="5%" left="8%" rotate={15} />
-      <style dangerouslySetInnerHTML={{ __html: `
+      <DecorativeStar size={70} color="#FFFFFF" opacity={0.1} bottom="5%" left="8%" rotate={15} />
+      <style dangerouslySetInnerHTML={{
+        __html: `
         @keyframes moveStripes {
           from { background-position: 0 0; }
           to { background-position: 56.57px 56.57px; }
@@ -88,7 +89,7 @@ export default function ContactFormSection() {
         style={{ maxWidth: 1200, paddingLeft: 48, paddingRight: 48 }}
       >
         {/* Eyebrow */}
-        <motion.p
+        {/* <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -96,7 +97,7 @@ export default function ContactFormSection() {
           className="font-body font-bold text-xs sm:text-sm uppercase tracking-wider text-white/70 mb-4"
         >
           ✦ Get In Touch
-        </motion.p>
+        </motion.p> */}
 
         {/* Heading */}
         <motion.h2

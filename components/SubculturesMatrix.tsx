@@ -9,49 +9,49 @@ const verticals = [
     name: "Culinary & Beverage",
     curators: "Supper clubs, independent roasters, mixology innovators.",
     opportunity: "Premium alcobev, gourmet D2C, culinary tech.",
-    image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=500&auto=format&fit=crop&q=60",
+    image: "/images/subculture/cullinary-and-beverages.webp",
   },
   {
     name: "Active Lifestyle",
     curators: "Run clubs, community fitness squads, skate crews.",
     opportunity: "Athleisure, health-tech, wearable tech, hydration.",
-    image: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=500&auto=format&fit=crop&q=60",
+    image: "/images/subculture/active-lifestyle.png",
   },
   {
     name: "Independent Sound",
     curators: "Community-first music tours, underground electronic labels.",
     opportunity: "Audio gear, streaming networks, youth lifestyle brands.",
-    image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=500&auto=format&fit=crop&q=60",
+    image: "/images/subculture/independent-sound.webp",
   },
   {
     name: "Mindfulness & Well-being",
     curators: "Digital detox collectives, wellness circles, sound baths.",
     opportunity: "Premium hospitality, insurance, clean-label D2C.",
-    image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500&auto=format&fit=crop&q=60",
+    image: "/images/subculture/mindfullness.webp",
   },
   {
     name: "Analog Arts & Culture",
     curators: "Vinyl listening rooms, tactile design, indie publishing.",
     opportunity: "Consumer tech, luxury lifestyle, apparel, automotive.",
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=500&auto=format&fit=crop&q=60",
+    image: "/images/subculture/analog-art.webp",
   },
   {
     name: "Pet Culture",
     curators: "Pet parent networks, breed-specific collectives.",
     opportunity: "Premium pet care, pet-tech, experiential travel.",
-    image: "https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=500&auto=format&fit=crop&q=60",
+    image: "/images/subculture/pet-culture.webp",
   },
   {
     name: "Next-Gen Families",
     curators: "Alternative micro-learning circles, tactile play cohorts.",
     opportunity: "Sustainable toys, organic nutrition, premium kids' wear.",
-    image: "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?w=500&auto=format&fit=crop&q=60",
+    image: "/images/subculture/next-gen-families.webp",
   },
   {
     name: "Slow Travel & Hidden Trails",
     curators: "Motor-touring clubs, off-the-grid exploration groups.",
     opportunity: "Luggage, automotive, outdoor gear, hospitality.",
-    image: "https://images.unsplash.com/photo-1533105079780-92b9be482077?w=500&auto=format&fit=crop&q=60",
+    image: "/images/subculture/slow-travel.webp",
   },
 ];
 
@@ -78,15 +78,15 @@ export default function SubculturesMatrix() {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4">
           <div>
             {/* Eyebrow */}
-            <motion.p
+            <motion.span
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="font-body font-bold text-xs sm:text-sm uppercase tracking-wider text-white mb-2"
+              className="inline-block font-body text-[10px] sm:text-xs font-black uppercase tracking-wider px-3 py-1 rounded-full border-2 border-white text-white mb-3"
             >
               ✦ THE SUBCULTURES MATRIX
-            </motion.p>
+            </motion.span>
             {/* Heading */}
             <motion.h2
               initial={{ opacity: 0, y: 40 }}

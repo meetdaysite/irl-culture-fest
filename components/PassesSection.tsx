@@ -93,11 +93,11 @@ function TicketCard({
       onMouseLeave={onLeave}
       animate={{ scale: isHovered ? 1.04 : 1 }}
       transition={{ type: "spring", stiffness: 300, damping: 22 }}
-      className="select-none cursor-pointer w-full h-full"
+      className="select-none cursor-pointer w-full h-full rounded-2xl"
       style={{
-        filter: isHovered
-          ? "drop-shadow(0 20px 40px rgba(0,0,0,0.25))"
-          : "drop-shadow(4px 6px 0px rgba(0,0,0,0.2))",
+        boxShadow: isHovered
+          ? "0 20px 40px rgba(0,0,0,0.25)"
+          : "4px 6px 0px rgba(0,0,0,0.2)",
       }}
     >
       <div
@@ -124,14 +124,14 @@ function TicketCard({
         {/* TEAR LINE */}
         <div className="relative flex items-center" style={{ background: "#fff" }}>
           <div
-            className="absolute -left-[13px] w-6 h-6 rounded-full z-10"
+            className="absolute -left-4 w-8 h-8 rounded-full z-10"
             style={{ background: "#F5F0E8" }}
           />
           <div
-            className="absolute -right-[13px] w-6 h-6 rounded-full z-10"
+            className="absolute -right-4 w-8 h-8 rounded-full z-10"
             style={{ background: "#F5F0E8" }}
           />
-          <div className="w-full border-t-2 border-dashed border-[#1A1A1A]/30 mx-3" />
+          <div className="w-full border-t-[3px] border-dashed border-[#1A1A1A]/50 mx-4" />
         </div>
 
         {/* BOTTOM: white body */}
@@ -219,15 +219,15 @@ export default function PassesSection() {
         style={{ maxWidth: 1280, paddingLeft: 48, paddingRight: 48 }}
       >
         {/* Eyebrow */}
-        <motion.p
+        <motion.span
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="font-body font-bold text-xs sm:text-sm uppercase tracking-wider text-[#FF2B2B] mb-3"
+          className="inline-block font-body text-[10px] sm:text-xs font-black uppercase tracking-wider px-3 py-1 rounded-full border-2 border-[#FF2B2B] text-[#FF2B2B] mb-3"
         >
           ✦ PASSES &amp; ACCESS
-        </motion.p>
+        </motion.span>
 
         {/* Heading */}
         <motion.h2

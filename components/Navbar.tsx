@@ -181,7 +181,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-4">
             <button
               onClick={() => scrollToSection("#passes")}
-              className="font-body text-xs font-black uppercase tracking-wider py-2 px-5 rounded-full border border-black transition-transform cursor-pointer hover:scale-105 active:scale-95"
+              className="font-body text-xs font-black uppercase tracking-wider py-2 px-5 rounded-full border border-black transition-transform cursor-pointer hover:scale-105 active:scale-95 buzz-button"
               style={{
                 backgroundColor: isNavbarWhite
                   ? "#FF2B2B"

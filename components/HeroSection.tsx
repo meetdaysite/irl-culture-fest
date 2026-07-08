@@ -3,21 +3,51 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import DecorativeStar from "@/components/DecorativeStar";
 
-// 10 card items from public/image-scroll
+// Subculture card items from public/images/subculture
 const cardPool = [
-  { id: "1", image: "/image-scroll/pexels-bertellifotografia-15141482.jpg", label: "Supper Clubs", vertical: "Culinary & Bev", badge: "18+" },
-  { id: "2", image: "/image-scroll/pexels-rdne-7335257.jpg", label: "Run Clubs", vertical: "Active Lifestyle", badge: "ACTIVE" },
-  { id: "3", image: "/image-scroll/pexels-bertellifotografia-3856033.jpg", label: "Tactile Design", vertical: "Analog Arts", badge: "DESIGN" },
-  { id: "4", image: "/image-scroll/6.webp", label: "Underground Sound", vertical: "Music Labels", badge: "LIVE" },
-  { id: "5", image: "/image-scroll/5.webp", label: "Pet Meetups", vertical: "Pet Culture", badge: "PETS" },
-  { id: "6", image: "/image-scroll/4.jpg", label: "Wellness Circles", vertical: "Mindfulness", badge: "WELLNESS" },
-  { id: "7", image: "/image-scroll/2.webp", label: "Digital Detox", vertical: "Mindfulness", badge: "IRL" },
-  { id: "8", image: "/image-scroll/12.webp", label: "Tactile Play", vertical: "Next-Gen Families", badge: "PLAY" },
-  { id: "9", image: "/image-scroll/11.webp", label: "Independent Roasters", vertical: "Culinary & Bev", badge: "ROAST" },
-  { id: "10", image: "/image-scroll/1.jpg", label: "Vinyl Listening", vertical: "Analog Arts", badge: "VINYL" },
+  { id: "1", image: "/images/subculture/cullinary-and-beverages.webp", label: "Culinary & Beverage", vertical: "IRL FESTIVAL", badge: "CULINARY" },
+  { id: "2", image: "/images/subculture/active-lifestyle.png", label: "Active Lifestyle", vertical: "IRL FESTIVAL", badge: "ACTIVE" },
+  { id: "3", image: "/images/subculture/independent-sound.webp", label: "Independent Sound", vertical: "IRL FESTIVAL", badge: "MUSIC" },
+  { id: "4", image: "/images/subculture/mindfullness.webp", label: "Mindfulness & Wellbeing", vertical: "IRL FESTIVAL", badge: "WELLNESS" },
+  { id: "5", image: "/images/subculture/analog-art.webp", label: "Analog Arts & Culture", vertical: "IRL FESTIVAL", badge: "ART" },
+  { id: "6", image: "/images/subculture/pet-culture.webp", label: "Pet Culture", vertical: "IRL FESTIVAL", badge: "PETS" },
+  { id: "7", image: "/images/subculture/next-gen-families.webp", label: "Next-Gen Families", vertical: "IRL FESTIVAL", badge: "PLAY" },
+  { id: "8", image: "/images/subculture/slow-travel.webp", label: "Slow Travel", vertical: "IRL FESTIVAL", badge: "TRAVEL" },
 ];
+
+const cities = [
+  { city: "Delhi", day: "28", month: "NOV", bg: "#FF2B2B", text: "#FFFFFF" },
+  { city: "Mumbai", day: "05", month: "DEC", bg: "#FFFFFF", text: "#1A1A1A" },
+  { city: "Bangalore", day: "12", month: "DEC", bg: "#f2af29", text: "#1A1A1A" },
+];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const ticketVariants = {
+  hidden: { opacity: 0, x: 60, rotateY: 90 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    rotateY: 0,
+    transition: {
+      type: "spring" as const,
+      stiffness: 110,
+      damping: 14
+    }
+  },
+};
 
 export default function HeroSection() {
   const [isHovered, setIsHovered] = useState(false);
@@ -25,11 +55,11 @@ export default function HeroSection() {
 
   // Maintain active cards for visible slots
   const [activeCards, setActiveCards] = useState([
-    cardPool[0], // Slot 1: outermost left
-    cardPool[1], // Slot 2: inner left
-    cardPool[2], // Slot 3: center (largest)
-    cardPool[3], // Slot 4: inner right
-    cardPool[4], // Slot 5: outermost right
+    cardPool[0],
+    cardPool[1],
+    cardPool[2],
+    cardPool[3],
+    cardPool[4],
   ]);
 
   const [nextPoolIndex, setNextPoolIndex] = useState(5);
@@ -37,7 +67,7 @@ export default function HeroSection() {
   // Responsive mobile listener
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
+      setIsMobile(window.innerWidth < 1024); // lg breakpoint in Tailwind
     };
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -51,8 +81,8 @@ export default function HeroSection() {
     const interval = setInterval(() => {
       setActiveCards((prev) => {
         const next = [...prev];
-        next.shift(); // remove leftmost card
-        next.push(cardPool[nextPoolIndex]); // add new card to the right
+        next.shift(); // remove top/leftmost card
+        next.push(cardPool[nextPoolIndex]); // add new card to the end/bottom
         return next;
       });
       setNextPoolIndex((prev) => (prev + 1) % cardPool.length);
@@ -62,35 +92,43 @@ export default function HeroSection() {
   }, [isHovered, nextPoolIndex]);
 
   // Compute dynamic slot styling configurations for the active cards remaining in the DOM
+  // Desktop: circular fan pivoting off the right edge (X_c = right edge, Y_c = middle)
   const getSlotConfig = (slotIndex: number) => {
     if (isMobile) {
-      // 3 visible slots mapped over the activeCards array (length 3 when active)
+      // Mobile Flat Fallback: 3 visible slots, W=170px, equal gaps edge-to-edge
       switch (slotIndex) {
-        case 0: // Left card
-          return { x: "calc(-50% - 80%)", y: 15, scale: 0.92, rotate: -8, zIndex: 10, opacity: 1 };
-        case 1: // Center card (focus)
-          return { x: "-50%", y: 0, scale: 1.06, rotate: 0, zIndex: 20, opacity: 1 };
-        case 2: // Right card
-          return { x: "calc(-50% + 80%)", y: 15, scale: 0.92, rotate: 8, zIndex: 10, opacity: 1 };
+        case 0:
+          return { x: "calc(-45vw)", y: 15, scale: 0.92, rotate: -8, zIndex: 10, opacity: 0.9 };
+        case 1:
+          return { x: "calc(-50%)", y: 0, scale: 1.06, rotate: 0, zIndex: 20, opacity: 1 };
+        case 2:
+          return { x: "calc(45vw - 170px)", y: 15, scale: 0.92, rotate: 8, zIndex: 10, opacity: 0.9 };
         default:
-          return { x: "-50%", y: 0, scale: 1, rotate: 0, zIndex: 0, opacity: 0 };
+          return { x: "calc(-50%)", y: 0, scale: 1, rotate: 0, zIndex: 0, opacity: 0 };
       }
     } else {
-      // 5 visible slots mapped over the activeCards array (length 5 when active)
-      switch (slotIndex) {
-        case 0: // Outermost Left (brought closer to Slot 1 to make gap equal)
-          return { x: "calc(-50% - 150%)", y: 35, scale: 0.86, rotate: -12, zIndex: 10, opacity: 0.9 };
-        case 1: // Inner Left
-          return { x: "calc(-50% - 80%)", y: 12, scale: 0.95, rotate: -6, zIndex: 20, opacity: 1 };
-        case 2: // Center Card (largest)
-          return { x: "-50%", y: -8, scale: 1.08, rotate: 0, zIndex: 30, opacity: 1 };
-        case 3: // Inner Right
-          return { x: "calc(-50% + 80%)", y: 12, scale: 0.95, rotate: 6, zIndex: 20, opacity: 1 };
-        case 4: // Outermost Right (brought closer to Slot 3 to make gap equal)
-          return { x: "calc(-50% + 150%)", y: 35, scale: 0.86, rotate: 12, zIndex: 10, opacity: 0.9 };
-        default:
-          return { x: "-50%", y: 0, scale: 1, rotate: 0, zIndex: 0, opacity: 0 };
-      }
+      // Desktop Radial Math: 5 cards arranged on a circle
+      const R = 440;
+      const W = 220;
+      const H = 270;
+      const Y_c = 250;
+
+      // Calculate angle relative to center-left (180deg)
+      const alphaDeg = (slotIndex - 2) * 16; // Angles: -32, -16, 0, 16, 32
+      const alphaRad = (alphaDeg * Math.PI) / 180;
+
+      const rightVal = R * Math.cos(alphaRad) - W / 2;
+      const yVal = R * Math.sin(alphaRad);
+      const topVal = Y_c + yVal - H / 2;
+
+      return {
+        right: `${rightVal}px`,
+        top: `${topVal}px`,
+        scale: 1 - Math.abs(slotIndex - 2) * 0.08,
+        rotate: alphaDeg,
+        zIndex: 30 - Math.abs(slotIndex - 2) * 10,
+        opacity: 1 - Math.abs(slotIndex - 2) * 0.05,
+      };
     }
   };
 
@@ -98,197 +136,289 @@ export default function HeroSection() {
     <section
       id="hero"
       className="relative min-h-screen flex flex-col items-center justify-between overflow-hidden"
-      style={{ background: "#F5F0E8", paddingTop: 48, paddingBottom: 0 }}
+      style={{ background: "#F5F0E8", paddingTop: 90, paddingBottom: 0 }}
     >
       {/* Decorative background stars */}
       <DecorativeStar size={170} color="#FF2B2B" opacity={0.1} top="70px" left="5%" spin spinDuration={45} />
       <DecorativeStar size={110} color="#f2af29" opacity={0.12} top="18%" right="4%" rotate={20} />
-      <DecorativeStar size={60}  color="#1A1A1A" opacity={0.06} top="40%" left="3%" rotate={10} />
+      <DecorativeStar size={60} color="#1A1A1A" opacity={0.06} top="40%" left="3%" rotate={10} />
       <DecorativeStar size={130} color="#FF2B2B" opacity={0.08} bottom="25%" right="6%" spin spinDuration={35} />
 
-      {/* Main Copy Area - Centered & Highly Spaced */}
-      <div className="relative z-10 max-w-4xl px-6 w-full text-center mt-4 flex-1 flex flex-col justify-center items-center">
-        {/* Compact Eyebrow Info Row */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mb-4"
-        >
-          <span className="font-body text-xs sm:text-sm font-black text-[#FF2B2B] tracking-wider uppercase">
-            November &amp; December 2026
-          </span>
-          <span className="hidden sm:inline text-[#1A1A1A]/20">|</span>
-          <span className="font-body text-xs sm:text-sm font-black text-[#1A1A1A] tracking-wider uppercase">
-            Delhi (Nov 28) | Pune (Dec 5) | Bangalore (Dec 12)
-          </span>
-        </motion.div>
+      {/* Main Restructured Grid */}
+      <div className="relative z-10 max-w-7xl px-8 mx-auto w-full mt-6 mb-12 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
 
-        {/* Compact Headline */}
-        <h1 className="font-display select-none flex flex-col items-center mb-2 max-w-3xl leading-[0.9] tracking-tight">
-          <motion.span
-            initial={{ opacity: 0, y: 20 }}
+        {/* Left Column: Copy Area (7 cols on desktop) */}
+        <div className="lg:col-span-7 flex flex-col justify-center items-start text-left">
+
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.5 }}
-            className="block text-[#1A1A1A] font-black"
-            style={{ fontSize: "clamp(30px, 4.5vw, 56px)" }}
+            transition={{ duration: 0.5 }}
+            className="inline-block font-body text-[10px] sm:text-xs font-black uppercase tracking-wider px-3 py-1 rounded-full border-2 border-[#FF2B2B] text-[#FF2B2B] mb-6"
           >
-            PEOPLE ARE DONE
-          </motion.span>
-          <motion.span
-            initial={{ opacity: 0, y: 20 }}
+            India's first IRL Culture Festival
+          </motion.div>
+
+          {/* Compact Headline (Celebrating the IRL...) */}
+          <h1 className="font-display select-none flex flex-col items-start mb-6 max-w-4xl leading-[0.9] tracking-tight text-left">
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.5 }}
+              className="block text-[#1A1A1A] font-black"
+              style={{ fontSize: "clamp(30px, 4.5vw, 56px)" }}
+            >
+              CELEBRATING THE
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="block text-[#FF2B2B] font-black"
+              style={{ fontSize: "clamp(30px, 4.5vw, 56px)" }}
+            >
+              IRL CULTURE BUILDERS
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              className="block text-[#1A1A1A] font-black mt-1"
+              style={{ fontSize: "clamp(30px, 4.5vw, 56px)" }}
+            >
+              &amp; THE ECOSYSTEM MAKING IT HAPPEN.
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+              className="block text-[#FF2B2B] font-black"
+              style={{ fontSize: "clamp(30px, 4.5vw, 56px)" }}
+            >
+
+            </motion.span>
+          </h1>
+
+          {/* Subhead & Compact Body Paragraph (People are done doomscrolling...) */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+            className="font-body text-[#1A1A1A] font-bold leading-snug mb-8 max-w-xl text-left"
+            style={{ fontSize: "clamp(14px, 1.2vw, 16px)" }}
+          >
+            People are done doomscrolling. They want to feel something real.
+          </motion.p>
+
+          {/* Compact CTA Row */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="block text-[#FF2B2B] font-black"
-            style={{ fontSize: "clamp(30px, 4.5vw, 56px)" }}
+            transition={{ delay: 0.7, duration: 0.4 }}
+            className="flex flex-wrap justify-start items-center gap-3 w-full"
           >
-            DOOMSCROLLING.
-          </motion.span>
-          <motion.span
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
-            className="block text-[#1A1A1A] font-black mt-1"
-            style={{ fontSize: "clamp(30px, 4.5vw, 56px)" }}
+            <Link
+              href="#passes"
+              className="bg-[#FF2B2B] text-white hover:bg-[#1A1A1A] font-body font-black uppercase text-sm tracking-wider px-8 py-3 rounded-full border-2 border-transparent transition-all hover:scale-105 shadow-[4px_4px_0px_#1A1A1A] cursor-pointer text-center w-full sm:w-auto"
+            >
+              Secure Your Pass
+            </Link>
+            <Link
+              href="#contact"
+              className="border-2 border-[#1A1A1A] text-[#1A1A1A] hover:bg-[#1A1A1A] hover:text-white font-body font-black uppercase text-sm tracking-wider px-8 py-3 rounded-full transition-all hover:scale-105 cursor-pointer text-center w-full sm:w-auto"
+            >
+              Partner With Us
+            </Link>
+          </motion.div>
+        </div>
+
+        {/* Right Column: Ticket Stub City List & Mobile Fallback Cards (5 cols on desktop) */}
+        <div className="lg:col-span-5 w-full flex flex-col items-center lg:items-end justify-start gap-8 relative z-20 lg:-mt-12">
+
+          {/* Staggered City Tickets list */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="flex flex-col sm:flex-row lg:flex-col gap-4 w-full justify-center lg:justify-end items-center lg:items-end overflow-visible"
           >
-            THEY WANT TO FEEL
-          </motion.span>
-          <motion.span
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
-            className="block text-[#FF2B2B] font-black"
-            style={{ fontSize: "clamp(30px, 4.5vw, 56px)" }}
-          >
-            SOMETHING REAL.
-          </motion.span>
-        </h1>
-
-        {/* Subhead & Compact Body Paragraph */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.5 }}
-          className="font-body text-[#1A1A1A] font-bold leading-snug mb-2 max-w-xl"
-          style={{ fontSize: "clamp(14px, 1.2vw, 16px)" }}
-        >
-          Celebrating the IRL culture builders &amp; the ecosystem making it happen.
-        </motion.p>
-
-        {/*
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6, duration: 0.5 }}
-          className="font-body text-[#555] leading-relaxed mb-5 text-sm sm:text-base max-w-[560px]"
-        >
-          The internet spent a decade optimizing for digital creators, leaving physical community hosts completely invisible. Meanwhile, a premium audience is actively demanding highly curated, offline experiences. We are bridging that gap to make the offline economy sustainable.
-        </motion.p>
-        */}
-
-        {/* Compact CTA Row */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7, duration: 0.4 }}
-          className="flex flex-wrap justify-center items-center gap-3 w-full mb-4"
-        >
-          <Link
-            href="#passes"
-            className="bg-[#FF2B2B] text-white hover:bg-[#1A1A1A] font-body font-black uppercase text-sm tracking-wider px-8 py-3 rounded-full border-2 border-transparent transition-all hover:scale-105 shadow-[4px_4px_0px_#1A1A1A] cursor-pointer text-center w-full sm:w-auto"
-          >
-            Secure Your Pass
-          </Link>
-          <Link
-            href="#contact"
-            className="border-2 border-[#1A1A1A] text-[#1A1A1A] hover:bg-[#1A1A1A] hover:text-white font-body font-black uppercase text-sm tracking-wider px-8 py-3 rounded-full transition-all hover:scale-105 cursor-pointer text-center w-full sm:w-auto"
-          >
-            Partner With Us
-          </Link>
-        </motion.div>
-      </div>
-
-      {/* Horizontal Carousel Shift fanned cards container */}
-      <div
-        className="relative w-full flex justify-center items-end z-10"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        style={{ height: "300px", marginTop: "30px", marginBottom: "-10px" }}
-      >
-        <div className="relative w-full max-w-[1400px] h-full overflow-visible">
-          <AnimatePresence initial={false}>
-            {activeCards.map((card, i) => {
-              const slotConfig = getSlotConfig(i);
-
-              return (
-                <motion.div
-                  key={card.id}
-                  initial={
-                    isMobile
-                      ? { x: "calc(-50% + 180%)", y: 50, scale: 0.75, rotate: 18, opacity: 0, zIndex: 0 }
-                      : { x: "calc(-50% + 240%)", y: 65, scale: 0.75, rotate: 18, opacity: 0, zIndex: 0 }
-                  }
-                  animate={{
-                    x: slotConfig.x,
-                    y: slotConfig.y,
-                    scale: slotConfig.scale,
-                    rotate: slotConfig.rotate,
-                    opacity: slotConfig.opacity,
-                    zIndex: slotConfig.zIndex,
-                  }}
-                  exit={
-                    isMobile
-                      ? { x: "calc(-50% - 180%)", y: 50, scale: 0.75, rotate: -18, opacity: 0, zIndex: 0 }
-                      : { x: "calc(-50% - 240%)", y: 65, scale: 0.75, rotate: -18, opacity: 0, zIndex: 0 }
-                  }
-                  transition={{
-                    duration: 0.6,
-                    ease: "easeInOut",
-                  }}
-                  style={{
-                    position: "absolute",
-                    left: "50%",
-                    transformOrigin: "bottom center",
-                    background: "#FFFFFF",
-                  }}
-                  className="w-[170px] sm:w-[210px] md:w-[245px] aspect-[1/1.22] rounded-t-[22px] overflow-hidden border-2 border-[#1A1A1A] border-b-0 flex flex-col justify-between shadow-2xl transition-all"
+            {cities.map((item) => (
+              <motion.div
+                key={item.city}
+                variants={ticketVariants}
+                whileHover={{ scale: 1.05 }}
+                className="flex items-center border-2 border-[#1A1A1A] rounded-xl overflow-hidden shadow-[4px_4px_0px_#1A1A1A] w-[240px] bg-white transition-shadow"
+                style={{ background: item.bg, color: item.text }}
+              >
+                {/* Left Date Block */}
+                <div
+                  className="flex flex-col items-center justify-center px-4 py-2.5 border-r-2 border-dashed border-[#1A1A1A] min-w-[72px]"
+                  style={{ borderColor: item.text }}
                 >
-                  {/* Floating Yellow Badge over Image */}
-                  <span
-                    className="absolute top-3.5 right-3.5 z-20 bg-[#f2af29] text-[#1A1A1A] border-2 border-[#1A1A1A] rounded-full px-2.5 py-0.5 font-display font-black text-[9px] sm:text-[10px] uppercase tracking-wider shadow-[2px_2px_0px_#1A1A1A]"
-                  >
-                    {card.badge}
-                  </span>
+                  <span className="font-display text-xl font-black leading-none">{item.day}</span>
+                  <span className="font-body text-[9px] font-black tracking-wider uppercase mt-1 opacity-90">{item.month}</span>
+                </div>
+                {/* Right City Block */}
+                <div className="px-4 py-2.5 flex-1 flex flex-col justify-center text-left">
+                  <span className="font-display text-base font-black tracking-wide uppercase leading-none">{item.city}</span>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
 
-                  {/* Image shifted all the way to the top */}
-                  <div className="relative flex-1 overflow-hidden bg-white p-2">
-                    <div className="w-full h-full rounded-t-[14px] overflow-hidden border border-[#1A1A1A]/10">
-                      <img
-                        src={card.image}
-                        alt={card.label}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                      />
-                    </div>
-                  </div>
+          {/* Mobile Fallback Card Stack (visible only on mobile) */}
+          {isMobile && (
+            <div
+              className="relative w-full flex justify-center items-end mt-12 overflow-visible"
+              style={{ height: "260px" }}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              <div className="relative w-full h-full overflow-visible">
+                <AnimatePresence initial={false}>
+                  {activeCards.slice(0, 3).map((card, i) => {
+                    const slotConfig = getSlotConfig(i);
 
-                  {/* Bottom title block */}
-                  <div
-                    className="px-3.5 py-2.5 border-t-2 border-[#1A1A1A] flex flex-col justify-center min-h-[56px] bg-white text-[#1A1A1A]"
-                  >
-                    <span className="font-display font-black text-[12px] sm:text-[14px] uppercase tracking-wide truncate">
-                      {card.label}
-                    </span>
-                    <span className="font-body text-[8px] uppercase tracking-widest block font-bold text-[#FF2B2B] truncate mt-0.5">
-                      {card.vertical}
-                    </span>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </AnimatePresence>
+                    return (
+                      <motion.div
+                        key={card.id}
+                        initial={{ x: "calc(-50% + 180%)", y: 50, scale: 0.75, rotate: 18, opacity: 0, zIndex: 0 }}
+                        animate={{
+                          x: slotConfig.x,
+                          y: slotConfig.y ?? 0,
+                          scale: slotConfig.scale,
+                          rotate: slotConfig.rotate,
+                          opacity: slotConfig.opacity ?? 1,
+                          zIndex: slotConfig.zIndex,
+                        }}
+                        exit={{ x: "calc(-50% - 180%)", y: 50, scale: 0.75, rotate: -18, opacity: 0, zIndex: 0 }}
+                        transition={{ duration: 0.6, ease: "easeInOut" }}
+                        style={{
+                          position: "absolute",
+                          left: "50%",
+                          transformOrigin: "bottom center",
+                          background: "#FFFFFF",
+                        }}
+                        className="w-[160px] sm:w-[190px] aspect-[1/1.22] rounded-t-[18px] overflow-hidden border-2 border-[#1A1A1A] border-b-0 flex flex-col justify-between shadow-xl"
+                      >
+                        <div className="relative flex-1 overflow-hidden bg-white p-1.5">
+                          <div className="w-full h-full rounded-t-[10px] overflow-hidden border border-[#1A1A1A]/10">
+                            <img src={card.image} alt={card.label} className="w-full h-full object-cover" />
+                          </div>
+                        </div>
+                        <div className="px-3 py-2 border-t-2 border-[#1A1A1A] min-h-[48px] bg-white text-[#1A1A1A] flex items-center text-left">
+                          <span className="leading-tight">
+                            <span className="font-display font-black text-[11px] sm:text-[12px] uppercase tracking-tight mr-1.5 inline">
+                              {card.label}
+                            </span>
+                            <span className="font-body text-[7px] uppercase tracking-widest font-bold text-[#FF2B2B] inline whitespace-nowrap">
+                              {card.badge}
+                            </span>
+                          </span>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </AnimatePresence>
+              </div>
+            </div>
+          )}
         </div>
       </div>
+
+      {/* Desktop Circular Fan Carousel (Absolute positioned, visible only on desktop/large screens) */}
+      {!isMobile && (
+        <div
+          className="absolute right-0 top-1/2 -translate-y-[45%] w-[480px] h-[500px] pointer-events-none overflow-visible z-10"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <div className="relative w-full h-full overflow-visible">
+            <AnimatePresence initial={false}>
+              {activeCards.map((card, i) => {
+                const slotConfig = getSlotConfig(i);
+
+                // Entrance and exit configurations centered along the 45deg/ -45deg radial trajectories
+                const R = 440;
+                const W = 220;
+                const H = 270;
+                const Y_c = 250;
+
+                const enterRight = R * Math.cos((45 * Math.PI) / 180) - W / 2;
+                const enterTop = Y_c + R * Math.sin((45 * Math.PI) / 180) - H / 2;
+
+                const exitRight = R * Math.cos((-45 * Math.PI) / 180) - W / 2;
+                const exitTop = Y_c + R * Math.sin((-45 * Math.PI) / 180) - H / 2;
+
+                return (
+                  <motion.div
+                    key={card.id}
+                    initial={{
+                      right: `${enterRight}px`,
+                      top: `${enterTop}px`,
+                      scale: 0.8,
+                      rotate: 45,
+                      opacity: 0,
+                      zIndex: 0,
+                    }}
+                    animate={{
+                      right: slotConfig.right,
+                      top: slotConfig.top,
+                      scale: slotConfig.scale,
+                      rotate: slotConfig.rotate,
+                      opacity: slotConfig.opacity,
+                      zIndex: slotConfig.zIndex,
+                    }}
+                    exit={{
+                      right: `${exitRight}px`,
+                      top: `${exitTop}px`,
+                      scale: 0.8,
+                      rotate: -45,
+                      opacity: 0,
+                      zIndex: 0,
+                    }}
+                    transition={{
+                      duration: 0.6,
+                      ease: "easeInOut",
+                    }}
+                    style={{
+                      position: "absolute",
+                      transformOrigin: "bottom center",
+                      background: "#FFFFFF",
+                      pointerEvents: "auto", // enable interaction (hover pause) on individual cards
+                    }}
+                    className="w-[220px] h-[270px] rounded-t-[22px] overflow-hidden border-2 border-[#1A1A1A] border-b-0 flex flex-col justify-between shadow-2xl transition-shadow hover:shadow-[0_20px_35px_-10px_rgba(0,0,0,0.3)] cursor-pointer"
+                  >
+                    {/* Image */}
+                    <div className="relative flex-1 overflow-hidden bg-white p-2">
+                      <div className="w-full h-full rounded-t-[14px] overflow-hidden border border-[#1A1A1A]/10">
+                        <img
+                          src={card.image}
+                          alt={card.label}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Card Label */}
+                    <div className="px-3.5 py-2 border-t-2 border-[#1A1A1A] min-h-[56px] bg-white text-[#1A1A1A] flex items-center text-left">
+                      <span className="leading-snug">
+                        <span className="font-display font-black text-[13px] uppercase tracking-tight mr-2 inline">
+                          {card.label}
+                        </span>
+                        <span className="font-body text-[8px] uppercase tracking-widest font-bold text-[#FF2B2B] inline whitespace-nowrap">
+                          {card.badge}
+                        </span>
+                      </span>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
+          </div>
+        </div>
+      )}
 
       {/* Torn Paper Divider -> StatsBar #FF2B2B */}
       <svg
@@ -303,7 +433,7 @@ export default function HeroSection() {
           bottom: "-2px",
           left: 0,
           pointerEvents: "none",
-          zIndex: 3,
+          zIndex: 40, // overlay above cards so they clip cleanly under this boundary
         }}
       >
         <path

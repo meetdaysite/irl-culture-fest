@@ -27,15 +27,15 @@ export default function PartnersCollaborators() {
         style={{ maxWidth: 1200, paddingLeft: 48, paddingRight: 48 }}
       >
         {/* Eyebrow */}
-        <motion.p
+        <motion.span
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="font-body font-bold text-xs sm:text-sm uppercase tracking-wider text-[#FF2B2B] mb-3"
+          className="inline-block font-body text-[10px] sm:text-xs font-black uppercase tracking-wider px-3 py-1 rounded-full border-2 border-[#FF2B2B] text-[#FF2B2B] mb-3"
         >
           ✦ PARTNERS &amp; COLLABORATORS
-        </motion.p>
+        </motion.span>
 
         {/* Heading */}
         <motion.h2
