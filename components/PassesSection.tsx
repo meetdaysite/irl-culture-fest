@@ -6,7 +6,7 @@ import DecorativeStar from "@/components/DecorativeStar";
 
 const allAccessPass = {
   title: "All Access Pass",
-  price: "₹11,999",
+  price: "₹9,999",
   taxes: "Plus Taxes",
   bestFor: "Corporate Leaders, Agency Executives, & Enterprise Enablers",
   inclusions: [
@@ -22,7 +22,7 @@ const allAccessPass = {
 const otherPasses = [
   {
     title: "Community Leader Pass",
-    price: "₹4,499",
+    price: "₹3,999",
     taxes: "Plus Taxes",
     bestFor: "Micro-curators, Subculture Leaders, & Active Hosts",
     inclusions: [
@@ -266,7 +266,7 @@ export default function PassesSection() {
     >
       {/* Decorative stars */}
       <DecorativeStar size={140} color="#FF2B2B" opacity={0.06} top="40px" right="6%" spin spinDuration={38} />
-      <DecorativeStar size={80}  color="#f2af29" opacity={0.07} top="40%" left="2%" rotate={42} />
+      <DecorativeStar size={80} color="#f2af29" opacity={0.07} top="40%" left="2%" rotate={42} />
       <DecorativeStar size={110} color="#1A1A1A" opacity={0.05} bottom="20%" right="4%" spin spinDuration={44} />
       <div
         className="mx-auto relative z-10"

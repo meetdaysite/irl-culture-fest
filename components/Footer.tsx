@@ -2,20 +2,27 @@
 
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import Image from "next/image";
-
-const navLinks = [
-  { label: "The Manifesto", href: "#manifesto" },
-  { label: "The Festival", href: "#solution" },
-  { label: "Subcultures", href: "#subcultures" },
-  { label: "Team & Partners", href: "#team" },
-  { label: "Passes", href: "#passes" },
-];
 
 export default function Footer() {
   const pathname = usePathname();
+  const isPodcast = pathname === "/podcast";
 
   const scrollToSection = (href: string) => {
+    if (href.startsWith("/")) {
+      if (href.includes("#")) {
+        const [path, hash] = href.split("#");
+        if (pathname === path) {
+          const el = document.getElementById(hash);
+          if (el) el.scrollIntoView({ behavior: "smooth" });
+        } else {
+          window.location.href = href;
+        }
+      } else {
+        window.location.href = href;
+      }
+      return;
+    }
+
     if (href.startsWith("#")) {
       if (pathname !== "/") {
         window.location.href = `/${href}`;
@@ -32,45 +39,70 @@ export default function Footer() {
     }
   };
 
+  const footerBg = isPodcast ? "rgba(255, 255, 255, 0.7)" : "#1A1A1A";
+  const footerTextColor = isPodcast ? "text-black/80" : "text-white/80";
+  const footerTextMuted = isPodcast ? "text-black/40" : "text-white/40";
+  const footerLinkColor = isPodcast ? "text-black hover:text-[#FF2B2B]" : "text-white hover:text-[#FF2B2B]";
+  const footerDividerBg = isPodcast ? "bg-black/10" : "bg-white/10";
+
+  const links = isPodcast
+    ? [
+        { label: "Manifesto", href: "/podcast/#manifesto" },
+        { label: "Pillars", href: "/podcast/#pillars" },
+        { label: "Benefits", href: "/podcast/#benefits" },
+        { label: "Host", href: "/podcast/#host" },
+        { label: "Process", href: "/podcast/#process" },
+      ]
+    : [
+        { label: "The Manifesto", href: "#manifesto" },
+        { label: "The Festival", href: "#solution" },
+        { label: "Subcultures", href: "#subcultures" },
+        { label: "Team & Partners", href: "#team" },
+        { label: "Passes", href: "#passes" },
+      ];
+
   return (
     <footer
       className="pt-16 pb-8 px-8"
-      style={{ background: "#1A1A1A", borderTop: "2px solid #333" }}
+      style={{
+        background: footerBg,
+        borderTop: isPodcast ? "2px solid rgba(0, 0, 0, 0.1)" : "2px solid #333",
+        backdropFilter: isPodcast ? "blur(12px)" : "none",
+      }}
     >
       <div className="max-w-7xl mx-auto">
-        {/* Main Columns Grid - Using a 4-column span for wider distribution */}
+        {/* Main Columns Grid */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-          {/* Column 1: Logo & Tagline (spans 2 columns on desktop for wider footprint) */}
+          {/* Column 1: Logo & Tagline */}
           <div className="flex flex-col items-start space-y-4 md:col-span-2">
             <button
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              onClick={() => scrollToSection(isPodcast ? "/podcast/#hero" : "#top")}
               className="flex items-center cursor-pointer"
             >
-              <Image
-                src="/footer-logo.png"
-                alt="IRL Culture Fest Logo"
-                width={120}
-                height={34}
-                style={{ width: "auto", height: "auto" }}
-                className="h-8 object-contain"
+              <img
+                src={isPodcast ? "/images/podcast/podcast-logo.png" : "/footer-logo.png"}
+                alt={isPodcast ? "IRL Podcast Logo" : "IRL Culture Fest Logo"}
+                className="h-16 sm:h-20 object-contain"
               />
             </button>
-            <p className="font-[family-name:var(--font-space-grotesk)] text-base text-white/80 max-w-md leading-relaxed">
-              Celebrating the IRL Culture Builders & the ecosystem making it happen.
+            <p className={`font-body text-base ${footerTextColor} max-w-md leading-relaxed`}>
+              {isPodcast
+                ? "Deep, honest conversations with the curators and community builders crafting offline culture in India."
+                : "Celebrating the IRL Culture Builders & the ecosystem making it happen."}
             </p>
           </div>
 
-          {/* Column 2: Navigation (shifted to the right slightly by the 4-column layout) */}
+          {/* Column 2: Navigation */}
           <div className="flex flex-col space-y-3 md:pl-8">
-            <span className="font-[family-name:var(--font-space-grotesk)] text-xs font-bold uppercase tracking-wider text-white/40">
+            <span className={`font-body text-xs font-bold uppercase tracking-wider ${footerTextMuted}`}>
               Navigation
             </span>
             <div className="flex flex-col space-y-2.5">
-              {navLinks.map((link) => (
+              {links.map((link) => (
                 <button
                   key={link.label}
                   onClick={() => scrollToSection(link.href)}
-                  className="w-fit text-left font-[family-name:var(--font-space-grotesk)] text-base text-white/80 hover:text-[#FF2B2B] transition-colors cursor-pointer"
+                  className={`w-fit text-left font-body text-base ${footerLinkColor} transition-colors cursor-pointer`}
                 >
                   {link.label}
                 </button>
@@ -78,10 +110,10 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 3: Follow (positioned in the extreme right column) */}
+          {/* Column 3: Follow */}
           <div className="flex flex-col space-y-4 md:items-end md:text-right">
             <div className="w-full max-w-[120px] md:text-right flex flex-col space-y-4 md:ml-auto">
-              <span className="font-[family-name:var(--font-space-grotesk)] text-xs font-bold uppercase tracking-wider text-white/40 block">
+              <span className={`font-body text-xs font-bold uppercase tracking-wider ${footerTextMuted} block`}>
                 Follow
               </span>
               {/* Social Icons */}
@@ -92,7 +124,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1 }}
-                  className="text-white/80 hover:text-[#FF2B2B] transition-colors"
+                  className={`${footerTextColor} hover:text-[#FF2B2B] transition-colors`}
                   aria-label="Instagram"
                 >
                   <svg
@@ -117,7 +149,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1 }}
-                  className="text-white/80 hover:text-[#FF2B2B] transition-colors"
+                  className={`${footerTextColor} hover:text-[#FF2B2B] transition-colors`}
                   aria-label="LinkedIn"
                 >
                   <svg
@@ -142,7 +174,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1 }}
-                  className="text-white/80 hover:text-[#FF2B2B] transition-colors"
+                  className={`${footerTextColor} hover:text-[#FF2B2B] transition-colors`}
                   aria-label="Twitter"
                 >
                   <svg
@@ -165,7 +197,7 @@ export default function Footer() {
         </div>
 
         {/* Divider Line */}
-        <div className="border-t border-white/10 my-6"></div>
+        <div className={`h-[1px] w-full ${footerDividerBg} my-6`}></div>
 
         {/* Bottom Bar: Links, Powered by, Copyright */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
@@ -175,21 +207,21 @@ export default function Footer() {
               href="https://www.irlculturefest.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-[family-name:var(--font-space-grotesk)] text-sm text-white/80 hover:text-[#FF2B2B] transition-colors"
+              className={`font-body text-sm ${footerTextColor} hover:text-[#FF2B2B] transition-colors`}
             >
               www.irlculturefest.com
             </a>
-            <span className="hidden sm:inline text-white/20">|</span>
+            <span className={isPodcast ? "hidden sm:inline text-black/20" : "hidden sm:inline text-white/20"}>|</span>
             <a
               href="tel:+918130339180"
-              className="font-[family-name:var(--font-space-grotesk)] text-sm text-white/80 hover:text-[#FF2B2B] transition-colors"
+              className={`font-body text-sm ${footerTextColor} hover:text-[#FF2B2B] transition-colors`}
             >
               +91 81303 39180
             </a>
-            <span className="hidden sm:inline text-white/20">|</span>
+            <span className={isPodcast ? "hidden sm:inline text-black/20" : "hidden sm:inline text-white/20"}>|</span>
             <a
               href="mailto:info@meetday.ai"
-              className="font-[family-name:var(--font-space-grotesk)] text-sm text-white/80 hover:text-[#FF2B2B] transition-colors"
+              className={`font-body text-sm ${footerTextColor} hover:text-[#FF2B2B] transition-colors`}
             >
               info@meetday.ai
             </a>
@@ -197,11 +229,11 @@ export default function Footer() {
 
           {/* Copyright & Powered By */}
           <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 text-center">
-            <p className="font-[family-name:var(--font-space-grotesk)] text-xs text-white/40">
+            <p className={`font-body text-xs ${footerTextMuted}`}>
               © 2026 IRL Culture Fest. All rights reserved.
             </p>
-            <span className="hidden sm:inline text-white/20">|</span>
-            <p className="font-[family-name:var(--font-space-grotesk)] text-xs text-white/40">
+            <span className={isPodcast ? "hidden sm:inline text-black/20" : "hidden sm:inline text-white/20"}>|</span>
+            <p className={`font-body text-xs ${footerTextMuted}`}>
               Powered by{" "}
               <a
                 href="https://meetday.ai"

@@ -9,9 +9,7 @@ export default function Navbar() {
   const [scrollY, setScrollY] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
-  const isPartnerPage = pathname === "/partner";
 
-  const [isNavbarWhite, setIsNavbarWhite] = useState(false);
   const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
@@ -46,22 +44,6 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
-
-      // Check if overlapping a section with a red background
-      const redElements = ["partner-hero", "partner-form"];
-      let isOverRed = false;
-      for (const id of redElements) {
-        const el = document.getElementById(id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          // Navbar height is around 100px. Overlap occurs if top of section <= 90px and bottom >= 10px.
-          if (rect.top <= 90 && rect.bottom >= 10) {
-            isOverRed = true;
-            break;
-          }
-        }
-      }
-      setIsNavbarWhite(isOverRed);
     };
 
     handleScroll();
@@ -71,6 +53,21 @@ export default function Navbar() {
 
   const scrollToSection = (href: string) => {
     setMobileOpen(false);
+
+    if (href.startsWith("/")) {
+      if (href.includes("#")) {
+        const [path, hash] = href.split("#");
+        if (pathname === path) {
+          const el = document.getElementById(hash);
+          if (el) el.scrollIntoView({ behavior: "smooth" });
+        } else {
+          window.location.href = href;
+        }
+      } else {
+        window.location.href = href;
+      }
+      return;
+    }
 
     if (href.startsWith("#")) {
       if (pathname !== "/") {
@@ -89,19 +86,28 @@ export default function Navbar() {
   // Progressive interpolation between 20–80px scroll
   const progress = Math.min(Math.max((scrollY - 20) / 60, 0), 1); // 0 at top, 1 at 80px+
 
-  const navBg = isNavbarWhite
-    ? "rgba(255, 255, 255, 0.75)"
-    : `rgba(255,255,255,${(0.05 + progress * 0.35).toFixed(2)})`;
+  const isPodcast = pathname === "/podcast";
+  const navBg = "rgba(255, 255, 255, 0.7)";
   const blurPx = `${(3 + progress * 11).toFixed(1)}px`;
-  const shadowOpacity = isNavbarWhite ? 0.12 : progress * 0.06;
+  const shadowOpacity = progress * 0.06;
 
-  // Text color: black at start (with 0.45 opacity) transitioning to fully opaque black (#1A1A1A) when scrolled
-  const textOpacity = (0.45 + (progress * 0.55)).toFixed(2);
-  const linkColor = isNavbarWhite
-    ? "#1A1A1A"
-    : isPartnerPage
-      ? (progress < 0.2 ? "rgba(255, 255, 255, 0.95)" : "#1A1A1A")
-      : `rgba(26, 26, 26, ${textOpacity})`;
+  const linkColor = "rgba(26, 26, 26, 0.85)";
+
+  const links = isPodcast
+    ? [
+      { label: "Manifesto", href: "/podcast/#manifesto" },
+      { label: "Pillars", href: "/podcast/#pillars" },
+      { label: "Benefits", href: "/podcast/#benefits" },
+      { label: "Host", href: "/podcast/#host" },
+      { label: "Process", href: "/podcast/#process" },
+    ]
+    : [
+      { label: "The Manifesto", href: "#manifesto" },
+      { label: "The Festival", href: "#solution" },
+      { label: "Subcultures", href: "#subcultures" },
+      { label: "Team & Partners", href: "#team" },
+      { label: "Passes", href: "#passes" },
+    ];
 
   return (
     <>
@@ -125,76 +131,61 @@ export default function Navbar() {
         <div className="mx-auto max-w-7xl px-8 py-4 flex items-center justify-between">
           {/* Logo */}
           <button
-            onClick={() => scrollToSection("#hero")}
+            onClick={() => scrollToSection(isPodcast ? "/podcast/#hero" : "#hero")}
             className="flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-105 active:scale-95"
           >
             <img
-              src="/footer-logo.png?v=2"
-              alt="IRL Culture Fest Logo"
-              className="h-[50px] sm:h-[60px] object-contain"
+              src={isPodcast ? "/images/podcast/podcast-logo.png" : "/footer-logo.png?v=2"}
+              alt={isPodcast ? "IRL Podcast Logo" : "IRL Culture Fest Logo"}
+              className="h-[45px] sm:h-[50px] object-contain"
             />
           </button>
 
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center gap-8 mr-6">
-            <button
-              onClick={() => scrollToSection("#manifesto")}
-              className="font-body text-xs font-bold uppercase tracking-wider transition-colors hover:text-[#FF2B2B]"
-              style={{ color: activeSection === "manifesto" ? "#FF2B2B" : linkColor }}
-            >
-              The Manifesto
-            </button>
-            <button
-              onClick={() => scrollToSection("#solution")}
-              className="font-body text-xs font-bold uppercase tracking-wider transition-colors hover:text-[#FF2B2B]"
-              style={{ color: activeSection === "solution" ? "#FF2B2B" : linkColor }}
-            >
-              The Festival
-            </button>
-            <button
-              onClick={() => scrollToSection("#subcultures")}
-              className="font-body text-xs font-bold uppercase tracking-wider transition-colors hover:text-[#FF2B2B]"
-              style={{ color: activeSection === "subcultures" ? "#FF2B2B" : linkColor }}
-            >
-              Subcultures
-            </button>
-            <button
-              onClick={() => scrollToSection("#team")}
-              className="font-body text-xs font-bold uppercase tracking-wider transition-colors hover:text-[#FF2B2B]"
-              style={{ color: activeSection === "team" ? "#FF2B2B" : linkColor }}
-            >
-              Team &amp; Partners
-            </button>
-            <button
-              onClick={() => scrollToSection("#passes")}
-              className="font-body text-xs font-bold uppercase tracking-wider transition-colors hover:text-[#FF2B2B]"
-              style={{ color: activeSection === "passes" ? "#FF2B2B" : linkColor }}
-            >
-              Passes
-            </button>
+            {links.map((link) => {
+              const targetId = link.href.includes("#") ? link.href.split("#")[1] : "";
+              return (
+                <button
+                  key={link.label}
+                  onClick={() => scrollToSection(link.href)}
+                  className="font-body text-xs font-bold uppercase tracking-wider transition-colors hover:text-[#FF2B2B]"
+                  style={{ color: activeSection === targetId ? "#FF2B2B" : linkColor }}
+                >
+                  {link.label}
+                </button>
+              );
+            })}
           </div>
 
           {/* Desktop Action Buttons */}
           <div className="hidden md:flex items-center gap-4">
+            {isPodcast ? (
+              <button
+                onClick={() => scrollToSection("/")}
+                className="font-body text-xs font-black uppercase tracking-wider py-2 px-5 rounded-full border border-black bg-black text-white transition-transform cursor-pointer hover:scale-105 active:scale-95 shadow-[2px_2px_0px_0px_#0D0D0D]"
+              >
+                IRL Culture Fest
+              </button>
+            ) : (
+              <button
+                onClick={() => scrollToSection("/podcast")}
+                className="font-body text-xs font-black uppercase tracking-wider py-2 px-5 rounded-full border border-black bg-black text-white transition-transform cursor-pointer hover:scale-105 active:scale-95 shadow-[2px_2px_0px_0px_#0D0D0D]"
+              >
+                IRL Culture Podcast
+              </button>
+            )}
             <button
-              onClick={() => scrollToSection("#passes")}
+              onClick={() => scrollToSection(isPodcast ? "/podcast/#process" : "#passes")}
               className="font-body text-xs font-black uppercase tracking-wider py-2 px-5 rounded-full border border-black transition-transform cursor-pointer hover:scale-105 active:scale-95 buzz-button"
               style={{
-                backgroundColor: isNavbarWhite
-                  ? "#FF2B2B"
-                  : isPartnerPage && progress < 0.2 ? "#FFFFFF" : "#FF2B2B",
-                color: isNavbarWhite
-                  ? "#FFFFFF"
-                  : isPartnerPage && progress < 0.2 ? "#FF2B2B" : "#FFFFFF",
-                boxShadow: isNavbarWhite
-                  ? "2px 2px 0px 0px #0D0D0D"
-                  : isPartnerPage && progress < 0.2 ? "2px 2px 0px 0px #FFFFFF" : "2px 2px 0px 0px #0D0D0D",
-                borderColor: isNavbarWhite
-                  ? "#0D0D0D"
-                  : isPartnerPage && progress < 0.2 ? "#FFFFFF" : "#0D0D0D",
+                backgroundColor: "#FF2B2B",
+                color: "#FFFFFF",
+                boxShadow: "2px 2px 0px 0px #0D0D0D",
+                borderColor: "#0D0D0D",
               }}
             >
-              Secure Your Pass
+              {isPodcast ? "Pitch Your Story" : "Secure Your Pass"}
             </button>
           </div>
 
@@ -228,45 +219,27 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[55] bg-white flex flex-col items-center justify-center gap-8"
+            className="fixed inset-0 z-[55] flex flex-col items-center justify-center gap-8"
+            style={{
+              background: isPodcast ? "rgba(255, 255, 255, 0.85)" : "#ffffff",
+              backdropFilter: isPodcast ? "blur(12px)" : "none",
+            }}
           >
             {/* Mobile Navigation Links */}
             <div className="flex flex-col items-center gap-6 mt-16">
-              <button
-                onClick={() => scrollToSection("#manifesto")}
-                className="font-body text-base font-bold uppercase tracking-wider transition-colors hover:text-[#FF2B2B]"
-                style={{ color: activeSection === "manifesto" ? "#FF2B2B" : "#1A1A1A" }}
-              >
-                The Manifesto
-              </button>
-              <button
-                onClick={() => scrollToSection("#solution")}
-                className="font-body text-base font-bold uppercase tracking-wider transition-colors hover:text-[#FF2B2B]"
-                style={{ color: activeSection === "solution" ? "#FF2B2B" : "#1A1A1A" }}
-              >
-                The Festival
-              </button>
-              <button
-                onClick={() => scrollToSection("#subcultures")}
-                className="font-body text-base font-bold uppercase tracking-wider transition-colors hover:text-[#FF2B2B]"
-                style={{ color: activeSection === "subcultures" ? "#FF2B2B" : "#1A1A1A" }}
-              >
-                Subcultures
-              </button>
-              <button
-                onClick={() => scrollToSection("#team")}
-                className="font-body text-base font-bold uppercase tracking-wider transition-colors hover:text-[#FF2B2B]"
-                style={{ color: activeSection === "team" ? "#FF2B2B" : "#1A1A1A" }}
-              >
-                Team &amp; Partners
-              </button>
-              <button
-                onClick={() => scrollToSection("#passes")}
-                className="font-body text-base font-bold uppercase tracking-wider transition-colors hover:text-[#FF2B2B]"
-                style={{ color: activeSection === "passes" ? "#FF2B2B" : "#1A1A1A" }}
-              >
-                Passes
-              </button>
+              {links.map((link) => {
+                const targetId = link.href.includes("#") ? link.href.split("#")[1] : "";
+                return (
+                  <button
+                    key={link.label}
+                    onClick={() => scrollToSection(link.href)}
+                    className="font-body text-base font-bold uppercase tracking-wider transition-colors hover:text-[#FF2B2B]"
+                    style={{ color: activeSection === targetId ? "#FF2B2B" : "#1A1A1A" }}
+                  >
+                    {link.label}
+                  </button>
+                );
+              })}
             </div>
 
             {/* Mobile Action Buttons */}
@@ -276,8 +249,23 @@ export default function Navbar() {
               transition={{ delay: 0.2 }}
               className="flex flex-col gap-4 w-[80%] max-w-[260px]"
             >
+              {isPodcast ? (
+                <button
+                  onClick={() => scrollToSection("/")}
+                  className="w-full text-center font-body text-sm font-black uppercase tracking-wider py-3.5 rounded-full border border-black bg-black text-white transition-transform cursor-pointer hover:scale-103 active:scale-98 shadow-[3px_3px_0px_0px_#0D0D0D]"
+                >
+                  IRL Culture Fest
+                </button>
+              ) : (
+                <button
+                  onClick={() => scrollToSection("/podcast")}
+                  className="w-full text-center font-body text-sm font-black uppercase tracking-wider py-3.5 rounded-full border border-black bg-black text-white transition-transform cursor-pointer hover:scale-103 active:scale-98 shadow-[3px_3px_0px_0px_#0D0D0D]"
+                >
+                  Podcast
+                </button>
+              )}
               <button
-                onClick={() => scrollToSection("#passes")}
+                onClick={() => scrollToSection(isPodcast ? "/podcast/#process" : "#passes")}
                 className="w-full text-center font-body text-sm font-black uppercase tracking-wider py-3.5 rounded-full border border-[#0D0D0D] transition-transform cursor-pointer hover:scale-103 active:scale-98"
                 style={{
                   backgroundColor: "#FF2B2B",
@@ -285,7 +273,7 @@ export default function Navbar() {
                   boxShadow: "3px 3px 0px 0px #0D0D0D",
                 }}
               >
-                Secure Your Pass
+                {isPodcast ? "Pitch Your Story" : "Secure Your Pass"}
               </button>
             </motion.div>
           </motion.div>

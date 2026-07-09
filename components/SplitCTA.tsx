@@ -74,7 +74,7 @@ export default function SplitCTA() {
               style={{ marginTop: 32 }}
             >
               <Link
-                href="/attend"
+                href="#passes"
                 className="inline-block font-body text-[14px] font-semibold text-center rounded-full transition-all duration-250 cursor-pointer"
                 style={{
                   background: "#0D0D0D",
@@ -139,7 +139,7 @@ export default function SplitCTA() {
               style={{ marginTop: 32 }}
             >
               <Link
-                href="/partner"
+                href="#passes"
                 className="inline-block font-body text-[14px] font-semibold text-center rounded-full transition-all duration-250 cursor-pointer"
                 style={{
                   background: "#FFFFFF",
