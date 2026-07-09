@@ -11,11 +11,15 @@ export default function Navbar() {
   const pathname = usePathname();
 
   const [activeSection, setActiveSection] = useState("");
+  const [hoveredTab, setHoveredTab] = useState<number | null>(null);
+  const [hoveredMobileTab, setHoveredMobileTab] = useState<number | null>(null);
 
   useEffect(() => {
-    if (pathname !== "/") return;
+    const isPodcast = pathname === "/podcast";
+    const sections = isPodcast
+      ? ["manifesto", "pillars", "benefits", "host", "process"]
+      : ["manifesto", "solution", "subcultures", "passes", "team"];
 
-    const sections = ["manifesto", "solution", "subcultures", "passes", "team"];
     const observers = sections.map((id) => {
       const el = document.getElementById(id);
       if (!el) return null;
@@ -59,7 +63,10 @@ export default function Navbar() {
         const [path, hash] = href.split("#");
         if (pathname === path) {
           const el = document.getElementById(hash);
-          if (el) el.scrollIntoView({ behavior: "smooth" });
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth" });
+            setActiveSection(hash);
+          }
         } else {
           window.location.href = href;
         }
@@ -77,6 +84,7 @@ export default function Navbar() {
       const element = document.querySelector(href);
       if (element) {
         element.scrollIntoView({ behavior: "smooth" });
+        setActiveSection(href.replace("#", ""));
       }
     } else {
       window.location.href = href;
@@ -142,15 +150,19 @@ export default function Navbar() {
           </button>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden md:flex items-center gap-8 mr-6">
-            {links.map((link) => {
+          <div className="hidden md:flex items-center gap-6 mr-6">
+            {links.map((link, idx) => {
               const targetId = link.href.includes("#") ? link.href.split("#")[1] : "";
+              const isActive = activeSection === targetId;
+              const isHovered = hoveredTab === idx;
               return (
                 <button
                   key={link.label}
                   onClick={() => scrollToSection(link.href)}
-                  className="font-body text-xs font-bold uppercase tracking-wider transition-colors hover:text-[#FF2B2B]"
-                  style={{ color: activeSection === targetId ? "#FF2B2B" : linkColor }}
+                  onMouseEnter={() => setHoveredTab(idx)}
+                  onMouseLeave={() => setHoveredTab(null)}
+                  className="font-body text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
+                  style={{ color: isActive || isHovered ? "#FF2B2B" : linkColor }}
                 >
                   {link.label}
                 </button>
@@ -176,7 +188,7 @@ export default function Navbar() {
               </button>
             )}
             <button
-              onClick={() => scrollToSection(isPodcast ? "/podcast/#process" : "#passes")}
+              onClick={() => scrollToSection(isPodcast ? "/podcast/#collaborate" : "#passes")}
               className="font-body text-xs font-black uppercase tracking-wider py-2 px-5 rounded-full border border-black transition-transform cursor-pointer hover:scale-105 active:scale-95 buzz-button"
               style={{
                 backgroundColor: "#FF2B2B",
@@ -227,14 +239,18 @@ export default function Navbar() {
           >
             {/* Mobile Navigation Links */}
             <div className="flex flex-col items-center gap-6 mt-16">
-              {links.map((link) => {
+              {links.map((link, idx) => {
                 const targetId = link.href.includes("#") ? link.href.split("#")[1] : "";
+                const isActive = activeSection === targetId;
+                const isHovered = hoveredMobileTab === idx;
                 return (
                   <button
                     key={link.label}
                     onClick={() => scrollToSection(link.href)}
-                    className="font-body text-base font-bold uppercase tracking-wider transition-colors hover:text-[#FF2B2B]"
-                    style={{ color: activeSection === targetId ? "#FF2B2B" : "#1A1A1A" }}
+                    onMouseEnter={() => setHoveredMobileTab(idx)}
+                    onMouseLeave={() => setHoveredMobileTab(null)}
+                    className="font-body text-base font-bold uppercase tracking-wider transition-colors cursor-pointer"
+                    style={{ color: isActive || isHovered ? "#FF2B2B" : "#1A1A1A" }}
                   >
                     {link.label}
                   </button>
@@ -265,7 +281,7 @@ export default function Navbar() {
                 </button>
               )}
               <button
-                onClick={() => scrollToSection(isPodcast ? "/podcast/#process" : "#passes")}
+                onClick={() => scrollToSection(isPodcast ? "/podcast/#collaborate" : "#passes")}
                 className="w-full text-center font-body text-sm font-black uppercase tracking-wider py-3.5 rounded-full border border-[#0D0D0D] transition-transform cursor-pointer hover:scale-103 active:scale-98"
                 style={{
                   backgroundColor: "#FF2B2B",

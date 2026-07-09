@@ -42,7 +42,7 @@ export default function PartnersCollaborators() {
     <section
       id="partners"
       className="relative overflow-hidden"
-      style={{ background: "#0D0D0D", paddingTop: 80, paddingBottom: 140 }}
+      style={{ background: "#0D0D0D", paddingTop: 40, paddingBottom: 80 }}
     >
       <div
         className="mx-auto relative z-10"

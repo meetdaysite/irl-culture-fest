@@ -39,11 +39,11 @@ export default function Footer() {
     }
   };
 
-  const footerBg = isPodcast ? "rgba(255, 255, 255, 0.7)" : "#1A1A1A";
-  const footerTextColor = isPodcast ? "text-black/80" : "text-white/80";
-  const footerTextMuted = isPodcast ? "text-black/40" : "text-white/40";
-  const footerLinkColor = isPodcast ? "text-black hover:text-[#FF2B2B]" : "text-white hover:text-[#FF2B2B]";
-  const footerDividerBg = isPodcast ? "bg-black/10" : "bg-white/10";
+  const footerBg = isPodcast ? "#0D0D0D" : "#1A1A1A";
+  const footerTextColor = "text-white/80";
+  const footerTextMuted = "text-white/40";
+  const footerLinkColor = "text-white hover:text-[#FF2B2B]";
+  const footerDividerBg = "bg-white/10";
 
   const links = isPodcast
     ? [
@@ -66,8 +66,8 @@ export default function Footer() {
       className="pt-16 pb-8 px-8"
       style={{
         background: footerBg,
-        borderTop: isPodcast ? "2px solid rgba(0, 0, 0, 0.1)" : "2px solid #333",
-        backdropFilter: isPodcast ? "blur(12px)" : "none",
+        borderTop: isPodcast ? "2px solid #222" : "2px solid #333",
+        backdropFilter: "none",
       }}
     >
       <div className="max-w-7xl mx-auto">
@@ -80,7 +80,7 @@ export default function Footer() {
               className="flex items-center cursor-pointer"
             >
               <img
-                src={isPodcast ? "/images/podcast/podcast-logo.png" : "/footer-logo.png"}
+                src={isPodcast ? "/images/podcast/podcast-logo-footer.png" : "/footer-logo.png"}
                 alt={isPodcast ? "IRL Podcast Logo" : "IRL Culture Fest Logo"}
                 className="h-16 sm:h-20 object-contain"
               />
