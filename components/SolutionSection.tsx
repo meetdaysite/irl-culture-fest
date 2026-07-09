@@ -90,11 +90,11 @@ export default function SolutionSection() {
             <img
               src="/footer-logo.png"
               alt="IRL Culture Fest"
-              className="h-[90px] object-contain object-left"
+              className="h-[8rem] object-contain object-right md:ml-auto"
             />
-            <p className="font-body text-[#555] text-sm sm:text-base leading-relaxed">
+            {/* <p className="font-body text-[#555] text-sm sm:text-base leading-relaxed">
               This isn't a trade show, and it's definitely not a corporate conference. For one weekend across three cities, we are building a dedicated ecosystem where real-world curation meets commercial viability.
-            </p>
+            </p> */}
           </motion.div>
         </div>
 
