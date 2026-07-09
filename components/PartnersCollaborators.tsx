@@ -154,7 +154,7 @@ export default function PartnersCollaborators() {
                 whileHover={{ scale: 1.06, borderColor: "rgba(255,255,255,0.3)", backgroundColor: "rgba(255,255,255,0.8)" }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.05 }}
-                className="flex items-center justify-center border border-white/10 rounded-xl py-1.5 px-2 bg-white/[0.65] cursor-pointer transition-colors h-[64px]"
+                className="flex items-center justify-center border border-white/10 rounded-xl py-1.5 px-2 bg-white/[0.85] cursor-pointer transition-colors h-[64px]"
               >
                 <img
                   src={brand.logo}
