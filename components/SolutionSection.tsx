@@ -56,7 +56,7 @@ export default function SolutionSection() {
     <section
       id="solution"
       className="relative overflow-hidden"
-      style={{ background: "#0D0D0D", paddingTop: 80, paddingBottom: 160 }}
+      style={{ background: "#0D0D0D", paddingTop: 80, paddingBottom: 60 }}
     >
       <div
         className="mx-auto relative z-[2]"
@@ -74,29 +74,78 @@ export default function SolutionSection() {
         </motion.span>
 
         {/* Header Row */}
-        <div className="mb-16 max-w-[640px] text-left">
-          <motion.h2
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-display text-[#F5F0E8] leading-none mb-3"
-            style={{
-              fontSize: "clamp(32px, 4.5vw, 56px)",
-              letterSpacing: "0.01em",
-            }}
-          >
-            Introducing IRL Culture Festival 2026
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="font-body text-[#FF2B2B] uppercase font-bold text-xs tracking-wider"
-          >
-            THE PHYSICAL HOME OF INDIA'S OFFLINE MOVEMENT.
-          </motion.p>
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 mb-16">
+          <div className="max-w-[640px] text-left">
+            <motion.h2
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="font-display text-[#F5F0E8] leading-none mb-3"
+              style={{
+                fontSize: "clamp(32px, 4.5vw, 56px)",
+                letterSpacing: "0.01em",
+              }}
+            >
+              Introducing IRL Culture Festival 2026
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="font-body text-[#FF2B2B] uppercase font-bold text-xs tracking-wider"
+            >
+              THE PHYSICAL HOME OF INDIA'S OFFLINE MOVEMENT.
+            </motion.p>
+          </div>
+
+          {/* Cards container */}
+          <div className="flex items-center gap-3 sm:gap-4 self-start lg:self-center pr-2">
+            {/* Solution Image Card */}
+            <motion.div
+              animate={{ rotate: 8 }}
+              whileHover={{ scale: 1.05, rotate: 0 }}
+              transition={{ type: "spring", stiffness: 300, damping: 15 }}
+              className="relative bg-white p-1.5 rounded-xl border border-black shadow-[4px_4px_0px_#FF2B2B] w-[150px] sm:w-[200px] flex-shrink-0 cursor-pointer"
+            >
+              {/* Tape graphic */}
+              <div
+                className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-8 h-2.5 bg-[#FF2B2B]/60 backdrop-blur-[0.5px] border border-black/5 rotate-[-2deg] z-30"
+                style={{
+                  clipPath: "polygon(5% 5%, 95% 10%, 98% 90%, 2% 95%)",
+                }}
+              />
+              <div className="overflow-hidden rounded-lg w-full h-auto aspect-[3/4]">
+                <img
+                  src="/images/solution.png"
+                  alt="Solution"
+                  className="w-full h-full object-cover scale-[1.15]"
+                />
+              </div>
+            </motion.div>
+
+            {/* Logo Card */}
+            <motion.div
+              animate={{ rotate: -8 }}
+              whileHover={{ scale: 1.05, rotate: 0 }}
+              transition={{ type: "spring", stiffness: 300, damping: 15 }}
+              className="relative bg-white p-2 rounded-xl border border-black shadow-[4px_4px_0px_#FF2B2B] w-[110px] sm:w-[145px] aspect-[3/4] flex-shrink-0 flex items-center justify-center cursor-pointer -top-8 sm:-top-12"
+            >
+              {/* Tape graphic */}
+              <div
+                className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-8 h-2.5 bg-[#FF2B2B]/60 backdrop-blur-[0.5px] border border-black/5 rotate-[2deg] z-30"
+                style={{
+                  clipPath: "polygon(5% 5%, 95% 10%, 98% 90%, 2% 95%)",
+                }}
+              />
+              <img
+                src="/footer-logo.png"
+                alt="IRL Logo"
+                className="w-[85%] h-auto object-contain"
+              />
+            </motion.div>
+          </div>
         </div>
 
         {/* Connected Timeline */}
@@ -196,20 +245,7 @@ export default function SolutionSection() {
           </div>
         </div>
 
-        {/* Footer Credit Row */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="border-t border-white/10 mt-16 pt-8 flex items-center justify-end"
-        >
-          <img
-            src="/footer-logo.png"
-            alt="IRL Logo"
-            className="h-16 w-auto object-contain"
-          />
-        </motion.div>
+
       </div>
 
       {/* Torn Paper Divider → next section: Experience #F5F0E8 */}

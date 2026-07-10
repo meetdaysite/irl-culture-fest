@@ -284,17 +284,46 @@ export default function PassesSection() {
         </motion.span>
 
         {/* Heading */}
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="font-display text-[#1A1A1A] tracking-tight leading-none mb-14"
-          style={{ fontSize: "clamp(32px, 4.5vw, 56px)", letterSpacing: "0.01em" }}
-        >
-          Choose Your{" "}
-          <span className="text-[#FF2B2B]">Access Level.</span>
-        </motion.h2>
+        <div className="relative flex flex-col md:flex-row md:items-end justify-between mb-14 w-full gap-4">
+          <motion.h2
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="font-display text-[#1A1A1A] tracking-tight leading-none"
+            style={{ fontSize: "clamp(32px, 4.5vw, 56px)", letterSpacing: "0.01em" }}
+          >
+            Choose Your{" "}
+            <span className="text-[#FF2B2B]">Access Level.</span>
+          </motion.h2>
+
+          {/* Floating Sticky Note */}
+          <div className="relative flex justify-start md:justify-end -mt-3 md:-mt-6">
+            <motion.div
+              animate={{
+                y: [0, -5, 0],
+                rotate: [3, 4.5, 3],
+              }}
+              transition={{
+                y: { repeat: Infinity, duration: 3.5, ease: "easeInOut" },
+                rotate: { repeat: Infinity, duration: 3.5, ease: "easeInOut" },
+              }}
+              className="relative bg-[#0D0D0D] border border-white/20 p-1 px-3 shadow-[2px_2px_0px_#FF2B2B] rounded rotate-[3deg] z-20"
+              style={{ fontFamily: "'Caveat', cursive" }}
+            >
+              {/* Tape graphic (Red) */}
+              <div
+                className="absolute -top-2.5 left-1/2 transform -translate-x-1/2 w-9 h-3 bg-[#FF2B2B]/60 backdrop-blur-[0.5px] border border-black/5 rotate-[-2deg] z-30"
+                style={{
+                  clipPath: "polygon(5% 5%, 95% 10%, 98% 90%, 2% 95%)",
+                }}
+              />
+              <span className="font-bold text-white text-sm sm:text-base whitespace-nowrap block pt-1.5">
+                Opens in Sep
+              </span>
+            </motion.div>
+          </div>
+        </div>
 
         {/* Two-column layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">

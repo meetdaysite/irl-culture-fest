@@ -47,19 +47,19 @@ export default function Footer() {
 
   const links = isPodcast
     ? [
-        { label: "Manifesto", href: "/podcast/#manifesto" },
-        { label: "Pillars", href: "/podcast/#pillars" },
-        { label: "Benefits", href: "/podcast/#benefits" },
-        { label: "Host", href: "/podcast/#host" },
-        { label: "Process", href: "/podcast/#process" },
-      ]
+      { label: "Manifesto", href: "/podcast/#manifesto" },
+      { label: "Pillars", href: "/podcast/#pillars" },
+      { label: "Benefits", href: "/podcast/#benefits" },
+      { label: "Host", href: "/podcast/#host" },
+      { label: "Process", href: "/podcast/#process" },
+    ]
     : [
-        { label: "The Manifesto", href: "#manifesto" },
-        { label: "The Festival", href: "#solution" },
-        { label: "Subcultures", href: "#subcultures" },
-        { label: "Team & Partners", href: "#team" },
-        { label: "Passes", href: "#passes" },
-      ];
+      { label: "Manifesto", href: "#manifesto" },
+      { label: "Festival", href: "#solution" },
+      { label: "Subcultures", href: "#subcultures" },
+      { label: "Team", href: "#team" },
+      { label: "Passes", href: "#passes" },
+    ];
 
   return (
     <footer
@@ -97,16 +97,18 @@ export default function Footer() {
             <span className={`font-body text-xs font-bold uppercase tracking-wider ${footerTextMuted}`}>
               Navigation
             </span>
-            <div className="flex flex-col space-y-2.5">
-              {links.map((link) => (
-                <button
-                  key={link.label}
-                  onClick={() => scrollToSection(link.href)}
-                  className={`w-fit text-left font-body text-base ${footerLinkColor} transition-colors cursor-pointer`}
-                >
-                  {link.label}
-                </button>
-              ))}
+            <div className="grid grid-cols-2 gap-x-8 gap-y-2.5 text-left w-full max-w-[280px]">
+              {links.map((link) => {
+                return (
+                  <button
+                    key={link.label}
+                    onClick={() => scrollToSection(link.href)}
+                    className={`w-fit text-left font-body text-base ${footerLinkColor} transition-colors cursor-pointer`}
+                  >
+                    {link.label}
+                  </button>
+                );
+              })}
             </div>
           </div>
 

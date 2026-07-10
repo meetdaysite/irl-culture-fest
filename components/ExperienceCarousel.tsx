@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 const cards = [
   {
     title: "KNOWLEDGE SHARING",
-    body: "A professional track where the attendees participate in panel discussions, fire-side chats and keynotes by celebrated community leaders, founders and ecosystem providers.",
+    body: "Fire-side chats and keynotes by celebrated community leaders, founders and ecosystem providers.",
     image: "/images/inside-the-fest/knowledge-sharing.png",
     bg: "#1A1A1A",
     text: "#FFFFFF",
@@ -33,7 +33,7 @@ const cards = [
     body: "A high-stakes, rapid-fire pitch session hosted live within the Host Sandbox. A curated board of forward-thinking brand marketers and ecosystem enablers ready to deploy capital.",
     image: "/images/inside-the-fest/live-pitching.jpg",
     bg: "#f2af29",
-    text: "#FFFFFF",
+    text: "#1A1A1A",
     dotColor: "#FF2B2B",
   },
   {

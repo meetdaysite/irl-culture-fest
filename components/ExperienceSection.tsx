@@ -36,10 +36,9 @@ export default function ExperienceSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="font-display text-[#1A1A1A] leading-tight mb-2"
+              className="font-display text-[#1A1A1A] tracking-tight leading-none mb-2"
               style={{
                 fontSize: "clamp(32px, 4.5vw, 56px)",
-                letterSpacing: "0.01em",
               }}
             >
               We Don&apos;t Chase Footfall. <span className="text-[#FF2B2B]">We Curate</span> the Room.

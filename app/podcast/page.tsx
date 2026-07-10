@@ -117,7 +117,7 @@ export default function PodcastPage() {
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
 
                 {/* Left Side: Content */}
-                <div className="md:col-span-7 text-left">
+                <div className="md:col-span-8 lg:col-span-9 text-left">
                   {/* Superhead */}
                   <motion.span
                     initial={{ opacity: 0, y: 15 }}
@@ -133,10 +133,9 @@ export default function PodcastPage() {
                     initial={{ opacity: 0, y: 25 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7, delay: 0.15 }}
-                    className="font-display leading-none tracking-tight text-[#1A1A1A] mb-6 text-[32px] sm:text-[44px] md:text-[56px] uppercase"
+                    className="font-display leading-none tracking-tight text-[#1A1A1A] mb-6 text-[30px] sm:text-[40px] md:text-[46px] lg:text-[56px] uppercase"
                   >
-                    STORIES BEHIND THE PEOPLE <br className="hidden md:inline" />
-                    BUILDING <span className="text-[#FF2B2B]"><br></br>OFFLINE CULTURE.</span>
+                    STORIES BEHIND THE PEOPLE BUILDING <span className="text-[#FF2B2B]"><br></br>OFFLINE CULTURE.</span>
                   </motion.h1>
 
                   {/* Subhead */}
@@ -172,7 +171,7 @@ export default function PodcastPage() {
                 </div>
 
                 {/* Right Side: Image */}
-                <div className="md:col-span-5 flex justify-center md:justify-end">
+                <div className="md:col-span-4 lg:col-span-3 flex justify-center md:justify-end">
                   <div className="relative">
                     {/* Gagaan Podcast Image */}
                     <motion.div
@@ -811,23 +810,23 @@ export default function PodcastPage() {
                       isHovered
                         ? { y: -4, rotate: 0, scale: 1.05 }
                         : {
-                            y: [0, -8, 0],
-                            rotate: card.rotate,
-                            scale: 1,
-                          }
+                          y: [0, -8, 0],
+                          rotate: card.rotate,
+                          scale: 1,
+                        }
                     }
                     transition={
                       isHovered
                         ? { type: "spring", stiffness: 260, damping: 20 }
                         : {
-                            y: {
-                              repeat: Infinity,
-                              duration: 4.5 + card.idx * 0.5,
-                              ease: "easeInOut",
-                            },
-                            rotate: { type: "spring", stiffness: 260, damping: 20 },
-                            scale: { type: "spring", stiffness: 260, damping: 20 }
-                          }
+                          y: {
+                            repeat: Infinity,
+                            duration: 4.5 + card.idx * 0.5,
+                            ease: "easeInOut",
+                          },
+                          rotate: { type: "spring", stiffness: 260, damping: 20 },
+                          scale: { type: "spring", stiffness: 260, damping: 20 }
+                        }
                     }
                     onMouseEnter={() => setHoveredChapterCard(card.idx)}
                     onMouseLeave={() => setHoveredChapterCard(null)}
@@ -860,11 +859,10 @@ export default function PodcastPage() {
                       href={card.link}
                       target={card.external ? "_blank" : "_self"}
                       rel={card.external ? "noopener noreferrer" : ""}
-                      className={`w-full font-body text-xs font-black uppercase tracking-wider py-3 px-5 rounded-full border-2 text-center cursor-pointer transition-all duration-300 ${
-                        card.idx === 0
-                          ? "bg-[#FF2B2B] text-white border-[#FF2B2B] hover:bg-[#cc2222]"
-                          : "bg-transparent text-[#1A1A1A] border-[#1A1A1A] hover:bg-[#1A1A1A] hover:text-white"
-                      }`}
+                      className={`w-full font-body text-xs font-black uppercase tracking-wider py-3 px-5 rounded-full border-2 text-center cursor-pointer transition-all duration-300 ${card.idx === 0
+                        ? "bg-[#FF2B2B] text-white border-[#FF2B2B] hover:bg-[#cc2222]"
+                        : "bg-transparent text-[#1A1A1A] border-[#1A1A1A] hover:bg-[#1A1A1A] hover:text-white"
+                        }`}
                     >
                       {card.linkLabel}
                     </a>
@@ -898,14 +896,14 @@ export default function PodcastPage() {
                 <motion.div
                   initial={{ opacity: 0, rotate: -4, y: 30 }}
                   whileInView={{ opacity: 1, y: 0, rotate: -4 }}
-                  whileHover={{ scale: 1.08, rotate: 0 }}
+                  whileHover={{ scale: 1.05, rotate: 0 }}
                   viewport={{ once: true }}
                   transition={{ type: "spring", stiffness: 220, damping: 20 }}
-                  className="relative bg-white p-2 pb-4 rounded-2xl w-full max-w-[280px] md:max-w-[320px] cursor-pointer group"
+                  className="relative bg-white p-3.5 pb-6 rounded-2xl w-full max-w-[320px] md:max-w-[400px] cursor-pointer group border border-black/10 shadow-[6px_6px_0px_rgba(0,0,0,0.15)]"
                 >
                   {/* Polaroid Tape Graphic */}
                   <div
-                    className="absolute -top-3.5 left-1/2 transform -translate-x-1/2 w-24 h-7 bg-[#f2af29]/35 backdrop-blur-[0.5px] border border-black/5 rotate-[-1deg] z-30 flex items-center justify-center"
+                    className="absolute -top-4.5 left-1/2 transform -translate-x-1/2 w-32 h-8 bg-[#f2af29]/35 backdrop-blur-[0.5px] border border-black/5 rotate-[-1deg] z-30 flex items-center justify-center"
                     style={{
                       clipPath: "polygon(2% 10%, 98% 5%, 95% 95%, 5% 90%)",
                     }}
@@ -922,7 +920,7 @@ export default function PodcastPage() {
                     className="text-center text-3xl text-[#1A1A1A] mt-2 font-medium leading-none"
                     style={{ fontFamily: "'Caveat', cursive" }}
                   >
-                    Gagaan S. Nagi
+                    Gagaan
                   </p>
                 </motion.div>
               </div>
@@ -1136,8 +1134,8 @@ export default function PodcastPage() {
             <h2 className="font-display text-white leading-tight mb-4" style={{ fontSize: "clamp(24px, 3.2vw, 42px)", letterSpacing: "0.01em" }}>
               Let Us Tell Your Story.
             </h2>
-            <p className="font-body text-lg md:text-2xl text-white/85 max-w-2xl mx-auto mb-10">
-              Are you a curator, host, or physical community builder in India? Let's talk.
+            <p className="font-body text-lg md:text-2xl text-white/85 max-w-none md:whitespace-nowrap text-center mx-auto mb-10">
+              Are you a curator, host, or physical community builder in India?
             </p>
 
             <div className="flex items-center justify-center">

@@ -218,7 +218,7 @@ export default function Navbar() {
                 borderColor: "#0D0D0D",
               }}
             >
-              {isPodcast ? "Pitch Your Story" : "Secure Your Pass"}
+              {isPodcast ? "Become Our Guest" : "Prtner With Us"}
             </button>
           </div>
 
