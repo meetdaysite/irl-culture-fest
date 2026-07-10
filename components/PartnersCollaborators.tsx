@@ -151,10 +151,10 @@ export default function PartnersCollaborators() {
                 rel="noopener noreferrer"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ scale: 1.06, borderColor: "rgba(255,255,255,0.3)", backgroundColor: "rgba(255,255,255,0.8)" }}
+                whileHover={{ scale: 1.06, borderColor: "rgba(255,255,255,0.3)", backgroundColor: "rgba(255,255,255,1)" }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.05 }}
-                className="flex items-center justify-center border border-white/10 rounded-xl py-1.5 px-2 bg-white/[0.85] cursor-pointer transition-colors h-[64px]"
+                transition={{ duration: 0.2, delay: i * 0.01 }}
+                className="flex items-center justify-center border border-white/10 rounded-xl py-1.5 px-2 bg-white/[1] cursor-pointer transition-colors h-[64px]"
               >
                 <img
                   src={brand.logo}

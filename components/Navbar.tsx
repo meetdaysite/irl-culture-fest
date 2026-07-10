@@ -143,7 +143,7 @@ export default function Navbar() {
             className="flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-105 active:scale-95"
           >
             <img
-              src={isPodcast ? "/images/podcast/podcast-logo.png" : "/footer-logo.png?v=2"}
+              src={isPodcast ? "/images/podcast/IRL Podcast white bg.svg" : "/footer-logo.png?v=2"}
               alt={isPodcast ? "IRL Podcast Logo" : "IRL Culture Fest Logo"}
               className="h-[45px] sm:h-[50px] object-contain"
             />
@@ -172,6 +172,14 @@ export default function Navbar() {
 
           {/* Desktop Action Buttons */}
           <div className="hidden md:flex items-center gap-4">
+            <a
+              href="https://meetday.ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-body text-xs font-black tracking-wider py-2 px-5 rounded-full border border-black bg-white text-black transition-transform cursor-pointer hover:scale-105 active:scale-95 shadow-[2px_2px_0px_0px_#FF2B2B] text-center"
+            >
+              meetday.ai
+            </a>
             {isPodcast ? (
               <button
                 onClick={() => scrollToSection("/")}
@@ -265,6 +273,14 @@ export default function Navbar() {
               transition={{ delay: 0.2 }}
               className="flex flex-col gap-4 w-[80%] max-w-[260px]"
             >
+              <a
+                href="https://meetday.ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full text-center font-body text-sm font-black tracking-wider py-3.5 rounded-full border border-black bg-white text-black transition-transform cursor-pointer hover:scale-103 active:scale-98 shadow-[3px_3px_0px_0px_#FF2B2B]"
+              >
+                meetday.ai
+              </a>
               {isPodcast ? (
                 <button
                   onClick={() => scrollToSection("/")}

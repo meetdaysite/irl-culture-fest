@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 
 const cards = [
   {
@@ -10,7 +11,14 @@ const cards = [
     bg: "#F5F0E8",
     textColor: "#1A1A1A",
     numberColor: "#FF2B2B",
+    ghostColor: "#FF2B2B",
+    ghostOpacity: 0.08,
     hoverBorder: "#FF2B2B",
+    icon: (color: string) => (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="mb-4">
+        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+      </svg>
+    )
   },
   {
     number: "02",
@@ -18,8 +26,16 @@ const cards = [
     body: "Providing top subcultures their own physical micro-neighborhoods to program, own, and run live.",
     bg: "#FF2B2B",
     textColor: "#FFFFFF",
-    numberColor: "rgba(255,255,255,0.3)",
-    hoverBorder: "#FF2B2B",
+    numberColor: "#FFFFFF",
+    ghostColor: "#FFFFFF",
+    ghostOpacity: 0.08,
+    hoverBorder: "#FFFFFF",
+    icon: (color: string) => (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="mb-4">
+        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+        <circle cx="12" cy="10" r="3" />
+      </svg>
+    )
   },
   {
     number: "03",
@@ -27,12 +43,33 @@ const cards = [
     body: "Building the commercial infrastructure and corporate networks required to turn hosting into a viable career.",
     bg: "#1A1A1A",
     textColor: "#FFFFFF",
-    numberColor: "#f2af29",
-    hoverBorder: "#f2af29",
+    numberColor: "#FF2B2B",
+    ghostColor: "#FF2B2B",
+    ghostOpacity: 0.08,
+    hoverBorder: "#FF2B2B",
+    icon: (color: string) => (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="mb-4">
+        <path d="m22 7-8.5 8.5-5-5L2 17M22 7h-6M22 7v6" />
+      </svg>
+    )
   },
 ];
 
 export default function SolutionSection() {
+  const [wanderPos, setWanderPos] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const wander = () => {
+      setWanderPos({
+        x: (Math.random() - 0.5) * 40,  // -20px to +20px
+        y: (Math.random() - 0.5) * 50,  // -25px to +25px
+      });
+    };
+    wander();
+    const id = setInterval(wander, 3500);
+    return () => clearInterval(id);
+  }, []);
+
   return (
     <section
       id="solution"
@@ -43,6 +80,18 @@ export default function SolutionSection() {
         className="mx-auto relative z-[2]"
         style={{ maxWidth: 1200, paddingLeft: 48, paddingRight: 48 }}
       >
+        {/* Large Background Watermark Logo (Inner margin bound + random wander) */}
+        <motion.div
+          animate={{ x: wanderPos.x, y: wanderPos.y }}
+          transition={{ duration: 3.5, ease: "easeInOut" }}
+          className="absolute right-12 top-6 pointer-events-none select-none hidden md:block z-[0] opacity-[0.4] max-w-[200px] lg:max-w-[250px]"
+        >
+          <img
+            src="/footer-logo.png"
+            alt="IRL Culture Fest Watermark"
+            className="w-full h-auto object-contain"
+          />
+        </motion.div>
         {/* Eyebrow */}
         <motion.span
           initial={{ opacity: 0, y: 20 }}
@@ -55,51 +104,33 @@ export default function SolutionSection() {
         </motion.span>
 
         {/* Header Row */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
-          <div className="md:col-span-7">
-            <motion.h2
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="font-display text-[#1A1A1A] leading-none mb-3"
-              style={{
-                fontSize: "clamp(32px, 4.5vw, 56px)",
-                letterSpacing: "0.01em",
-              }}
-            >
-              Introducing IRL Culture Festival 2026
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.15 }}
-              className="font-body text-[#FF2B2B] uppercase font-bold text-sm tracking-wider"
-            >
-              The Physical Home of India’s Offline Movement.
-            </motion.p>
-          </div>
-          <motion.div
+        <div className="mb-12 max-w-3xl text-left">
+          <motion.h2
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="md:col-span-5 flex flex-col justify-end gap-5"
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="font-display text-[#1A1A1A] leading-none mb-3"
+            style={{
+              fontSize: "clamp(32px, 4.5vw, 56px)",
+              letterSpacing: "0.01em",
+            }}
           >
-            <img
-              src="/footer-logo.png"
-              alt="IRL Culture Fest"
-              className="h-[8rem] object-contain object-right md:ml-auto"
-            />
-            {/* <p className="font-body text-[#555] text-sm sm:text-base leading-relaxed">
-              This isn't a trade show, and it's definitely not a corporate conference. For one weekend across three cities, we are building a dedicated ecosystem where real-world curation meets commercial viability.
-            </p> */}
-          </motion.div>
+            Introducing IRL Culture Festival 2026
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="font-body text-[#FF2B2B] uppercase font-bold text-sm tracking-wider"
+          >
+            The Physical Home of India’s Offline Movement.
+          </motion.p>
         </div>
 
         {/* 3 Numbered Cards */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {cards.map((card, i) => (
             <motion.div
               key={card.number}
@@ -112,7 +143,7 @@ export default function SolutionSection() {
                 y: { type: "spring", stiffness: 400, damping: 20, delay: 0.15 * i },
                 scale: { type: "spring", stiffness: 400, damping: 20 }
               }}
-              className="relative rounded-2xl p-8 sm:p-10 overflow-hidden transition-all duration-150 hover:shadow-2xl cursor-default border-2 border-transparent shadow-md min-h-[260px] flex flex-col justify-start"
+              className="relative rounded-2xl p-8 sm:p-10 overflow-hidden transition-all duration-150 hover:shadow-2xl cursor-default border-2 border-transparent shadow-md min-h-[300px] flex flex-col justify-between items-start"
               style={{ background: card.bg, color: card.textColor }}
               onMouseEnter={(e) => {
                 (e.currentTarget as HTMLDivElement).style.borderColor = card.hoverBorder;
@@ -122,33 +153,38 @@ export default function SolutionSection() {
               }}
             >
               <span
-                className="absolute top-2 right-4 font-display text-[80px] sm:text-[100px] leading-none pointer-events-none select-none"
+                className="absolute top-4 right-4 font-display text-[80px] sm:text-[100px] leading-none pointer-events-none select-none"
                 style={{
-                  color: card.number === "02" ? "#FF5253" : card.numberColor,
-                  opacity: card.number === "02" ? 1 : 0.1
+                  color: card.ghostColor,
+                  opacity: card.ghostOpacity
                 }}
               >
                 {card.number}
               </span>
-              <div className="relative z-10">
-                <span
-                  className="font-display text-4xl block mb-1"
-                  style={{ color: card.numberColor }}
-                >
-                  {card.number}
-                </span>
-                <h3
-                  className="font-body font-bold uppercase tracking-wider mb-4"
-                  style={{
-                    fontSize: "clamp(15px, 1.8vw, 20px)",
-                    letterSpacing: "0.03em",
-                  }}
-                >
-                  {card.title}
-                </h3>
-                <p className="font-body text-sm sm:text-[15px] leading-relaxed opacity-90">
-                  {card.body}
-                </p>
+              <div className="relative z-10 w-full flex flex-col h-full justify-between items-start">
+                <div className="w-full">
+                  <div className="flex items-center justify-between w-full mb-4">
+                    {card.icon(card.numberColor)}
+                    <span
+                      className="font-display text-4xl leading-none"
+                      style={{ color: card.numberColor }}
+                    >
+                      {card.number}
+                    </span>
+                  </div>
+                  <h3
+                    className="font-body font-bold uppercase tracking-wider mb-4"
+                    style={{
+                      fontSize: "clamp(15px, 1.8vw, 20px)",
+                      letterSpacing: "0.03em",
+                    }}
+                  >
+                    {card.title}
+                  </h3>
+                  <p className="font-body text-sm sm:text-[15px] leading-relaxed opacity-90">
+                    {card.body}
+                  </p>
+                </div>
               </div>
             </motion.div>
           ))}

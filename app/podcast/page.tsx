@@ -10,7 +10,7 @@ const JaggedDivider = ({ color, top = false }: { color: string; top?: boolean })
   const step = 15;
   const height = 12;
   const base = 25;
-  
+
   let pathD = `M 0 ${base}`;
   for (let x = step; x <= 1440; x += step) {
     const isPeak = (x / step) % 2 !== 0;
@@ -44,6 +44,8 @@ const podcastBrands = [
   { name: "Google", logo: "/images/podcast/gagaan-logos/Google.svg", url: "https://www.google.com" },
   { name: "Meta", logo: "/images/podcast/gagaan-logos/Meta.svg", url: "https://www.meta.com" },
   { name: "WPP", logo: "/images/podcast/gagaan-logos/WPP.svg", url: "https://www.wpp.com" },
+  { name: "IPG", logo: "/images/podcast/gagaan-logos/IPG.svg", url: "https://www.interpublic.com" },
+  { name: "OMG", logo: "/images/podcast/gagaan-logos/OMG.svg", url: "https://www.omnicommediagroup.com" },
   { name: "P&G", logo: "/images/podcast/gagaan-logos/PandG.svg", url: "https://www.pg.com" },
   { name: "Unilever", logo: "/images/podcast/gagaan-logos/Unilever.svg", url: "https://www.unilever.com" },
   { name: "Samsung", logo: "/images/podcast/gagaan-logos/Samsung.svg", url: "https://www.samsung.com" },
@@ -61,6 +63,11 @@ export default function PodcastPage() {
   const [copied, setCopied] = useState(false);
   const [activeBenefit, setActiveBenefit] = useState(0);
   const [hoverBenefit, setHoverBenefit] = useState<number | null>(null);
+  const [hoveredFormatCard, setHoveredFormatCard] = useState<number | null>(null);
+  const [hoveredPillarCard, setHoveredPillarCard] = useState<number | null>(null);
+  const [hoveredChapterCard, setHoveredChapterCard] = useState<number | null>(null);
+  const [activeProcessStep, setActiveProcessStep] = useState(0);
+  const [hoveredProcessStep, setHoveredProcessStep] = useState<number | null>(null);
 
   useEffect(() => {
     if (hoverBenefit !== null) return;
@@ -70,6 +77,14 @@ export default function PodcastPage() {
     return () => clearInterval(interval);
   }, [hoverBenefit]);
 
+  useEffect(() => {
+    if (hoveredProcessStep !== null) return;
+    const interval = setInterval(() => {
+      setActiveProcessStep((prev) => (prev + 1) % 4);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [hoveredProcessStep]);
+
   const handleCopyEmail = () => {
     navigator.clipboard.writeText("info@meetday.ai");
     setCopied(true);
@@ -78,60 +93,31 @@ export default function PodcastPage() {
 
   return (
     <>
+      <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&display=swap" rel="stylesheet" />
       <Navbar />
       <main className="bg-[#F5F0E8] text-[#1A1A1A] overflow-x-hidden min-h-screen">
-        
+
         {/* 1. HERO SECTION */}
         <section id="hero" className="relative pt-12 pb-0 md:pt-16 md:pb-0 bg-[#FF2B2B] overflow-hidden">
-          
+
           {/* Inner Cream Band with Jagged Paper Cut transitions */}
           <div className="relative bg-[#F5F0E8] text-[#1A1A1A] pt-16 pb-6 md:pt-20 md:pb-8 overflow-hidden">
             <JaggedDivider color="#FF2B2B" top />
-            
-            {/* Subtle audio waveform / asterisk backdrop inside the cream block */}
-            <div className="absolute inset-0 opacity-10 flex items-center justify-center pointer-events-none">
-              <svg width="100%" height="100%" viewBox="0 0 1440 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M100 300 H1340" stroke="black" strokeWidth="2" strokeDasharray="8 8" />
-                {[...Array(24)].map((_, i) => {
-                  const height = 40 + Math.sin(i * 0.8) * 120 + Math.cos(i * 0.3) * 60;
-                  const x = 150 + i * 50;
-                  return (
-                    <motion.line
-                      key={i}
-                      x1={x}
-                      y1={300 - height / 2}
-                      x2={x}
-                      y2={300 + height / 2}
-                      stroke="black"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                      animate={{
-                        y1: [300 - (height * 0.3) / 2, 300 - (height * 1.3) / 2, 300 - (height * 0.7) / 2],
-                        y2: [300 + (height * 0.3) / 2, 300 + (height * 1.3) / 2, 300 + (height * 0.7) / 2],
-                      }}
-                      transition={{
-                        duration: 1.2 + (i % 3) * 0.3,
-                        repeat: Infinity,
-                        repeatType: "mirror",
-                        ease: "easeInOut",
-                        delay: (i % 4) * 0.1,
-                      }}
-                    />
-                  );
-                })}
-              </svg>
-            </div>
 
-            <DecorativeStar size={160} color="#FF2B2B" opacity={0.08} top="8%" right="8%" spin spinDuration={40} useStar4={true} />
-            <DecorativeStar size={80} color="#f2af29" opacity={0.12} bottom="12%" left="6%" rotate={35} useStar4={true} />
-            <DecorativeStar size={70} color="#FF2B2B" opacity={0.07} top="35%" left="20%" useStar4={true} />
-            <DecorativeStar size={90} color="#f2af29" opacity={0.09} bottom="25%" right="18%" useStar4={true} />
+
+
+            <DecorativeStar size={200} color="#FF2B2B" opacity={0.16} top="8%" right="8%" spin spinDuration={40} useStar4={true} />
+            <DecorativeStar size={110} color="#f2af29" opacity={0.19} bottom="12%" left="6%" rotate={35} spin spinDuration={35} useStar4={true} />
+            <DecorativeStar size={100} color="#FF2B2B" opacity={0.15} top="35%" left="20%" spin spinDuration={45} useStar4={true} />
+            <DecorativeStar size={125} color="#f2af29" opacity={0.17} bottom="25%" right="18%" spin spinDuration={38} useStar4={true} />
+            <DecorativeStar size={90} color="#FF2B2B" opacity={0.14} top="50%" right="40%" rotate={15} spin spinDuration={42} useStar4={true} />
+            <DecorativeStar size={105} color="#f2af29" opacity={0.16} bottom="5%" left="45%" spin spinDuration={25} useStar4={true} />
 
             <div className="max-w-6xl mx-auto px-6 relative z-10">
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-                
+
                 {/* Left Side: Content */}
-                <div className="md:col-span-8 text-left">
+                <div className="md:col-span-7 text-left">
                   {/* Superhead */}
                   <motion.span
                     initial={{ opacity: 0, y: 15 }}
@@ -150,7 +136,7 @@ export default function PodcastPage() {
                     className="font-display leading-none tracking-tight text-[#1A1A1A] mb-6 text-[32px] sm:text-[44px] md:text-[56px] uppercase"
                   >
                     STORIES BEHIND THE PEOPLE <br className="hidden md:inline" />
-                    BUILDING <span className="text-[#FF2B2B]">OFFLINE CULTURE.</span>
+                    BUILDING <span className="text-[#FF2B2B]"><br></br>OFFLINE CULTURE.</span>
                   </motion.h1>
 
                   {/* Subhead */}
@@ -185,34 +171,20 @@ export default function PodcastPage() {
                   </motion.div>
                 </div>
 
-                {/* Right Side: Image + Logo */}
-                <div className="md:col-span-4 flex justify-center md:justify-end">
+                {/* Right Side: Image */}
+                <div className="md:col-span-5 flex justify-center md:justify-end">
                   <div className="relative">
                     {/* Gagaan Podcast Image */}
                     <motion.div
                       initial={{ opacity: 0, scale: 0.9 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.7, delay: 0.25 }}
-                      className="w-full max-w-[240px] sm:max-w-[280px] md:max-w-[300px] aspect-[4/5] rounded-2xl border-2 border-black overflow-hidden shadow-[6px_6px_0px_#1A1A1A] group cursor-pointer"
+                      className="w-full max-w-[270px] sm:max-w-[320px] md:max-w-[360px] aspect-[4/5] rounded-2xl border-2 border-black overflow-hidden shadow-[6px_6px_0px_#1A1A1A] group cursor-pointer"
                     >
                       <img
                         src="/images/podcast/Gagaan podcast 2.png"
                         alt="Gagaan Podcast Host"
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                    </motion.div>
-
-                    {/* Podcast Logo (Shifted downward and smaller) */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.7, delay: 0.4 }}
-                      className="absolute -bottom-16 -left-12 w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-xl bg-white border-2 border-black p-2 shadow-[4px_4px_0px_#1A1A1A] flex items-center justify-center z-20"
-                    >
-                      <img
-                        src="/images/podcast/podcast-logo.png"
-                        alt="IRL Culture Podcast Logo"
-                        className="w-full h-full object-contain"
                       />
                     </motion.div>
                   </div>
@@ -222,17 +194,18 @@ export default function PodcastPage() {
             </div>
 
           </div>
-          
+
         </section>
 
         {/* 2. THE MISSION SECTION */}
-        <section className="pt-24 pb-24 md:pt-32 md:pb-32 bg-[#FF2B2B] text-white relative overflow-hidden">
+        <section className="pt-24 pb-12 md:pt-32 md:pb-16 bg-[#FF2B2B] text-white relative overflow-hidden">
           <JaggedDivider color="#F5F0E8" top />
-          <DecorativeStar size={110} color="#FFFFFF" opacity={0.12} top="15%" left="4%" useStar4={true} />
-          <DecorativeStar size={70} color="#f2af29" opacity={0.15} bottom="20%" right="45%" useStar4={true} />
+          <DecorativeStar size={150} color="#FFFFFF" opacity={0.19} top="15%" left="4%" spin spinDuration={38} useStar4={true} />
+          <DecorativeStar size={100} color="#f2af29" opacity={0.2} bottom="20%" right="45%" spin spinDuration={42} useStar4={true} />
+          <DecorativeStar size={115} color="#FFFFFF" opacity={0.18} top="30%" right="10%" spin spinDuration={30} useStar4={true} />
           <div className="max-w-6xl mx-auto px-6 relative z-10">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
-              
+
               {/* Left Column: Content */}
               <div className="md:col-span-7 text-left">
                 <motion.span
@@ -244,16 +217,16 @@ export default function PodcastPage() {
                 >
                   ✦ THE MISSION
                 </motion.span>
-                
+
                 {/* Sentence 1: Separate, bigger, different color, no italics, upper+lower case */}
                 <motion.h2
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.1 }}
-                  className="font-display leading-tight text-[#1A1A1A] text-3xl sm:text-4xl md:text-5xl mb-6"
+                  className="font-display leading-tight text-[#1A1A1A] text-2xl sm:text-3xl md:text-4xl mb-6"
                 >
-                  Urban Loneliness is Quietly Rising.
+                  Urban Loneliness is <br></br>Quietly Rising.
                 </motion.h2>
 
                 {/* Remaining Sentences: Smaller, white text, no italics */}
@@ -293,59 +266,115 @@ export default function PodcastPage() {
         {/* 3. OUR MANIFESTO TO HOSTS */}
         <section id="manifesto" className="bg-[#1A1A1A] relative overflow-hidden">
           <JaggedDivider color="#FF2B2B" top />
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 w-full min-h-[500px] md:min-h-[700px]">
-            {/* Quadrant 1: Manifesto Intro */}
-            <div className="bg-[#1A1A1A] flex flex-col justify-center items-start p-8 sm:p-12 md:p-16 text-left relative overflow-hidden">
-              <DecorativeStar size={70} color="#FF2B2B" opacity={0.08} top="15%" right="10%" useStar4={true} />
+            {/* Left Column: Text Stack */}
+            <div
+              className="bg-[#1A1A1A] flex flex-col justify-center items-start p-8 sm:p-12 md:py-16 md:pr-16 text-left relative overflow-hidden"
+              style={{
+                paddingLeft: "calc(max(1.5rem, 50vw - 576px))",
+              }}
+            >
+              <DecorativeStar size={70} color="#FF2B2B" opacity={0.08} top="10%" right="10%" useStar4={true} />
+              <DecorativeStar size={55} color="#f2af29" opacity={0.1} bottom="10%" left="5%" spin spinDuration={20} useStar4={true} />
+
               <span className="inline-block font-body text-[10px] sm:text-xs font-black uppercase tracking-wider px-3 py-1 rounded-full border-2 border-[#f2af29] text-[#f2af29] mb-6">
                 ✦ OUR MANIFESTO TO HOSTS
               </span>
-              <p className="font-body text-sm sm:text-base md:text-lg leading-relaxed font-medium tracking-wide text-white/80">
+
+              <p className="font-body text-sm sm:text-base md:text-lg leading-relaxed font-medium tracking-wide text-white/80 mb-8">
                 You do not just host experiences.
                 <span className="font-display text-2xl sm:text-3xl md:text-4xl font-black text-[#f2af29] block mt-3 leading-none">
                   You sculpt belonging.
                 </span>
               </p>
-            </div>
 
-            {/* Quadrant 2: Manifesto Image 1 */}
-            <div className="relative w-full h-[250px] sm:h-[350px] md:h-auto overflow-hidden">
-              <img
-                src="/images/podcast/manifesto-1.jpg"
-                alt="Manifesto 1"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-              />
-            </div>
-
-            {/* Quadrant 4: Manifesto Conclusion (Desktop bottom-right, Mobile row 3) */}
-            <div
-              className="flex flex-col justify-center items-start p-8 sm:p-12 md:p-16 text-left md:col-start-2 md:row-start-2 relative overflow-hidden"
-              style={{
-                background: "repeating-linear-gradient(-45deg, #FF2B2B, #FF2B2B 15px, #E52222 15px, #E52222 30px)",
-              }}
-            >
-              <DecorativeStar size={85} color="#FFFFFF" opacity={0.15} bottom="10%" left="15%" useStar4={true} />
-              <p className="font-body text-sm sm:text-base md:text-lg leading-relaxed font-medium tracking-wide text-white">
-                You build safe harbors that transform everyday urban survival into vibrant real-world connection.
-              </p>
+              {/* Red Conclusion Box */}
               <div
-                className="bg-white border-2 border-black rounded-xl p-4 mt-5 w-full"
-                style={{ boxShadow: "4px 4px 0px 0px #1A1A1A" }}
+                className="w-full border-2 border-black rounded-2xl p-6 md:p-8 relative overflow-hidden text-white"
+                style={{
+                  background: "repeating-linear-gradient(-45deg, #FF2B2B, #FF2B2B 15px, #E52222 15px, #E52222 30px)",
+                  boxShadow: "5px 5px 0px #000000",
+                }}
               >
-                <p className="font-body text-sm sm:text-base md:text-lg leading-relaxed font-bold tracking-wide text-[#1A1A1A]">
-                  We want to record, archive, and honor your story.
+                <DecorativeStar size={60} color="#FFFFFF" opacity={0.15} bottom="-10px" right="-10px" useStar4={true} />
+                <p className="font-body text-sm sm:text-base md:text-lg leading-relaxed font-medium tracking-wide text-white mb-6">
+                  You build safe harbors that transform everyday urban survival into vibrant real-world connection.
                 </p>
+                <div
+                  className="bg-white border-2 border-black rounded-xl p-4 w-full"
+                  style={{ boxShadow: "4px 4px 0px 0px #1A1A1A" }}
+                >
+                  <p className="font-body text-sm sm:text-base md:text-lg leading-relaxed font-bold tracking-wide text-[#1A1A1A]">
+                    We want to record, archive, and honor your story.
+                  </p>
+                </div>
               </div>
             </div>
 
-            {/* Quadrant 3: Manifesto Image 2 (Desktop bottom-left, Mobile row 4) */}
-            <div className="relative w-full h-[250px] sm:h-[350px] md:h-auto overflow-hidden md:col-start-1 md:row-start-2">
-              <img
-                src="/images/podcast/manifesto-2.png"
-                alt="Manifesto 2"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-              />
+            {/* Right Column: The Polaroid Board */}
+            <div
+              className="bg-[#1A1A1A] flex flex-col justify-center items-center p-8 md:py-16 md:pl-16 min-h-[450px] md:min-h-0 relative"
+              style={{
+                paddingRight: "calc(max(1.5rem, 50vw - 576px))"
+              }}
+            >
+              <DecorativeStar size={60} color="#FF2B2B" opacity={0.1} top="10%" left="10%" spin spinDuration={35} useStar4={true} />
+              <DecorativeStar size={75} color="#f2af29" opacity={0.12} bottom="15%" right="10%" rotate={15} useStar4={true} />
+
+              <div className="flex flex-row items-center justify-center gap-4 sm:gap-6 md:gap-4 lg:gap-6 w-full max-w-2xl relative z-10">
+
+                {/* Polaroid 1 (Left) */}
+                <motion.div
+                  initial={{ rotate: 4, y: 15 }}
+                  whileInView={{ y: 0 }}
+                  whileHover={{ scale: 1.1, rotate: 0, zIndex: 30 }}
+                  viewport={{ once: true }}
+                  transition={{ type: "spring", stiffness: 220, damping: 20 }}
+                  className="relative bg-white p-2.5 pb-6 sm:pb-8 rounded-xl w-[190px] sm:w-[260px] md:w-[240px] lg:w-[280px] aspect-[3/4] cursor-pointer group border-2 border-black shadow-[4px_4px_0px_rgba(0,0,0,0.4)] z-10"
+                >
+                  {/* Polaroid Tape Graphic */}
+                  <div
+                    className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-22 h-6.5 bg-[#f2af29]/40 backdrop-blur-[0.5px] border border-black/5 rotate-[3deg] z-30"
+                    style={{
+                      clipPath: "polygon(2% 10%, 98% 5%, 95% 95%, 5% 90%)",
+                    }}
+                  />
+                  <div className="w-full h-full overflow-hidden rounded bg-gray-100 border border-black/10">
+                    <img
+                      src="/images/podcast/manifesto-1.jpg"
+                      alt="Manifesto 1"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                </motion.div>
+
+                {/* Polaroid 2 (Right) */}
+                <motion.div
+                  initial={{ rotate: -4, y: 15 }}
+                  whileInView={{ y: 0 }}
+                  whileHover={{ scale: 1.1, rotate: 0, zIndex: 30 }}
+                  viewport={{ once: true }}
+                  transition={{ type: "spring", stiffness: 220, damping: 20 }}
+                  className="relative bg-white p-2.5 pb-6 sm:pb-8 rounded-xl w-[190px] sm:w-[260px] md:w-[240px] lg:w-[280px] aspect-[3/4] cursor-pointer group border-2 border-black shadow-[4px_4px_0px_rgba(0,0,0,0.4)] z-20"
+                >
+                  {/* Polaroid Tape Graphic */}
+                  <div
+                    className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-20 h-6 bg-[#FF2B2B]/40 backdrop-blur-[0.5px] border border-black/5 rotate-[-3deg] z-30"
+                    style={{
+                      clipPath: "polygon(5% 5%, 95% 10%, 98% 90%, 2% 95%)",
+                    }}
+                  />
+                  <div className="w-full h-full overflow-hidden rounded bg-gray-100 border border-black/10">
+                    <img
+                      src="/images/podcast/manifesto-2.png"
+                      alt="Manifesto 2"
+                      className="w-full h-full object-cover scale-[1.3] transition-transform duration-500 group-hover:scale-[1.4]"
+                    />
+                  </div>
+                </motion.div>
+
+              </div>
             </div>
           </div>
           <JaggedDivider color="#F5F0E8" />
@@ -353,24 +382,106 @@ export default function PodcastPage() {
 
         {/* 4. THE EXPERIENCE SECTION */}
         <section id="experience" className="pt-12 pb-24 md:pt-16 md:pb-32 bg-[#F5F0E8] relative overflow-hidden">
-          <DecorativeStar size={75} color="#FF2B2B" opacity={0.07} top="40%" left="15%" useStar4={true} />
-          <DecorativeStar size={85} color="#f2af29" opacity={0.09} bottom="35%" right="15%" useStar4={true} />
-          
-          {/* Floating Corner Images */}
-          <div className="absolute top-0 left-0 hidden lg:block w-56 h-56 md:w-80 md:h-80 overflow-hidden z-10 group cursor-pointer">
-            <img src="/images/podcast/format/20.png" alt="Format 20" className="w-full h-full object-cover scale-[1.25] transition-transform duration-500 group-hover:scale-[1.35]" />
-          </div>
-          <div className="absolute top-0 right-0 hidden lg:block w-52 h-52 md:w-72 md:h-72 overflow-hidden z-10 group cursor-pointer">
-            <img src="/images/podcast/format/A platform that brands.png" alt="Format Brands" className="w-full h-full object-cover scale-[1.25] transition-transform duration-500 group-hover:scale-[1.35]" />
-          </div>
-          <div className="absolute bottom-12 md:bottom-16 left-0 hidden lg:block w-56 h-56 md:w-72 md:h-72 overflow-hidden z-10 group cursor-pointer">
-            <img src="/images/podcast/format/23.png" alt="Format 23" className="w-full h-full object-cover scale-[1.25] transition-transform duration-500 group-hover:scale-[1.35]" />
-          </div>
-          <div className="absolute bottom-12 md:bottom-16 right-0 hidden lg:block w-60 h-60 md:w-84 md:h-84 overflow-hidden z-10 group cursor-pointer">
-            <img src="/images/podcast/format/21.png" alt="Format 21" className="w-full h-full object-cover scale-[1.25] transition-transform duration-500 group-hover:scale-[1.35]" />
-          </div>
-
+          <DecorativeStar size={105} color="#FF2B2B" opacity={0.15} top="40%" left="15%" spin spinDuration={44} useStar4={true} />
+          <DecorativeStar size={120} color="#f2af29" opacity={0.17} bottom="35%" right="15%" spin spinDuration={36} useStar4={true} />
+          <DecorativeStar size={95} color="#1A1A1A" opacity={0.16} top="15%" right="35%" spin spinDuration={25} useStar4={true} />
           <div className="max-w-6xl mx-auto px-6 relative z-10">
+            {/* Floating Corner Cards (Aligned to Margins) */}
+            <motion.div
+              initial={{ rotate: -4, opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              animate={hoveredFormatCard === 1 ? { y: 0, rotate: 0, scale: 1.05 } : { y: [0, -8, 0], rotate: -4, scale: 1 }}
+              transition={{
+                opacity: { duration: 0.5 },
+                y: { repeat: hoveredFormatCard === 1 ? 0 : Infinity, duration: 4.2, ease: "easeInOut" }
+              }}
+              onMouseEnter={() => setHoveredFormatCard(1)}
+              onMouseLeave={() => setHoveredFormatCard(null)}
+              viewport={{ once: true }}
+              className="absolute top-0 left-2 xl:left-4 hidden xl:block w-48 h-56 md:w-56 md:h-64 bg-white p-2.5 pb-6 border-2 border-black rounded-xl shadow-[4px_4px_0px_#1a1a1a] z-10 cursor-pointer group"
+            >
+              <div
+                className="absolute -top-2.5 left-1/2 transform -translate-x-1/2 w-16 h-5 bg-[#f2af29]/40 backdrop-blur-[0.5px] border border-black/5 rotate-[-2deg] z-30"
+                style={{
+                  clipPath: "polygon(2% 10%, 98% 5%, 95% 95%, 5% 90%)",
+                }}
+              />
+              <div className="w-full h-full overflow-hidden rounded bg-gray-100 border border-black/10">
+                <img src="/images/podcast/format/20.png" alt="Format 20" className="w-full h-full object-cover scale-[1.25] transition-transform duration-500 group-hover:scale-[1.35]" />
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ rotate: 3, opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              animate={hoveredFormatCard === 2 ? { y: 0, rotate: 0, scale: 1.05 } : { y: [0, -6, 0], rotate: 3, scale: 1 }}
+              transition={{
+                opacity: { duration: 0.5 },
+                y: { repeat: hoveredFormatCard === 2 ? 0 : Infinity, duration: 4.8, ease: "easeInOut" }
+              }}
+              onMouseEnter={() => setHoveredFormatCard(2)}
+              onMouseLeave={() => setHoveredFormatCard(null)}
+              viewport={{ once: true }}
+              className="absolute top-0 right-2 xl:right-4 hidden xl:block w-48 h-56 md:w-56 md:h-64 bg-white p-2.5 pb-6 border-2 border-black rounded-xl shadow-[4px_4px_0px_#1a1a1a] z-10 cursor-pointer group"
+            >
+              <div
+                className="absolute -top-2.5 left-1/2 transform -translate-x-1/2 w-16 h-5 bg-[#FF2B2B]/40 backdrop-blur-[0.5px] border border-black/5 rotate-[3deg] z-30"
+                style={{
+                  clipPath: "polygon(5% 5%, 95% 10%, 98% 90%, 2% 95%)",
+                }}
+              />
+              <div className="w-full h-full overflow-hidden rounded bg-gray-100 border border-black/10">
+                <img src="/images/podcast/format/A platform that brands.png" alt="Format Brands" className="w-full h-full object-cover scale-[1.25] transition-transform duration-500 group-hover:scale-[1.35]" />
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ rotate: 4, opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              animate={hoveredFormatCard === 3 ? { y: 0, rotate: 0, scale: 1.05 } : { y: [0, -7, 0], rotate: 4, scale: 1 }}
+              transition={{
+                opacity: { duration: 0.5 },
+                y: { repeat: hoveredFormatCard === 3 ? 0 : Infinity, duration: 4.5, ease: "easeInOut" }
+              }}
+              onMouseEnter={() => setHoveredFormatCard(3)}
+              onMouseLeave={() => setHoveredFormatCard(null)}
+              viewport={{ once: true }}
+              className="absolute bottom-0 left-2 xl:left-4 hidden xl:block w-48 h-56 md:w-56 md:h-64 bg-white p-2.5 pb-6 border-2 border-black rounded-xl shadow-[4px_4px_0px_#1a1a1a] z-10 cursor-pointer group"
+            >
+              <div
+                className="absolute -top-2.5 left-1/2 transform -translate-x-1/2 w-16 h-5 bg-[#FF2B2B]/40 backdrop-blur-[0.5px] border border-black/5 rotate-[-3deg] z-30"
+                style={{
+                  clipPath: "polygon(2% 10%, 98% 5%, 95% 95%, 5% 90%)",
+                }}
+              />
+              <div className="w-full h-full overflow-hidden rounded bg-gray-100 border border-black/10">
+                <img src="/images/podcast/format/23.png" alt="Format 23" className="w-full h-full object-cover scale-[1.25] transition-transform duration-500 group-hover:scale-[1.35]" />
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ rotate: -3, opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              animate={hoveredFormatCard === 4 ? { y: 0, rotate: 0, scale: 1.05 } : { y: [0, -9, 0], rotate: -3, scale: 1 }}
+              transition={{
+                opacity: { duration: 0.5 },
+                y: { repeat: hoveredFormatCard === 4 ? 0 : Infinity, duration: 5.0, ease: "easeInOut" }
+              }}
+              onMouseEnter={() => setHoveredFormatCard(4)}
+              onMouseLeave={() => setHoveredFormatCard(null)}
+              viewport={{ once: true }}
+              className="absolute bottom-0 right-2 xl:right-4 hidden xl:block w-48 h-56 md:w-56 md:h-64 bg-white p-2.5 pb-6 border-2 border-black rounded-xl shadow-[4px_4px_0px_#1a1a1a] z-10 cursor-pointer group"
+            >
+              <div
+                className="absolute -top-2.5 left-1/2 transform -translate-x-1/2 w-16 h-5 bg-[#f2af29]/40 backdrop-blur-[0.5px] border border-black/5 rotate-[2deg] z-30"
+                style={{
+                  clipPath: "polygon(5% 5%, 95% 10%, 98% 90%, 2% 95%)",
+                }}
+              />
+              <div className="w-full h-full overflow-hidden rounded bg-gray-100 border border-black/10">
+                <img src="/images/podcast/format/21.png" alt="Format 21" className="w-full h-full object-cover scale-[1.25] transition-transform duration-500 group-hover:scale-[1.35]" />
+              </div>
+            </motion.div>
             <div className="text-center mb-16">
               <span className="inline-block font-body text-xs font-black uppercase tracking-wider px-3 py-1 rounded-full border-2 border-[#FF2B2B] text-[#FF2B2B] mb-4">
                 ✦ THE FORMAT
@@ -436,9 +547,10 @@ export default function PodcastPage() {
 
         {/* 5. THE STORIES WE SEEK */}
         <section id="pillars" className="pt-8 pb-0 bg-[#1A1A1A] relative overflow-hidden">
-          <DecorativeStar size={100} color="#FF2B2B" opacity={0.06} top="10%" left="5%" useStar4={true} />
-          <DecorativeStar size={70} color="#f2af29" opacity={0.08} bottom="25%" right="5%" useStar4={true} />
-          
+          <DecorativeStar size={140} color="#FF2B2B" opacity={0.14} top="10%" left="5%" spin spinDuration={40} useStar4={true} />
+          <DecorativeStar size={100} color="#f2af29" opacity={0.16} bottom="25%" right="5%" spin spinDuration={30} useStar4={true} />
+          <DecorativeStar size={115} color="#FFFFFF" opacity={0.18} top="5%" right="25%" spin spinDuration={30} useStar4={true} />
+
           <div className="max-w-6xl mx-auto px-6 relative z-10">
             <div className="mb-6">
               <span className="inline-block font-body text-xs font-black uppercase tracking-wider px-3 py-1 rounded-full border-2 border-[#FF2B2B] text-[#FF2B2B] mb-3">
@@ -476,11 +588,21 @@ export default function PodcastPage() {
               ].map((pillar, idx) => (
                 <motion.div
                   key={idx}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  whileHover={{ scale: 1.03 }}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  animate={hoveredPillarCard === idx ? { y: 0, scale: 1.03 } : { y: [0, -8, 0], scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  transition={{
+                    opacity: { duration: 0.5, delay: idx * 0.1 },
+                    y: {
+                      repeat: hoveredPillarCard === idx ? 0 : Infinity,
+                      duration: 4.5 + idx * 0.5,
+                      ease: "easeInOut",
+                      delay: idx * 0.1
+                    }
+                  }}
+                  onMouseEnter={() => setHoveredPillarCard(idx)}
+                  onMouseLeave={() => setHoveredPillarCard(null)}
                   className="rounded-2xl border-2 border-black p-6 flex flex-col justify-between"
                   style={{
                     backgroundColor: pillar.bg,
@@ -502,24 +624,39 @@ export default function PodcastPage() {
                 </motion.div>
               ))}
             </div>
+
+            {/* Card-formatted image aligned to margins */}
+            <div className="relative w-full h-[180px] md:h-[300px] overflow-hidden rounded-2xl border-2 border-black mt-8 group cursor-pointer">
+              <img
+                src="/images/podcast/pillars.png"
+                alt="Editorial Pillars Banner"
+                className="w-full h-full object-cover scale-[1.05] transition-transform duration-700 group-hover:scale-[1.1]"
+              />
+            </div>
           </div>
 
-          {/* Full-width image spanning all the way to the bottom edge */}
-          <div className="relative w-full h-[250px] md:h-[450px] overflow-hidden mt-0 group cursor-pointer">
-            <img
-              src="/images/podcast/pillars.png"
-              alt="Editorial Pillars Banner"
-              className="w-full h-full object-cover scale-[1.05] transition-transform duration-700 group-hover:scale-[1.1]"
-            />
-          </div>
-
-          <JaggedDivider color="#F5F0E8" />
         </section>
 
         {/* 6. WHAT YOU RECEIVE (PERKS) */}
-        <section id="benefits" className="pt-12 pb-24 md:pt-16 md:pb-32 bg-[#F5F0E8] relative overflow-hidden">
+        <section
+          id="benefits"
+          className="pt-12 pb-24 md:pt-16 md:pb-32 relative overflow-hidden moving-stripes-benefits"
+        >
+          <style>{`
+            @keyframes move-stripes-benefits {
+              0% { background-position: 0 0; }
+              100% { background-position: 56.57px 0; }
+            }
+            .moving-stripes-benefits {
+              background: repeating-linear-gradient(-45deg, #F5F0E8, #F5F0E8 20px, #EBE5D8 20px, #EBE5D8 40px);
+              background-size: 56.57px 56.57px;
+              animation: move-stripes-benefits 3.5s linear infinite;
+            }
+          `}</style>
+          <JaggedDivider color="#1A1A1A" top />
           <DecorativeStar size={80} color="#FF2B2B" opacity={0.07} top="20%" right="8%" useStar4={true} />
           <DecorativeStar size={110} color="#f2af29" opacity={0.09} bottom="10%" left="10%" useStar4={true} />
+          <DecorativeStar size={70} color="#1A1A1A" opacity={0.07} top="40%" left="40%" useStar4={true} />
           <div className="max-w-6xl mx-auto px-6 relative z-10">
             <div className="text-center mb-16">
               <span className="inline-block font-body text-xs font-black uppercase tracking-wider px-3 py-1 rounded-full border-2 border-[#FF2B2B] text-[#FF2B2B] mb-4">
@@ -562,7 +699,7 @@ export default function PodcastPage() {
                   { bg: "#1A1A1A", text: "#FFFFFF", num: "#f2af29" },
                   { bg: "#FFFFFF", text: "#1A1A1A", num: "#FF2B2B" },
                 ][idx];
-                
+
                 const isScaled = hoverBenefit !== null ? hoverBenefit === idx : activeBenefit === idx;
 
                 return (
@@ -585,7 +722,7 @@ export default function PodcastPage() {
                     }}
                   >
                     <div>
-                      <span 
+                      <span
                         className="block font-display text-4xl font-black mb-4"
                         style={{ color: cardColors.num }}
                       >
@@ -608,9 +745,10 @@ export default function PodcastPage() {
 
         {/* 7. PART OF A GLOBAL MOVEMENT */}
         <section className="pt-12 pb-24 md:pt-16 md:pb-32 bg-[#0D0D0D] text-white relative overflow-hidden">
-          <DecorativeStar size={140} color="#FF2B2B" opacity={0.1} bottom="5%" right="3%" spin spinDuration={35} useStar4={true} />
-          <DecorativeStar size={90} color="#f2af29" opacity={0.08} top="15%" left="8%" useStar4={true} />
-          
+          <DecorativeStar size={180} color="#FF2B2B" opacity={0.18} bottom="5%" right="3%" spin spinDuration={35} useStar4={true} />
+          <DecorativeStar size={125} color="#f2af29" opacity={0.16} top="15%" left="8%" spin spinDuration={38} useStar4={true} />
+          <DecorativeStar size={105} color="#FFFFFF" opacity={0.16} top="40%" right="25%" spin spinDuration={45} useStar4={true} />
+
           <div className="max-w-6xl mx-auto px-6 relative z-10">
             <div className="mb-16">
               <span className="inline-block font-body text-xs font-black uppercase tracking-wider px-3 py-1 rounded-full border-2 border-[#FF2B2B] text-[#FF2B2B] mb-4">
@@ -624,75 +762,110 @@ export default function PodcastPage() {
               </p>
             </div>
 
-            <div className="overflow-x-auto w-full border-2 border-white/20 rounded-2xl bg-[#1A1A1A] shadow-xl">
-              <table className="min-w-full text-left font-body">
-                <thead className="bg-[#2D2D2D] text-white font-display font-black uppercase text-sm sm:text-base tracking-wider border-b-2 border-white/10">
-                  <tr>
-                    <th scope="col" className="px-6 py-4 border-r border-white/10 w-[240px]">Component</th>
-                    <th scope="col" className="px-6 py-4 border-r border-white/10 w-[240px]">Our Role</th>
-                    <th scope="col" className="px-6 py-4">Mission &amp; Actions</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-white/10 bg-transparent text-white/90 text-sm sm:text-base">
-                  {[
-                    {
-                      comp: "IRL Culture Podcast",
-                      role: "We Archive Your Story",
-                      mission: "A dedicated content platform to showcase and immortalize the stories of IRL culture builders.",
-                      link: "#collaborate",
-                      linkLabel: "Pitch Now →",
-                    },
-                    {
-                      comp: "meetday™",
-                      role: "We Infrastructure Your Growth",
-                      mission: "An intelligent infrastructure built to help hosts discover premium brand sponsorships for IRL experiences.",
-                      link: "https://meetday.ai",
-                      linkLabel: "Explore meetday →",
-                      external: true,
-                    },
-                    {
-                      comp: "IRL Culture Fest 2026",
-                      role: "We Celebrate the Collective Movement",
-                      mission: "A massive live festival platform to engage IRL communities, brands, and the broader ecosystem.",
-                      link: "/#passes",
-                      linkLabel: "Get Passes →",
-                    },
-                  ].map((row, idx) => (
-                    <tr key={idx} className="hover:bg-white/5 transition-colors">
-                      <td className="px-6 py-5 border-r border-white/10 font-bold uppercase text-[#f2af29]">
-                        {row.comp}
-                      </td>
-                      <td className="px-6 py-5 border-r border-white/10 font-semibold text-white/80">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                {
+                  comp: "IRL Culture Podcast",
+                  role: "We Archive Your Story",
+                  logo: "/images/podcast/IRL Podcast white bg.svg",
+                  mission: "A dedicated content platform to showcase and immortalize the stories of IRL culture builders.",
+                  link: "#collaborate",
+                  linkLabel: "Pitch Now →",
+                },
+                {
+                  comp: "meetday™",
+                  role: "We Infrastructure Your Growth",
+                  logo: "/meetday-red.svg",
+                  mission: "An intelligent infrastructure built to help hosts discover premium brand sponsorships for IRL experiences.",
+                  link: "https://meetday.ai",
+                  linkLabel: "Explore meetday →",
+                  external: true,
+                },
+                {
+                  comp: "IRL Culture Fest 2026",
+                  role: "We Celebrate the Collective Movement",
+                  logo: "/footer-logo.png",
+                  mission: "A massive live festival platform to engage IRL communities, brands, and the broader ecosystem.",
+                  link: "/#passes",
+                  linkLabel: "Get Passes →",
+                },
+              ].map((row, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  animate={hoveredChapterCard === idx ? { y: 0, scale: 1.03 } : { y: [0, -8, 0], scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    opacity: { duration: 0.5, delay: idx * 0.1 },
+                    y: {
+                      repeat: hoveredChapterCard === idx ? 0 : Infinity,
+                      duration: 4.5 + idx * 0.4,
+                      ease: "easeInOut",
+                      delay: idx * 0.1
+                    }
+                  }}
+                  onMouseEnter={() => setHoveredChapterCard(idx)}
+                  onMouseLeave={() => setHoveredChapterCard(null)}
+                  className="rounded-2xl border-2 border-black p-6 bg-white flex flex-col justify-between items-start text-left"
+                  style={{
+                    boxShadow: "5px 5px 0px #FF2B2B",
+                  }}
+                >
+                  <div className="w-full">
+                    <div className="flex justify-between items-center w-full gap-4 mb-4">
+                      <span className="inline-block font-body text-[10px] font-black uppercase tracking-wider text-[#FF2B2B] px-2.5 py-1 rounded bg-[#FF2B2B]/10 border border-[#FF2B2B]/20 font-semibold">
                         {row.role}
-                      </td>
-                      <td className="px-6 py-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                        <span className="text-white/70 leading-relaxed max-w-md">
-                          {row.mission}
-                        </span>
-                        <a
-                          href={row.link}
-                          target={row.external ? "_blank" : "_self"}
-                          rel={row.external ? "noopener noreferrer" : ""}
-                          className="inline-block text-[#FF2B2B] hover:text-white font-bold transition-colors text-sm underline shrink-0"
-                        >
-                          {row.linkLabel}
-                        </a>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+                      </span>
+                      {row.logo && (
+                        <div className={`${row.comp.includes("Fest")
+                          ? "h-16 md:h-20"
+                          : row.comp.includes("Podcast")
+                            ? "h-14 md:h-18"
+                            : "h-9 md:h-11"
+                          } w-auto flex items-center justify-end shrink-0`}>
+                          <img
+                            src={row.logo}
+                            alt={`${row.comp} Logo`}
+                            className={`${row.comp.includes("Fest")
+                              ? "h-16 md:h-20 max-w-[180px] md:max-w-[210px]"
+                              : row.comp.includes("Podcast")
+                                ? "h-14 md:h-18 max-w-[180px] md:max-w-[210px]"
+                                : "h-9 md:h-11 max-w-[115px] md:max-w-[140px]"
+                              } object-contain`}
+                          />
+                        </div>
+                      )}
+                    </div>
+                    <h3 className="font-display text-[#1A1A1A] text-2xl font-black mb-3 leading-tight">
+                      {row.comp}
+                    </h3>
+                    <p className="font-body text-black/70 text-sm leading-relaxed mb-6">
+                      {row.mission}
+                    </p>
+                  </div>
+                  <a
+                    href={row.link}
+                    target={row.external ? "_blank" : "_self"}
+                    rel={row.external ? "noopener noreferrer" : ""}
+                    className="w-full font-body text-xs font-black uppercase tracking-wider py-3.5 px-6 rounded-full border-2 border-black bg-[#1A1A1A] text-white transition-all duration-300 hover:scale-105 hover:bg-[#FF2B2B] hover:text-white active:scale-95 text-center cursor-pointer"
+                  >
+                    {row.linkLabel}
+                  </a>
+                </motion.div>
+              ))}
             </div>
           </div>
           <JaggedDivider color="#F5F0E8" />
         </section>
 
         {/* 8. MEET YOUR HOST */}
-        <section id="host" className="pt-12 pb-24 md:pt-16 md:pb-32 bg-[#F5F0E8] relative overflow-hidden">
-          <DecorativeStar size={110} color="#FF2B2B" opacity={0.08} top="12%" left="4%" useStar4={true} />
-          <DecorativeStar size={70} color="#f2af29" opacity={0.09} bottom="8%" right="6%" useStar4={true} />
-          <div className="max-w-5xl mx-auto px-6 relative z-10">
-            <div className="text-left mb-16 max-w-4xl mx-auto">
+        <section id="host" className="pt-8 pb-16 md:pt-12 md:pb-24 bg-[#F5F0E8] relative overflow-hidden">
+          <DecorativeStar size={150} color="#FF2B2B" opacity={0.16} top="12%" left="4%" spin spinDuration={32} useStar4={true} />
+          <DecorativeStar size={100} color="#f2af29" opacity={0.17} bottom="8%" right="6%" spin spinDuration={38} useStar4={true} />
+          <DecorativeStar size={115} color="#FF2B2B" opacity={0.15} top="30%" right="35%" spin spinDuration={30} useStar4={true} />
+          <div className="max-w-6xl mx-auto px-6 relative z-10">
+            <div className="text-left mb-8 w-full">
               <span className="inline-block font-body text-xs font-black uppercase tracking-wider px-3 py-1 rounded-full border-2 border-[#FF2B2B] text-[#FF2B2B] mb-4">
                 ✦ THE MICROPHONE
               </span>
@@ -702,7 +875,7 @@ export default function PodcastPage() {
             </div>
 
             {/* Gagaan's Polaroid & Biography Details */}
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center max-w-4xl mx-auto mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center w-full mb-8">
               {/* Left: Polaroid Image */}
               <div className="md:col-span-5 flex justify-center">
                 <motion.div
@@ -711,16 +884,16 @@ export default function PodcastPage() {
                   whileHover={{ scale: 1.08, rotate: 0 }}
                   viewport={{ once: true }}
                   transition={{ type: "spring", stiffness: 220, damping: 20 }}
-                  className="relative bg-white p-2 pb-4 rounded-2xl w-full max-w-[260px] cursor-pointer group"
+                  className="relative bg-white p-2 pb-4 rounded-2xl w-full max-w-[280px] md:max-w-[320px] cursor-pointer group"
                 >
                   {/* Polaroid Tape Graphic */}
-                  <div 
+                  <div
                     className="absolute -top-3.5 left-1/2 transform -translate-x-1/2 w-24 h-7 bg-[#f2af29]/35 backdrop-blur-[0.5px] border border-black/5 rotate-[-1deg] z-30 flex items-center justify-center"
                     style={{
                       clipPath: "polygon(2% 10%, 98% 5%, 95% 95%, 5% 90%)",
                     }}
                   />
-                  
+
                   <div className="aspect-[3/4] overflow-hidden rounded-xl bg-gray-100 mb-2">
                     <img
                       src="/images/team/Gagaan.png"
@@ -728,7 +901,10 @@ export default function PodcastPage() {
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
-                  <p className="font-display text-center text-xl text-black font-black leading-none mt-2">
+                  <p
+                    className="text-center text-3xl text-[#1A1A1A] mt-2 font-medium leading-none"
+                    style={{ fontFamily: "'Caveat', cursive" }}
+                  >
                     Gagaan S. Nagi
                   </p>
                 </motion.div>
@@ -737,8 +913,8 @@ export default function PodcastPage() {
               {/* Right: Content details (not in a card) */}
               <div className="md:col-span-7 text-left space-y-6">
                 <div>
-                  <span className="block font-body text-[11px] font-bold tracking-widest text-[#FF2B2B] uppercase mb-2">
-                    Podcast Host &amp; CEO, meetday.ai
+                  <span className="block font-body text-[11px] font-bold tracking-widest text-[#FF2B2B] mb-2">
+                    PODCAST HOST &amp; CEO, meetday.ai
                   </span>
                   <h3 className="font-display text-3xl sm:text-4xl text-[#1A1A1A] leading-none mb-4">
                     Gagaan Singh Nagi
@@ -753,7 +929,7 @@ export default function PodcastPage() {
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="flex flex-wrap gap-2 pt-2">
                   {["Experiential Strategy", "Community Design", "Host Ecosystems"].map((tag) => (
                     <span
@@ -764,31 +940,31 @@ export default function PodcastPage() {
                     </span>
                   ))}
                 </div>
-              </div>
-            </div>
 
-            {/* Logo Grid */}
-            <div className="text-left mt-20 max-w-4xl mx-auto">
-              <span className="block font-body text-xs font-black uppercase tracking-widest text-black/40 mb-6">
-                TRUSTED BY LEADERS FROM
-              </span>
-              <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-4 items-center justify-center">
-                {podcastBrands.map((brand, i) => (
-                  <motion.div
-                    key={brand.name}
-                    initial={{ opacity: 0, y: 15 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: i * 0.05 }}
-                    className="flex items-center justify-center border border-black/10 rounded-xl p-2 bg-white cursor-pointer h-[50px] shadow-sm hover:scale-105 transition-transform"
-                  >
-                    <img
-                      src={brand.logo}
-                      alt={brand.name}
-                      className="max-h-[30px] max-w-[90%] object-contain"
-                    />
-                  </motion.div>
-                ))}
+                {/* Logo Grid under content */}
+                <div className="text-left mt-4 w-full border-t border-black/10 pt-4">
+                  <span className="block font-body text-[10px] font-black uppercase tracking-widest text-black/40 mb-2">
+                    TRUSTED BY LEADERS FROM
+                  </span>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 items-center">
+                    {podcastBrands.map((brand, i) => (
+                      <motion.div
+                        key={brand.name}
+                        initial={{ opacity: 0, y: 15 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.4, delay: i * 0.05 }}
+                        className="flex items-center justify-center border border-black/10 rounded-xl p-2 bg-white cursor-pointer h-[58px] shadow-sm hover:scale-105 transition-transform"
+                      >
+                        <img
+                          src={brand.logo}
+                          alt={brand.name}
+                          className="max-h-[38px] max-w-[90%] object-contain"
+                        />
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -796,12 +972,13 @@ export default function PodcastPage() {
         </section>
 
         <section id="process" className="pt-8 pb-12 md:pt-12 md:pb-16 bg-[#FFFFFF] relative overflow-hidden">
-          <DecorativeStar size={120} color="#f2af29" opacity={0.06} top="-40px" right="4%" rotate={18} useStar4={true} />
-          <DecorativeStar size={90} color="#FF2B2B" opacity={0.07} bottom="15%" left="8%" useStar4={true} />
-          
+          <DecorativeStar size={160} color="#f2af29" opacity={0.14} top="-40px" right="4%" rotate={18} spin spinDuration={40} useStar4={true} />
+          <DecorativeStar size={125} color="#FF2B2B" opacity={0.15} bottom="15%" left="8%" spin spinDuration={35} useStar4={true} />
+          <DecorativeStar size={100} color="#f2af29" opacity={0.16} top="45%" right="45%" spin spinDuration={42} useStar4={true} />
+
           <div className="max-w-6xl mx-auto px-6 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              
+
               {/* Left Column: Heading and stacked cards */}
               <div className="lg:col-span-7 flex flex-col justify-start text-left">
                 <div className="mb-6">
@@ -842,36 +1019,54 @@ export default function PodcastPage() {
                       duration: "Episode Launch",
                       desc: "We launch the episode and reels out to India's leading creators and host ecosystem.",
                     },
-                  ].map((proc, idx) => (
-                    <motion.div
-                      key={idx}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: idx * 0.08 }}
-                      className="bg-[#F5F0E8] rounded-2xl border-2 border-[#1A1A1A] p-4 relative z-10 flex flex-row items-center gap-6"
-                      style={{
-                        boxShadow: "4px 4px 0px #1A1A1A",
-                      }}
-                    >
-                      <span className="font-display text-4xl text-[#FF2B2B] font-black shrink-0">
-                        {proc.step}
-                      </span>
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-1">
-                          <h3 className="font-display text-lg font-bold text-[#1A1A1A]">
-                            {proc.title}
-                          </h3>
-                          <span className="font-body text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-black/5 text-black/70">
-                            {proc.duration}
-                          </span>
+                  ].map((proc, idx) => {
+                    const isHighlighted = hoveredProcessStep !== null
+                      ? hoveredProcessStep === idx
+                      : activeProcessStep === idx;
+
+                    return (
+                      <motion.div
+                        key={idx}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{
+                          opacity: { duration: 0.4, delay: idx * 0.08 },
+                          y: { duration: 0.4, delay: idx * 0.08 },
+                          default: { type: "tween", duration: 0.15, ease: "easeOut" }
+                        }}
+                        animate={{
+                          scale: isHighlighted ? 1.04 : 1,
+                          backgroundColor: isHighlighted ? "#FF2B2B" : "#F5F0E8",
+                          color: isHighlighted ? "#FFFFFF" : "#1A1A1A",
+                          boxShadow: isHighlighted ? "6px 6px 0px #000000" : "4px 4px 0px #1A1A1A"
+                        }}
+                        onMouseEnter={() => setHoveredProcessStep(idx)}
+                        onMouseLeave={() => {
+                          setActiveProcessStep((idx + 1) % 4);
+                          setHoveredProcessStep(null);
+                        }}
+                        className="rounded-2xl border-2 border-[#1A1A1A] p-4 relative z-10 flex flex-row items-center gap-6 cursor-pointer"
+                      >
+                        <span className={`font-display text-4xl font-black shrink-0 ${isHighlighted ? "text-[#f2af29]" : "text-[#FF2B2B]"}`}>
+                          {proc.step}
+                        </span>
+                        <div className="flex-1">
+                          <div className="flex items-center gap-3 mb-1">
+                            <h3 className={`font-display text-lg font-bold ${isHighlighted ? "text-white" : "text-[#1A1A1A]"}`}>
+                              {proc.title}
+                            </h3>
+                            <span className={`font-body text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded ${isHighlighted ? "bg-white/20 text-white" : "bg-black/5 text-black/70"}`}>
+                              {proc.duration}
+                            </span>
+                          </div>
+                          <p className={`font-body text-xs sm:text-sm leading-relaxed ${isHighlighted ? "text-white/90" : "text-black/70"}`}>
+                            {proc.desc}
+                          </p>
                         </div>
-                        <p className="font-body text-xs sm:text-sm text-black/70 leading-relaxed">
-                          {proc.desc}
-                        </p>
-                      </div>
-                    </motion.div>
-                  ))}
+                      </motion.div>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -910,12 +1105,13 @@ export default function PodcastPage() {
               animation: move-stripes 2.5s linear infinite;
             }
           `}</style>
-          
+
           <JaggedDivider color="#FFFFFF" top />
-          <DecorativeStar size={150} color="#0D0D0D" opacity={0.1} top="15%" left="5%" spin spinDuration={40} useStar4={true} />
-          <DecorativeStar size={80} color="#f2af29" opacity={0.15} bottom="12%" right="8%" useStar4={true} />
-          
-          <div className="max-w-4xl mx-auto px-6 relative z-10">
+          <DecorativeStar size={190} color="#0D0D0D" opacity={0.18} top="15%" left="5%" spin spinDuration={40} useStar4={true} />
+          <DecorativeStar size={110} color="#f2af29" opacity={0.2} bottom="12%" right="8%" spin spinDuration={32} useStar4={true} />
+          <DecorativeStar size={135} color="#FFFFFF" opacity={0.19} top="35%" right="40%" spin spinDuration={35} useStar4={true} />
+
+          <div className="max-w-6xl mx-auto px-6 relative z-10">
             <h2 className="font-display text-white leading-tight mb-4" style={{ fontSize: "clamp(24px, 3.2vw, 42px)", letterSpacing: "0.01em" }}>
               Let's Build Together. <br />
               Let Us Tell Your Story.
@@ -923,7 +1119,7 @@ export default function PodcastPage() {
             <p className="font-body text-lg md:text-2xl text-white/85 max-w-2xl mx-auto mb-10">
               Are you a curator, host, or physical community builder in India? Let's talk.
             </p>
- 
+
             <div className="flex items-center justify-center">
               <a
                 href="mailto:info@meetday.ai"

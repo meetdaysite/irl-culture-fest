@@ -34,32 +34,20 @@ export default function DecorativeStar({
   return (
     <motion.div
       aria-hidden="true"
-      animate={
-        useStar4
-          ? { scale: [0.9, 1.25, 0.9] }
-          : {
-              scale: [1, 1.08, 1],
-              rotate: spin ? [rotate, rotate + 360] : rotate,
-            }
-      }
-      transition={
-        useStar4
-          ? {
-              duration: 3 + Math.random() * 3,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }
-          : {
-              scale: {
-                duration: 3 + Math.random() * 2,
-                repeat: Infinity,
-                ease: "easeInOut",
-              },
-              rotate: spin
-                ? { duration: spinDuration, repeat: Infinity, ease: "linear" }
-                : { duration: 0.6, ease: "easeOut" },
-            }
-      }
+      animate={{
+        scale: useStar4 ? [0.9, 1.25, 0.9] : [1, 1.08, 1],
+        rotate: spin ? [rotate, rotate + 360] : rotate
+      }}
+      transition={{
+        scale: {
+          duration: 3 + Math.random() * 3,
+          repeat: Infinity,
+          ease: "easeInOut"
+        },
+        rotate: spin
+          ? { duration: spinDuration, repeat: Infinity, ease: "linear" }
+          : { duration: 0.6, ease: "easeOut" }
+      }}
       style={{
         position: "absolute",
         width: size,
