@@ -99,7 +99,7 @@ export default function SubculturesMatrix() {
                 letterSpacing: "0.01em",
               }}
             >
-              Where Subcultures Meet Consumer Brands.
+              Where Subcultures <br></br>Meet Consumer Brands.
             </motion.h2>
           </div>
 

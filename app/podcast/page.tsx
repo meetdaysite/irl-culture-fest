@@ -98,7 +98,7 @@ export default function PodcastPage() {
       <main className="bg-[#F5F0E8] text-[#1A1A1A] overflow-x-hidden min-h-screen">
 
         {/* 1. HERO SECTION */}
-        <section id="hero" className="relative pt-12 pb-0 md:pt-16 md:pb-0 bg-[#FF2B2B] overflow-hidden">
+        <section id="hero" className="relative pt-16 pb-0 md:pt-20 md:pb-0 bg-[#FF2B2B] overflow-hidden">
 
           {/* Inner Cream Band with Jagged Paper Cut transitions */}
           <div className="relative bg-[#F5F0E8] text-[#1A1A1A] pt-16 pb-6 md:pt-20 md:pb-8 overflow-hidden">
@@ -117,7 +117,7 @@ export default function PodcastPage() {
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
 
                 {/* Left Side: Content */}
-                <div className="md:col-span-8 lg:col-span-9 text-left">
+                <div className="md:col-span-7 lg:col-span-8 text-left">
                   {/* Superhead */}
                   <motion.span
                     initial={{ opacity: 0, y: 15 }}
@@ -135,7 +135,7 @@ export default function PodcastPage() {
                     transition={{ duration: 0.7, delay: 0.15 }}
                     className="font-display leading-none tracking-tight text-[#1A1A1A] mb-6 text-[30px] sm:text-[40px] md:text-[46px] lg:text-[56px] uppercase"
                   >
-                    STORIES BEHIND THE PEOPLE BUILDING <span className="text-[#FF2B2B]"><br></br>OFFLINE CULTURE.</span>
+                    STORIES BEHIND <br></br>THE PEOPLE BUILDING <span className="text-[#FF2B2B]"><br></br>OFFLINE CULTURE.</span>
                   </motion.h1>
 
                   {/* Subhead */}
@@ -171,14 +171,14 @@ export default function PodcastPage() {
                 </div>
 
                 {/* Right Side: Image */}
-                <div className="md:col-span-4 lg:col-span-3 flex justify-center md:justify-end">
+                <div className="md:col-span-5 lg:col-span-4 flex justify-center md:justify-end">
                   <div className="relative">
                     {/* Gagaan Podcast Image */}
                     <motion.div
                       initial={{ opacity: 0, scale: 0.9 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.7, delay: 0.25 }}
-                      className="w-full max-w-[270px] sm:max-w-[320px] md:max-w-[360px] aspect-[4/5] rounded-2xl border-2 border-black overflow-hidden shadow-[6px_6px_0px_#1A1A1A] group cursor-pointer"
+                      className="w-full max-w-[280px] sm:max-w-[340px] md:max-w-[400px] lg:max-w-[440px] aspect-[4/5] rounded-2xl border-2 border-black overflow-hidden shadow-[6px_6px_0px_#1A1A1A] group cursor-pointer"
                     >
                       <img
                         src="/images/podcast/Gagaan podcast 2.png"
