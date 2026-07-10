@@ -7,50 +7,50 @@ import DecorativeStar from "@/components/DecorativeStar";
 const verticals = [
   {
     name: "Culinary & Beverage",
-    curators: "Supper clubs, independent roasters, mixology innovators.",
-    opportunity: "Premium alcobev, gourmet D2C, culinary tech.",
+    curators: "Underground supper clubs, regional culinary curators, craft mixology.",
+    opportunity: "Premium alcobev, FMCG, D2C gourmet, kitchen tech.",
     image: "/images/subculture/cullinary-and-beverages.webp",
   },
   {
     name: "Active Lifestyle",
-    curators: "Run clubs, community fitness squads, skate crews.",
-    opportunity: "Athleisure, health-tech, wearable tech, hydration.",
+    curators: "Urban run clubs, community fitness squads, mindful movement collectives.",
+    opportunity: "Athleisure, health-tech, wearable tech, hydration and wellness brands.",
     image: "/images/subculture/active-lifestyle.png",
   },
   {
-    name: "Independent Sound",
-    curators: "Community-first music tours, underground electronic labels.",
-    opportunity: "Audio gear, streaming networks, youth lifestyle brands.",
+    name: "Independent Sound & Music",
+    curators: "Independent audio communities, fusion genre sub-labels, vinyl listening rooms.",
+    opportunity: "Audio gear, streaming platforms, youth-centric lifestyle brands.",
     image: "/images/subculture/independent-sound.webp",
   },
   {
     name: "Mindfulness & Well-being",
-    curators: "Digital detox collectives, wellness circles, sound baths.",
-    opportunity: "Premium hospitality, insurance, clean-label D2C.",
+    curators: "Modern wellness circles, digital detox collectives, sensory sound-bath communities",
+    opportunity: "Insurance, corporate wellness, premium hospitality, clean-label D2C.",
     image: "/images/subculture/mindfullness.webp",
   },
   {
-    name: "Analog Arts & Culture",
-    curators: "Vinyl listening rooms, tactile design, indie publishing.",
-    opportunity: "Consumer tech, luxury lifestyle, apparel, automotive.",
+    name: "Arts & Subculture",
+    curators: "Street photography collectives, independent zine creators, tactile art workshop hubs.",
+    opportunity: "Consumer tech, luxury lifestyle, apparel, design-forward auto brands.",
     image: "/images/subculture/analog-art.webp",
   },
   {
-    name: "Pet Culture",
-    curators: "Pet parent networks, breed-specific collectives.",
-    opportunity: "Premium pet care, pet-tech, experiential travel.",
+    name: "Pet Culture & Communities",
+    curators: "Niche pet-parent circles, breed-specific social networks, animal welfare collectives.",
+    opportunity: "Premium pet food, pet-tech, pet insurance, hospitality/travel brands.",
     image: "/images/subculture/pet-culture.webp",
   },
   {
-    name: "Next-Gen Families",
-    curators: "Alternative micro-learning circles, tactile play cohorts.",
-    opportunity: "Sustainable toys, organic nutrition, premium kids' wear.",
+    name: "Next-Gen Families & Kids",
+    curators: "Conscious parenting circles, alternative micro-learning networks, tactile play collectives.",
+    opportunity: "Premium kids' wear, ed-tech alternatives, organic family nutrition, sustainable toys.",
     image: "/images/subculture/next-gen-families.webp",
   },
   {
     name: "Slow Travel & Hidden Trails",
-    curators: "Motor-touring clubs, off-the-grid exploration groups.",
-    opportunity: "Luggage, automotive, outdoor gear, hospitality.",
+    curators: "Off-the-grid exploration clubs, local heritage walk curators, motor-touring subcultures.",
+    opportunity: "Automotive, premium luggage, outdoor/camping gear, experiential hospitality.",
     image: "/images/subculture/slow-travel.webp",
   },
 ];
@@ -67,9 +67,9 @@ export default function SubculturesMatrix() {
     >
       {/* Decorative stars */}
       <DecorativeStar size={160} color="#f2af29" opacity={0.12} top="50px" left="5%" spin spinDuration={45} />
-      <DecorativeStar size={90}  color="#FFFFFF"  opacity={0.15} top="40%" right="4%" rotate={15} />
+      <DecorativeStar size={90} color="#FFFFFF" opacity={0.15} top="40%" right="4%" rotate={15} />
       <DecorativeStar size={140} color="#1A1A1A" opacity={0.15} bottom="15%" left="2%" spin spinDuration={35} />
-      <DecorativeStar size={70}  color="#FFFFFF"  opacity={0.1} bottom="5%" right="12%" rotate={35} />
+      <DecorativeStar size={70} color="#FFFFFF" opacity={0.1} bottom="5%" right="12%" rotate={35} />
       <div
         className="mx-auto relative z-10"
         style={{ maxWidth: 1200, paddingLeft: 48, paddingRight: 48 }}
@@ -112,21 +112,19 @@ export default function SubculturesMatrix() {
           >
             <button
               onClick={() => setIsTableView(false)}
-              className={`font-body text-[10px] sm:text-xs font-black uppercase tracking-wider px-4 py-2 rounded-full transition-all duration-300 cursor-pointer ${
-                !isTableView
-                  ? "bg-[#f2af29] text-black shadow-md"
-                  : "bg-transparent text-white opacity-70 hover:opacity-100"
-              }`}
+              className={`font-body text-[10px] sm:text-xs font-black uppercase tracking-wider px-4 py-2 rounded-full transition-all duration-300 cursor-pointer ${!isTableView
+                ? "bg-[#f2af29] text-black shadow-md"
+                : "bg-transparent text-white opacity-70 hover:opacity-100"
+                }`}
             >
               Grid View
             </button>
             <button
               onClick={() => setIsTableView(true)}
-              className={`font-body text-[10px] sm:text-xs font-black uppercase tracking-wider px-4 py-2 rounded-full transition-all duration-300 cursor-pointer ${
-                isTableView
-                  ? "bg-[#f2af29] text-black shadow-md"
-                  : "bg-transparent text-white opacity-70 hover:opacity-100"
-              }`}
+              className={`font-body text-[10px] sm:text-xs font-black uppercase tracking-wider px-4 py-2 rounded-full transition-all duration-300 cursor-pointer ${isTableView
+                ? "bg-[#f2af29] text-black shadow-md"
+                : "bg-transparent text-white opacity-70 hover:opacity-100"
+                }`}
             >
               Table View
             </button>
@@ -210,7 +208,7 @@ export default function SubculturesMatrix() {
                         >
                           <div>
                             <span className="block font-body text-[8px] uppercase font-bold tracking-widest text-[#f2af29] mb-0.5">
-                              The Curators
+                              The Subculture Target
                             </span>
                             <p className="font-body text-[12px] leading-snug text-white opacity-90">
                               {v.curators}
@@ -218,7 +216,7 @@ export default function SubculturesMatrix() {
                           </div>
                           <div>
                             <span className="block font-body text-[8px] uppercase font-bold tracking-widest text-[#f2af29] mb-0.5">
-                              Brand Alignment
+                              Brand Alignment Oppurtunity
                             </span>
                             <p className="font-body text-[12px] leading-snug text-white opacity-90">
                               {v.opportunity}

@@ -106,12 +106,12 @@ export default function PodcastPage() {
 
 
 
-            <DecorativeStar size={200} color="#FF2B2B" opacity={0.16} top="8%" right="8%" spin spinDuration={40} useStar4={true} />
-            <DecorativeStar size={110} color="#f2af29" opacity={0.19} bottom="12%" left="6%" rotate={35} spin spinDuration={35} useStar4={true} />
-            <DecorativeStar size={100} color="#FF2B2B" opacity={0.15} top="35%" left="20%" spin spinDuration={45} useStar4={true} />
-            <DecorativeStar size={125} color="#f2af29" opacity={0.17} bottom="25%" right="18%" spin spinDuration={38} useStar4={true} />
-            <DecorativeStar size={90} color="#FF2B2B" opacity={0.14} top="50%" right="40%" rotate={15} spin spinDuration={42} useStar4={true} />
-            <DecorativeStar size={105} color="#f2af29" opacity={0.16} bottom="5%" left="45%" spin spinDuration={25} useStar4={true} />
+            <DecorativeStar size={200} color="#FF2B2B" opacity={0.07} top="8%" right="8%" spin spinDuration={40} useStar4={true} />
+            <DecorativeStar size={110} color="#f2af29" opacity={0.07} bottom="12%" left="6%" rotate={35} spin spinDuration={35} useStar4={true} />
+            <DecorativeStar size={100} color="#FF2B2B" opacity={0.07} top="35%" left="20%" spin spinDuration={45} useStar4={true} />
+            <DecorativeStar size={125} color="#f2af29" opacity={0.07} bottom="25%" right="18%" spin spinDuration={38} useStar4={true} />
+            <DecorativeStar size={90} color="#FF2B2B" opacity={0.07} top="50%" right="40%" rotate={15} spin spinDuration={42} useStar4={true} />
+            <DecorativeStar size={105} color="#f2af29" opacity={0.07} bottom="5%" left="45%" spin spinDuration={25} useStar4={true} />
 
             <div className="max-w-6xl mx-auto px-6 relative z-10">
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
@@ -200,9 +200,9 @@ export default function PodcastPage() {
         {/* 2. THE MISSION SECTION */}
         <section className="pt-24 pb-12 md:pt-32 md:pb-16 bg-[#FF2B2B] text-white relative overflow-hidden">
           <JaggedDivider color="#F5F0E8" top />
-          <DecorativeStar size={150} color="#FFFFFF" opacity={0.19} top="15%" left="4%" spin spinDuration={38} useStar4={true} />
-          <DecorativeStar size={100} color="#f2af29" opacity={0.2} bottom="20%" right="45%" spin spinDuration={42} useStar4={true} />
-          <DecorativeStar size={115} color="#FFFFFF" opacity={0.18} top="30%" right="10%" spin spinDuration={30} useStar4={true} />
+          <DecorativeStar size={150} color="#FFFFFF" opacity={0.07} top="15%" left="4%" spin spinDuration={38} useStar4={true} />
+          <DecorativeStar size={100} color="#f2af29" opacity={0.07} bottom="20%" right="45%" spin spinDuration={42} useStar4={true} />
+          <DecorativeStar size={115} color="#FFFFFF" opacity={0.07} top="30%" right="10%" spin spinDuration={30} useStar4={true} />
           <div className="max-w-6xl mx-auto px-6 relative z-10">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
 
@@ -382,9 +382,9 @@ export default function PodcastPage() {
 
         {/* 4. THE EXPERIENCE SECTION */}
         <section id="experience" className="pt-12 pb-24 md:pt-16 md:pb-32 bg-[#F5F0E8] relative overflow-hidden">
-          <DecorativeStar size={105} color="#FF2B2B" opacity={0.15} top="40%" left="15%" spin spinDuration={44} useStar4={true} />
-          <DecorativeStar size={120} color="#f2af29" opacity={0.17} bottom="35%" right="15%" spin spinDuration={36} useStar4={true} />
-          <DecorativeStar size={95} color="#1A1A1A" opacity={0.16} top="15%" right="35%" spin spinDuration={25} useStar4={true} />
+          <DecorativeStar size={105} color="#FF2B2B" opacity={0.07} top="40%" left="15%" spin spinDuration={44} useStar4={true} />
+          <DecorativeStar size={120} color="#f2af29" opacity={0.07} bottom="35%" right="15%" spin spinDuration={36} useStar4={true} />
+          <DecorativeStar size={95} color="#1A1A1A" opacity={0.07} top="15%" right="35%" spin spinDuration={25} useStar4={true} />
           <div className="max-w-6xl mx-auto px-6 relative z-10">
             {/* Floating Corner Cards (Aligned to Margins) */}
             <motion.div
@@ -547,9 +547,9 @@ export default function PodcastPage() {
 
         {/* 5. THE STORIES WE SEEK */}
         <section id="pillars" className="pt-8 pb-0 bg-[#1A1A1A] relative overflow-hidden">
-          <DecorativeStar size={140} color="#FF2B2B" opacity={0.14} top="10%" left="5%" spin spinDuration={40} useStar4={true} />
-          <DecorativeStar size={100} color="#f2af29" opacity={0.16} bottom="25%" right="5%" spin spinDuration={30} useStar4={true} />
-          <DecorativeStar size={115} color="#FFFFFF" opacity={0.18} top="5%" right="25%" spin spinDuration={30} useStar4={true} />
+          <DecorativeStar size={140} color="#FF2B2B" opacity={0.07} top="10%" left="5%" spin spinDuration={40} useStar4={true} />
+          <DecorativeStar size={100} color="#f2af29" opacity={0.07} bottom="25%" right="5%" spin spinDuration={30} useStar4={true} />
+          <DecorativeStar size={115} color="#FFFFFF" opacity={0.07} top="5%" right="25%" spin spinDuration={30} useStar4={true} />
 
           <div className="max-w-6xl mx-auto px-6 relative z-10">
             <div className="mb-6">
@@ -745,9 +745,9 @@ export default function PodcastPage() {
 
         {/* 7. PART OF A GLOBAL MOVEMENT */}
         <section className="pt-12 pb-24 md:pt-16 md:pb-32 bg-[#0D0D0D] text-white relative overflow-hidden">
-          <DecorativeStar size={180} color="#FF2B2B" opacity={0.18} bottom="5%" right="3%" spin spinDuration={35} useStar4={true} />
-          <DecorativeStar size={125} color="#f2af29" opacity={0.16} top="15%" left="8%" spin spinDuration={38} useStar4={true} />
-          <DecorativeStar size={105} color="#FFFFFF" opacity={0.16} top="40%" right="25%" spin spinDuration={45} useStar4={true} />
+          <DecorativeStar size={180} color="#FF2B2B" opacity={0.07} bottom="8%" right="3%" spin spinDuration={35} useStar4={true} />
+          <DecorativeStar size={125} color="#f2af29" opacity={0.07} bottom="15%" left="5%" spin spinDuration={38} useStar4={true} />
+          <DecorativeStar size={105} color="#FFFFFF" opacity={0.07} bottom="20%" right="30%" spin spinDuration={45} useStar4={true} />
 
           <div className="max-w-6xl mx-auto px-6 relative z-10">
             <div className="mb-16">
@@ -762,98 +762,125 @@ export default function PodcastPage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                {
-                  comp: "IRL Culture Podcast",
-                  role: "We Archive Your Story",
-                  logo: "/images/podcast/IRL Podcast white bg.svg",
-                  mission: "A dedicated content platform to showcase and immortalize the stories of IRL culture builders.",
-                  link: "#collaborate",
-                  linkLabel: "Pitch Now →",
-                },
-                {
-                  comp: "meetday™",
-                  role: "We Infrastructure Your Growth",
-                  logo: "/meetday-red.svg",
-                  mission: "An intelligent infrastructure built to help hosts discover premium brand sponsorships for IRL experiences.",
-                  link: "https://meetday.ai",
-                  linkLabel: "Explore meetday →",
-                  external: true,
-                },
-                {
-                  comp: "IRL Culture Fest 2026",
-                  role: "We Celebrate the Collective Movement",
-                  logo: "/footer-logo.png",
-                  mission: "A massive live festival platform to engage IRL communities, brands, and the broader ecosystem.",
-                  link: "/#passes",
-                  linkLabel: "Get Passes →",
-                },
-              ].map((row, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  animate={hoveredChapterCard === idx ? { y: 0, scale: 1.03 } : { y: [0, -8, 0], scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{
-                    opacity: { duration: 0.5, delay: idx * 0.1 },
-                    y: {
-                      repeat: hoveredChapterCard === idx ? 0 : Infinity,
-                      duration: 4.5 + idx * 0.4,
-                      ease: "easeInOut",
-                      delay: idx * 0.1
-                    }
-                  }}
-                  onMouseEnter={() => setHoveredChapterCard(idx)}
-                  onMouseLeave={() => setHoveredChapterCard(null)}
-                  className="rounded-2xl border-2 border-black p-6 bg-white flex flex-col justify-between items-start text-left"
-                  style={{
-                    boxShadow: "5px 5px 0px #FF2B2B",
-                  }}
+            {/* Podcast card left (centered), two secondary cards stacked on right */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+
+              {/* Primary Card: IRL Culture Podcast — left, vertically centered */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                animate={hoveredChapterCard === 0 ? { y: 0, scale: 1.02 } : { y: [0, -8, 0], scale: 1 }}
+                viewport={{ once: true }}
+                transition={{
+                  opacity: { duration: 0.5 },
+                  y: {
+                    repeat: hoveredChapterCard === 0 ? 0 : Infinity,
+                    duration: 4.5,
+                    ease: "easeInOut",
+                  }
+                }}
+                onMouseEnter={() => setHoveredChapterCard(0)}
+                onMouseLeave={() => setHoveredChapterCard(null)}
+                className="rounded-2xl p-6 bg-[#F5F0E8] flex flex-col gap-4 text-left"
+                style={{ borderTop: "3px solid #FF2B2B", borderLeft: "2px solid #1A1A1A", borderRight: "2px solid #1A1A1A", borderBottom: "2px solid #1A1A1A" }}
+              >
+                {/* Role pill */}
+                <span className="inline-block font-body text-[10px] font-black uppercase tracking-wider text-[#FF2B2B] px-2.5 py-1 rounded bg-[#FF2B2B]/10 border border-[#FF2B2B]/20 self-start">
+                  We Archive Your Story
+                </span>
+                {/* Logo + description side by side */}
+                <div className="flex items-center gap-5">
+                  <img
+                    src="/images/podcast/IRL Podcast white bg.svg"
+                    alt="IRL Culture Podcast Logo"
+                    className="h-20 w-auto shrink-0 object-contain"
+                  />
+                  <p className="font-body text-black/70 text-sm leading-relaxed">
+                    A dedicated content platform to showcase and immortalize the stories of IRL culture builders.
+                  </p>
+                </div>
+                {/* CTA */}
+                <a
+                  href="#collaborate"
+                  className="w-full font-body text-xs font-black uppercase tracking-wider py-3.5 px-8 rounded-full border-2 border-[#FF2B2B] bg-[#FF2B2B] text-white transition-all duration-300 hover:scale-105 hover:bg-[#cc2222] active:scale-95 text-center cursor-pointer mt-1"
                 >
-                  <div className="w-full">
-                    <div className="flex justify-between items-center w-full gap-4 mb-4">
-                      <span className="inline-block font-body text-[10px] font-black uppercase tracking-wider text-[#FF2B2B] px-2.5 py-1 rounded bg-[#FF2B2B]/10 border border-[#FF2B2B]/20 font-semibold">
-                        {row.role}
-                      </span>
-                      {row.logo && (
-                        <div className={`${row.comp.includes("Fest")
-                          ? "h-16 md:h-20"
-                          : row.comp.includes("Podcast")
-                            ? "h-14 md:h-18"
-                            : "h-9 md:h-11"
-                          } w-auto flex items-center justify-end shrink-0`}>
-                          <img
-                            src={row.logo}
-                            alt={`${row.comp} Logo`}
-                            className={`${row.comp.includes("Fest")
-                              ? "h-16 md:h-20 max-w-[180px] md:max-w-[210px]"
-                              : row.comp.includes("Podcast")
-                                ? "h-14 md:h-18 max-w-[180px] md:max-w-[210px]"
-                                : "h-9 md:h-11 max-w-[115px] md:max-w-[140px]"
-                              } object-contain`}
-                          />
-                        </div>
-                      )}
-                    </div>
-                    <h3 className="font-display text-[#1A1A1A] text-2xl font-black mb-3 leading-tight">
-                      {row.comp}
-                    </h3>
-                    <p className="font-body text-black/70 text-sm leading-relaxed mb-6">
-                      {row.mission}
-                    </p>
-                  </div>
-                  <a
-                    href={row.link}
-                    target={row.external ? "_blank" : "_self"}
-                    rel={row.external ? "noopener noreferrer" : ""}
-                    className="w-full font-body text-xs font-black uppercase tracking-wider py-3.5 px-6 rounded-full border-2 border-black bg-[#1A1A1A] text-white transition-all duration-300 hover:scale-105 hover:bg-[#FF2B2B] hover:text-white active:scale-95 text-center cursor-pointer"
+                  Pitch Now →
+                </a>
+              </motion.div>
+
+              {/* Right column: meetday + fest stacked */}
+              <div className="flex flex-col gap-5">
+                {[
+                  {
+                    idx: 1,
+                    comp: "meetday™",
+                    role: "We Infrastructure Your Growth",
+                    logo: "/meetday-red.svg",
+                    logoClass: "h-8 w-auto shrink-0",
+                    mission: "An intelligent infrastructure built to help hosts discover premium brand sponsorships for IRL experiences.",
+                    link: "https://meetday.ai",
+                    linkLabel: "Explore meetday →",
+                    external: true,
+                  },
+                  {
+                    idx: 2,
+                    comp: "IRL Culture Fest 2026",
+                    role: "We Celebrate the Collective Movement",
+                    logo: "/footer-logo.png",
+                    logoClass: "h-20 w-auto shrink-0",
+                    mission: "A massive live festival platform to engage IRL communities, brands, and the broader ecosystem.",
+                    link: "/#passes",
+                    linkLabel: "Get Passes →",
+                  },
+                ].map((row) => (
+                  <motion.div
+                    key={row.idx}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    animate={hoveredChapterCard === row.idx ? { y: 0, scale: 1.03 } : { y: [0, -8, 0], scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      opacity: { duration: 0.5, delay: row.idx * 0.1 },
+                      y: {
+                        repeat: hoveredChapterCard === row.idx ? 0 : Infinity,
+                        duration: 4.5 + row.idx * 0.4,
+                        ease: "easeInOut",
+                        delay: row.idx * 0.1
+                      }
+                    }}
+                    onMouseEnter={() => setHoveredChapterCard(row.idx)}
+                    onMouseLeave={() => setHoveredChapterCard(null)}
+                    className="rounded-2xl p-5 bg-[#F5F0E8] flex flex-col gap-3 text-left"
+                    style={{ borderTop: "3px solid #FF2B2B", borderLeft: "2px solid #1A1A1A", borderRight: "2px solid #1A1A1A", borderBottom: "2px solid #1A1A1A" }}
                   >
-                    {row.linkLabel}
-                  </a>
-                </motion.div>
-              ))}
+                    {/* Role pill */}
+                    <span className="inline-block font-body text-[10px] font-black uppercase tracking-wider text-[#FF2B2B] px-2.5 py-1 rounded bg-[#FF2B2B]/10 border border-[#FF2B2B]/20 self-start">
+                      {row.role}
+                    </span>
+                    {/* Logo + description side by side */}
+                    <div className="flex items-center gap-4">
+                      <img
+                        src={row.logo}
+                        alt={`${row.comp} Logo`}
+                        className={`${row.logoClass} object-contain`}
+                      />
+                      <p className="font-body text-black/70 text-xs leading-relaxed">
+                        {row.mission}
+                      </p>
+                    </div>
+                    {/* CTA */}
+                    <a
+                      href={row.link}
+                      target={row.external ? "_blank" : "_self"}
+                      rel={row.external ? "noopener noreferrer" : ""}
+                      className="w-full font-body text-xs font-black uppercase tracking-wider py-2.5 px-5 rounded-full border-2 border-[#1A1A1A] bg-transparent text-[#1A1A1A] transition-all duration-300 hover:scale-105 hover:bg-[#1A1A1A] hover:text-white active:scale-95 text-center cursor-pointer"
+                    >
+                      {row.linkLabel}
+                    </a>
+                  </motion.div>
+                ))}
+              </div>
+
             </div>
           </div>
           <JaggedDivider color="#F5F0E8" />
@@ -861,9 +888,9 @@ export default function PodcastPage() {
 
         {/* 8. MEET YOUR HOST */}
         <section id="host" className="pt-8 pb-16 md:pt-12 md:pb-24 bg-[#F5F0E8] relative overflow-hidden">
-          <DecorativeStar size={150} color="#FF2B2B" opacity={0.16} top="12%" left="4%" spin spinDuration={32} useStar4={true} />
-          <DecorativeStar size={100} color="#f2af29" opacity={0.17} bottom="8%" right="6%" spin spinDuration={38} useStar4={true} />
-          <DecorativeStar size={115} color="#FF2B2B" opacity={0.15} top="30%" right="35%" spin spinDuration={30} useStar4={true} />
+          <DecorativeStar size={150} color="#FF2B2B" opacity={0.07} top="12%" left="4%" spin spinDuration={32} useStar4={true} />
+          <DecorativeStar size={100} color="#f2af29" opacity={0.07} bottom="8%" right="6%" spin spinDuration={38} useStar4={true} />
+          <DecorativeStar size={115} color="#FF2B2B" opacity={0.07} top="30%" right="35%" spin spinDuration={30} useStar4={true} />
           <div className="max-w-6xl mx-auto px-6 relative z-10">
             <div className="text-left mb-8 w-full">
               <span className="inline-block font-body text-xs font-black uppercase tracking-wider px-3 py-1 rounded-full border-2 border-[#FF2B2B] text-[#FF2B2B] mb-4">
@@ -972,9 +999,9 @@ export default function PodcastPage() {
         </section>
 
         <section id="process" className="pt-8 pb-12 md:pt-12 md:pb-16 bg-[#FFFFFF] relative overflow-hidden">
-          <DecorativeStar size={160} color="#f2af29" opacity={0.14} top="-40px" right="4%" rotate={18} spin spinDuration={40} useStar4={true} />
-          <DecorativeStar size={125} color="#FF2B2B" opacity={0.15} bottom="15%" left="8%" spin spinDuration={35} useStar4={true} />
-          <DecorativeStar size={100} color="#f2af29" opacity={0.16} top="45%" right="45%" spin spinDuration={42} useStar4={true} />
+          <DecorativeStar size={160} color="#f2af29" opacity={0.07} top="-40px" right="4%" rotate={18} spin spinDuration={40} useStar4={true} />
+          <DecorativeStar size={125} color="#FF2B2B" opacity={0.07} bottom="15%" left="8%" spin spinDuration={35} useStar4={true} />
+          <DecorativeStar size={100} color="#f2af29" opacity={0.07} top="45%" right="45%" spin spinDuration={42} useStar4={true} />
 
           <div className="max-w-6xl mx-auto px-6 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -1107,9 +1134,9 @@ export default function PodcastPage() {
           `}</style>
 
           <JaggedDivider color="#FFFFFF" top />
-          <DecorativeStar size={190} color="#0D0D0D" opacity={0.18} top="15%" left="5%" spin spinDuration={40} useStar4={true} />
-          <DecorativeStar size={110} color="#f2af29" opacity={0.2} bottom="12%" right="8%" spin spinDuration={32} useStar4={true} />
-          <DecorativeStar size={135} color="#FFFFFF" opacity={0.19} top="35%" right="40%" spin spinDuration={35} useStar4={true} />
+          <DecorativeStar size={190} color="#0D0D0D" opacity={0.07} top="15%" left="5%" spin spinDuration={40} useStar4={true} />
+          <DecorativeStar size={110} color="#f2af29" opacity={0.07} bottom="12%" right="8%" spin spinDuration={32} useStar4={true} />
+          <DecorativeStar size={135} color="#FFFFFF" opacity={0.07} top="35%" right="40%" spin spinDuration={35} useStar4={true} />
 
           <div className="max-w-6xl mx-auto px-6 relative z-10">
             <h2 className="font-display text-white leading-tight mb-4" style={{ fontSize: "clamp(24px, 3.2vw, 42px)", letterSpacing: "0.01em" }}>

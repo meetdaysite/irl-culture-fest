@@ -80,7 +80,7 @@ export default function Footer() {
               className="flex items-center cursor-pointer"
             >
               <img
-                src={isPodcast ? "/images/podcast/podcast-logo-footer.png" : "/footer-logo.png"}
+                src={isPodcast ? "/images/podcast/IRL Podcast black bg.svg" : "/footer-logo.png"}
                 alt={isPodcast ? "IRL Podcast Logo" : "IRL Culture Fest Logo"}
                 className="h-16 sm:h-20 object-contain"
               />
@@ -210,13 +210,6 @@ export default function Footer() {
               className={`font-body text-sm ${footerTextColor} hover:text-[#FF2B2B] transition-colors`}
             >
               www.irlculturefest.com
-            </a>
-            <span className={isPodcast ? "hidden sm:inline text-black/20" : "hidden sm:inline text-white/20"}>|</span>
-            <a
-              href="tel:+918130339180"
-              className={`font-body text-sm ${footerTextColor} hover:text-[#FF2B2B] transition-colors`}
-            >
-              +91 81303 39180
             </a>
             <span className={isPodcast ? "hidden sm:inline text-black/20" : "hidden sm:inline text-white/20"}>|</span>
             <a
