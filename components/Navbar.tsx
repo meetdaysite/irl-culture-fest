@@ -9,16 +9,17 @@ export default function Navbar() {
   const [scrollY, setScrollY] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
+  const isPodcast = pathname === "/podcast";
 
   const [activeSection, setActiveSection] = useState("");
+  const [clickedSection, setClickedSection] = useState("");
   const [hoveredTab, setHoveredTab] = useState<number | null>(null);
   const [hoveredMobileTab, setHoveredMobileTab] = useState<number | null>(null);
 
   useEffect(() => {
-    const isPodcast = pathname === "/podcast";
     const sections = isPodcast
-      ? ["manifesto", "pillars", "benefits", "host", "process"]
-      : ["manifesto", "solution", "subcultures", "passes", "team"];
+      ? ["benefits", "host", "process"]
+      : ["experience", "passes"];
 
     const observers = sections.map((id) => {
       const el = document.getElementById(id);
@@ -55,8 +56,25 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handleUserScroll = () => {
+      setClickedSection("");
+    };
+    window.addEventListener("wheel", handleUserScroll, { passive: true });
+    window.addEventListener("touchmove", handleUserScroll, { passive: true });
+    return () => {
+      window.removeEventListener("wheel", handleUserScroll);
+      window.removeEventListener("touchmove", handleUserScroll);
+    };
+  }, []);
   const scrollToSection = (href: string) => {
     setMobileOpen(false);
+
+    const targetId = href.includes("#") ? href.split("#")[1] : "";
+    if (targetId) {
+      setClickedSection(targetId);
+      setActiveSection(targetId);
+    }
 
     if (href.startsWith("/")) {
       if (href.includes("#")) {
@@ -65,7 +83,6 @@ export default function Navbar() {
           const el = document.getElementById(hash);
           if (el) {
             el.scrollIntoView({ behavior: "smooth" });
-            setActiveSection(hash);
           }
         } else {
           window.location.href = href;
@@ -84,7 +101,6 @@ export default function Navbar() {
       const element = document.querySelector(href);
       if (element) {
         element.scrollIntoView({ behavior: "smooth" });
-        setActiveSection(href.replace("#", ""));
       }
     } else {
       window.location.href = href;
@@ -94,7 +110,6 @@ export default function Navbar() {
   // Progressive interpolation between 20–80px scroll
   const progress = Math.min(Math.max((scrollY - 20) / 60, 0), 1); // 0 at top, 1 at 80px+
 
-  const isPodcast = pathname === "/podcast";
   const navBg = "rgba(255, 255, 255, 0.7)";
   const blurPx = `${(3 + progress * 11).toFixed(1)}px`;
   const shadowOpacity = progress * 0.06;
@@ -103,18 +118,13 @@ export default function Navbar() {
 
   const links = isPodcast
     ? [
-      { label: "Manifesto", href: "/podcast/#manifesto" },
-      { label: "Pillars", href: "/podcast/#pillars" },
       { label: "Benefits", href: "/podcast/#benefits" },
       { label: "Host", href: "/podcast/#host" },
       { label: "Process", href: "/podcast/#process" },
     ]
     : [
-      { label: "The Manifesto", href: "#manifesto" },
-      { label: "The Festival", href: "#solution" },
-      { label: "Subcultures", href: "#subcultures" },
-      { label: "Team & Partners", href: "#team" },
-      { label: "Passes", href: "#passes" },
+      { label: "Inside the Fest", href: "#experience" },
+      { label: "Get Passes", href: "#passes" },
     ];
 
   return (
@@ -149,23 +159,26 @@ export default function Navbar() {
             />
           </button>
 
-          {/* Desktop Navigation Links */}
-          <div className="hidden md:flex items-center gap-6 mr-6">
+          <div className="hidden md:flex items-center gap-4 mr-6">
             {links.map((link, idx) => {
               const targetId = link.href.includes("#") ? link.href.split("#")[1] : "";
-              const isActive = activeSection === targetId;
+              const isActive = clickedSection ? clickedSection === targetId : activeSection === targetId;
               const isHovered = hoveredTab === idx;
               return (
-                <button
-                  key={link.label}
-                  onClick={() => scrollToSection(link.href)}
-                  onMouseEnter={() => setHoveredTab(idx)}
-                  onMouseLeave={() => setHoveredTab(null)}
-                  className="font-body text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
-                  style={{ color: isActive || isHovered ? "#FF2B2B" : linkColor }}
-                >
-                  {link.label}
-                </button>
+                <div key={link.label} className="flex items-center gap-4">
+                  <button
+                    onClick={() => scrollToSection(link.href)}
+                    onMouseEnter={() => setHoveredTab(idx)}
+                    onMouseLeave={() => setHoveredTab(null)}
+                    className="font-body text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
+                    style={{ color: isActive || isHovered ? "#FF2B2B" : linkColor }}
+                  >
+                    {link.label}
+                  </button>
+                  {idx < links.length - 1 && (
+                    <span className="text-[#1A1A1A]/30 text-xs font-light select-none">|</span>
+                  )}
+                </div>
               );
             })}
           </div>

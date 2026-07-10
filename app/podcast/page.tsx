@@ -762,125 +762,115 @@ export default function PodcastPage() {
               </p>
             </div>
 
-            {/* Podcast card left (centered), two secondary cards stacked on right */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-
-              {/* Primary Card: IRL Culture Podcast — left, vertically centered */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                animate={hoveredChapterCard === 0 ? { y: 0, scale: 1.02 } : { y: [0, -8, 0], scale: 1 }}
-                viewport={{ once: true }}
-                transition={{
-                  opacity: { duration: 0.5 },
-                  y: {
-                    repeat: hoveredChapterCard === 0 ? 0 : Infinity,
-                    duration: 4.5,
-                    ease: "easeInOut",
-                  }
-                }}
-                onMouseEnter={() => setHoveredChapterCard(0)}
-                onMouseLeave={() => setHoveredChapterCard(null)}
-                className="rounded-2xl p-6 bg-[#F5F0E8] flex flex-col gap-4 text-left"
-                style={{ borderTop: "3px solid #FF2B2B", borderLeft: "2px solid #1A1A1A", borderRight: "2px solid #1A1A1A", borderBottom: "2px solid #1A1A1A" }}
-              >
-                {/* Role pill */}
-                <span className="inline-block font-body text-[10px] font-black uppercase tracking-wider text-[#FF2B2B] px-2.5 py-1 rounded bg-[#FF2B2B]/10 border border-[#FF2B2B]/20 self-start">
-                  We Archive Your Story
-                </span>
-                {/* Logo + description side by side */}
-                <div className="flex items-center gap-5">
-                  <img
-                    src="/images/podcast/IRL Podcast white bg.svg"
-                    alt="IRL Culture Podcast Logo"
-                    className="h-20 w-auto shrink-0 object-contain"
-                  />
-                  <p className="font-body text-black/70 text-sm leading-relaxed">
-                    A dedicated content platform to showcase and immortalize the stories of IRL culture builders.
-                  </p>
-                </div>
-                {/* CTA */}
-                <a
-                  href="#collaborate"
-                  className="w-full font-body text-xs font-black uppercase tracking-wider py-3.5 px-8 rounded-full border-2 border-[#FF2B2B] bg-[#FF2B2B] text-white transition-all duration-300 hover:scale-105 hover:bg-[#cc2222] active:scale-95 text-center cursor-pointer mt-1"
-                >
-                  Pitch Now →
-                </a>
-              </motion.div>
-
-              {/* Right column: meetday + fest stacked */}
-              <div className="flex flex-col gap-5">
-                {[
-                  {
-                    idx: 1,
-                    comp: "meetday™",
-                    role: "We Infrastructure Your Growth",
-                    logo: "/meetday-red.svg",
-                    logoClass: "h-8 w-auto shrink-0",
-                    mission: "An intelligent infrastructure built to help hosts discover premium brand sponsorships for IRL experiences.",
-                    link: "https://meetday.ai",
-                    linkLabel: "Explore meetday →",
-                    external: true,
-                  },
-                  {
-                    idx: 2,
-                    comp: "IRL Culture Fest 2026",
-                    role: "We Celebrate the Collective Movement",
-                    logo: "/footer-logo.png",
-                    logoClass: "h-20 w-auto shrink-0",
-                    mission: "A massive live festival platform to engage IRL communities, brands, and the broader ecosystem.",
-                    link: "/#passes",
-                    linkLabel: "Get Passes →",
-                  },
-                ].map((row) => (
+            {/* Podcast cards in one row, equal sizes, slightly tilted, scale and straighten on hover */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+              {[
+                {
+                  idx: 0,
+                  comp: "IRL Culture Podcast",
+                  role: "We Archive Your Story",
+                  logo: "/images/podcast/IRL Podcast white bg.svg",
+                  logoClass: "h-16 w-auto shrink-0",
+                  mission: "A dedicated content platform to showcase and immortalize the stories of IRL culture builders.",
+                  link: "#collaborate",
+                  linkLabel: "Pitch Now →",
+                  rotate: -2,
+                },
+                {
+                  idx: 1,
+                  comp: "meetday™",
+                  role: "We Infrastructure Your Growth",
+                  logo: "/meetday-red.svg",
+                  logoClass: "h-7 w-auto shrink-0",
+                  mission: "An intelligent infrastructure built to help hosts discover premium brand sponsorships for IRL experiences.",
+                  link: "https://meetday.ai",
+                  linkLabel: "Explore meetday →",
+                  external: true,
+                  rotate: 2.5,
+                },
+                {
+                  idx: 2,
+                  comp: "IRL Culture Fest 2026",
+                  role: "We Celebrate the Collective Movement",
+                  logo: "/footer-logo.png",
+                  logoClass: "h-16 w-auto shrink-0",
+                  mission: "A massive live festival platform to engage IRL communities, brands, and the broader ecosystem.",
+                  link: "/#passes",
+                  linkLabel: "Get Passes →",
+                  rotate: -1.8,
+                },
+              ].map((card) => {
+                const isHovered = hoveredChapterCard === card.idx;
+                return (
                   <motion.div
-                    key={row.idx}
+                    key={card.idx}
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
-                    animate={hoveredChapterCard === row.idx ? { y: 0, scale: 1.03 } : { y: [0, -8, 0], scale: 1 }}
                     viewport={{ once: true }}
-                    transition={{
-                      opacity: { duration: 0.5, delay: row.idx * 0.1 },
-                      y: {
-                        repeat: hoveredChapterCard === row.idx ? 0 : Infinity,
-                        duration: 4.5 + row.idx * 0.4,
-                        ease: "easeInOut",
-                        delay: row.idx * 0.1
-                      }
-                    }}
-                    onMouseEnter={() => setHoveredChapterCard(row.idx)}
+                    animate={
+                      isHovered
+                        ? { y: -4, rotate: 0, scale: 1.05 }
+                        : {
+                            y: [0, -8, 0],
+                            rotate: card.rotate,
+                            scale: 1,
+                          }
+                    }
+                    transition={
+                      isHovered
+                        ? { type: "spring", stiffness: 260, damping: 20 }
+                        : {
+                            y: {
+                              repeat: Infinity,
+                              duration: 4.5 + card.idx * 0.5,
+                              ease: "easeInOut",
+                            },
+                            rotate: { type: "spring", stiffness: 260, damping: 20 },
+                            scale: { type: "spring", stiffness: 260, damping: 20 }
+                          }
+                    }
+                    onMouseEnter={() => setHoveredChapterCard(card.idx)}
                     onMouseLeave={() => setHoveredChapterCard(null)}
-                    className="rounded-2xl p-5 bg-[#F5F0E8] flex flex-col gap-3 text-left"
-                    style={{ borderTop: "3px solid #FF2B2B", borderLeft: "2px solid #1A1A1A", borderRight: "2px solid #1A1A1A", borderBottom: "2px solid #1A1A1A" }}
+                    className="rounded-2xl p-6 bg-[#F5F0E8] flex flex-col justify-between gap-6 text-left h-full border-2 border-black shadow-[4px_4px_0px_#1A1A1A]"
+                    style={{
+                      borderTop: "4px solid #FF2B2B",
+                    }}
                   >
-                    {/* Role pill */}
-                    <span className="inline-block font-body text-[10px] font-black uppercase tracking-wider text-[#FF2B2B] px-2.5 py-1 rounded bg-[#FF2B2B]/10 border border-[#FF2B2B]/20 self-start">
-                      {row.role}
-                    </span>
-                    {/* Logo + description side by side */}
-                    <div className="flex items-center gap-4">
-                      <img
-                        src={row.logo}
-                        alt={`${row.comp} Logo`}
-                        className={`${row.logoClass} object-contain`}
-                      />
-                      <p className="font-body text-black/70 text-xs leading-relaxed">
-                        {row.mission}
-                      </p>
+                    <div className="flex flex-col gap-5">
+                      {/* Role pill */}
+                      <span className="inline-block font-body text-[10px] font-black uppercase tracking-wider text-[#FF2B2B] px-2.5 py-1 rounded bg-[#FF2B2B]/10 border border-[#FF2B2B]/20 self-start">
+                        {card.role}
+                      </span>
+                      {/* Logo + description vertically stacked */}
+                      <div className="flex flex-col gap-4 items-start">
+                        <div className="h-16 flex items-center justify-start">
+                          <img
+                            src={card.logo}
+                            alt={`${card.comp} Logo`}
+                            className={`${card.logoClass} object-contain`}
+                          />
+                        </div>
+                        <p className="font-body text-black/70 text-xs sm:text-sm leading-relaxed">
+                          {card.mission}
+                        </p>
+                      </div>
                     </div>
                     {/* CTA */}
                     <a
-                      href={row.link}
-                      target={row.external ? "_blank" : "_self"}
-                      rel={row.external ? "noopener noreferrer" : ""}
-                      className="w-full font-body text-xs font-black uppercase tracking-wider py-2.5 px-5 rounded-full border-2 border-[#1A1A1A] bg-transparent text-[#1A1A1A] transition-all duration-300 hover:scale-105 hover:bg-[#1A1A1A] hover:text-white active:scale-95 text-center cursor-pointer"
+                      href={card.link}
+                      target={card.external ? "_blank" : "_self"}
+                      rel={card.external ? "noopener noreferrer" : ""}
+                      className={`w-full font-body text-xs font-black uppercase tracking-wider py-3 px-5 rounded-full border-2 text-center cursor-pointer transition-all duration-300 ${
+                        card.idx === 0
+                          ? "bg-[#FF2B2B] text-white border-[#FF2B2B] hover:bg-[#cc2222]"
+                          : "bg-transparent text-[#1A1A1A] border-[#1A1A1A] hover:bg-[#1A1A1A] hover:text-white"
+                      }`}
                     >
-                      {row.linkLabel}
+                      {card.linkLabel}
                     </a>
                   </motion.div>
-                ))}
-              </div>
-
+                );
+              })}
             </div>
           </div>
           <JaggedDivider color="#F5F0E8" />
@@ -946,13 +936,17 @@ export default function PodcastPage() {
                   <h3 className="font-display text-3xl sm:text-4xl text-[#1A1A1A] leading-none mb-4">
                     Gagaan Singh Nagi
                   </h3>
-                  <p className="font-body text-[#1A1A1A] text-base leading-relaxed text-black/80 font-medium">
-                    Gagaan brings more than 20 years of expertise in experiential marketing to the microphone. Having engineered deep social and corporate experiences across 15+ countries, he has collaborated with over 100+ global brands.
-                  </p>
+                  <div className="font-body text-[#1A1A1A] text-base leading-relaxed text-black/80 font-medium">
+                    <ul className="list-disc list-inside">
+                      <li className="mb-2"><b>20+ Years</b> in Experiential Marketing</li>
+                      <li className="mb-2">Built Corporate & Social Experiences across <b>15+ Countries</b></li>
+                      <li className="mb-2">Collaborated with <b>100+ Global Brands</b></li>
+                    </ul>
+                  </div>
                   {/* Pull Quote */}
                   <div className="border-l-4 border-[#FF2B2B] pl-4 my-5 py-2 bg-black/[0.03] rounded-r-lg">
                     <p className="font-body text-[#1A1A1A] text-lg font-bold italic leading-snug text-black/85">
-                      &ldquo;My goal is a sustainable IRL ecosystem—empowering a new generation of curators and community builders across India.&rdquo;
+                      &ldquo;His goal is to create a sustainable IRL ecosystem empowering a new generation of young curators and community builders across the globe.&rdquo;
                     </p>
                   </div>
                 </div>
@@ -1140,7 +1134,6 @@ export default function PodcastPage() {
 
           <div className="max-w-6xl mx-auto px-6 relative z-10">
             <h2 className="font-display text-white leading-tight mb-4" style={{ fontSize: "clamp(24px, 3.2vw, 42px)", letterSpacing: "0.01em" }}>
-              Let's Build Together. <br />
               Let Us Tell Your Story.
             </h2>
             <p className="font-body text-lg md:text-2xl text-white/85 max-w-2xl mx-auto mb-10">
