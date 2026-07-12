@@ -218,17 +218,17 @@ export default function HeroSection() {
             className="flex flex-wrap justify-start items-center gap-3 w-full"
           >
             <Link
-              href="#passes"
+              href="#contact"
               className="bg-[#FF2B2B] text-white hover:bg-[#1A1A1A] font-body font-black uppercase text-sm tracking-wider px-8 py-3 rounded-full border-2 border-transparent transition-all hover:scale-105 shadow-[4px_4px_0px_#1A1A1A] cursor-pointer text-center w-full sm:w-auto"
             >
-              Secure Your Pass
+              Partner With Us
             </Link>
-            <Link
+            {/* <Link
               href="#contact"
               className="border-2 border-[#1A1A1A] text-[#1A1A1A] hover:bg-[#1A1A1A] hover:text-white font-body font-black uppercase text-sm tracking-wider px-8 py-3 rounded-full transition-all hover:scale-105 cursor-pointer text-center w-full sm:w-auto"
             >
               Partner With Us
-            </Link>
+            </Link> */}
           </motion.div>
         </div>
 
