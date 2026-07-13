@@ -148,12 +148,12 @@ export default function PodcastPage() {
                     An initiative to promote IRL culture in India.
                   </motion.p>
 
-                  {/* CTA Button */}
+                  {/* CTA Buttons */}
                   <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5, delay: 0.4 }}
-                    className="flex justify-start"
+                    className="flex flex-wrap justify-start items-center gap-4 w-full"
                   >
                     <button
                       onClick={() => {
@@ -167,6 +167,12 @@ export default function PodcastPage() {
                     >
                       Pitch Your Story
                     </button>
+                    <a
+                      href="mailto:info@meetday.ai"
+                      className="font-body text-sm font-black uppercase tracking-wider py-4.5 px-10 rounded-full border-2 border-black text-[#1A1A1A] hover:bg-[#1A1A1A] hover:text-white transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer text-center"
+                    >
+                      Contact Us
+                    </a>
                   </motion.div>
                 </div>
 

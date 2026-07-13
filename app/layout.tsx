@@ -33,6 +33,14 @@ export const metadata: Metadata = {
       "Celebrating India's offline community builders across Delhi, Mumbai, Bangalore & Pune. November 2026.",
     images: ["/og-image.png"],
   },
+  icons: {
+    icon: [
+      { url: "/favicon.png", type: "image/png" },
+      { url: "/favicon.ico", type: "image/x-icon" }
+    ],
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
   other: {
     "theme-color": "#FF2B2B",
   },
