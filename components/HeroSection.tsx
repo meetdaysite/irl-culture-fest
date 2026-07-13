@@ -223,12 +223,12 @@ export default function HeroSection() {
             >
               Partner With Us
             </Link>
-            {/* <Link
-              href="#contact"
+            <Link
+              href="mailto:info@meetday.ai"
               className="border-2 border-[#1A1A1A] text-[#1A1A1A] hover:bg-[#1A1A1A] hover:text-white font-body font-black uppercase text-sm tracking-wider px-8 py-3 rounded-full transition-all hover:scale-105 cursor-pointer text-center w-full sm:w-auto"
             >
-              Partner With Us
-            </Link> */}
+              Contact Us
+            </Link>
           </motion.div>
         </div>
 
