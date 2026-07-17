@@ -80,9 +80,9 @@ export default function Footer() {
               className="flex items-center cursor-pointer"
             >
               <img
-                src={isPodcast ? "/images/podcast/IRL Podcast black bg.svg" : "/footer-logo.svg"}
+                src={isPodcast ? "/images/podcast/black bg irl podcast.svg" : "/footer-logo.svg"}
                 alt={isPodcast ? "IRL Podcast Logo" : "IRL Culture Fest Logo"}
-                className="h-16 sm:h-20 object-contain"
+                className={`${isPodcast ? "h-[90px] sm:h-[110px]" : "h-16 sm:h-20"} object-contain`}
               />
             </button>
             <p className={`font-body text-base ${footerTextColor} max-w-md leading-relaxed`}>
