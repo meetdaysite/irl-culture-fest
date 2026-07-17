@@ -155,7 +155,7 @@ export default function Navbar() {
             <img
               src={isPodcast ? "/images/podcast/IRL Podcast white bg.svg" : "/logo.svg"}
               alt={isPodcast ? "IRL Podcast Logo" : "IRL Culture Fest Logo"}
-              className={`${isPodcast ? "h-[54px] sm:h-[60px]" : "h-[45px] sm:h-[50px]"} object-contain`}
+              className={`${isPodcast ? "h-[42px] sm:h-[48px]" : "h-[35px] sm:h-[40px]"} object-contain`}
             />
           </button>
 

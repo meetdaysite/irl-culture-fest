@@ -130,7 +130,7 @@ export default function SolutionSection() {
               animate={{ rotate: -8 }}
               whileHover={{ scale: 1.05, rotate: 0 }}
               transition={{ type: "spring", stiffness: 300, damping: 15 }}
-              className="relative bg-white p-2 rounded-xl border border-black shadow-[4px_4px_0px_#FF2B2B] w-[110px] sm:w-[145px] aspect-[3/4] flex-shrink-0 flex items-center justify-center cursor-pointer -top-8 sm:-top-12"
+              className="relative bg-white p-2 rounded-xl border border-black shadow-[4px_4px_0px_#FF2B2B] w-[140px] sm:w-[190px] aspect-[4/3] flex-shrink-0 flex items-center justify-center cursor-pointer -top-8 sm:-top-12"
             >
               {/* Tape graphic */}
               <div
@@ -140,9 +140,9 @@ export default function SolutionSection() {
                 }}
               />
               <img
-                src="/footer-logo.png"
+                src="/logo.svg"
                 alt="IRL Logo"
-                className="w-[85%] h-auto object-contain"
+                className="w-[92%] h-auto object-contain"
               />
             </motion.div>
           </div>
