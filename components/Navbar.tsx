@@ -153,7 +153,7 @@ export default function Navbar() {
             className="flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-105 active:scale-95"
           >
             <img
-              src={isPodcast ? "/images/podcast/IRL Podcast white bg.svg" : "/footer-logo.png?v=2"}
+              src={isPodcast ? "/images/podcast/IRL Podcast white bg.svg" : "/logo.svg"}
               alt={isPodcast ? "IRL Podcast Logo" : "IRL Culture Fest Logo"}
               className={`${isPodcast ? "h-[54px] sm:h-[60px]" : "h-[45px] sm:h-[50px]"} object-contain`}
             />
