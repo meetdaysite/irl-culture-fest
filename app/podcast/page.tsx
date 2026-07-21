@@ -775,7 +775,7 @@ export default function PodcastPage() {
                   comp: "IRL Culture Podcast",
                   role: "We Archive Your Story",
                   logo: "/images/podcast/white bg irl podcast.svg",
-                  logoClass: "h-24 w-auto shrink-0",
+                  logoClass: "h-22 w-auto shrink-0",
                   mission: "A dedicated content platform to showcase and immortalize the stories of IRL culture builders.",
                   link: "#collaborate",
                   linkLabel: "Pitch Now →",
@@ -786,7 +786,7 @@ export default function PodcastPage() {
                   comp: "meetday™",
                   role: "We Infrastructure Your Growth",
                   logo: "/meetday-red.svg",
-                  logoClass: "h-7 w-auto shrink-0",
+                  logoClass: "h-9 w-auto shrink-0",
                   mission: "An intelligent infrastructure built to help hosts discover premium brand sponsorships for IRL experiences.",
                   link: "https://meetday.ai",
                   linkLabel: "Explore meetday →",
@@ -797,8 +797,8 @@ export default function PodcastPage() {
                   idx: 2,
                   comp: "IRL Culture Fest 2026",
                   role: "We Celebrate the Collective Movement",
-                  logo: "/footer-logo.png",
-                  logoClass: "h-16 w-auto shrink-0",
+                  logo: "/logo.svg",
+                  logoClass: "h-14 w-auto shrink-0",
                   mission: "A massive live festival platform to engage IRL communities, brands, and the broader ecosystem.",
                   link: "/#passes",
                   linkLabel: "Get Passes →",
@@ -848,7 +848,7 @@ export default function PodcastPage() {
                       </span>
                       {/* Logo + description vertically stacked */}
                       <div className="flex flex-col gap-4 items-start">
-                        <div className="h-16 flex items-center justify-start">
+                        <div className="h-24 flex items-center justify-start">
                           <img
                             src={card.logo}
                             alt={`${card.comp} Logo`}
