@@ -19,9 +19,9 @@ const cardPool = [
 ];
 
 const cities = [
-  { city: "Delhi", day: "28", month: "NOV", bg: "#FF2B2B", text: "#FFFFFF" },
-  { city: "Mumbai", day: "05", month: "DEC", bg: "#FFFFFF", text: "#1A1A1A" },
-  { city: "Bangalore", day: "12", month: "DEC", bg: "#f2af29", text: "#1A1A1A" },
+  { city: "Delhi", day: "20", month: "FEB", bg: "#FF2B2B", text: "#FFFFFF" },
+  { city: "Mumbai", day: "27", month: "FEB", bg: "#FFFFFF", text: "#1A1A1A" },
+  { city: "Bangalore", day: "06", month: "MAR", bg: "#f2af29", text: "#1A1A1A" },
 ];
 
 const containerVariants = {

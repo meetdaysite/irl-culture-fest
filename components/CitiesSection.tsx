@@ -6,24 +6,28 @@ const cities = [
   {
     name: "DELHI",
     state: "National Capital",
+    date: "20 Feb",
     blurb:
       "Home to India's most eclectic underground scene — from Hauz Khas speakeasies to Mehrauli art collectives, Delhi's IRL culture pulses through its heritage and hustle.",
   },
   {
     name: "MUMBAI",
     state: "Maharashtra",
+    date: "27 Feb",
     blurb:
       "Where Bollywood meets the indie circuit — Mumbai's community builders run everything from sunrise raves at Juhu to stand-up comedy cellars in Bandra.",
   },
   {
     name: "BANGALORE",
     state: "Karnataka",
+    date: "6 March",
     blurb:
       "India's unofficial capital of community-led culture — from Koramangala jam sessions to Indiranagar board-game nights, this city breathes IRL.",
   },
   {
     name: "PUNE",
     state: "Maharashtra",
+    date: "Coming Soon",
     blurb:
       "A rising force in India's cultural revolution — Pune's college energy, FC Road café culture, and Kothrud creative studios make it a hotbed for new-wave community building.",
   },
@@ -90,7 +94,7 @@ export default function CitiesSection() {
           className="font-body text-white/80 text-lg text-center"
           style={{ marginBottom: 48 }}
         >
-          November 2026
+          Feb — March
         </motion.p>
 
         {/* City Cards */}
@@ -120,7 +124,7 @@ export default function CitiesSection() {
                     {city.state}
                   </p>
                   <span className="inline-block font-body text-[12px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-[#1A1A1A] text-[#f2af29]">
-                    Coming Nov 2026
+                    {city.date}
                   </span>
                 </div>
                 {/* Back */}

@@ -87,7 +87,7 @@ export default function SolutionSection() {
                 letterSpacing: "0.01em",
               }}
             >
-              Introducing IRL Culture Festival 2026
+              Introducing IRL Culture Festival 2027
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}

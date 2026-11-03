@@ -48,7 +48,7 @@ const otherPasses = [
   },
   {
     title: "Brand Pass",
-    price: "₹4,499",
+    price: "₹4,999",
     taxes: "Plus Taxes",
     bestFor: "Brand Managers, D2C Founders, & Creative Directors",
     inclusions: [
@@ -61,7 +61,7 @@ const otherPasses = [
   },
   {
     title: "Ecosystem Pass",
-    price: "₹4,499",
+    price: "₹4,999",
     taxes: "Plus Taxes",
     bestFor: "Ecosystem Builders, Enablers, & Community Partners",
     inclusions: [
@@ -284,7 +284,7 @@ export default function PassesSection() {
         </motion.span>
 
         {/* Heading */}
-        <div className="relative flex flex-col md:flex-row md:items-end justify-between mb-14 w-full gap-4">
+        <div className="mb-14 w-full">
           <motion.h2
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -296,33 +296,6 @@ export default function PassesSection() {
             Choose Your{" "}
             <span className="text-[#FF2B2B]">Access Level.</span>
           </motion.h2>
-
-          {/* Floating Sticky Note */}
-          <div className="relative flex justify-start md:justify-end -mt-3 md:-mt-6">
-            <motion.div
-              animate={{
-                y: [0, -5, 0],
-                rotate: [3, 4.5, 3],
-              }}
-              transition={{
-                y: { repeat: Infinity, duration: 3.5, ease: "easeInOut" },
-                rotate: { repeat: Infinity, duration: 3.5, ease: "easeInOut" },
-              }}
-              className="relative bg-[#0D0D0D] border border-white/20 p-1 px-3 shadow-[2px_2px_0px_#FF2B2B] rounded rotate-[3deg] z-20"
-              style={{ fontFamily: "'Caveat', cursive" }}
-            >
-              {/* Tape graphic (Red) */}
-              <div
-                className="absolute -top-2.5 left-1/2 transform -translate-x-1/2 w-9 h-3 bg-[#FF2B2B]/60 backdrop-blur-[0.5px] border border-black/5 rotate-[-2deg] z-30"
-                style={{
-                  clipPath: "polygon(5% 5%, 95% 10%, 98% 90%, 2% 95%)",
-                }}
-              />
-              <span className="font-bold text-white text-sm sm:text-base whitespace-nowrap block pt-1.5">
-                Opens in Sep
-              </span>
-            </motion.div>
-          </div>
         </div>
 
         {/* Two-column layout */}

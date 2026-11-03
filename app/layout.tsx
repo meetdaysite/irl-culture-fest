@@ -24,13 +24,13 @@ const getSiteUrl = () => {
 
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
-  title: "IRL Culture Fest 2026 — India's First IRL Festival",
+  title: "IRL Culture Fest 2027 — India's First IRL Festival",
   description:
-    "Celebrating India's offline community builders across Delhi, Mumbai, Bangalore & Pune. November 2026.",
+    "Celebrating India's offline community builders across Delhi (20 Feb), Mumbai (27 Feb), and Bangalore (6 March).",
   openGraph: {
-    title: "IRL Culture Fest 2026 — India's First IRL Festival",
+    title: "IRL Culture Fest 2027 — India's First IRL Festival",
     description:
-      "Celebrating India's offline community builders across Delhi, Mumbai, Bangalore & Pune. November 2026.",
+      "Celebrating India's offline community builders across Delhi (20 Feb), Mumbai (27 Feb), and Bangalore (6 March).",
     images: ["/og-image.png"],
   },
   icons: {
