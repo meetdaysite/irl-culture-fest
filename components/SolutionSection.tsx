@@ -140,7 +140,7 @@ export default function SolutionSection() {
                 }}
               />
               <img
-                src="/logo.svg"
+                src="/White.png"
                 alt="IRL Logo"
                 className="w-[92%] h-auto object-contain"
               />

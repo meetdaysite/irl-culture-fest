@@ -80,7 +80,7 @@ export default function Footer() {
               className="flex items-center cursor-pointer"
             >
               <img
-                src={isPodcast ? "/images/podcast/black bg irl podcast.svg" : "/footer-logo.svg"}
+                src={isPodcast ? "/images/podcast/black bg irl podcast.svg" : "/Black.png"}
                 alt={isPodcast ? "IRL Podcast Logo" : "IRL Culture Fest Logo"}
                 className={`${isPodcast ? "h-[90px] sm:h-[110px]" : "h-16 sm:h-20"} object-contain`}
               />
